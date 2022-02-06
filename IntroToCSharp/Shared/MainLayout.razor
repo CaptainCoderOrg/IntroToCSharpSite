@@ -1,4 +1,6 @@
 @inherits LayoutComponentBase
+@inject IJSRuntime JS
+@using System.Text.Json
 
 <div class="page">
     <div class="sidebar">
@@ -7,7 +9,14 @@
 
     <div class="main">
         <div class="top-row px-4">
-            <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+            @if (UserData.IsLoggedIn)
+            {
+                <span>@UserData.DisplayName <a href="javascript:void(0);" @onclick="Logout">Logout</a></span>
+            }
+            else
+            {
+                <a href="javascript:void(0);" @onclick="Login" class="ml-md-auto">Login</a>
+            }
         </div>
 
         <div class="content px-4">
@@ -15,3 +24,25 @@
         </div>
     </div>
 </div>
+
+@code
+{
+    public User UserData = new User("null");
+    public async Task Login() => await JS.InvokeVoidAsync("firebaseLogin");
+    public async Task Logout() => await JS.InvokeVoidAsync("firebaseLogout");
+
+    protected override async Task OnInitializedAsync()
+    {
+        // On initialization, register this object to be notified when the user changes
+        await JS.InvokeVoidAsync("onAuthStateChanged", DotNetObjectReference.Create(this));
+    }
+
+    [JSInvokable]
+    /// Callback when the user changes. The response is a JSON object or "null" if the user is
+    /// not authenticated.
+    public void UpdateUser(string response)
+    {
+        UserData = new User(response);
+        InvokeAsync(StateHasChanged);
+    }
+}
