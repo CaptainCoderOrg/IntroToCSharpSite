@@ -10,4 +10,10 @@
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
   </ItemGroup>
 
+<!-- Uncomment to run npm every time you build. This is pretty slow
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="npm install" WorkingDirectory="NPM" />
+    <Exec Command="npm run build" WorkingDirectory="NPM" />
+  </Target>
+-->
 </Project>
