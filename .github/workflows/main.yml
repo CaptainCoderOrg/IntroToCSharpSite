@@ -14,7 +14,7 @@ jobs:
       with:
         dotnet-version: 5.0.401
     - name: Publish Project
-      run: cd IntroToCSharp; dotnet publish -c Release -o ../release --nologo
+      run: ls; cd IntroToCSharp; dotnet publish -c Release -o ../release --nologo
     - name: Commit wwwroot to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@3.7.1
       with:
