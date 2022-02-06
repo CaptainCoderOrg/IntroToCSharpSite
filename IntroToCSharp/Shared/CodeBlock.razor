@@ -1,0 +1,48 @@
+@inject HttpClient Http
+@inject IJSRuntime JS
+<pre class="@GetAllowCopy()">
+    <code id="@Language/@Filename" class="code language-@Language"></code>
+</pre>
+
+@code {
+
+    private string language = "csharp";
+    private bool allowCopy = false;
+    public string output;
+
+    [Parameter]
+    public string Language {
+        get => language; 
+        set => language = value;
+    }
+
+    [Parameter]
+    public string Filename {get; set;}
+
+    [Parameter]
+    public bool AllowCopy {
+        get => allowCopy;
+        set => allowCopy = value;
+    }
+
+    public string Output 
+    {
+        get => output == null ? "Loading..." : output;
+        set => output = value;
+    } 
+
+    public string GetAllowCopy() => AllowCopy ? "" : "no-copy";
+
+    protected override async void OnAfterRender(bool firstRender)
+    {
+        await JS.InvokeVoidAsync("RenderCode", $"{Language}/{Filename}", Output);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Output = await Http.GetStringAsync($"examples/{Language}/{Filename}");
+        
+
+    }
+
+}
