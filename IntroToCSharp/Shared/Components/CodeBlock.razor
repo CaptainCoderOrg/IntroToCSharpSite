@@ -6,43 +6,70 @@
 
 @code {
 
+    /// <summary>
+    /// The syntax highlighting mode to use
+    /// </summary>
     private string language = "csharp";
-    private bool allowCopy = false;
-    public string output;
 
+    /// <summary>
+    /// Can the code be selected for copying?
+    /// </summary>
+    private bool allowCopy = false;
+
+    /// <summary>
+    /// The sourceCode to be highlighted
+    /// </summary>
+    private string sourceCode;
+
+    /// <summary>
+    /// Parameter used to specify the language to be highlighted. The default value is "csharp"
+    /// </summary>
+    /// <value>The language</value>
     [Parameter]
     public string Language {
         get => language; 
         set => language = value;
     }
 
+    /// <summary>
+    /// The source file to display in this code block. The specified
+    /// path should be relative to the `wwwroot/examples/{language}/`
+    /// directory.
+    /// </summary>
+    /// <value>The relative path to the file</value>
     [Parameter]
     public string Filename {get; set;}
 
+    /// <summary>
+    /// Specifies if this code block can be highlighted and copied in the web browser.
+    /// </summary>
+    /// <value>true if the code can be highlighted and false otherwise</value>
     [Parameter]
     public bool AllowCopy {
         get => allowCopy;
         set => allowCopy = value;
     }
 
-    public string Output 
+    /// <summary>
+    /// The source code to be highlighted. If the code has not
+    /// yet been loaded, this returns "Loading..."
+    /// </summary>
+    public string SourceCode 
     {
-        get => output == null ? "Loading..." : output;
-        set => output = value;
+        get => sourceCode == null ? "Loading..." : sourceCode;
+        private set => sourceCode = value;
     } 
 
     public string GetAllowCopy() => AllowCopy ? "" : "no-copy";
 
     protected override async void OnAfterRender(bool firstRender)
     {
-        await JS.InvokeVoidAsync("RenderCode", $"{Language}/{Filename}", Output);
+        await JS.InvokeVoidAsync("RenderCode", $"{Language}/{Filename}", SourceCode);
     }
 
     protected override async Task OnInitializedAsync()
     {
-        Output = await Http.GetStringAsync($"examples/{Language}/{Filename}");
-        
-
+        SourceCode = await Http.GetStringAsync($"examples/{Language}/{Filename}");
     }
 
 }
