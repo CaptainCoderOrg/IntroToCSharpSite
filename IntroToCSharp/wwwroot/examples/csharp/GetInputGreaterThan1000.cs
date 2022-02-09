@@ -1,13 +1,13 @@
 using System;
 public class ReadValidInputExample
 {
-    /// Summary:
-    ///   Prompts the user to enter an integer that is greater than 1000. Then,
-    ///   returns the users input as an int. If the user enters an invalid valud,
-    ///   this method will continue to prompt the user.
-    /// 
-    /// Returns: 
-    ///   The users input as an integer
+
+    /// <summary>
+    /// Prompts the user to enter an integer that is greater than 1000. Then,
+    /// returns the users input as an int. If the user enters an invalid valud,
+    /// this method will continue to prompt the user.
+    /// </summary>
+    /// <returns>The users input as an integer</returns>
     public static int GetInputGreaterThan1000()
     {
         // Create a variable to store the value the user enters
