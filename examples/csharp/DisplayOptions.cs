@@ -3,14 +3,11 @@ using System.Collections.Generic;
 public class LoopThroughListExample
 {
     
-    /// Summary:
-    ///
-    ///   Given a non-empty list of options, display the options as a list
-    ///   starting with the number 1.
-    /// 
-    /// Parameters:
-    /// 
-    ///   options - a non-empty list of options to be displayed.
+    /// <summary>
+    /// Given a non-empty list of options, display the options as a list
+    /// starting with the number 1.
+    /// </summary>
+    /// <param name="options">a non-empty list of options to be displayed.</param>
     public static void DisplayOptions(List<string> options)
     {
         // Start by validating the input
