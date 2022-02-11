@@ -1,4 +1,5 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
+﻿@using Radzen.Blazor
+<div class="top-row pl-4 navbar navbar-dark">
     <a class="navbar-brand" href="">IntroToCSharp</a>
     <button class="navbar-toggler" @onclick="ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>
@@ -6,33 +7,14 @@
 </div>
 
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <ul class="nav flex-column">
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="examples/display-options">
-                <span class="oi" aria-hidden="true"></span> Display Options
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="examples/read-input">
-                <span class="oi" aria-hidden="true"></span> Read Input
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="examples/random-dog-generator">
-                <span class="oi" aria-hidden="true"></span> Random Generator
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="examples/association-list">
-                <span class="oi" aria-hidden="true"></span> Association List
-            </NavLink>
-        </li>
-    </ul>
+    <RadzenPanelMenu>
+        <RadzenPanelMenuItem Text="Examples">
+            <RadzenPanelMenuItem Text="Read Input" Path="/examples/read-input" Icon="description"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Display Options" Path="/examples/display-options" Icon="description"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Random Generator" Path="/examples/random-dog-generator" Icon="description"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Association List" Path="/examples/association-list" Icon="description"></RadzenPanelMenuItem>
+        </RadzenPanelMenuItem>
+    </RadzenPanelMenu>
 </div>
 
 @code {
