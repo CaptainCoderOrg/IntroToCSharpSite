@@ -69,7 +69,10 @@
 
     protected override async Task OnInitializedAsync()
     {
-        SourceCode = await Http.GetStringAsync($"examples/{Language}/{Filename}");
+        Output = await Http.GetStringAsync($"examples/{Language}/{Filename}");
+        Output = Output.Replace("<", "&lt;");
+        Output = Output.Replace(">", "&gt;"); 
+
     }
 
 }
