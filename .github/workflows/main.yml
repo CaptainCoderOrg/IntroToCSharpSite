@@ -13,7 +13,7 @@ jobs:
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v1.9.0
       with:
-        dotnet-version: 5.0.401
+        dotnet-version: 6.0.201
     - name: Publish Project
       run: dotnet publish IntroToCSharp/IntroToCSharp.csproj -c Release -o release --nologo
     - name: Add .nojekyll file
