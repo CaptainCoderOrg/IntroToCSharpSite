@@ -8,13 +8,13 @@ public class User
     /// The User's display name
     /// </summary>
     /// <value></value>
-    public string DisplayName { get; }
+    public string? DisplayName { get; }
 
     /// <summary>
     /// The User's email address
     /// </summary>
     /// <value></value>
-    public string Email { get; }
+    public string? Email { get; }
 
     /// <summary>
     /// true if the user is logged in and false otherwise
