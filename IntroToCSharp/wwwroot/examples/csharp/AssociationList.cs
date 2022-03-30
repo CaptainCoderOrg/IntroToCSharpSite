@@ -56,7 +56,7 @@ public class AssociationList
     {
         List<string> people = new List<string>();
         List<double> heights = new List<double>();
-        people.Add("Bob the Buidler");
+        people.Add("Bob the Builder");
         heights.Add(10);
         people.Add("John Cena");
         heights.Add(72.2);
