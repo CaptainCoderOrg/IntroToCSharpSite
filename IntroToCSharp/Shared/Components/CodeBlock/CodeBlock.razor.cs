@@ -4,26 +4,19 @@ namespace CaptainCoder
     using Microsoft.JSInterop;
     public class CodeBlock : ComponentBase
     {
-        private string language = "csharp";
         private bool allowCopy = false;
         private string? _output;
-        private string _filename = String.Empty;
-
         [Inject]
         private IJSRuntime? JS { get; set; }
 
         [Inject]
         private HttpClient? HTTP { get; set; }
+        public int SelectedIndex { get; set; } = 0;
+        [Parameter]
+        public string Language { get; set; } = "csharp";
 
         [Parameter]
-        public string Language
-        {
-            get => language;
-            set => language = value;
-        }
-
-        [Parameter]
-        public string Filename { get => _filename; set => _filename = value; }
+        public string Filename { get; set; } = String.Empty;
 
         [Parameter]
         public bool AllowCopy
@@ -31,6 +24,9 @@ namespace CaptainCoder
             get => allowCopy;
             set => allowCopy = value;
         }
+
+        [Parameter]
+        public string? ReplIt { get; set; } = null;
 
         public string Output
         {
