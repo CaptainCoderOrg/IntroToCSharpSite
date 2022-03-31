@@ -1,2 +1,6 @@
+@using Radzen
 @inherits CaptainCoder.ReplIt
-<iframe frameborder="0" width="100%" height="500px" src="@Url"></iframe>
+<div style="position:absolute">
+    <RadzenButton Icon="cached" ButtonStyle="ButtonStyle.Success" style="margin: 5px" MouseEnter='@(args => ShowTooltip(args, "Reload Console") )' Click=@ReloadIFrame/>
+</div>
+<iframe id="@Path" frameborder="0" width="100%" height="500px" src="@Url"></iframe>
