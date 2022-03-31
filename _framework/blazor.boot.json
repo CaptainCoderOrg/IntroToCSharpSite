@@ -7,7 +7,7 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "IntroToCSharp.dll": "sha256-Q243+fgq7C5fnf3l0LvE6r5svvSjTyFkK+vIlFjW9AE=",
+      "IntroToCSharp.dll": "sha256-hDMd2BWxBJDhrBlEbVTe0LRhUQ+1vudXDB82Jw7BVaU=",
       "Microsoft.AspNetCore.Components.dll": "sha256-0mxhTGm2t8oPiiyDB77a7z6jNLoIIlAcTKG2rMT\/TGk=",
       "Microsoft.AspNetCore.Components.Forms.dll": "sha256-e8cBC83u+sT5cYBray2oDZj61olRXgv75y8GOQVRR4c=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-UT2ROwljZUSaHuEaaN7cCqe7\/M79k+iMMb+YduOBmTk=",
