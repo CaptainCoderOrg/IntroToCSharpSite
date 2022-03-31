@@ -4,3 +4,6 @@
 [submodule "IntroToCSharp/ReplIt/Examples/IntroToCSharp-ReadInputExample"]
 	path = IntroToCSharp/ReplIt/Examples/IntroToCSharp-ReadInputExample
 	url = https://github.com/jcollard/IntroToCSharp-ReadInputExample
+[submodule "IntroToCSharp/ReplIt/Examples/IntroToCsharp-DogGenerator"]
+	path = IntroToCSharp/ReplIt/Examples/IntroToCsharp-DogGenerator
+	url = https://github.com/jcollard/IntroToCsharp-DogGenerator.git
