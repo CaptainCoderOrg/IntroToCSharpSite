@@ -3,15 +3,24 @@
 @inherits CaptainCoder.CodeBlock
 <RadzenTabs RenderMode="TabRenderMode.Client" @bind-SelectedIndex=@SelectedIndex>
     <Tabs>
-        <RadzenTabsItem Text="Source">
+        <RadzenTabsItem Icon="code" Text="Code">
             <pre class="@GetAllowCopy()">
-                <code id="@Language/@Filename" class="code language-@Language" replit="@ReplIt"></code>
+                <code id="@Language/@Filename" class="code language-@Language"></code>
             </pre>
         </RadzenTabsItem>
         @if (ReplIt != null)
         {
-        <RadzenTabsItem Text="Run Code">
-            <ReplIt Path="@ReplIt"/>
+        <RadzenTabsItem Icon="arrow_circle_right" Text="Run">
+            <RadzenSplitter Orientation="Orientation.Horizontal">
+                <RadzenSplitterPane>
+                    <pre class="@GetAllowCopy()">
+                        <code id="ReplIt/@Language/@Filename" class="code language-@Language"></code>
+                    </pre>
+                </RadzenSplitterPane>
+                    <RadzenSplitterPane >
+                        <ReplIt Path="@ReplIt"/>
+                    </RadzenSplitterPane>
+            </RadzenSplitter>
         </RadzenTabsItem>
         }
     </Tabs>
