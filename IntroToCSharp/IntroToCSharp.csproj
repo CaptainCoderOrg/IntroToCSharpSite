@@ -13,26 +13,19 @@
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
   </ItemGroup>
 
-  <!-- Uncomment to run npm every time you build. This is pretty slow
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="npm install" WorkingDirectory="NPM" />
-    <Exec Command="npm run build" WorkingDirectory="NPM" />
-  </Target>
--->
-
-</Project>
-
-<!-- <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
-
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-  </PropertyGroup>
-
+  <!-- Ignore ReplIt directory as it contains C# projects within -->
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.10" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.10" PrivateAssets="all" />
-    <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+    <Compile Remove="ReplIt\**" />
   </ItemGroup>
 
 
-</Project> -->
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="python3 prebuild.py" WorkingDirectory="ReplIt" />
+    <!-- Uncomment to run npm every time you build. This is pretty slow
+    <Exec Command="npm install" WorkingDirectory="NPM" />
+    <Exec Command="npm run build" WorkingDirectory="NPM" />
+    -->
+  </Target>
+
+
+</Project>
