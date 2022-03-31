@@ -10,3 +10,6 @@
 [submodule "IntroToCSharp/ReplIt/Examples/IntroToCSharp-DisplayOptions"]
 	path = IntroToCSharp/ReplIt/Examples/IntroToCSharp-DisplayOptions
 	url = https://github.com/jcollard/IntroToCSharp-DisplayOptions.git
+[submodule "IntroToCSharp/ReplIt/Examples/IntroToCSharp-AssociationList"]
+	path = IntroToCSharp/ReplIt/Examples/IntroToCSharp-AssociationList
+	url = https://github.com/jcollard/IntroToCSharp-AssociationList.git
