@@ -39,7 +39,7 @@ namespace CaptainCoder
         protected override async void OnAfterRender(bool firstRender)
         {
             await JS!.InvokeVoidAsync("RenderCode", $"{Language}/{Filename}", Output);
-            if (ReplIt != null) await JS!.InvokeVoidAsync("RenderCode", $"ReplIt/{Language}/{Filename}", Output);
+            // if (ReplIt != null) await JS!.InvokeVoidAsync("RenderCode", $"ReplIt/{Language}/{Filename}", Output);
         }
 
         protected override async Task OnInitializedAsync()

@@ -1,27 +1,6 @@
 @using IntroToCSharp.Shared.Components.ReplIt
-@using Radzen
 @inherits CaptainCoder.CodeBlock
-<RadzenTabs RenderMode="TabRenderMode.Client" @bind-SelectedIndex=@SelectedIndex>
-    <Tabs>
-        <RadzenTabsItem Icon="code" Text="Code">
-            <pre class="@GetAllowCopy()">
-                <code id="@Language/@Filename" class="code language-@Language"></code>
-            </pre>
-        </RadzenTabsItem>
-        @if (ReplIt != null)
-        {
-        <RadzenTabsItem Icon="arrow_circle_right" Text="Run">
-            <RadzenSplitter Orientation="Orientation.Horizontal">
-                <RadzenSplitterPane>
-                    <pre class="@GetAllowCopy()">
-                        <code id="ReplIt/@Language/@Filename" class="code language-@Language"></code>
-                    </pre>
-                </RadzenSplitterPane>
-                    <RadzenSplitterPane >
-                        <ReplIt Path="@ReplIt"/>
-                    </RadzenSplitterPane>
-            </RadzenSplitter>
-        </RadzenTabsItem>
-        }
-    </Tabs>
-</RadzenTabs>
+
+<pre class="@GetAllowCopy()">
+    <code id="@Language/@Filename" class="code language-@Language"></code>
+</pre>
