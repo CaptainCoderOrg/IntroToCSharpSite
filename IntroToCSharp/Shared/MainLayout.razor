@@ -9,12 +9,7 @@
 <TopMenu Main="this" />
 
 <MudDrawerContainer Class="mt-12">
-    <MudDrawer @bind-Open="@IsNavMenuOpen" Elevation="25" Variant="@DrawerVariant.Persistent" Style="position:fixed">
-        <MudDrawerHeader>
-            <MudText Typo="Typo.h6">Intro To C#</MudText>
-        </MudDrawerHeader>
-        <NavMenu />
-    </MudDrawer>
+    <NavMenu Main="this" />
 
     <MudContainer>
         @Body

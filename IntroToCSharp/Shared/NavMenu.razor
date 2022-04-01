@@ -1,9 +1,26 @@
 ﻿
-<MudNavMenu Bordered="true">
-    <MudNavGroup Title="Examples">
-        <MudNavLink Href="examples/read-input" >Read Input</MudNavLink>
-        <MudNavLink Href="examples/display-options">Display Options</MudNavLink>
-        <MudNavLink Href="examples/random-dog-generator">Random Dog Generator</MudNavLink>
-        <MudNavLink Href="examples/association-list">Association List</MudNavLink>
-    </MudNavGroup>
-</MudNavMenu>
+<MudDrawer @bind-Open="@Main.IsNavMenuOpen" Elevation="25" Variant="@DrawerVariant.Persistent" Style="position:fixed">
+    <MudDrawerHeader Class="pr-4">
+        
+        <MudElement Class="d-flex flex-row justify-space-between" Style="width:100%">
+            <MudText Typo="Typo.h6">
+                Intro To C#    
+            </MudText>
+            <MudIconButton Class="pa-0" Icon="@Icons.Material.Outlined.ArrowCircleLeft" Color="Color.Inherit" OnClick="@Main.ToggleNavMenu"/>
+        </MudElement>
+    </MudDrawerHeader>
+    <MudNavMenu Bordered="true">
+        <MudNavGroup Title="Examples">
+            <MudNavLink Href="examples/read-input" >Read Input</MudNavLink>
+            <MudNavLink Href="examples/display-options">Display Options</MudNavLink>
+            <MudNavLink Href="examples/random-dog-generator">Random Dog Generator</MudNavLink>
+            <MudNavLink Href="examples/association-list">Association List</MudNavLink>
+        </MudNavGroup>
+    </MudNavMenu>
+</MudDrawer>
+
+@code
+{
+    [Parameter, EditorRequired]
+    public MainLayout Main {get; set;} = null!;
+}
