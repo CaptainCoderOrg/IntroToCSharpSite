@@ -13,7 +13,7 @@ namespace CaptainCoder
         private HttpClient HTTP { get; set; } = null!;
         public int SelectedIndex { get; set; } = 0;
         [Parameter]
-        public string Height { get; set; } = "100%";
+        public string MaxHeight { get; set; } = "650px";
         [Parameter]
         public string Language { get; set; } = "csharp";
 

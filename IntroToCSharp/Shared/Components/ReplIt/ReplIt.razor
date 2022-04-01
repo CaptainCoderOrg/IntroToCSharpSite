@@ -2,8 +2,12 @@
 <div style="position:absolute;">
     @if (OnClose != null)
     {
-        <MudIconButton Color="Color.Error" Icon="@Icons.Material.Filled.Close"  OnClick="@OnClose"/>
+        <MudTooltip Text="Close Console">
+            <MudIconButton Color="Color.Error" Icon="@Icons.Material.Filled.Close"  OnClick="@OnClose"/>
+        </MudTooltip>
     }
-    <MudIconButton Color="Color.Tertiary" Icon="@Icons.Material.Filled.Cached"  OnClick="@ReloadIFrame"/>
+    <MudTooltip Text="Refresh Console">
+        <MudIconButton Color="Color.Tertiary" Icon="@Icons.Material.Filled.Cached"  OnClick="@ReloadIFrame"/>
+    </MudTooltip>
 </div>
 <iframe id="@Path" frameborder="0" src="@Url"></iframe>
