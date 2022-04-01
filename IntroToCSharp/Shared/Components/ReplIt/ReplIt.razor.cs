@@ -12,6 +12,8 @@ namespace CaptainCoder
         public bool OutputOnly { get; set; } = true;
         [Parameter]
         public Action? OnClose { get; set; } = null;
+        [Parameter]
+        public bool ShareSource { get; set; } = false;
                 
         [Inject]
         private IJSRuntime JS { get; set; } = null!;
