@@ -6,20 +6,19 @@
 <MudDialogProvider/>
 <MudSnackbarProvider/>
 
+<TopMenu Main="this" />
 
-<MudDrawerContainer>
-    <MudDrawer @bind-Open="@IsNavMenuOpen" Elevation="0" Variant="@DrawerVariant.Persistent" Color="Color.Primary">
+<MudDrawerContainer Class="mt-12">
+    <MudDrawer @bind-Open="@IsNavMenuOpen" Elevation="25" Variant="@DrawerVariant.Persistent" Style="position:fixed">
         <MudDrawerHeader>
             <MudText Typo="Typo.h6">Intro To C#</MudText>
         </MudDrawerHeader>
         <NavMenu />
     </MudDrawer>
 
-    <TopMenu Main="this" />
-
-    <div class="content px-4">
+    <MudContainer>
         @Body
-    </div>
+    </MudContainer>
 
 </MudDrawerContainer>
 @code

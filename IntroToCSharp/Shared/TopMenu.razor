@@ -1,5 +1,5 @@
-<MudToolBar Class="pl-0">
-    <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" OnClick="@Main.ToggleNavMenu"/>
+<MudAppBar Color="Color.Primary" Dense="true" Elevation="1">
+    <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" OnClick="@Main.ToggleNavMenu" Edge="Edge.Start"/>
     <MudSpacer />
     @if (Main.UserData.IsLoggedIn)
     {
@@ -9,7 +9,7 @@
     {
         <a href="javascript:void(0);" @onclick="Main.Login" class="ml-md-auto">Login</a>
     }
-</MudToolBar>
+</MudAppBar>
 
 @code 
 {
