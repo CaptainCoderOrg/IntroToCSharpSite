@@ -2,35 +2,29 @@
 @inject IJSRuntime JS
 
 @* MudBlazor Dependencies *@
-<MudThemeProvider/>
+<MudThemeProvider Theme="Themes.s_CSharpTheme"/>
 <MudDialogProvider/>
 <MudSnackbarProvider/>
 
-<div class="page">
-    <div class="sidebar">
+
+<MudDrawerContainer>
+    <MudDrawer @bind-Open="@IsNavMenuOpen" Elevation="0" Variant="@DrawerVariant.Persistent" Color="Color.Primary">
+        <MudDrawerHeader>
+            <MudText Typo="Typo.h6">Intro To C#</MudText>
+        </MudDrawerHeader>
         <NavMenu />
+    </MudDrawer>
+
+    <TopMenu Main="this" />
+
+    <div class="content px-4">
+        @Body
     </div>
 
-    <div class="main">
-        <div class="top-row px-4">
-            @if (UserData.IsLoggedIn)
-            {
-                <span>@UserData.DisplayName <a href="javascript:void(0);" @onclick="Logout">Logout</a></span>
-            }
-            else
-            {
-                <a href="javascript:void(0);" @onclick="Login" class="ml-md-auto">Login</a>
-            }
-        </div>
-
-        <div class="content px-4">
-            @Body
-        </div>
-    </div>
-</div>
-
+</MudDrawerContainer>
 @code
 {
+    public bool IsNavMenuOpen = true;
     public User UserData = new User("null");
     public async Task Login() => await JS.InvokeVoidAsync("firebaseLogin");
     public async Task Logout() => await JS.InvokeVoidAsync("firebaseLogout");
@@ -49,4 +43,6 @@
         UserData = new User(response);
         InvokeAsync(StateHasChanged);
     }
+
+    public void ToggleNavMenu() => IsNavMenuOpen = !IsNavMenuOpen;
 }

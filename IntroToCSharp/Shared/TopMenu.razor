@@ -1,0 +1,18 @@
+<MudToolBar>
+    <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" OnClick="@Main.ToggleNavMenu"/>
+    <MudSpacer />
+    @if (Main.UserData.IsLoggedIn)
+    {
+        <span>@Main.UserData.DisplayName <a href="javascript:void(0);" @onclick="Main.Logout">Logout</a></span>
+    }
+    else
+    {
+        <a href="javascript:void(0);" @onclick="Main.Login" class="ml-md-auto">Login</a>
+    }
+</MudToolBar>
+
+@code 
+{
+    [Parameter, EditorRequired]
+    public MainLayout Main {get; set;} = null!;
+}
