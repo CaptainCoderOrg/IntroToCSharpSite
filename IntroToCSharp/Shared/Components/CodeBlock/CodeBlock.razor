@@ -1,6 +1,21 @@
 @using IntroToCSharp.Shared.Components.ReplIt
 @inherits CaptainCoder.CodeBlock
 
-<pre class="@GetAllowCopy()">
-    <code id="@Language/@Filename" class="code language-@Language"></code>
-</pre>
+<MudPaper Height="@Height" Style="overflow:hidden; position: relative;" Class="d-flex flex-column gap-2">
+    
+    <MudPaper Style="overflow:auto; position:relative;">
+        <pre class="@GetAllowCopy()">
+            <code id="@Language/@Filename" class="code language-@Language"></code>
+        </pre>
+    </MudPaper>
+    @if (ReplIt != null)
+    {
+    <MudElement Style="@PlayButtonStyle">
+        <MudIconButton Icon="@Icons.Material.Outlined.PlayCircle" OnClick="@(() => IsReplItOpen = !IsReplItOpen)" />    
+    </MudElement>
+    <MudPaper Style="@ReplItStyle" Height="300px">
+        <ReplIt Path="@ReplIt" OnClose="@(() => IsReplItOpen = !IsReplItOpen)"/>
+    </MudPaper>
+    }
+    
+</MudPaper>

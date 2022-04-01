@@ -1,5 +1,9 @@
 @inherits CaptainCoder.ReplIt
-@* <div style="position:absolute">
-    <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.Cached" />
-</div> *@
+<div style="position:absolute;">
+    @if (OnClose != null)
+    {
+        <MudIconButton Color="Color.Error" Icon="@Icons.Material.Filled.Close"  OnClick="@OnClose"/>
+    }
+    <MudIconButton Color="Color.Tertiary" Icon="@Icons.Material.Filled.Cached"  OnClick="@ReloadIFrame"/>
+</div>
 <iframe id="@Path" frameborder="0" src="@Url"></iframe>

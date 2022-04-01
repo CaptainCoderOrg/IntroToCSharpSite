@@ -10,8 +10,9 @@ namespace CaptainCoder
 
         [Parameter]
         public bool OutputOnly { get; set; } = true;
-
-        
+        [Parameter]
+        public Action? OnClose { get; set; } = null;
+                
         [Inject]
         private IJSRuntime JS { get; set; } = null!;
         public string Url => $"https://replit.com/@{Path}?{Options}";

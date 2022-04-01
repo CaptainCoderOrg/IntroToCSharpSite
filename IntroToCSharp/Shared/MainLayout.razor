@@ -11,7 +11,7 @@
 <MudDrawerContainer Class="mt-12">
     <NavMenu Main="this" />
 
-    <div class="px-4">
+    <div class="pa-4">
         @Body
     </div>
 
@@ -37,6 +37,5 @@
         UserData = new User(response);
         InvokeAsync(StateHasChanged);
     }
-
     public void ToggleNavMenu() => IsNavMenuOpen = !IsNavMenuOpen;
 }
