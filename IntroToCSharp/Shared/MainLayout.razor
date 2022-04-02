@@ -2,7 +2,7 @@
 @inject IJSRuntime JS
 
 @* MudBlazor Dependencies *@
-<MudThemeProvider Theme="Themes.s_CSharpTheme"/>
+<MudThemeProvider @ref="_mudThemeProvider" Theme="Themes.s_CSharpTheme" @bind-IsDarkMode="@IsDarkMode"/>
 <MudDialogProvider/>
 <MudSnackbarProvider/>
 
@@ -18,6 +18,17 @@
 </MudDrawerContainer>
 @code
 {
+    private MudThemeProvider _mudThemeProvider = null!;
+    private bool _isDarkMode = true;
+    public bool IsDarkMode {
+      get => _isDarkMode;
+      set
+      {
+          if (value == _isDarkMode) return;
+          _isDarkMode = value;
+          StateHasChanged();
+      }
+    }
     public bool IsNavMenuOpen = true;
     public User UserData = new User("null");
     public async Task Login() => await JS.InvokeVoidAsync("firebaseLogin");
@@ -36,6 +47,14 @@
     {
         UserData = new User(response);
         InvokeAsync(StateHasChanged);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            IsDarkMode = await _mudThemeProvider.GetSystemPreference();
+        }
     }
     public void ToggleNavMenu() => IsNavMenuOpen = !IsNavMenuOpen;
 }
