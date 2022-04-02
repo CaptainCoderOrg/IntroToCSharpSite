@@ -30,9 +30,8 @@ namespace CaptainCoder
         [Parameter]
         public string? ReplIt { get; set; } = null;
         public bool IsReplItOpen { get; set; } = false;
-        public string ReplItStyle => ReplIt != null && IsReplItOpen ? "" : "display:none";
+        public string ReplItStyle => ReplIt != null && IsReplItOpen ? "min-height:250px; overflow:hidden;" : "display:none";
         public string PlayButtonStyle => ReplIt != null && !IsReplItOpen ? "" : "display:none";
-        public string CodeHeight => ReplIt != null && IsReplItOpen ? "50%" : "100%";
 
         public string Output
         {

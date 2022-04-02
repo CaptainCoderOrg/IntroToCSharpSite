@@ -1,9 +1,9 @@
 @using IntroToCSharp.Shared.Components.ReplIt
 @inherits CaptainCoder.CodeBlock
 
-<MudPaper MaxHeight="@MaxHeight" Style="overflow:hidden; position: relative;" Class="d-flex flex-column">
+<MudPaper MaxHeight="@MaxHeight" Style="overflow:hidden; position: relative;" Class="d-flex flex-column flex-0">
     
-    <MudPaper Style="overflow:auto; position:relative;" >
+    <MudPaper Style="overflow:auto; position:relative;">
         <pre class="@GetAllowCopy()">
             <code id="@Language/@Filename" class="language-@Language code-block"></code>
         </pre>
@@ -13,7 +13,7 @@
     <MudElement Class="ma-2" Style="@PlayButtonStyle">
         <MudButton Color="Color.Tertiary" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.PlayCircle" OnClick="@(() => IsReplItOpen = !IsReplItOpen)" >Run Code</MudButton>    
     </MudElement>
-    <MudPaper Style="@ReplItStyle" Height="400px">
+    <MudPaper Style="@ReplItStyle" >
         <ReplIt Path="@ReplIt" ShareSource="@AllowCopy" OnClose="@(() => IsReplItOpen = !IsReplItOpen)"/>
     </MudPaper>
     }
