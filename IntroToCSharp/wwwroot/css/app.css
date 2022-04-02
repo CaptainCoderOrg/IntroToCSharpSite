@@ -20,3 +20,10 @@ pre {
 .code-block {
     padding: 0.5rem !important;
 }
+
+code {
+    background-color: darkgray;
+    padding-left: .25rem;
+    padding-right: .25rem;
+    color: whitesmoke;
+}
