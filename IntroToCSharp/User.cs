@@ -9,6 +9,12 @@ public class User
     /// </summary>
     /// <value></value>
     public string? DisplayName { get; }
+
+    public string? UID { get; }
+
+    /// <summary>
+    /// The first letter of the User's display name.
+    /// </summary>
     public char AvatarLetter => DisplayName != null ? DisplayName.ToUpper()[0] : '?';
 
     /// <summary>
@@ -32,12 +38,14 @@ public class User
         if (response == "null")
         {
             this.DisplayName = null;
+            this.UID = null;
             this.Email = null;
             this.IsLoggedIn = false;
         }
         else
         {
             var result = JsonDocument.Parse(response);
+            this.UID = result.RootElement.GetProperty("uid").GetString();
             this.DisplayName = result.RootElement.GetProperty("displayName").GetString();
             this.Email = result.RootElement.GetProperty("email").GetString();
             this.IsLoggedIn = true;
