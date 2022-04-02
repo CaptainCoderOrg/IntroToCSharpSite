@@ -5,3 +5,18 @@
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
 }
+
+p {
+    margin: 0.75rem 0rem;
+}
+
+pre {
+    line-height: 1rem;
+    font-family: monospace;
+    margin:0;
+    padding:0;
+}
+
+.code-block {
+    padding: 0.5rem !important;
+}

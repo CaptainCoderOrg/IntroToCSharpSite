@@ -20,5 +20,10 @@ public class Themes
         //     DrawerWidthLeft = "260px",
         //     DrawerWidthRight = "300px"
         // }
+
+        Typography = new Typography()
+        {
+            Default = new Default() { FontSize = "1.0rem", LineHeight = 1.5 }
+        }
     };
 }
