@@ -13,3 +13,6 @@
 [submodule "IntroToCSharp/ReplIt/Examples/IntroToCSharp-AssociationList"]
 	path = IntroToCSharp/ReplIt/Examples/IntroToCSharp-AssociationList
 	url = https://github.com/jcollard/IntroToCSharp-AssociationList.git
+[submodule "IntroToCSharp/ReplIt/Examples/IntroToCSharp-AskName"]
+	path = IntroToCSharp/ReplIt/Examples/IntroToCSharp-AskName
+	url = https://github.com/jcollard/IntroToCSharp-AskName.git
