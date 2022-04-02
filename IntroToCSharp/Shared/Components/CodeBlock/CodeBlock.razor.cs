@@ -4,6 +4,7 @@ namespace CaptainCoder
     using Microsoft.JSInterop;
     public class CodeBlock : ComponentBase
     {
+        private static int s_NextID = 0;
         private bool allowCopy = false;
         private string? _output;
         [Inject]
@@ -16,6 +17,9 @@ namespace CaptainCoder
         public string MaxHeight { get; set; } = "650px";
         [Parameter]
         public string Language { get; set; } = "csharp";
+
+        private int _id = s_NextID++;
+        public string ID => $"{_id}/{Language}/{Filename}";
 
         [Parameter]
         public string Filename { get; set; } = String.Empty;
@@ -43,7 +47,7 @@ namespace CaptainCoder
 
         protected override async void OnAfterRender(bool firstRender)
         {
-            await JS.InvokeVoidAsync("RenderCode", $"{Language}/{Filename}", Output);
+            await JS.InvokeVoidAsync("RenderCode", ID, Output);
         }
 
         protected override async Task OnInitializedAsync()
