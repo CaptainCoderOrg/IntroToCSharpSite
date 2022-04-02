@@ -21,7 +21,7 @@
 
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="python3 prebuild.py" WorkingDirectory="ReplIt" />
+    <!-- <Exec Command="python3 prebuild.py" WorkingDirectory="ReplIt" /> -->
     <!-- Uncomment to run npm every time you build. This is pretty slow
     <Exec Command="npm install" WorkingDirectory="NPM" />
     <Exec Command="npm run build" WorkingDirectory="NPM" />

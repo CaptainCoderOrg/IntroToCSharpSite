@@ -9,6 +9,7 @@ public class User
     /// </summary>
     /// <value></value>
     public string? DisplayName { get; }
+    public char AvatarLetter => DisplayName != null ? DisplayName.ToUpper()[0] : '?';
 
     /// <summary>
     /// The User's email address

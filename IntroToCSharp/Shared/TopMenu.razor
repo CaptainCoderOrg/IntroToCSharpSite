@@ -1,13 +1,21 @@
-<MudAppBar Color="Color.Primary" Dense="true" Elevation="1">
+<MudAppBar Elevation="25">
     <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" OnClick="@Main.ToggleNavMenu" Edge="Edge.Start"/>
     <MudSpacer />
     @if (Main.UserData.IsLoggedIn)
     {
-        <span>@Main.UserData.DisplayName <a href="javascript:void(0);" @onclick="Main.Logout">Logout</a></span>
+        <MudElement>@Main.UserData.DisplayName </MudElement>
+        <MudMenu>
+            <ActivatorContent>
+                <MudAvatar Class="ml-4" Color="Color.Secondary">@Main.UserData.AvatarLetter</MudAvatar>
+            </ActivatorContent>
+            <ChildContent>
+                <MudMenuItem OnClick="@Main.Logout">Logout</MudMenuItem>
+            </ChildContent>
+        </MudMenu>
     }
     else
     {
-        <a href="javascript:void(0);" @onclick="Main.Login" class="ml-md-auto">Login</a>
+        <MudButton href="javascript:void(0);" OnClick="@Main.Login" Variant="Variant.Filled" Color="Color.Tertiary" class="ml-md-auto">Login</MudButton>
     }
 </MudAppBar>
 
