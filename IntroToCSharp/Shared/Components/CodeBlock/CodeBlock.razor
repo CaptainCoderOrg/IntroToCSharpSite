@@ -1,9 +1,9 @@
 @using IntroToCSharp.Shared.Components.ReplIt
 @inherits CaptainCoder.CodeBlock
 
-<MudPaper MaxHeight="@MaxHeight" Style="overflow:hidden; position: relative;" Class="d-flex flex-column flex-0">
+<MudPaper MaxHeight="@MaxHeight" Class="d-flex flex-column flex-0 gap-1">
     
-    <MudPaper Style="overflow:auto; position:relative;">
+    <MudPaper Style="overflow:auto;">
         <pre class="@GetAllowCopy()">
             <code id="@Language/@Filename" class="language-@Language code-block"></code>
         </pre>
