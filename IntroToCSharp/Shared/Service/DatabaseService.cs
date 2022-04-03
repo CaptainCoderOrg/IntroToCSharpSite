@@ -1,3 +1,4 @@
+using IntroToCSharp.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
@@ -20,11 +21,16 @@ public class DatabaseService
     /// Initializes the DatabaseService. This method should be called once during
     /// initialization of the application.
     /// </summary>
-    public static void Init(IJSRuntime JS)
+    private static void Init(IJSRuntime JS)
     {
         if (JS == null) throw new ArgumentNullException("JSRuntime must be non-null.");
         if (Service.JS != null) throw new InvalidOperationException("Cannot initialize database more than once.");
         Service.JS = JS;
+    }
+
+    static DatabaseService()
+    {
+        MainLayout.OnInit += (JS, Snackbar) => Init(JS);
     }
 
     private DatabaseService() { }

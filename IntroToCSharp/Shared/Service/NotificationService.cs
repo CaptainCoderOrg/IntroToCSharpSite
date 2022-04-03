@@ -1,3 +1,4 @@
+using IntroToCSharp.Shared;
 using MudBlazor;
 
 /// <summary>
@@ -16,11 +17,16 @@ public class NotificationService
     /// to specify the ISnackbar to use for displaying messages.
     /// </summary>
     /// <param name="snackbar">The Snackbar to use for displaying messages.</param>
-    public static void Init(ISnackbar snackbar)
+    private static void Init(ISnackbar snackbar)
     {
         if (snackbar == null) throw new ArgumentNullException("Snackbar must not be null.");
         if (Service._snackbar != null) throw new InvalidOperationException("Cannot initialize NotificationService multiple times.");
         Service._snackbar = snackbar;
+    }
+
+    static NotificationService()
+    {
+        MainLayout.OnInit += (JS, Snackbar) => Init(Snackbar);
     }
 
     private ISnackbar? _snackbar;

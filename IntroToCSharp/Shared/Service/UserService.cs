@@ -1,14 +1,20 @@
+using IntroToCSharp.Shared;
 using Microsoft.JSInterop;
 
 public class UserService
 {
     public static UserService Service { get; } = new UserService();
 
-    public static void Init(IJSRuntime JS)
+    private static void Init(IJSRuntime JS)
     {
         if (JS == null) throw new ArgumentNullException("IJSRuntime cannot be null.");
         if (Service._runtime != null) throw new InvalidOperationException("UserService cannot be initialized multiple times.");
         Service.SetRuntime(JS);
+    }
+
+    static UserService()
+    {
+        MainLayout.OnInit += (JS, Snackbar) => Init(JS);
     }
 
     private IJSRuntime? _runtime;
@@ -24,6 +30,15 @@ public class UserService
         // On initialization, register this object to be notified when the user changes
         runtime.InvokeVoidAsync("onAuthStateChanged", DotNetObjectReference.Create(this));
     }
+
+    private async Task<IJSRuntime> GetRuntime()
+    {
+        await Task.Run(() => { while(this._runtime == null) Thread.Sleep(100); });
+        return this._runtime!;
+    }
+
+    public async Task Login() => await (await GetRuntime()).InvokeVoidAsync("firebaseLogin");
+    public async Task Logout() => await (await GetRuntime()).InvokeVoidAsync("firebaseLogout");
 
     [JSInvokable]
     /// Callback when the user changes. The response is a JSON object or "null" if the user is

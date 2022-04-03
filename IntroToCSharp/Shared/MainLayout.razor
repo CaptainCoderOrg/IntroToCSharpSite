@@ -19,9 +19,14 @@
 </MudDrawerContainer>
 @code
 {
-    public event Action<IJSRuntime, ISnackbar>? OnInit;
+    private static IJSRuntime? s_JS;
+    private static ISnackbar? s_SnackBar;
+    private static bool s_isInit = false;
+    private static event Action<IJSRuntime, ISnackbar>? s_onInit;
     private MudThemeProvider _mudThemeProvider = null!;
     private bool _isDarkMode = true;
+    public bool IsNavMenuOpen = true;
+    public User UserData = new User("null");
     public bool IsDarkMode
     {
         get => _isDarkMode;
@@ -32,19 +37,29 @@
             StateHasChanged();
         }
     }
-    public bool IsNavMenuOpen = true;
-    public User UserData = new User("null");
 
-    public async Task Login() => await JS.InvokeVoidAsync("firebaseLogin");
-    public async Task Logout() => await JS.InvokeVoidAsync("firebaseLogout");
+    public static event Action<IJSRuntime, ISnackbar> OnInit
+    {
+        add
+        {
+            if (value == null) throw new ArgumentNullException("Cannot add null event handler.");
+            if (s_isInit)
+            {
+                value.Invoke(s_JS!, s_SnackBar!);
+            }
+            s_onInit += value;
+        }
+        remove => s_onInit -= value;
+    }
 
     protected override void OnInitialized()
     {
-        UserService.Init(JS);
+        s_onInit?.Invoke(JS, Snackbar);
+        s_JS = JS;
+        s_SnackBar = Snackbar;
+        s_isInit = true;
         UserService.Service.OnLogin += UpdateUser;
         UserService.Service.OnLogout += () => UpdateUser(new User("null"));
-        DatabaseService.Init(JS);
-        NotificationService.Init(Snackbar);
     }
 
     public void UpdateUser(User user)

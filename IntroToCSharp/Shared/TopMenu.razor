@@ -13,13 +13,13 @@
                 <MudAvatar Class="ml-4" Color="Color.Secondary">@Main.UserData.AvatarLetter</MudAvatar>
             </ActivatorContent>
             <ChildContent>
-                <MudMenuItem OnClick="@Main.Logout">Logout</MudMenuItem>
+                <MudMenuItem OnClick="@UserService.Service.Logout">Logout</MudMenuItem>
             </ChildContent>
         </MudMenu>
     }
     else
     {
-        <MudButton href="javascript:void(0);" OnClick="@Main.Login" Variant="Variant.Filled" Color="Color.Tertiary" class="ml-md-auto">Login</MudButton>
+        <MudButton href="javascript:void(0);" OnClick="@UserService.Service.Login" Variant="Variant.Filled" Color="Color.Tertiary" class="ml-md-auto">Login</MudButton>
     }
 </MudAppBar>
 
