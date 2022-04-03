@@ -54,8 +54,10 @@
 
         if (UserData.UID != null)
         {
-            SetDataCall<string> setter = new SetDataCall<string>($"/users/{UserData.UID}/test");
-            setter.Set("Some Value");
+            DataReference<string> someVal = new DataReference<string>($"/users/{UserData.UID}/test");
+            someVal.DataChanged += (data) => NotificationService.Service.Add(data).AndForget();
+            someVal.Set("Some Value");
+
         }
     }
 
