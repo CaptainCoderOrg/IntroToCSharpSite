@@ -1,5 +1,6 @@
 @inherits LayoutComponentBase
 @inject IJSRuntime JS
+@inject ISnackbar Snackbar
 
 @* MudBlazor Dependencies *@
 <MudThemeProvider @ref="_mudThemeProvider" Theme="Themes.s_CSharpTheme" @bind-IsDarkMode="@IsDarkMode"/>
@@ -31,6 +32,7 @@
     }
     public bool IsNavMenuOpen = true;
     public User UserData = new User("null");
+
     public async Task Login() => await JS.InvokeVoidAsync("firebaseLogin");
     public async Task Logout() => await JS.InvokeVoidAsync("firebaseLogout");
 
@@ -38,6 +40,8 @@
     {
         // On initialization, register this object to be notified when the user changes
         await JS.InvokeVoidAsync("onAuthStateChanged", DotNetObjectReference.Create(this));
+        Database.InitDatabase(JS);
+        NotificationService.InitSnackbar(Snackbar);
     }
 
     [JSInvokable]
@@ -47,6 +51,9 @@
     {
         UserData = new User(response);
         InvokeAsync(StateHasChanged);
+
+        SetDataCall<string> setter = new SetDataCall<string>($"/users/{UserData.UID}/test");
+        setter.Set("Some Value");
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
