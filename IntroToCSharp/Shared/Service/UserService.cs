@@ -18,9 +18,28 @@ public class UserService
     }
 
     private IJSRuntime? _runtime;
-    private User? UserData;
-    public event Action<User>? OnLogin;
-    public event Action? OnLogout;
+    private User _userData = User.NoUser;
+    private event Action<User>? _onUserChange;
+    public event Action<User> OnUserChange
+    {
+        add
+        {
+            if (value == null) throw new ArgumentNullException("Cannot register null event.");
+            value.Invoke(UserData);
+            _onUserChange += value;
+        }
+        remove => _onUserChange -= value;
+    }
+
+    private User UserData
+    {
+        get => _userData;
+        set
+        {
+            _userData = value;
+            _onUserChange?.Invoke(value);
+        }
+    }
 
     private UserService() {}
 
@@ -43,17 +62,5 @@ public class UserService
     [JSInvokable]
     /// Callback when the user changes. The response is a JSON object or "null" if the user is
     /// not authenticated.
-    public void UpdateUser(string response)
-    {
-        UserData = new User(response);
-
-        if (UserData.UID != null)
-        {
-            OnLogin?.Invoke(UserData);
-        }
-        else
-        {
-            OnLogout?.Invoke();
-        }
-    }
+    public void UpdateUser(string response) => UserData = new User(response);
 }

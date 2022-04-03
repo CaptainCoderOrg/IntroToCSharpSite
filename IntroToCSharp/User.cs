@@ -4,6 +4,7 @@ using System.Text.Json;
 /// </summary>
 public class User
 {
+    public static User NoUser = new User("null");
     /// <summary>
     /// The User's display name
     /// </summary>

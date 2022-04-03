@@ -5,12 +5,12 @@
                          Icon="@Icons.Material.Outlined.DarkMode"
                          Color="Color.Inherit" />
     <MudSpacer />
-    @if (Main.UserData.IsLoggedIn)
+    @if (UserData.IsLoggedIn)
     {
-        <MudElement>@Main.UserData.DisplayName </MudElement>
+        <MudElement>@UserData.DisplayName </MudElement>
         <MudMenu>
             <ActivatorContent>
-                <MudAvatar Class="ml-4" Color="Color.Secondary">@Main.UserData.AvatarLetter</MudAvatar>
+                <MudAvatar Class="ml-4" Color="Color.Secondary">@UserData.AvatarLetter</MudAvatar>
             </ActivatorContent>
             <ChildContent>
                 <MudMenuItem OnClick="@UserService.Service.Logout">Logout</MudMenuItem>
@@ -27,4 +27,17 @@
 {
     [Parameter, EditorRequired]
     public MainLayout Main {get; set;} = null!;
+    public User UserData = User.NoUser;
+
+    private void UpdateUser(User user)
+    {
+        UserData = user;
+        InvokeAsync(StateHasChanged);
+    }
+
+    protected override void OnInitialized()
+    {
+
+        UserService.Service.OnUserChange += UpdateUser;
+    }
 }

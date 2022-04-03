@@ -26,7 +26,6 @@
     private MudThemeProvider _mudThemeProvider = null!;
     private bool _isDarkMode = true;
     public bool IsNavMenuOpen = true;
-    public User UserData = new User("null");
     public bool IsDarkMode
     {
         get => _isDarkMode;
@@ -58,14 +57,6 @@
         s_JS = JS;
         s_SnackBar = Snackbar;
         s_isInit = true;
-        UserService.Service.OnLogin += UpdateUser;
-        UserService.Service.OnLogout += () => UpdateUser(new User("null"));
-    }
-
-    public void UpdateUser(User user)
-    {
-        UserData = user;
-        InvokeAsync(StateHasChanged);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
