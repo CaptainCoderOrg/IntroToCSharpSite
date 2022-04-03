@@ -67,12 +67,12 @@ export function firebaseLogout() {
  * @param {string} path
  * @param {function} callback
  */
-export function refDatabase(path, callback) {
+export function refDatabase(path, handler) {
   const ref = firebase_database.ref;
   const onValue = firebase_database.onValue;
   const observer = ref(database, path)
   onValue(observer, (snapshot) => {
-    callback(snapshot);
+    handler.invokeMethodAsync("OnValueChanged", JSON.stringify(snapshot.val()));
   });
 }
 
@@ -83,10 +83,13 @@ export function refDatabase(path, callback) {
  * @param {JSON} data
  * @returns A Promise containing the result of this operation
  */
-export function setDatabase(path, data) {
+export function setDatabase(path, data, handler) {
   const set = firebase_database.set;
   const ref = firebase_database.ref;
-  return set(ref(database, path), data);
+  set(ref(database, path), data)
+      .then(() => handler.invokeMethodAsync("OnSuccess"))
+      .catch((exception) => handler.invokeMethodAsync("OnException", JSON.stringify(exception)));
+
 }
 
 /**
@@ -94,10 +97,12 @@ export function setDatabase(path, data) {
  * @param {string} path
  * @returns A Promise containing the result of this operation
  */
-export function removeDatabase(path) {
+export function removeDatabase(path, handler) {
   const remove = firebase_database.remove;
   const ref = firebase_database.ref;
-  return remove(ref(database, path));
+  const result = remove(ref(database, path));
+  result.then(() =>  handler.invokeMethodAsync("OnSuccess"))
+        .catch((exception) => handler.invokeMethodAsync("OnException", JSON.stringify(exception)));
 }
 
 // Expose functions for calling in Blazor App
