@@ -19,6 +19,7 @@
 </MudDrawerContainer>
 @code
 {
+    public event Action<IJSRuntime, ISnackbar>? OnInit;
     private MudThemeProvider _mudThemeProvider = null!;
     private bool _isDarkMode = true;
     public bool IsDarkMode {
@@ -36,20 +37,20 @@
     public async Task Login() => await JS.InvokeVoidAsync("firebaseLogin");
     public async Task Logout() => await JS.InvokeVoidAsync("firebaseLogout");
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        // On initialization, register this object to be notified when the user changes
-        await JS.InvokeVoidAsync("onAuthStateChanged", DotNetObjectReference.Create(this));
+        
+        UserService.Init(JS);
+        UserService.Service.OnLogin += UpdateUser;
+        UserService.Service.OnLogout += () => UpdateUser(new User("null"));
         DatabaseService.Init(JS);
         NotificationService.Init(Snackbar);
     }
 
-    [JSInvokable]
-    /// Callback when the user changes. The response is a JSON object or "null" if the user is
-    /// not authenticated.
-    public void UpdateUser(string response)
+    
+    public void UpdateUser(User user)
     {
-        UserData = new User(response);
+        UserData = user;
         InvokeAsync(StateHasChanged);
 
         if (UserData.UID != null)
@@ -69,4 +70,4 @@
         }
     }
     public void ToggleNavMenu() => IsNavMenuOpen = !IsNavMenuOpen;
-}
+}    
