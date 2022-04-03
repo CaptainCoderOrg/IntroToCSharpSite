@@ -3,9 +3,9 @@
 @inject ISnackbar Snackbar
 
 @* MudBlazor Dependencies *@
-<MudThemeProvider @ref="_mudThemeProvider" Theme="Themes.s_CSharpTheme" @bind-IsDarkMode="@IsDarkMode"/>
-<MudDialogProvider/>
-<MudSnackbarProvider/>
+<MudThemeProvider @ref="_mudThemeProvider" Theme="Themes.s_CSharpTheme" @bind-IsDarkMode="@IsDarkMode" />
+<MudDialogProvider />
+<MudSnackbarProvider />
 
 <TopMenu Main="this" />
 
@@ -22,14 +22,15 @@
     public event Action<IJSRuntime, ISnackbar>? OnInit;
     private MudThemeProvider _mudThemeProvider = null!;
     private bool _isDarkMode = true;
-    public bool IsDarkMode {
-      get => _isDarkMode;
-      set
-      {
-          if (value == _isDarkMode) return;
-          _isDarkMode = value;
-          StateHasChanged();
-      }
+    public bool IsDarkMode
+    {
+        get => _isDarkMode;
+        set
+        {
+            if (value == _isDarkMode) return;
+            _isDarkMode = value;
+            StateHasChanged();
+        }
     }
     public bool IsNavMenuOpen = true;
     public User UserData = new User("null");
@@ -39,7 +40,6 @@
 
     protected override void OnInitialized()
     {
-        
         UserService.Init(JS);
         UserService.Service.OnLogin += UpdateUser;
         UserService.Service.OnLogout += () => UpdateUser(new User("null"));
@@ -47,19 +47,10 @@
         NotificationService.Init(Snackbar);
     }
 
-    
     public void UpdateUser(User user)
     {
         UserData = user;
         InvokeAsync(StateHasChanged);
-
-        if (UserData.UID != null)
-        {
-            DataReference<string> someVal = new DataReference<string>($"/users/{UserData.UID}/test");
-            someVal.DataChanged += (data) => NotificationService.Service.Add(data).AndForget();
-            someVal.Set("Some Value");
-
-        }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -70,4 +61,4 @@
         }
     }
     public void ToggleNavMenu() => IsNavMenuOpen = !IsNavMenuOpen;
-}    
+}
