@@ -40,7 +40,7 @@
     {
         // On initialization, register this object to be notified when the user changes
         await JS.InvokeVoidAsync("onAuthStateChanged", DotNetObjectReference.Create(this));
-        Database.InitDatabase(JS);
+        DatabaseService.InitDatabase(JS);
         NotificationService.InitSnackbar(Snackbar);
     }
 
@@ -52,8 +52,11 @@
         UserData = new User(response);
         InvokeAsync(StateHasChanged);
 
-        SetDataCall<string> setter = new SetDataCall<string>($"/users/{UserData.UID}/test");
-        setter.Set("Some Value");
+        if (UserData.UID != null)
+        {
+            SetDataCall<string> setter = new SetDataCall<string>($"/users/{UserData.UID}/test");
+            setter.Set("Some Value");
+        }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

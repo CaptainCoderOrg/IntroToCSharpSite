@@ -2,12 +2,12 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
 
-public class Database
+public class DatabaseService
 {
     internal readonly IJSRuntime JS;
-    private static Database? s_Database;
+    private static DatabaseService? s_Database;
 
-    public static async Task<Database> GetDatabase()
+    public static async Task<DatabaseService> GetDatabase()
     {
         await Task.Run(() => { while (s_Database == null) Thread.Sleep(100); });
         return s_Database!;
@@ -15,10 +15,10 @@ public class Database
 
     public static void InitDatabase(IJSRuntime JS)
     {
-        s_Database = new Database(JS);
+        s_Database = new DatabaseService(JS);
     }
 
-    private Database(IJSRuntime JS)
+    private DatabaseService(IJSRuntime JS)
     {
         this.JS = JS;
     }
@@ -36,7 +36,7 @@ public class SetDataCall<T>
     {
         if (data == null) throw new NullReferenceException("Data cannot be null.");
         object[] args = {_path, data, DotNetObjectReference.Create(this)};
-        Database db = await Database.GetDatabase();
+        DatabaseService db = await DatabaseService.GetDatabase();
         await db.JS.InvokeAsync<string>("setDatabase", args);
     }
 
