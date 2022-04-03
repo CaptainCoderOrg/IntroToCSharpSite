@@ -2,16 +2,28 @@ using MudBlazor;
 
 public class NotificationService
 {
-    private static ISnackbar? s_Snackbar;
+    public static NotificationService Service { get; } = new NotificationService();
 
-    public static async Task<ISnackbar> GetSnackbar()
+    public static void Init(ISnackbar snackbar)
     {
-        await Task.Run(() => { while (s_Snackbar == null) Thread.Sleep(100); });
-        return s_Snackbar!;
+        if (snackbar == null) throw new ArgumentNullException("Snackbar must not be null.");
+        if (Service._snackbar != null) throw new InvalidOperationException("Cannot initialize NotificationService multiple times.");
+        Service._snackbar = snackbar;
     }
 
-    public static void InitSnackbar(ISnackbar snackbar)
+    private ISnackbar? _snackbar;
+    public async Task<ISnackbar> GetSnackbar()
     {
-        s_Snackbar = snackbar;
+        await Task.Run(() => { while (_snackbar == null ) Thread.Sleep(100); });
+        return _snackbar!;
     }
+
+    private NotificationService() {}
+
+    /* Start: Delegate Methods for ISnackbar */
+    public async Task<Snackbar> Add(string message, Severity severity = Severity.Normal, Action<SnackbarOptions> configure = null!) => (await GetSnackbar()).Add(message, severity, configure);
+    public async void Clear() => (await GetSnackbar()).Clear();
+    public async void Remove(Snackbar snackbar) => (await GetSnackbar()).Remove(snackbar);
+    public async void Dispose() => (await GetSnackbar()).Dispose();
+    /* End: Delegate Methods for ISnackbar */
 }

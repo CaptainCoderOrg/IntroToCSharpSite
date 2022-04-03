@@ -41,16 +41,8 @@ public class SetDataCall<T>
     }
 
     [JSInvokable]
-    public virtual async void OnSuccess()
-    {
-       ISnackbar snackbar = await NotificationService.GetSnackbar();
-       snackbar.Add("Data Synced.", Severity.Success);
-    }
-
+    public virtual async void OnSuccess() => await NotificationService.Service.Add("Data Synced.", Severity.Success);
+    
     [JSInvokable]
-    public virtual async void OnException(string exception)
-    {
-        ISnackbar snackbar = await NotificationService.GetSnackbar();
-        snackbar.Add(exception, Severity.Warning);
-    }
+    public virtual async void OnException(string exception) => await NotificationService.Service.Add(exception, Severity.Warning);
 }
