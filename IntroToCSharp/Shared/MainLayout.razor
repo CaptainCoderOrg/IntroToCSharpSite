@@ -40,7 +40,7 @@
     {
         // On initialization, register this object to be notified when the user changes
         await JS.InvokeVoidAsync("onAuthStateChanged", DotNetObjectReference.Create(this));
-        DatabaseService.InitDatabase(JS);
+        DatabaseService.Init(JS);
         NotificationService.Init(Snackbar);
     }
 

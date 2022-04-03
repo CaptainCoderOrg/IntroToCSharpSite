@@ -13,7 +13,7 @@ public class DatabaseService
         return s_Database!;
     }
 
-    public static void InitDatabase(IJSRuntime JS)
+    public static void Init(IJSRuntime JS)
     {
         s_Database = new DatabaseService(JS);
     }
