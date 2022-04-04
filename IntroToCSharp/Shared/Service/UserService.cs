@@ -56,7 +56,8 @@ public class UserService
         return this._runtime!;
     }
 
-    public async Task Login() => await (await GetRuntime()).InvokeVoidAsync("firebaseLogin");
+    public async Task GoogleLogin() => await (await GetRuntime()).InvokeVoidAsync("firebaseGoogleLogin");
+    public async Task GitHubLogin() => await (await GetRuntime()).InvokeVoidAsync("firebaseGitHubLogin");
     public async Task Logout() => await (await GetRuntime()).InvokeVoidAsync("firebaseLogout");
 
     [JSInvokable]

@@ -54,7 +54,8 @@ public class User
             var result = JsonDocument.Parse(response);
             this.UID = result.RootElement.GetProperty("uid").GetString();
             this.DisplayName = result.RootElement.GetProperty("displayName").GetString();
-            this.Email = result.RootElement.GetProperty("email").GetString();
+            // TODO: Detect which service authenticated this user (Google / Github provided different values)
+            // this.Email = result.RootElement.GetProperty("email").GetString();
             this.IsLoggedIn = true;
             // TODO(jcollard 2022-04-04): default to localstorage.DarkMode?
             this.DarkMode = DataReference.Bool($"/users/{this.UID}/prefs/DarkMode", false, "Dark Mode");

@@ -19,7 +19,10 @@
     }
     else
     {
-        <MudButton href="javascript:void(0);" OnClick="@UserService.Service.Login" Variant="Variant.Filled" Color="Color.Tertiary" class="ml-md-auto">Login</MudButton>
+        <MudMenu Label="Login" Variant="Variant.Filled" Color="Color.Tertiary" class="ml-md-auto" ActivationEvent="@MouseEvent.MouseOver">
+            <MudMenuItem OnClick="@UserService.Service.GoogleLogin">Google</MudMenuItem>
+            <MudMenuItem OnClick="@UserService.Service.GitHubLogin">GitHub</MudMenuItem>
+        </MudMenu>
     }
 </MudAppBar>
 
