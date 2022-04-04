@@ -32,21 +32,33 @@ export function onAuthStateChanged(obj) {
     });
 }
 
+
+function firebaseLogin(provider) {
+    if (_user) return; // If we're already logged in, noop
+    // const provider = providernew firebase_auth.GoogleAuthProvider();
+    const auth = firebase_auth.getAuth();
+    firebase_auth.signInWithPopup(auth, provider)
+        .then((result) => {
+            // TODO: Redirect?
+        }).catch((error) => {
+            // TODO: Redirect?
+            console.error("Error!");
+            console.error(error);
+        });
+}
+
 /**
  * Invoke a Google Authentication popup
  */
-export function firebaseLogin() {
-    if (_user) return; // If we're already logged in, noop
-    const provider = new firebase_auth.GoogleAuthProvider();
-    const auth = firebase_auth.getAuth();
-    firebase_auth.signInWithPopup(auth, provider)
-      .then((result) => {
-        // TODO: Redirect?
-      }).catch((error) => {
-        // TODO: Redirect?
-        console.error("Error!");
-        console.error(error);
-      });
+export function firebaseGoogleLogin() {
+    firebaseLogin(new firebase_auth.GoogleAuthProvider());
+}
+
+/**
+ * Invoke a GitHub Authentication popup
+ */
+export function firebaseGitHubLogin() {
+    firebaseLogin(new firebase_auth.GithubAuthProvider());
 }
 
 /**
@@ -55,9 +67,9 @@ export function firebaseLogin() {
 export function firebaseLogout() {
     const auth = firebase_auth.getAuth();
     firebase_auth.signOut(auth).then(() => {
-      // Sign-out successful.
+        // Sign-out successful.
     }).catch((error) => {
-      // An error happened.
+        // An error happened.
     });
 }
 
@@ -68,14 +80,14 @@ export function firebaseLogout() {
  * @param {function} callback
  */
 export function refDatabase(path, handler) {
-  const ref = firebase_database.ref;
-  const onValue = firebase_database.onValue;
-  const observer = ref(database, path)
-  onValue(observer, (snapshot) => {
-    let val = snapshot.val();
-    val = val == null ? null : JSON.stringify(val);
-    handler.invokeMethodAsync("OnChange", val);
-  });
+    const ref = firebase_database.ref;
+    const onValue = firebase_database.onValue;
+    const observer = ref(database, path)
+    onValue(observer, (snapshot) => {
+        let val = snapshot.val();
+        val = val == null ? null : JSON.stringify(val);
+        handler.invokeMethodAsync("OnChange", val);
+    });
 }
 
 /**
@@ -86,12 +98,11 @@ export function refDatabase(path, handler) {
  * @returns A Promise containing the result of this operation
  */
 export function setDatabase(path, data, handler) {
-  const set = firebase_database.set;
-  const ref = firebase_database.ref;
-  set(ref(database, path), JSON.parse(data))
-      .then(() => handler.invokeMethodAsync("OnSuccess"))
-      .catch((exception) => handler.invokeMethodAsync("OnException", JSON.stringify(exception)));
-
+    const set = firebase_database.set;
+    const ref = firebase_database.ref;
+    set(ref(database, path), JSON.parse(data))
+        .then(() => handler.invokeMethodAsync("OnSuccess"))
+        .catch((exception) => handler.invokeMethodAsync("OnException", JSON.stringify(exception)));
 }
 
 /**
@@ -100,15 +111,16 @@ export function setDatabase(path, data, handler) {
  * @returns A Promise containing the result of this operation
  */
 export function removeDatabase(path, handler) {
-  const remove = firebase_database.remove;
-  const ref = firebase_database.ref;
-  const result = remove(ref(database, path));
-  result.then(() =>  handler.invokeMethodAsync("OnSuccess"))
+    const remove = firebase_database.remove;
+    const ref = firebase_database.ref;
+    const result = remove(ref(database, path));
+    result.then(() => handler.invokeMethodAsync("OnSuccess"))
         .catch((exception) => handler.invokeMethodAsync("OnException", JSON.stringify(exception)));
 }
 
 // Expose functions for calling in Blazor App
-window.firebaseLogin = firebaseLogin;
+window.firebaseGoogleLogin = firebaseGoogleLogin;
+window.firebaseGitHubLogin = firebaseGitHubLogin;
 window.firebaseLogout = firebaseLogout;
 window.onAuthStateChanged = onAuthStateChanged;
 window.refDatabase = refDatabase;
