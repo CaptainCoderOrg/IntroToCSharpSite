@@ -56,7 +56,8 @@ public class User
             this.DisplayName = result.RootElement.GetProperty("displayName").GetString();
             this.Email = result.RootElement.GetProperty("email").GetString();
             this.IsLoggedIn = true;
-            this.DarkMode = DataReference.Bool($"/users/{this.UID}/prefs/DarkMode", "Dark Mode");
+            // TODO(jcollard 2022-04-04): default to localstorage.DarkMode?
+            this.DarkMode = DataReference.Bool($"/users/{this.UID}/prefs/DarkMode", false, "Dark Mode");
         }
     }
 

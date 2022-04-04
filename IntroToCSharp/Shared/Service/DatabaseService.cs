@@ -134,7 +134,7 @@ public interface IChangeHandler
 
 public class DataReference
 {
-    public static DataReference<bool> Bool(string path, string? niceName = null) => BoolDataReference.GetRef(path, niceName);
+    public static DataReference<bool> Bool(string path, bool defaultValue = false, string? niceName = null) => BoolDataReference.GetRef(path, defaultValue, niceName);
 }
 
 /// <summary>
@@ -144,11 +144,17 @@ public class DataReference
 public abstract class DataReference<T>  : IResultHandler, IChangeHandler
 {
     private readonly string? _niceName;
+    private T? _defaultValue;
     private T? _val;
     private bool _hasVal = false;
     private bool _hasRef = false;
-    private event Action<T>? _dataChanged;
+    private event Action<T?>? _dataChanged;
     private readonly string _path;
+    
+    /// <summary>
+    /// The nice name for this data reference, if one exists.
+    /// </summary>
+    public string? NiceName => _niceName;
 
     /// <summary>
     /// The absolute path to this DataReference within the database.
@@ -158,7 +164,7 @@ public abstract class DataReference<T>  : IResultHandler, IChangeHandler
     /// <summary>
     /// This event is triggered when the data at the specified path changes.
     /// </summary>
-    public event Action<T>? DataChanged
+    public event Action<T?>? DataChanged
     {
         add
         {
@@ -174,13 +180,9 @@ public abstract class DataReference<T>  : IResultHandler, IChangeHandler
         remove => _dataChanged -= value;
     }
 
-    protected T Val
+    protected T? Val
     {
-        get
-        {
-            if (_val == null) throw new InvalidOperationException("No CurrentVal found.");
-            return _val;
-        }
+        get => _val;
         set
         {
             // If the current value is already equal to this value, no need to update.
@@ -195,9 +197,10 @@ public abstract class DataReference<T>  : IResultHandler, IChangeHandler
     /// Constructs a DataReference specifying the path within the database.
     /// </summary>
     /// <param name="path"></param>
-    protected DataReference(string path, string? niceName = null)
+    protected DataReference(string path, T? defaultValue = default(T), string? niceName = null)
     {
         this._path = path;
+        this._defaultValue = defaultValue;
         this._niceName = niceName;
     }
 
@@ -233,33 +236,47 @@ public abstract class DataReference<T>  : IResultHandler, IChangeHandler
     public abstract void Set(T data, bool notifyOnSuccess = true);
 
     /// <inheritdoc/>
-    public abstract void OnChange(string data);
+    [JSInvokable]
+    public void OnChange(string? data)
+    {
+        if (data == null)
+        {
+            Val = _defaultValue;
+            return;
+        }
+        HandleChange(data);
+    }
+
+    protected abstract void HandleChange(string data);
 
 }
 
 internal class BoolDataReference : DataReference<bool>
 {
     private static readonly Dictionary<string, BoolDataReference> DataRefs = new Dictionary<string, BoolDataReference>();
-    internal static DataReference<bool> GetRef(string path, string? niceName = null)
+    internal static DataReference<bool> GetRef(string path, bool defaultValue = false, string? niceName = null)
     {
         if (!DataRefs.TryGetValue(path, out BoolDataReference? value))
         {
-            value = new BoolDataReference(path, niceName);
+            value = new BoolDataReference(path, defaultValue, niceName);
         }
         return value;
     }
-    private BoolDataReference(string path, string? niceName = null) : base(path, niceName) {}
+    private BoolDataReference(string path, bool defaultValue = false, string? niceName = null) : base(path, defaultValue, niceName) {}
 
-    [JSInvokable]
-    public override void OnChange(string data)
+    protected override void HandleChange(string data)
     {
         try
-        {
+        {   
             Val = JsonDocument.Parse(data).RootElement.GetBoolean();
+        }
+        catch (InvalidOperationException)
+        {
+            NotificationService.Service.Add($"Error loading {NiceName}. Expected bool but found: {data}", Severity.Error).AndForget();
         }
         catch
         {
-            NotificationService.Service.Add($"Could not load value: {data}", Severity.Error).AndForget();
+            NotificationService.Service.Add($"Error loading {NiceName}.", Severity.Error).AndForget();
         }
     }
 
