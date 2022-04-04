@@ -86,7 +86,7 @@ export function refDatabase(path, handler) {
 export function setDatabase(path, data, handler) {
   const set = firebase_database.set;
   const ref = firebase_database.ref;
-  set(ref(database, path), data)
+  set(ref(database, path), JSON.parse(data))
       .then(() => handler.invokeMethodAsync("OnSuccess"))
       .catch((exception) => handler.invokeMethodAsync("OnException", JSON.stringify(exception)));
 
