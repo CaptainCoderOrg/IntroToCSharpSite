@@ -259,7 +259,7 @@ internal class BoolDataReference : DataReference<bool>
         }
         catch
         {
-            NotificationService.Service.Add($"Could not load value: {data}").AndForget();
+            NotificationService.Service.Add($"Could not load value: {data}", Severity.Error).AndForget();
         }
     }
 
