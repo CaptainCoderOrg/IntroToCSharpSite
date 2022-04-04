@@ -26,6 +26,8 @@
     private MudThemeProvider _mudThemeProvider = null!;
     private bool _isDarkMode = true;
     public bool IsNavMenuOpen = true;
+    private DataReference<bool>? DarkModePreference;
+    private User? UserData;
     public bool IsDarkMode
     {
         get => _isDarkMode;
@@ -33,8 +35,16 @@
         {
             if (value == _isDarkMode) return;
             _isDarkMode = value;
+            UpdateDarkModePreference(UserData);
             StateHasChanged();
         }
+    }
+
+    public void UpdateDarkModePreference(User? userData)
+    {
+        if (userData == null) return;
+        if (DarkModePreference == null) return;
+        DarkModePreference.Set(_isDarkMode, false);
     }
 
     public static event Action<IJSRuntime, ISnackbar> OnInit
@@ -57,6 +67,18 @@
         s_JS = JS;
         s_SnackBar = Snackbar;
         s_isInit = true;
+        UserService.Service.OnUserChange += (user => 
+        {
+            UserData = user;
+            DarkModePreference = UserData.IsLoggedIn ? DataReference.Bool($"/users/{UserData.UID}/DarkMode", "Dark Mode") : null;
+            if (DarkModePreference != null)
+            {
+                DarkModePreference.DataChanged += (val =>
+                {
+                    if (val != _isDarkMode) IsDarkMode = val;
+                });
+            }
+        });
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

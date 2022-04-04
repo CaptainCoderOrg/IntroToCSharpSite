@@ -1,5 +1,5 @@
+using System.Text.Json;
 using IntroToCSharp.Shared;
-using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
 
@@ -52,7 +52,7 @@ public class DatabaseService
     public async Task Set<T>(string path, T data, IResultHandler handler)
     {
         if (data == null) throw new ArgumentNullException("Data cannot be null.");
-        object[] args = { path, data!, DotNetObjectReference.Create(handler) };
+        object[] args = { path, JsonSerializer.Serialize(data), DotNetObjectReference.Create(handler) };
         var JS = await GetRuntime();
         await JS.InvokeVoidAsync("setDatabase", args);
     }
@@ -77,7 +77,7 @@ public class DatabaseService
     /// <param name="handler"></param>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public async Task Ref<T>(string path, IChangeHandler<T> handler)
+    public async Task Ref(string path, IChangeHandler handler)
     {
         object[] args = { path, DotNetObjectReference.Create(handler) };
         var JS = await GetRuntime();
@@ -91,31 +91,69 @@ public class DatabaseService
 /// </summary>
 public interface IResultHandler
 {
+    static IResultHandler Default = new DefaultResultHandler();
+
+    /// <summary>
+    /// A JSInvokable method which is called when the database interaction is completed successfully.
+    /// </summary>
     void OnSuccess();
+
+    /// <summary>
+    /// A JSInvokable method which is called when an exception is raised by the database.
+    /// </summary>
+    /// <param name="exception"></param>
     void OnException(string exception);
+}
+
+public class DefaultResultHandler : IResultHandler
+{
+    [JSInvokable]
+    public async void OnException(string exception) => await NotificationService.Service.Add(exception, Severity.Warning);
+    [JSInvokable]
+    public void OnSuccess() {}
 }
 
 /// <summary>
 /// A IChangeHandler is used to observe data within the database.
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public interface IChangeHandler<T>
+public interface IChangeHandler
 {
-    void OnChange(T result);
+    /// <summary>
+    /// A JSInvokable method which is called when a value change has been detected.
+    /// </summary>
+    /// <param name="result">A JSON string containing the new value.</param>
+    void OnChange(string result);
+
+    /// <summary>
+    /// A JSInvokable method which is called when an exception is raised by the database.
+    /// </summary>
+    /// <param name="exception"></param>
     void OnException(string exception);
+}
+
+public class DataReference
+{
+    public static DataReference<bool> Bool(string path, string? niceName = null) => BoolDataReference.GetRef(path, niceName);
 }
 
 /// <summary>
 /// A DataReference is a helper class for reading and writing data within the database.
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public class DataReference<T> : IResultHandler, IChangeHandler<T>
+public abstract class DataReference<T>  : IResultHandler, IChangeHandler
 {
-    private readonly string _path;
-    private T? _currentVal;
+    private readonly string? _niceName;
+    private T? _val;
     private bool _hasVal = false;
     private bool _hasRef = false;
     private event Action<T>? _dataChanged;
+    private readonly string _path;
+
+    /// <summary>
+    /// The absolute path to this DataReference within the database.
+    /// </summary>
+    public string Path => _path;
 
     /// <summary>
     /// This event is triggered when the data at the specified path changes.
@@ -125,27 +163,30 @@ public class DataReference<T> : IResultHandler, IChangeHandler<T>
         add
         {
             if (value == null) throw new ArgumentNullException("Cannot register null event listener.");
-            if (_hasVal) value.Invoke(CurrentVal);
+            if (_hasVal) value.Invoke(Val);
             _dataChanged += value;
             if (!_hasRef)
             {
-                DatabaseService.Service.Ref<T>(_path, this).AndForget();
+                DatabaseService.Service.Ref(_path, this).AndForget();
                 _hasRef = true;
             }
         }
         remove => _dataChanged -= value;
     }
 
-    private T CurrentVal
+    protected T Val
     {
         get
         {
-            if (_currentVal == null) throw new InvalidOperationException("No CurrentVal found.");
-            return _currentVal;
+            if (_val == null) throw new InvalidOperationException("No CurrentVal found.");
+            return _val;
         }
         set
         {
-            _currentVal = value;
+            // If the current value is already equal to this value, no need to update.
+            if (EqualityComparer<T>.Default.Equals(_val, value) && _hasVal) return;
+            _val = value;
+            _dataChanged?.Invoke(_val);
             _hasVal = true;
         }
     }
@@ -154,38 +195,77 @@ public class DataReference<T> : IResultHandler, IChangeHandler<T>
     /// Constructs a DataReference specifying the path within the database.
     /// </summary>
     /// <param name="path"></param>
-    public DataReference(string path)
+    protected DataReference(string path, string? niceName = null)
     {
         this._path = path;
-    }
-
-    /// <summary>
-    /// Attempts to set the data value within the database.
-    /// </summary>
-    /// <param name="data"></param>
-    /// <returns></returns>
-    public async void Set(T data)
-    {
-        if (data == null) throw new NullReferenceException("Data cannot be null.");
-        await DatabaseService.Service.Set<T>(_path, data, this);
+        this._niceName = niceName;
     }
 
     /// <summary>
     /// Attempts to remove the data from the database
     /// </summary>
     /// <returns></returns>
-    public async void Remove() => await DatabaseService.Service.Remove(_path, this);
-
-    [JSInvokable]
-    public virtual async void OnSuccess() => await NotificationService.Service.Add("Data Synced.", Severity.Success);
-
-    [JSInvokable]
-    public virtual async void OnException(string exception) => await NotificationService.Service.Add(exception, Severity.Warning);
-
-    [JSInvokable]
-    public virtual void OnChange(T data)
+    public async void Remove(bool notifyOnSuccess = true)
     {
-        CurrentVal = data;
-        _dataChanged?.Invoke(data);
+        IResultHandler handler = notifyOnSuccess ? this : IResultHandler.Default;
+        await DatabaseService.Service.Remove(_path, handler);
+    }
+
+    /// <inheritdoc/>
+    [JSInvokable]
+    public virtual async void OnSuccess()
+    {
+        string message = "Data Synced";
+        message += _niceName == null ? "" : $": {_niceName}";
+        await NotificationService.Service.Add(message, Severity.Success);
+    }
+
+    /// <inheritdoc/>
+    [JSInvokable]
+    public virtual void OnException(string exception) => IResultHandler.Default.OnException(exception);
+
+    /// <summary>
+    /// Attempts to set the data value within the database. If notifyOnSuccess is set to true
+    /// an on screen notification will be displayed when the Database returns successfully
+    /// </summary>
+    /// <param name="data">The value to set</param>
+    /// <param name="notifyOnSuccess"></param>
+    public abstract void Set(T data, bool notifyOnSuccess = true);
+
+    /// <inheritdoc/>
+    public abstract void OnChange(string data);
+
+}
+
+internal class BoolDataReference : DataReference<bool>
+{
+    private static readonly Dictionary<string, BoolDataReference> DataRefs = new Dictionary<string, BoolDataReference>();
+    internal static DataReference<bool> GetRef(string path, string? niceName = null)
+    {
+        if (!DataRefs.TryGetValue(path, out BoolDataReference? value))
+        {
+            value = new BoolDataReference(path, niceName);
+        }
+        return value;
+    }
+    private BoolDataReference(string path, string? niceName = null) : base(path, niceName) {}
+
+    [JSInvokable]
+    public override void OnChange(string data)
+    {
+        try
+        {
+            Val = JsonDocument.Parse(data).RootElement.GetBoolean();
+        }
+        catch
+        {
+            NotificationService.Service.Add($"Could not load value: {data}").AndForget();
+        }
+    }
+
+    public override async void Set(bool data, bool notifyOnSuccess = true)
+    {
+        IResultHandler handler = notifyOnSuccess ? this : IResultHandler.Default;
+        await DatabaseService.Service.Set<bool>(Path, data, handler);
     }
 }
