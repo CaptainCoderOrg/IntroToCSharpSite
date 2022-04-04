@@ -31,6 +31,11 @@ public class User
     public bool IsLoggedIn { get; }
 
     /// <summary>
+    /// A Reference to this users DarkMode preference.
+    /// </summary>
+    public DataReference<bool>? DarkMode;
+
+    /// <summary>
     /// Given an authentication response, constructs a User object from that JSON data.
     /// </summary>
     /// <param name="response">"null" if the user is not authenticated otherwise a JSON string with 'displayName' and 'email'</param>
@@ -42,6 +47,7 @@ public class User
             this.UID = null;
             this.Email = null;
             this.IsLoggedIn = false;
+            this.DarkMode = null;
         }
         else
         {
@@ -50,6 +56,7 @@ public class User
             this.DisplayName = result.RootElement.GetProperty("displayName").GetString();
             this.Email = result.RootElement.GetProperty("email").GetString();
             this.IsLoggedIn = true;
+            this.DarkMode = DataReference.Bool($"/users/{this.UID}/prefs/DarkMode", "Dark Mode");
         }
     }
 

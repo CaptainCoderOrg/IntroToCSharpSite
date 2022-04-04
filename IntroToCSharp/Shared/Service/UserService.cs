@@ -63,4 +63,9 @@ public class UserService
     /// Callback when the user changes. The response is a JSON object or "null" if the user is
     /// not authenticated.
     public void UpdateUser(string response) => UserData = new User(response);
+
+    /// <summary>
+    /// Sets the DarkModePreference of the current user
+    /// </summary>
+    public void UpdateDarkModePreference(bool value) => _userData.DarkMode?.Set(value, true);
 }
