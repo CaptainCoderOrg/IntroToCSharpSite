@@ -1,6 +1,7 @@
 @inherits LayoutComponentBase
 @inject IJSRuntime JS
 @inject ISnackbar Snackbar
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
 
 @* MudBlazor Dependencies *@
 <MudThemeProvider @ref="_mudThemeProvider" Theme="Themes.s_CSharpTheme" @bind-IsDarkMode="@IsDarkMode" />
@@ -34,6 +35,7 @@
             if (value == _isDarkMode) return;
             _isDarkMode = value;
             UserService.Service.UpdateDarkModePreference(value);
+            localStorage.SetItemAsync<bool>("DarkMode", value);
             StateHasChanged();
         }
     }
@@ -75,7 +77,13 @@
     {
         if (firstRender)
         {
-            IsDarkMode = await _mudThemeProvider.GetSystemPreference();
+            bool hasDarkMode = await localStorage.ContainKeyAsync("DarkMode");
+            if (!hasDarkMode)
+            {
+                bool systemPref = await _mudThemeProvider.GetSystemPreference();
+                await localStorage.SetItemAsync<bool>("DarkMode", systemPref);
+            }
+            IsDarkMode = await localStorage.GetItemAsync<bool>("DarkMode");
         }
     }
     public void ToggleNavMenu() => IsNavMenuOpen = !IsNavMenuOpen;
