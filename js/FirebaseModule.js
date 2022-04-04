@@ -72,7 +72,9 @@ export function refDatabase(path, handler) {
   const onValue = firebase_database.onValue;
   const observer = ref(database, path)
   onValue(observer, (snapshot) => {
-    handler.invokeMethodAsync("OnChange", JSON.stringify(snapshot.val()));
+    let val = snapshot.val();
+    val = val == null ? null : JSON.stringify(val);
+    handler.invokeMethodAsync("OnChange", val);
   });
 }
 
