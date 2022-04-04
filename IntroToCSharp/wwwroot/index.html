@@ -7,6 +7,7 @@
     <title>IntroToCSharp</title>
     <base />
     <!-- Dynamically set the base path based on where we are hosting from -->
+    <!-- Necessary for hosting from github.io -->
     <script>
         var path = window.location.pathname.split('/');
         var base = document.getElementsByTagName('base')[0];
@@ -19,17 +20,17 @@
         }
     </script>
 
-    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="/css/app.css" />
 
     <!-- Highlight.js and custom rendering code -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/vs2015.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
-    <script src="js/RenderCode.js"></script>
-    <script src="js/ReplIt.js"></script>
+    <script src="/js/RenderCode.js"></script>
+    <script src="/js/ReplIt.js"></script>
 
     <!-- MudBlazor dependencies -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
-    <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
+    <link href="/_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
 
 </head>
 
@@ -54,11 +55,11 @@
     </div>
 
     <!-- Firebase UI Auth -->
-    <script type="module" src="js/FirebaseModule.js"></script>
+    <script type="module" src="/js/FirebaseModule.js"></script>
     <!-- MudBlazor Dependencies -->
-    <script src="_content/MudBlazor/MudBlazor.min.js"></script>
+    <script src="/_content/MudBlazor/MudBlazor.min.js"></script>
     <!-- Default Blazor dependencies -->
-    <script src="_framework/blazor.webassembly.js"></script>
+    <script src="/_framework/blazor.webassembly.js"></script>
 </body>
 
 </html>
