@@ -1,4 +1,4 @@
-using IntroToCSharp.Shared;
+using IntroToCSharp.Shared.Layout;
 using Microsoft.JSInterop;
 
 public class UserService

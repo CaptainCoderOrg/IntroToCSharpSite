@@ -1,4 +1,4 @@
-using IntroToCSharp.Shared;
+using IntroToCSharp.Shared.Layout;
 using MudBlazor;
 
 /// <summary>

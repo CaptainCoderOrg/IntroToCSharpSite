@@ -1,5 +1,5 @@
 using System.Text.Json;
-using IntroToCSharp.Shared;
+using IntroToCSharp.Shared.Layout;
 using Microsoft.JSInterop;
 using MudBlazor;
 
