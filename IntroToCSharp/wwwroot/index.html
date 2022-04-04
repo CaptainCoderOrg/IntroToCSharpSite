@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>IntroToCSharp</title>
-    <base />
+    <base href="/" />
     <!-- Dynamically set the base path based on where we are hosting from -->
     <!-- Necessary for hosting from github.io -->
-    <script>
+    <!-- <script>
         var path = window.location.pathname.split('/');
         var base = document.getElementsByTagName('base')[0];
         if (window.location.host.includes('github.io')) {
@@ -20,7 +20,7 @@
         } else {
             base.setAttribute('href', '/');
         }
-    </script>
+    </script> -->
 
     <link rel="stylesheet" href="css/app.css" />
 
@@ -57,7 +57,7 @@
     </div>
 
     <!-- Firebase UI Auth -->
-    <script type="module" src="/js/FirebaseModule.js"></script>
+    <script type="module" src="js/FirebaseModule.js"></script>
     <!-- MudBlazor Dependencies -->
     <script src="_content/MudBlazor/MudBlazor.min.js"></script>
     <!-- Default Blazor dependencies -->
