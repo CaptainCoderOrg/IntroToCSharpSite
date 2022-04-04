@@ -34,7 +34,18 @@
 </head>
 
 <body>
-    <div id="app">Loading...</div>
+    <div id="app">
+        <div class="loading" style="position:absolute; top:30vh; width:100%; text-align:center">
+            <h1>Intro to Coding in C#</h1>
+            <div style="display:flex; gap:10px; justify-content:center; align-items:center">
+                The application is loading...
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-bar-value"></div>
+            </div>
+        </div>
+    </div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
