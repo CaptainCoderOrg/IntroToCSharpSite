@@ -12,6 +12,11 @@ public class NotificationService
     /// </summary>
     public static NotificationService Service { get; } = new NotificationService();
 
+    internal static void Debug(string message)
+    {
+        Service.Add(message, Severity.Warning).AndForget();
+    }
+
     /// <summary>
     /// This method should be called once during initialization of the application
     /// to specify the ISnackbar to use for displaying messages.
