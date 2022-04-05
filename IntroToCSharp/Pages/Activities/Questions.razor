@@ -1,0 +1,16 @@
+<Section Title="@Title">
+    <MudText Class="pa-2">@Message</MudText>
+    <MudList Clickable="true">
+        @ChildContent
+    </MudList>
+</Section>
+@code
+{
+    [Parameter, EditorRequired]
+    public string Title {get; set;} = null!;
+
+    [Parameter]
+    public RenderFragment ChildContent {get; set;} = null!;
+    [Parameter]
+    public RenderFragment Message { get; set; } = null!;
+}

@@ -1,0 +1,8 @@
+<MudPaper Outlined="true" Elevation="3" Class="pa-2 my-2">
+    <b>Fun Fact: </b> @ChildContent
+</MudPaper>
+@code
+{
+    [Parameter]
+    public RenderFragment ChildContent { get; set; } = null!;
+}

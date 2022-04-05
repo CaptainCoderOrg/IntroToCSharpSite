@@ -1,0 +1,35 @@
+@inject NavigationManager NavigationManager
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+
+<MudExpansionPanel @bind-IsExpanded="@IsExpanded" onclick="@OnExpand">
+    <TitleContent>
+        <h2 class="mud-theme-primary pa-2">@Title</h2>
+    </TitleContent>
+    <ChildContent>
+        <MudText Class="px-2 ma-0">@ChildContent</MudText>
+    </ChildContent>
+</MudExpansionPanel>
+@code
+{
+    [Parameter, EditorRequired]
+    public string Title {get; set;} = null!;
+    [Parameter]
+    public RenderFragment ChildContent {get; set;} = null!;
+    private bool IsExpanded = true;
+    private string Key => NavigationManager.Uri.Substring(NavigationManager.BaseUri.Length) + Title;
+
+    protected async override void OnInitialized()
+    {
+        bool contains = await localStorage.ContainKeyAsync(Key);
+        if (contains)
+        {
+            IsExpanded = await localStorage.GetItemAsync<bool>(Key);
+            StateHasChanged();
+        }
+    }
+
+    private async void OnExpand()
+    {
+        await localStorage.SetItemAsync<bool>(Key, IsExpanded);
+    }
+}
