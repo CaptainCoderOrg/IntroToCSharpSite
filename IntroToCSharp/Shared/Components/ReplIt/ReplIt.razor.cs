@@ -14,6 +14,8 @@ namespace CaptainCoder
         public Action? OnClose { get; set; } = null;
         [Parameter]
         public bool ShareSource { get; set; } = false;
+        [Parameter]
+        public string MinHeight { get; set; } = "250px";
                 
         [Inject]
         private IJSRuntime JS { get; set; } = null!;
