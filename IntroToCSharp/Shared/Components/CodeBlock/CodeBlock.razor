@@ -2,7 +2,7 @@
 @inherits CaptainCoder.CodeBlock
 
 <MudPaper MaxHeight="@MaxHeight" Class="d-flex flex-column flex-0 gap-1 my-2">
-    
+
     <MudPaper Style="overflow:auto;">
         <pre class="@GetAllowCopy()">
             <code id="@ID" class="language-@Language code-block"></code>
@@ -10,9 +10,9 @@
     </MudPaper>
     @if (ReplIt != null)
     {
-    <MudElement Class="ma-2" Style="@PlayButtonStyle">
-        <MudButton Color="Color.Tertiary" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.PlayCircle" OnClick="@(() => IsReplItOpen = !IsReplItOpen)" >Run Code</MudButton>    
-    </MudElement>
+        <MudElement Class="ma-2" Style="@PlayButtonStyle">
+            <MudButton Color="Color.Tertiary" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.PlayCircle" OnClick="@(() => IsReplItOpen = !IsReplItOpen)" >Run Code</MudButton>
+        </MudElement>
         if (IsReplItOpen)
         {
             <MudPaper Style="@ReplItStyle" >
@@ -20,5 +20,5 @@
             </MudPaper>
         }
     }
-    
+
 </MudPaper>
