@@ -1,9 +1,9 @@
-namespace CaptainCoder
+namespace IntroToCSharp.Shared.Components.ReplIt
 {
     using Microsoft.AspNetCore.Components;
     using Microsoft.JSInterop;
 
-    public class ReplIt : ComponentBase
+    public sealed partial class ReplIt : ComponentBase
     {
         [Parameter, EditorRequired]
         public string Path { get; set; } = null!;

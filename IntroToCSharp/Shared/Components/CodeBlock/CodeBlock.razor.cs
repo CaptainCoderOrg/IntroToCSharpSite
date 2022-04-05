@@ -1,8 +1,8 @@
-namespace CaptainCoder
+namespace IntroToCSharp.Shared.Components.CodeBlock
 {
     using Microsoft.AspNetCore.Components;
     using Microsoft.JSInterop;
-    public class CodeBlock : ComponentBase
+    public sealed partial class CodeBlock : ComponentBase
     {
         private static int s_NextID = 0;
         private bool allowCopy = false;
