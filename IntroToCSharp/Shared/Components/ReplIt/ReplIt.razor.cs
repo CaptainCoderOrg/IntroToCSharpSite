@@ -23,7 +23,5 @@ namespace CaptainCoder
         {
             await JS.InvokeVoidAsync("ReloadIFrame", Path);
         }
-
-        protected override async void OnAfterRender(bool firstRender) => await ReloadIFrame();
     }
 }

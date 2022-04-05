@@ -13,9 +13,12 @@
     <MudElement Class="ma-2" Style="@PlayButtonStyle">
         <MudButton Color="Color.Tertiary" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.PlayCircle" OnClick="@(() => IsReplItOpen = !IsReplItOpen)" >Run Code</MudButton>    
     </MudElement>
-    <MudPaper Style="@ReplItStyle" >
-        <ReplIt Path="@ReplIt" ShareSource="@AllowCopy" OnClose="@(() => IsReplItOpen = !IsReplItOpen)"/>
-    </MudPaper>
+        if (IsReplItOpen)
+        {
+            <MudPaper Style="@ReplItStyle" >
+                <ReplIt Path="@ReplIt" ShareSource="@AllowCopy" OnClose="@(() => IsReplItOpen = !IsReplItOpen)"/>
+            </MudPaper>
+        }
     }
     
 </MudPaper>
