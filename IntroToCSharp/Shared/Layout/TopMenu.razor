@@ -1,9 +1,14 @@
 <MudAppBar Elevation="25">
     <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" OnClick="@Main.ToggleNavMenu" Edge="Edge.Start"/>
+    <MudSpacer />
     <MudToggleIconButton @bind-Toggled="@Main.IsDarkMode"
                          ToggledIcon="@Icons.Material.Outlined.LightMode"
                          Icon="@Icons.Material.Outlined.DarkMode"
                          Color="Color.Inherit" />
+    <MudIconButton Icon="@Icons.Material.Outlined.Terminal" 
+                   Color="Color.Inherit"
+                   OnClick="@Main.ToggleConsole" />
+    
     <MudSpacer />
     @if (UserData.IsLoggedIn)
     {

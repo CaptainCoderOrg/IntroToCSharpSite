@@ -1,3 +1,4 @@
+@using IntroToCSharp.Shared.Components.ReplIt
 @inherits LayoutComponentBase
 @inject IJSRuntime JS
 @inject ISnackbar Snackbar
@@ -12,9 +13,13 @@
 
 <MudDrawerContainer Class="mt-13">
     <NavMenu Main="this" />
+    
 
-    <div class="pa-4">
+    <div class="pa-4" style="@BodyStyle">
         @Body
+    </div>
+    <div style="@ConsoleStyle">
+        <Nix MinHeight="350px" />
     </div>
 
 </MudDrawerContainer>
@@ -27,6 +32,15 @@
     private MudThemeProvider _mudThemeProvider = null!;
     private bool _isDarkMode = true;
     public bool IsNavMenuOpen = true;
+    private string ConsoleStyle => ShowConsole ? "display:block; height:45vh" : "display:none";
+    private string BodyStyle => ShowConsole ? "overflow:auto; height: 45vh" : "";
+    private bool ShowConsole = false;
+
+    public void ToggleConsole()
+    {
+        ShowConsole = !ShowConsole;
+        StateHasChanged();
+    }
     public bool IsDarkMode
     {
         get => _isDarkMode;
