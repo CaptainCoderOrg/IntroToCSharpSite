@@ -2,6 +2,11 @@
     <div class="split-pane__vertical">
         <div id="@TOP_ID" style="@TopStyle" class="split-pane__top">@TopContent</div>
         <div id="@V_ID" style="@ResizerStyle" class="resizer" data-direction="vertical"></div>
-        <div style="@BottomStyle" class="split-pane__bottom">@BottomContent</div>
+        <div style="@BottomStyle" class="split-pane__bottom">
+            @if(!BottomHidden || PreventReload)
+            {
+                @BottomContent
+            }
+        </div>
     </div>
 </div>

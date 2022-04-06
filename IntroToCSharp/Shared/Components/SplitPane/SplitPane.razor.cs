@@ -9,6 +9,7 @@ namespace IntroToCSharp.Shared.Components.SplitPane
         private static int s_NEXT_ID = 0;
         private readonly int _id = s_NEXT_ID++;
         private bool BottomHidden = true;
+        private bool PreventReload = false;
         private string _topStyle = "height:66%";
 
         [Inject]
@@ -53,6 +54,7 @@ namespace IntroToCSharp.Shared.Components.SplitPane
                 await localStorage.SetItemAsync<string>("console-height", _topStyle);
             }
             BottomHidden = !BottomHidden;
+            PreventReload = true;
             StateHasChanged();
         }
     }
