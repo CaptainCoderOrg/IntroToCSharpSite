@@ -1,0 +1,15 @@
+@inject NavigationManager NavigationManager
+<MudImage
+    Src="@Path"
+    Class="rounded-lg"
+    style="display: block; margin:auto; max-width:100%"
+    />
+
+@code
+{
+    [Parameter, EditorRequired]
+    public string Src { get; set; } = null!;
+    [Parameter]
+    public string Alt { get; set; } = "";
+    private string Path => $"imgs/{NavigationManager.Uri.Substring(NavigationManager.BaseUri.Length)}/{Src}";
+}
