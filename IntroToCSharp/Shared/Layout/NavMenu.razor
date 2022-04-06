@@ -1,7 +1,7 @@
 ﻿
 <MudDrawer @bind-Open="@Main.IsNavMenuOpen" Elevation="25" Variant="@DrawerVariant.Persistent" Style="position:fixed">
     <MudDrawerHeader Class="pr-4">
-        
+
         <MudElement Class="d-flex flex-row justify-space-between" Style="width:100%">
             <MudText Typo="Typo.h6">
                 <a href="">Intro To C#</a>
@@ -10,6 +10,9 @@
         </MudElement>
     </MudDrawerHeader>
     <MudNavMenu Bordered="true">
+        <MudNavGroup Title="Activities">
+            <MudNavLink Href="activities/two-truths-and-a-lie">Two Truths and a Lie</MudNavLink>
+        </MudNavGroup>
         <MudNavGroup Title="Examples">
             <MudNavLink Href="examples/read-input" >Read Input</MudNavLink>
             <MudNavLink Href="examples/display-options">Display Options</MudNavLink>
