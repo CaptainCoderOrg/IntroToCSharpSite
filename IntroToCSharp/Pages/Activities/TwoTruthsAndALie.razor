@@ -22,7 +22,7 @@
         <MudListItem Icon="@Icons.Filled.Circle">Learn how to create a new console C# project using the .NET CLI</MudListItem>
         <MudListItem Icon="@Icons.Filled.Circle">Learn how to compile and run a console C# project using the .NET CLI</MudListItem>
         <MudListItem Icon="@Icons.Filled.Circle">
-            Learn how to use the <code>Console.WriteLine</code> method to
+            Learn how to use the <Code>Console.WriteLine</Code> method to
             display text in the terminal
         </MudListItem>
     </MudList>
@@ -150,12 +150,12 @@ remaining words are referred to as arguments.
 <p>
 For example:
 <MudList Clickable="true">
-    <MudListItem Icon="@Icons.Filled.Circle"><code>date</code> - Executes the date command which displays the current date and time</MudListItem>
-    <MudListItem Icon="@Icons.Filled.Circle"><code>echo Hello World</code> - Executes the echo command which displays its arguments (Hello and World)</MudListItem>
-    <MudListItem Icon="@Icons.Filled.Circle"><code>touch NewFile.txt</code> - Executes the touch command which creates a file if it does not exist</MudListItem>
-    <MudListItem Icon="@Icons.Filled.Circle"><code>mkdir NewFolder</code> - Executes the mkdir command which creates a new folder</MudListItem>
-    <MudListItem Icon="@Icons.Filled.Circle"><code>go steve go</code> - Tries to find the go command but fails and reports that no go command exists</MudListItem>
-    <MudListItem Icon="@Icons.Filled.Circle"><code>ls</code> - Executes the ls command which lists the files in the current folder</MudListItem>
+    <MudListItem Icon="@Icons.Filled.Circle"><Code>date</Code> - Executes the date command which displays the current date and time</MudListItem>
+    <MudListItem Icon="@Icons.Filled.Circle"><Code>echo Hello World</Code> - Executes the echo command which displays its arguments (Hello and World)</MudListItem>
+    <MudListItem Icon="@Icons.Filled.Circle"><Code>touch NewFile.txt</Code> - Executes the touch command which creates a file if it does not exist</MudListItem>
+    <MudListItem Icon="@Icons.Filled.Circle"><Code>mkdir NewFolder</Code> - Executes the mkdir command which creates a new folder</MudListItem>
+    <MudListItem Icon="@Icons.Filled.Circle"><Code>go steve go</Code> - Tries to find the go command but fails and reports that no go command exists</MudListItem>
+    <MudListItem Icon="@Icons.Filled.Circle"><Code>ls</Code> - Executes the ls command which lists the files in the current folder</MudListItem>
 </MudList>
 
 The touch program creates a new file with the name that was provided.
@@ -166,18 +166,18 @@ The date program displays the current date and time
 <Section Title="Creating a Project Folder">
     <p>
         Before going further, let's create a folder to store our first project.
-        Use the <code>mkdir</code> command to create a folder named TwoTruthsAndALie.
+        Use the <Code>mkdir</Code> command to create a folder named TwoTruthsAndALie.
         Notice that I have no spaces in the name. If you put spaces, it will create
-        a new folder for each word. Run the command now <code>mkdir TwoTruthsAndALie</code>.
+        a new folder for each word. Run the command now <Code>mkdir TwoTruthsAndALie</Code>.
     </p>
     <p>
         Next, we need to move our console into the new folder. You can do this with the
-        <code>cd</code> command which "changes directory". Run the command <code>cd TwoTruthsAndALie</code>.
+        <Code>cd</Code> command which "changes directory". Run the command <Code>cd TwoTruthsAndALie</Code>.
     </p>
     <p>
         Finally, we can verify that our console is in the new directory by using
-        the <code>pwd</code> command which will "print the working directory".
-        Run the command <code>pwd</code>. If all went well, your workspace 
+        the <Code>pwd</Code> command which will "print the working directory".
+        Run the command <Code>pwd</Code>. If all went well, your workspace 
         should look something like this:
     </p>
     <MudImage 
@@ -200,7 +200,7 @@ The date program displays the current date and time
     used from the computers command line.
     </p>
     <p>
-        If you type <code>dotnet</code> into your console, this tells the operating
+        If you type <Code>dotnet</Code> into your console, this tells the operating
         system to run the .NET CLI. Try it now.
     </p>
     <p>
@@ -216,10 +216,10 @@ The date program displays the current date and time
         If you see this output, it tells us that the .NET CLI is installed and
         that the command by itself doesn't do much. When executed without any
         arguments, it displays information on how to use it. To create a new
-        C# project we can give it 2 arguments: <code>new</code> and <code>console</code>. 
+        C# project we can give it 2 arguments: <Code>new</Code> and <Code>console</Code>. 
         Let's try it:
     </p>
-    <MudCheckBox Checked="false">In the console run: <code>dotnet new console</code></MudCheckBox>
+    <MudCheckBox Checked="false">In the console run: <Code>dotnet new console</Code></MudCheckBox>
 
     <p>
         If all goes well, you should see output that looks similar to this:
@@ -255,9 +255,9 @@ The date program displays the current date and time
 <Section Title="Running Your First Program">
     <p>
         To run a C# project, you use the .NET CLI and provide it with a single
-        argument <code>run</code>. Let's try it:
+        argument <Code>run</Code>. Let's try it:
     </p>
-    <MudCheckBox Checked="false">In the console run: <code>dotnet run</code></MudCheckBox>
+    <MudCheckBox Checked="false">In the console run: <Code>dotnet run</Code></MudCheckBox>
     <p>
         This causes the C# project to be compiled (turned into computer instructions)
         and then executed. If all went well, you should see the following output:
@@ -284,14 +284,14 @@ The date program displays the current date and time
     />
     <p>
         Notice, this is the source code we saw at the beginning of this activity.
-        This program is very simple. It uses the <code>Console.WriteLine</code>
+        This program is very simple. It uses the <Code>Console.WriteLine</Code>
         method to output the text "Hello, World!" to the console and then exits.
     </p>
     <p>
         Let's add a new line to the program to output the text, "This is my first program.".
     </p>
-    <MudCheckBox Checked="false">Add the line <code>Console.WriteLine("This is my first progam.");</code></MudCheckBox>
-    <MudCheckBox Checked="false">In the console execute <code>dotnet run</code></MudCheckBox>
+    <MudCheckBox Checked="false">Add the line <Code>Console.WriteLine("This is my first progam.");</Code></MudCheckBox>
+    <MudCheckBox Checked="false">In the console execute <Code>dotnet run</Code></MudCheckBox>
     <Note>Double quotes should surround the text you want to output and you need to include a semi-colon at the end of the line.</Note>
 
     <p>
@@ -308,7 +308,7 @@ The date program displays the current date and time
 
 <Section Title="Second Task - Two Truths and a Lie">
     <p>
-        Let's practice using <code>Console.WriteLine</code> to output a few more
+        Let's practice using <Code>Console.WriteLine</Code> to output a few more
         lines of text to the console.
     </p>
     <MudCheckBox Checked="false">Write a line of code that displays your name</MudCheckBox>

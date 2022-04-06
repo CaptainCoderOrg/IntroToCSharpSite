@@ -1,0 +1,17 @@
+<code class="@CurrentClass">@ChildContent</code>
+@code
+{
+    [Parameter]
+    public RenderFragment ChildContent { get; set; } = null!;
+    private string CurrentClass = "code-light";
+    protected override void OnInitialized()
+    {
+        UserService.Service.OnUserChange += user => {
+            if (user.DarkMode == null) return;
+            user.DarkMode.DataChanged += isDarkMode => {
+                CurrentClass = isDarkMode ? "code-dark" : "code-light";
+                StateHasChanged(); 
+            };
+        };
+    }
+}
