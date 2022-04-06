@@ -3,7 +3,7 @@
 <h1>Two Truths and a Lie</h1>
 <Section Title="Overview">
     <p>
-        Two Truths and a Lie is a simple game in which you test how well your peers 
+        Two Truths and a Lie is a simple game in which you test how well your peers
         know you. You start by thinking of two things about yourself that are true
         and a third thing that is not true. Then, you say those three things to
         your peers in any order. Finally, your peers try to guess which of the items
@@ -30,9 +30,9 @@
 
 <Questions Title="Pre-Knowledge Check">
     <Message>
-        Next, let's do a quick knowledge check to see what we already know and 
-        where we have room to learn and grow. Don't be tempted to peek ahead at 
-        the answers. It is okay if you don't know the answer yet. The goal here 
+        Next, let's do a quick knowledge check to see what we already know and
+        where we have room to learn and grow. Don't be tempted to peek ahead at
+        the answers. It is okay if you don't know the answer yet. The goal here
         is to see what knowledge we already have.
     </Message>
     <ChildContent>
@@ -46,34 +46,29 @@
 
 <Section Title="Say Hello World">
     <p>
-        A computer is a machine that is very good at following instructions 
-        exactly as specified. A <Keyword Word="program"/> is a set of 
-        instructions that a computer can follow to perform a task. 
-        These instructions are defined using <b><i>only</i></b> numbers! This is because 
-        the "brain" of a computer can only read numbers. Below is an actual 
-        set of computer instructions that, when executed, displays 
+        A computer is a machine that is very good at following instructions
+        exactly as specified. A <Keyword Word="program"/> is a set of
+        instructions that a computer can follow to perform a task.
+        These instructions are defined using <b><i>only</i></b> numbers! This is because
+        the "brain" of a computer can only read numbers. Below is an actual
+        set of computer instructions that, when executed, displays
         "Hello World!"" to the screen.
     </p>
-    <MudImage 
-        Src="imgs/activities/two-truths-and-a-lie/helloprogram.png"
-        Alt="An image of a binary Hello World program"
-        Class="rounded-lg"
-        style="display: block; margin:auto;"
-    />
+    <Image Src="helloprogram.png" Alt="An image of a binary Hello World program" />
     <p>
-        As it turns out, humans are not very good at speaking directly to 
-        computers. To help facilitate writing these instructions, we often use 
-        something called a <Keyword Word="programming language"/>. A <Keyword Word="programming language"/> 
-        can be thought of as a set of vocabulary and grammar that provide rules 
+        As it turns out, humans are not very good at speaking directly to
+        computers. To help facilitate writing these instructions, we often use
+        something called a <Keyword Word="programming language"/>. A <Keyword Word="programming language"/>
+        can be thought of as a set of vocabulary and grammar that provide rules
         for instructing a computer to perform a task.
     </p>
     <FunFact>
         The term "computer" once meant "one who computes". Before electronic
         computers were available, a person who was good at performing mathematical
         calculations might have been employed as a "computer". You can read
-        more about the computer occupation on Wikipedia: 
-        <MudLink 
-            Href="https://en.wikipedia.org/wiki/Computer_(occupation)" 
+        more about the computer occupation on Wikipedia:
+        <MudLink
+            Href="https://en.wikipedia.org/wiki/Computer_(occupation)"
             Target="_blank">Continue Learning</MudLink>
     </FunFact>
 
@@ -84,13 +79,13 @@
     </p>
 
     <p>
-        Below is a program written in C# that, when executed, displays 
+        Below is a program written in C# that, when executed, displays
         "Hello World!" to the screen:
     </p>
 
     <CodeBlock Filename="HelloWorld.cs" />
 
-    <p> 
+    <p>
         As you can see, this is much easier for a human to read and understand
         than the computer instructions. That isn't to say that it makes perfect
         sense just yet but, it at least has words you've seen before.
@@ -105,9 +100,9 @@
         context of video games. In general, a <Keyword Word="console" /> is
         a device that is used to send data to and receive data from a computer.
         When you use a video game <Keyword Word="console" />, you are sending
-        your controller inputs to a computer which interprets them and sends 
+        your controller inputs to a computer which interprets them and sends
         video and audio data to a screen. Throughout this book, we will use
-        the term <Keyword Word="console" /> to refer to the console you will 
+        the term <Keyword Word="console" /> to refer to the console you will
         use to interact with the computer that is compiling and executing your
         C# code.
     </p>
@@ -116,7 +111,7 @@
         Below is a Repl.it <Keyword Word="console" /> that is attached to a
         Linux based computer that has .NET installed. Feel free to use this
         <Keyword Word="console" /> for this activity. Just know that when you
-        leave this page, your work will not be saved. 
+        leave this page, your work will not be saved.
 
         TODO: Add Fork option
     </p>
@@ -140,8 +135,8 @@
 </Questions>
 <Section Title="Understanding Commands">
 <p>
-When you type something into the terminal and press enter, the text you entered 
-is sent to your operating system and the operating system tries to figure out 
+When you type something into the terminal and press enter, the text you entered
+is sent to your operating system and the operating system tries to figure out
 what to do with it. The first word is typically referred to as a command.
 If the operating system finds a program associated with the command,
 it runs the program and uses the remaining words as inputs for the command. These
@@ -177,17 +172,12 @@ The date program displays the current date and time
     <p>
         Finally, we can verify that our console is in the new directory by using
         the <Code>pwd</Code> command which will "print the working directory".
-        Run the command <Code>pwd</Code>. If all went well, your workspace 
+        Run the command <Code>pwd</Code>. If all went well, your workspace
         should look something like this:
     </p>
-    <MudImage 
-        Src="imgs/activities/two-truths-and-a-lie/workspace.png"
-        Alt="Workspace after creating project"
-        Class="rounded-lg"
-        style="display: block; margin:auto;"
-    />
+    <Image Src="workspace.png" Alt="Workspace after creating project" />
     <Note>
-        The output from your pwd command will likely be different than mine. 
+        The output from your pwd command will likely be different than mine.
         However, the important thing is that it ends with "TwoTruthsAndALie"
     </Note>
 </Section>
@@ -206,17 +196,12 @@ The date program displays the current date and time
     <p>
         If all goes well, you should see something that looks like this:
     </p>
-    <MudImage 
-        Src="imgs/activities/two-truths-and-a-lie/dotnet.png"
-        Alt="Output from executing dotnet"
-        Class="rounded-lg"
-        style="display: block; margin:auto;"
-    />
+    <Image Src="dotnet.png" Alt="Output from executing dotnet" />
     <p>
         If you see this output, it tells us that the .NET CLI is installed and
         that the command by itself doesn't do much. When executed without any
         arguments, it displays information on how to use it. To create a new
-        C# project we can give it 2 arguments: <Code>new</Code> and <Code>console</Code>. 
+        C# project we can give it 2 arguments: <Code>new</Code> and <Code>console</Code>.
         Let's try it:
     </p>
     <MudCheckBox Checked="false">In the console run: <Code>dotnet new console</Code></MudCheckBox>
@@ -225,31 +210,20 @@ The date program displays the current date and time
         If all goes well, you should see output that looks similar to this:
     </p>
 
-    <MudImage 
-        Src="imgs/activities/two-truths-and-a-lie/newconsole.png"
-        Alt="Output from executing dotnet new console"
-        Class="rounded-lg"
-        style="display: block; margin:auto;"
-    />
+    <Image Src="newconsole.png" Alt="Output from executing dotnet new console" />
     <p>
         Additionally, you should see that several new files have been created
         within your workspace:
     </p>
 
-    <MudImage 
-        Src="imgs/activities/two-truths-and-a-lie/newfiles.png"
-        Alt="Output from executing dotnet new console"
-        Class="rounded-lg"
-        style="display: block; margin:auto;"
-    />
-
+    <Image Src="newfiles.png" Alt="Output from executing dotnet new console" />
     <p>
         These filew are the template files that .NET provides to make it easier
         to start programming in C# right away. You could create these files
         manually and everything would work exactly the same. However, it is such
         a common task that Microsoft provides these templates for developers.
     </p>
-    
+
 </Section>
 
 <Section Title="Running Your First Program">
@@ -262,26 +236,16 @@ The date program displays the current date and time
         This causes the C# project to be compiled (turned into computer instructions)
         and then executed. If all went well, you should see the following output:
     </p>
-    <MudImage 
-        Src="imgs/activities/two-truths-and-a-lie/outputhello.png"
-        Alt="Output from executing dotnet run"
-        Class="rounded-lg"
-        style="display: block; margin:auto;"
-    />
+    <Image Src="outputhello.png" Alt="Output from executing dotnet run" />
 </Section>
 
 <Section Title="The Program.cs File">
     <p>
-        Next, let's take a look at the C# program that we just compiled and 
+        Next, let's take a look at the C# program that we just compiled and
         executed. In your workspace, open the Program.cs file within your
         TwoTruthsAndALie project.
     </p>
-    <MudImage 
-        Src="imgs/activities/two-truths-and-a-lie/openprogram.png"
-        Alt="Hello World Program"
-        Class="rounded-lg"
-        style="display: block; margin:auto;"
-    />
+    <Image Src="openprogram.png" Alt="Hello World Program" />
     <p>
         Notice, this is the source code we saw at the beginning of this activity.
         This program is very simple. It uses the <Code>Console.WriteLine</Code>
@@ -296,12 +260,7 @@ The date program displays the current date and time
 
     <p>
         If all went well, your code and workspace should look like this:
-        <MudImage 
-        Src="imgs/activities/two-truths-and-a-lie/newline.png"
-        Alt="Hello World Program"
-        Class="rounded-lg"
-        style="display: block; margin:auto;"
-    />
+        <Image Src="newline.png" Alt="Hello World Program" />
     </p>
 
 </Section>
@@ -318,8 +277,8 @@ The date program displays the current date and time
 
 <Questions Title="Post-Knowledge Check">
     <Message>
-        Now that you've completed the activity, let's do a quick knowledge check 
-        to see what you learned and identify areas where you should review 
+        Now that you've completed the activity, let's do a quick knowledge check
+        to see what you learned and identify areas where you should review
         (feel free to look back and find the answers).
     </Message>
     <ChildContent>
