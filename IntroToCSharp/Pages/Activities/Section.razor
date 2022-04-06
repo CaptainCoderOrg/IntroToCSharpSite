@@ -3,7 +3,7 @@
 
 <MudExpansionPanel @bind-IsExpanded="@IsExpanded" onclick="@OnExpand">
     <TitleContent>
-        <h2 class="mud-theme-primary pa-2">@Title</h2>
+        <h2 class="@_theme pa-2">@Title</h2>
     </TitleContent>
     <ChildContent>
         <MudText Class="px-2 ma-0">@ChildContent</MudText>
@@ -17,6 +17,7 @@
     public RenderFragment ChildContent {get; set;} = null!;
     private bool IsExpanded = true;
     private string Key => NavigationManager.Uri.Substring(NavigationManager.BaseUri.Length) + Title;
+    private string _theme = "mud-theme-primary";
 
     protected async override void OnInitialized()
     {
@@ -26,6 +27,12 @@
             IsExpanded = await localStorage.GetItemAsync<bool>(Key);
             StateHasChanged();
         }
+
+        MainLayout mainLayout = await MainLayout.GetInstance();
+        mainLayout.OnDarkModeChange += isDarkMode => {
+            _theme = isDarkMode ? "mud-theme-dark" : "mud-theme-primary";
+            StateHasChanged();
+        };
     }
 
     private async void OnExpand()
