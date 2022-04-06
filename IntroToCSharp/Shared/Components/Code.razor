@@ -6,12 +6,11 @@
     private string CurrentClass = "code-light";
     protected override void OnInitialized()
     {
-        UserService.Service.OnUserChange += user => {
-            if (user.DarkMode == null) return;
-            user.DarkMode.DataChanged += isDarkMode => {
+        MainLayout.GetInstance().ContinueWith(mainLayout => {
+            mainLayout.Result.OnDarkModeChange += isDarkMode => {
                 CurrentClass = isDarkMode ? "code-dark" : "code-light";
-                StateHasChanged(); 
+                StateHasChanged();
             };
-        };
+        });
     }
 }

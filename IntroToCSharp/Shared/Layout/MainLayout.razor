@@ -28,10 +28,12 @@
 </MudDrawerContainer>
 @code
 {
+    private static MainLayout? s_Instance;
     private static IJSRuntime? s_JS;
     private static ISnackbar? s_SnackBar;
     private static bool s_isInit = false;
     private static event Action<IJSRuntime, ISnackbar>? s_onInit;
+    private event Action<bool>? _onDarkModeChange;
     private MudThemeProvider _mudThemeProvider = null!;
     private SplitPane _consoleSplitPane = null!;
     private bool _isDarkMode = true;
@@ -49,9 +51,20 @@
             if (value == _isDarkMode) return;
             _isDarkMode = value;
             UserService.Service.UpdateDarkModePreference(value);
+            _onDarkModeChange?.Invoke(value);
             localStorage.SetItemAsync<bool>("DarkMode", value);
             StateHasChanged();
         }
+    }
+
+    public event Action<bool> OnDarkModeChange
+    {
+        add
+        {
+            value.Invoke(IsDarkMode);
+            _onDarkModeChange += value;
+        }
+        remove => _onDarkModeChange -= value;
     }
 
     public static event Action<IJSRuntime, ISnackbar> OnInit
@@ -68,6 +81,12 @@
         remove => s_onInit -= value;
     }
 
+    public static async Task<MainLayout> GetInstance()
+    {
+        await Task.Run(() => {while(s_Instance == null) Thread.Sleep(10);});
+        return s_Instance!;
+    }
+
     private void HandleDarkMode(bool newVal)
     {
         if (newVal != _isDarkMode) IsDarkMode = newVal;
@@ -75,6 +94,7 @@
 
     protected override void OnInitialized()
     {
+        s_Instance = this;
         s_onInit?.Invoke(JS, Snackbar);
         s_JS = JS;
         s_SnackBar = Snackbar;
