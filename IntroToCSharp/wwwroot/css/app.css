@@ -1,5 +1,9 @@
 /* Disables copy / paste on an element */
 
+body {
+    overflow: hidden;
+}
+
 .no-copy {
     -webkit-user-select: none;
     /* Safari */
