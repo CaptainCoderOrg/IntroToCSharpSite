@@ -1,0 +1,50 @@
+@inject IJSRuntime JS
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+<div class="split-pane">
+    <div class="split-pane__vertical">
+        <div id="@TOP_ID" style="@TopStyle" class="split-pane__top">@TopContent</div>
+        <div id="@V_ID" style="@ResizerStyle" class="resizer" data-direction="vertical"></div>
+        <div style="@BottomStyle" class="split-pane__bottom">@BottomContent</div>
+    </div>
+</div>
+@code
+{
+    private static int s_NEXT_ID = 0;
+    private readonly int _id = s_NEXT_ID++;
+
+    [Parameter, EditorRequired]
+    public RenderFragment TopContent {get; set;} = null!;
+
+    [Parameter, EditorRequired]
+    public RenderFragment BottomContent {get; set;} = null!;
+    private bool BottomHidden = true;
+    private string _topStyle = "height:66%";
+    private string TopStyle => BottomHidden ? "height:100%" : _topStyle;
+    private string ResizerStyle => BottomHidden ? "display:none" : "";
+    private string BottomStyle => BottomHidden ? "display:none" : "";
+    public string V_ID => $"VerticalSplitPane-{_id}";
+    public string TOP_ID => $"VerticalSplitPane-Top-{_id}";
+    protected async override void OnAfterRender(bool firstRender)
+    {
+        await JS.InvokeVoidAsync("SplitPane", V_ID);
+    }
+
+    protected async override void OnInitialized()
+    {
+        bool hasHeight = await localStorage.ContainKeyAsync("console-height");
+        if (!hasHeight) return;
+        _topStyle = await localStorage.GetItemAsync<string>("console-height");
+    }
+
+    public async void ToggleBottomPanel()
+    {
+        if (!BottomHidden)
+        {
+            _topStyle = await JS.InvokeAsync<string>("GetSplitPaneHeight", TOP_ID);
+            _topStyle = $"height: {_topStyle}";
+            await localStorage.SetItemAsync<string>("console-height", _topStyle);
+        }
+        BottomHidden = !BottomHidden;
+        StateHasChanged();
+    }
+}

@@ -13,14 +13,17 @@
 
 <MudDrawerContainer Class="mt-13">
     <NavMenu Main="this" />
-    
 
-    <div class="pa-4" style="@BodyStyle">
-        @Body
-    </div>
-    <div style="@ConsoleStyle">
-        <Nix MinHeight="350px" />
-    </div>
+    <SplitPane @ref="_consoleSplitPane">
+        <TopContent>
+            <MudPaper Elevation="0" Class="pa-4">
+                @Body
+            </MudPaper>
+        </TopContent>
+        <BottomContent>
+            <Nix MinHeight="350px" />
+        </BottomContent>
+    </SplitPane>
 
 </MudDrawerContainer>
 @code
@@ -30,17 +33,14 @@
     private static bool s_isInit = false;
     private static event Action<IJSRuntime, ISnackbar>? s_onInit;
     private MudThemeProvider _mudThemeProvider = null!;
+    private SplitPane _consoleSplitPane = null!;
     private bool _isDarkMode = true;
     public bool IsNavMenuOpen = true;
     private string ConsoleStyle => ShowConsole ? "display:block; height:45vh" : "display:none";
     private string BodyStyle => ShowConsole ? "overflow:auto; height: 45vh" : "overflow:auto; height: 92vh";
     private bool ShowConsole = false;
 
-    public void ToggleConsole()
-    {
-        ShowConsole = !ShowConsole;
-        StateHasChanged();
-    }
+    public void ToggleConsole() => _consoleSplitPane.ToggleBottomPanel();
     public bool IsDarkMode
     {
         get => _isDarkMode;
