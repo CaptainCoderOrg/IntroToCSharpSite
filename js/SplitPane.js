@@ -1,7 +1,18 @@
+/** Heavily inspired by this work: https://htmldom.dev/create-resizable-split-views/ */
+
+/**
+ * Helper function for acquiring the current Height of a SplitPane
+ * @param {string} d_id 
+ * @returns height style of the specified element
+ */
 function GetSplitPaneHeight(d_id) {
     return document.getElementById(d_id).style.height;
 }
 
+/**
+ * Given an ID to an element, initialize it as a SplitPane
+ * @param {string} d_id 
+ */
 function SplitPane(d_id) {
     const resizer = document.getElementById(d_id);
     const direction = resizer.getAttribute('data-direction') || 'horizontal';

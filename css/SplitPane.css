@@ -1,9 +1,9 @@
+/** Heavily inspired by this work: https://htmldom.dev/create-resizable-split-views/ */
+
 .split-pane {
     display: flex;
-    /* Misc */
     border: 1px solid #cbd5e0;
     height: 95vh;
-    /* overflow: scroll-y; */
 }
 
 .resizer[data-direction='vertical'] {
@@ -14,9 +14,7 @@
 }
 
 .split-pane__vertical {
-    /* Take the remaining width */
     flex: 1;
-    /* Misc */
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -25,9 +23,7 @@
 }
 
 .split-pane__top {
-    /* Initial height */
     height: 12rem;
-    /* Misc */
     align-items: center;
     display: block;
     overflow: auto;
@@ -36,9 +32,7 @@
 }
 
 .split-pane__bottom {
-    /* Take the remaining height */
     flex: 1;
-    /* Misc */
     align-items: center;
     display: block;
     overflow: hidden;
