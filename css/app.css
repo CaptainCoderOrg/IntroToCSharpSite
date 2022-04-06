@@ -30,11 +30,20 @@ pre {
     padding: 0.5rem !important;
 }
 
-code {
-    background-color: darkgray;
+.code-light {
+    color: #24292F;
+    background-color: #AFB8C133;
     padding-left: .25rem;
     padding-right: .25rem;
-    color: whitesmoke;
+    border-radius: 6px;
+}
+
+.code-dark {
+    background-color: #6E768166;
+    color: #C9D1D9;
+    padding-left: .25rem;
+    padding-right: .25rem;
+    border-radius: 6px;
 }
 
 .loading {
