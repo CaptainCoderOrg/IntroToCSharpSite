@@ -12,19 +12,19 @@
                     <MudStack Row="true" Style="align-items:center">
                         <p>@key</p>
                         <MudTooltip Text="Open on Repl.it">
-                            <MudFab 
+                            <MudFab
                                 Target="_blank"
                                 Href="@GetURL(key)"
                                 Label="@Projects[key]" S
-                                Size="Size.Small" 
-                                Color="Color.Primary" 
+                                Size="Size.Small"
+                                Color="Color.Primary"
                                 Icon="@Icons.Material.Outlined.Link"/>
                         </MudTooltip>
 
                         <MudTooltip Text="Remove Project">
                             <MudFab
-                                Size="Size.Small" 
-                                Color="Color.Error" 
+                                Size="Size.Small"
+                                Color="Color.Error"
                                 Icon="@Icons.Material.Outlined.Delete"/>
                         </MudTooltip>
                     </MudStack>
@@ -33,18 +33,18 @@
             <MudForm @ref="_form">
             <MudGrid>
                 <MudItem>
-                    <MudTextField 
-                      @bind-Value="_nickName" 
-                      Label="Nick Name" 
-                      Variant="Variant.Text" 
-                      Validation="@ValidateName" />
+                    <MudTextField
+                      @bind-Value="_nickName"
+                      Label="Nick Name"
+                      Variant="Variant.Text"
+                      Validation="@(new Func<string,string?>(ValidateName))" />
                 </MudItem>
                 <MudItem>
-                    <MudTextField 
-                      @bind-Value="_url" 
-                      Label="Repl.it URL" 
+                    <MudTextField
+                      @bind-Value="_url"
+                      Label="Repl.it URL"
                       Variant="Variant.Text"
-                      Validation="@ValidateURL" />
+                      Validation="@(new Func<string,string?>(ValidateURL))" />
                 </MudItem>
                 <MudItem style="align-self: center;">
                     <MudTooltip Text="Add New Project">
@@ -62,8 +62,9 @@
     private readonly Dictionary<string, string> Projects = new Dictionary<string, string>();
     private bool IsEmpty => Projects.Count == 0;
     private string? _nickName, _url;
+
     [CascadingParameter] MudDialogInstance MudDialog { get; set; } = null!;
-    
+
     protected override void OnInitialized()
     {
         MudDialog.Options.CloseButton = true;
@@ -86,7 +87,7 @@
     }
 
 
-    private string? ValidateName(string? name)
+    private string? ValidateName(string name)
     {
         if (name == null || name == string.Empty)
         {
@@ -103,7 +104,7 @@
     {
         url = url.Trim();
         url = url.Substring(PREFIX.Length);
-        
+
         while (url.Contains("?"))
         {
             url = url.Substring(0, url.IndexOf("?"));
@@ -116,7 +117,7 @@
         return url;
     }
 
-    private string? ValidateURL(string? url)
+    private string? ValidateURL(string url)
     {
         if (url == null || url == string.Empty)
         {

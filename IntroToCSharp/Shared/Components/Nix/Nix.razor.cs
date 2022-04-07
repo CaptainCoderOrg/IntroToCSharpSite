@@ -21,9 +21,9 @@ namespace IntroToCSharp.Shared.Components.Nix
         }
         private int _id = s_NEXT_ID++;
         [Inject]
-        IDialogService DialogService { get; set; }
+        IDialogService DialogService { get; set; } = null!;
         [Inject]
-        internal IJSRuntime JS { get; set; }
+        internal IJSRuntime JS { get; set; } = null!;
         [Parameter]
         public string MinHeight { get; set; } = "500px";
         [Parameter]
