@@ -1,0 +1,147 @@
+<MudDialog>
+    <DialogContent>
+            @if (IsEmpty)
+            {
+                <p>You have not configured any projects.</p>
+            }
+            else
+            {
+                <h3>Projects</h3>
+                @foreach (string key in Projects.Keys)
+                {
+                    <MudStack Row="true" Style="align-items:center">
+                        <p>@key</p>
+                        <MudTooltip Text="Open on Repl.it">
+                            <MudFab 
+                                Target="_blank"
+                                Href="@GetURL(key)"
+                                Label="@Projects[key]" S
+                                Size="Size.Small" 
+                                Color="Color.Primary" 
+                                Icon="@Icons.Material.Outlined.Link"/>
+                        </MudTooltip>
+
+                        <MudTooltip Text="Remove Project">
+                            <MudFab
+                                Size="Size.Small" 
+                                Color="Color.Error" 
+                                Icon="@Icons.Material.Outlined.Delete"/>
+                        </MudTooltip>
+                    </MudStack>
+                }
+            }
+            <MudForm @ref="_form">
+            <MudGrid>
+                <MudItem>
+                    <MudTextField 
+                      @bind-Value="_nickName" 
+                      Label="Nick Name" 
+                      Variant="Variant.Text" 
+                      Validation="@ValidateName" />
+                </MudItem>
+                <MudItem>
+                    <MudTextField 
+                      @bind-Value="_url" 
+                      Label="Repl.it URL" 
+                      Variant="Variant.Text"
+                      Validation="@ValidateURL" />
+                </MudItem>
+                <MudItem style="align-self: center;">
+                    <MudTooltip Text="Add New Project">
+                        <MudFab Size="Size.Small" Color="Color.Tertiary" Icon="@Icons.Material.Outlined.Add" OnClick="@AddProject"/>
+                    </MudTooltip>
+                </MudItem>
+            </MudGrid>
+            </MudForm>
+    </DialogContent>
+</MudDialog>
+
+@code {
+    const string PREFIX = "https://replit.com/@";
+    private MudForm? _form;
+    private readonly Dictionary<string, string> Projects = new Dictionary<string, string>();
+    private bool IsEmpty => Projects.Count == 0;
+    private string? _nickName, _url;
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; } = null!;
+    
+    protected override void OnInitialized()
+    {
+        MudDialog.Options.CloseButton = true;
+        MudDialog.Options.FullWidth = true;
+        MudDialog.SetTitle("Console Configuration");
+        MudDialog.SetOptions(MudDialog.Options);
+    }
+
+    private async void AddProject()
+    {
+        if (_form == null) return;
+        await _form.Validate();
+        if (_form.IsValid)
+        {
+            Projects[_nickName!] = StripURL(_url!);
+            _nickName = "";
+            _url = "";
+            StateHasChanged();
+        }
+    }
+
+
+    private string? ValidateName(string? name)
+    {
+        if (name == null || name == string.Empty)
+        {
+            return "Nick Name required.";
+        }
+        if (Projects.ContainsKey(name))
+        {
+            return "Duplicate Nick Name found.";
+        }
+        return null;
+    }
+
+    private string StripURL(string url)
+    {
+        url = url.Trim();
+        url = url.Substring(PREFIX.Length);
+        
+        while (url.Contains("?"))
+        {
+            url = url.Substring(0, url.IndexOf("?"));
+        }
+
+        while (url.Contains("#"))
+        {
+            url = url.Substring(0, url.IndexOf("#"));
+        }
+        return url;
+    }
+
+    private string? ValidateURL(string? url)
+    {
+        if (url == null || url == string.Empty)
+        {
+            return "URL is required.";
+        }
+        url = url.Trim();
+
+        if (!url.StartsWith(PREFIX))
+        {
+            return $"URL must start with {PREFIX}";
+        }
+        url = StripURL(url);
+        // TODO: Validate UserName matches users REPL.IT account
+
+        if (Projects.ContainsValue(url))
+        {
+            string key = Projects.FirstOrDefault(x => x.Value == url).Key;
+            return $"Duplicate Project URL found: {key}";
+        }
+
+        return null;
+    }
+
+    private string GetURL(string key)
+    {
+        return $"{PREFIX}{Projects[key]}";
+    }
+}

@@ -1,4 +1,4 @@
-@using IntroToCSharp.Shared.Components.ReplIt
+@using IntroToCSharp.Shared.Components.Nix
 @inherits LayoutComponentBase
 @inject IJSRuntime JS
 @inject ISnackbar Snackbar
@@ -21,7 +21,7 @@
             </MudPaper>
         </TopContent>
         <BottomContent>
-            <Nix MinHeight="350px" />
+            <Nix MinHeight="350px" OnClose="@ToggleConsole" />
         </BottomContent>
     </SplitPane>
 

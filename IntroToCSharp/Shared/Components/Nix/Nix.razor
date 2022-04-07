@@ -1,0 +1,23 @@
+<div style="position:relative; top:45px; margin-top:-45px">
+    <MudStack Row="true" Spacing="0">
+        @if (OnClose != null)
+        {
+            <MudTooltip Text="Close Console">
+                <MudIconButton Color="Color.Error" Icon="@Icons.Material.Filled.Close"  OnClick="@OnClose"/>
+            </MudTooltip>
+        }
+        <MudTooltip Text="Refresh Console">
+            <MudIconButton Style="display:inline-block" Color="Color.Tertiary" Icon="@Icons.Material.Filled.Cached"  OnClick="@ReloadIFrame"/>
+        </MudTooltip>
+        <select onchange="@ChangeProject" style="height:35px;margin-top: 7px;border: 1px solid black;border-radius: 6px;max-width: 200px;">
+            @foreach (string key in Projects.Keys)
+            {
+                <option value="@Projects[key]">@key</option>
+            }
+        </select>
+        <MudTooltip Text="Configure Console">
+            <MudIconButton Color="Color.Dark" Icon="@Icons.Material.Filled.Settings"  OnClick="@OpenConfig"/>
+        </MudTooltip>
+    </MudStack>
+</div>
+<iframe id="@ID" style="overflow:auto;" frameborder="0" src="@Url" onload="@ResizeFrame"></iframe>
