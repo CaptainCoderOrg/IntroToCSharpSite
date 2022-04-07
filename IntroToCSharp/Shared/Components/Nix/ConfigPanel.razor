@@ -1,67 +1,77 @@
 <MudDialog>
     <DialogContent>
-            @if (IsEmpty)
+            @if (IsNotLoggedIn)
             {
-                <p>You have not configured any projects.</p>
+                <p>You must be logged in to configure your projects.</p>
             }
-            else
-            {
-                <h3>Projects</h3>
-                @foreach (string key in Projects.Keys)
+            else {
+                if (IsEmpty)
                 {
-                    <MudStack Row="true" Style="align-items:center">
-                        <p>@key</p>
-                        <MudTooltip Text="Open on Repl.it">
-                            <MudFab
-                                Target="_blank"
-                                Href="@GetURL(key)"
-                                Label="@Projects[key]" S
-                                Size="Size.Small"
-                                Color="Color.Primary"
-                                Icon="@Icons.Material.Outlined.Link"/>
-                        </MudTooltip>
-
-                        <MudTooltip Text="Remove Project">
-                            <MudFab
-                                Size="Size.Small"
-                                Color="Color.Error"
-                                Icon="@Icons.Material.Outlined.Delete"/>
-                        </MudTooltip>
-                    </MudStack>
+                    <p>You have not configured any projects.</p>
                 }
+                else
+                {
+                    <h3>Projects</h3>
+                    @foreach (string key in Projects.Keys)
+                    {
+                        <MudStack Row="true" Style="align-items:center">
+                            <p>@key</p>
+                            <MudTooltip Text="Open on Repl.it">
+                                <MudFab
+                                    Target="_blank"
+                                    Href="@GetURL(key)"
+                                    Label="@Projects[key]" S
+                                    Size="Size.Small"
+                                    Color="Color.Primary"
+                                    Icon="@Icons.Material.Outlined.Link"/>
+                            </MudTooltip>
+
+                            <MudTooltip Text="Remove Project">
+                                <MudFab
+                                    Size="Size.Small"
+                                    Color="Color.Error"
+                                    Icon="@Icons.Material.Outlined.Delete"
+                                    OnClick="@(() => RemoveProject(key))"
+                                    />
+                            </MudTooltip>
+                        </MudStack>
+                    }
+                }
+                <MudForm @ref="_form">
+                <MudGrid>
+                    <MudItem>
+                        <MudTextField
+                        @bind-Value="_nickName"
+                        Label="Nick Name"
+                        Variant="Variant.Text"
+                        Validation="@(new Func<string,string?>(ValidateName))" />
+                    </MudItem>
+                    <MudItem>
+                        <MudTextField
+                        @bind-Value="_url"
+                        Label="Repl.it URL"
+                        Variant="Variant.Text"
+                        Validation="@(new Func<string,string?>(ValidateURL))" />
+                    </MudItem>
+                    <MudItem style="align-self: center;">
+                        <MudTooltip Text="Add New Project">
+                            <MudFab Size="Size.Small" Color="Color.Tertiary" Icon="@Icons.Material.Outlined.Add" OnClick="@AddProject"/>
+                        </MudTooltip>
+                    </MudItem>
+                </MudGrid>
+                </MudForm>
             }
-            <MudForm @ref="_form">
-            <MudGrid>
-                <MudItem>
-                    <MudTextField
-                      @bind-Value="_nickName"
-                      Label="Nick Name"
-                      Variant="Variant.Text"
-                      Validation="@(new Func<string,string?>(ValidateName))" />
-                </MudItem>
-                <MudItem>
-                    <MudTextField
-                      @bind-Value="_url"
-                      Label="Repl.it URL"
-                      Variant="Variant.Text"
-                      Validation="@(new Func<string,string?>(ValidateURL))" />
-                </MudItem>
-                <MudItem style="align-self: center;">
-                    <MudTooltip Text="Add New Project">
-                        <MudFab Size="Size.Small" Color="Color.Tertiary" Icon="@Icons.Material.Outlined.Add" OnClick="@AddProject"/>
-                    </MudTooltip>
-                </MudItem>
-            </MudGrid>
-            </MudForm>
     </DialogContent>
 </MudDialog>
 
 @code {
     const string PREFIX = "https://replit.com/@";
     private MudForm? _form;
-    private readonly Dictionary<string, string> Projects = new Dictionary<string, string>();
+    private Dictionary<string, string> Projects = new Dictionary<string, string>();
+    private bool IsNotLoggedIn => UserData == null || !UserData.IsLoggedIn;
     private bool IsEmpty => Projects.Count == 0;
     private string? _nickName, _url;
+    private User? UserData;
 
     [CascadingParameter] MudDialogInstance MudDialog { get; set; } = null!;
 
@@ -71,6 +81,16 @@
         MudDialog.Options.FullWidth = true;
         MudDialog.SetTitle("Console Configuration");
         MudDialog.SetOptions(MudDialog.Options);
+        UserService.Service.OnUserChange += OnUserChange;
+    }
+
+    private void OnUserChange(User userData)
+    {
+        this.UserData = userData;
+        if (this.UserData.IsLoggedIn)
+        {
+            Projects = this.UserData.Projects;
+        }
     }
 
     private async void AddProject()
@@ -82,7 +102,16 @@
             Projects[_nickName!] = StripURL(_url!);
             _nickName = "";
             _url = "";
+            UserService.Service.UpdateProjectData(Projects);
             StateHasChanged();
+        }
+    }
+
+    private void RemoveProject(string key)
+    {
+        if(Projects.Remove(key))
+        {
+            UserService.Service.UpdateProjectData(Projects);
         }
     }
 
