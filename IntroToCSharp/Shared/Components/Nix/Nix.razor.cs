@@ -56,7 +56,13 @@ namespace IntroToCSharp.Shared.Components.Nix
         private void UpdateProjects(string? data)
         {
             this.Projects = JsonSerializer.Deserialize<Dictionary<string, string>>(data!)!;
-            if (_selected != null && !this.Projects.ContainsKey(_selected))
+            if (Projects.Count == 1)
+            {
+                _selected = Projects.First().Key;
+                UserService.Service.UpdateDefaultProject(Projects[_selected]);
+                this.SetURL(Projects[_selected]);
+            }
+            else if (_selected != null && Projects.Count > 0 && !this.Projects.ContainsKey(_selected))
             {
                 _selected = Projects.First().Key;
                 UserService.Service.UpdateDefaultProject(Projects[_selected]);
@@ -67,7 +73,7 @@ namespace IntroToCSharp.Shared.Components.Nix
 
         private void UpdateDefaultProject(string? defaultProject)
         {
-            if (_url == null && defaultProject != null)
+            if (_url == null && defaultProject != null && Projects.Count > 0)
             {
                 if (Projects.ContainsValue(defaultProject))
                 {
