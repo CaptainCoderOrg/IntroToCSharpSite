@@ -39,6 +39,7 @@ public class User
     /// A Reference to this users ProjectData.
     /// </summary>
     public DataReference<string>? ProjectData;
+    public DataReference<string>? DefaultProject;
     private Dictionary<string, string>? _projects;
 
     public Dictionary<string, string> Projects
@@ -61,6 +62,7 @@ public class User
             this.DarkMode = null;
             this.ProjectData = null;
             this._projects = null;
+            this.DefaultProject = null;
         }
         else
         {
@@ -73,6 +75,7 @@ public class User
             // TODO(jcollard 2022-04-04): default to localstorage.DarkMode?
             this.DarkMode = DataReference.Bool($"/users/{this.UID}/prefs/DarkMode", false, "Dark Mode");
             this.ProjectData = DataReference.String($"/users/{this.UID}/projectData", "{}", "Project Data");
+            this.DefaultProject = DataReference.String($"/users/{this.UID}/prefs/DefaultProject", "", "Last Project");
             this.ProjectData.DataChanged += data =>
             {
                 if (data == null || data == "{}")

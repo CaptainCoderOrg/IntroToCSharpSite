@@ -42,7 +42,7 @@ public class UserService
         }
     }
 
-    private UserService() {}
+    private UserService() { }
 
     private void SetRuntime(IJSRuntime runtime)
     {
@@ -53,7 +53,7 @@ public class UserService
 
     private async Task<IJSRuntime> GetRuntime()
     {
-        await Task.Run(() => { while(this._runtime == null) Thread.Sleep(100); });
+        await Task.Run(() => { while (this._runtime == null) Thread.Sleep(100); });
         return this._runtime!;
     }
 
@@ -76,4 +76,5 @@ public class UserService
     /// </summary>
     /// <param name="projects"></param>
     public void UpdateProjectData(Dictionary<string, string> projects) => _userData.ProjectData?.Set(JsonSerializer.Serialize(projects));
+    public void UpdateDefaultProject(string projectName) => _userData.DefaultProject?.Set(projectName);
 }
