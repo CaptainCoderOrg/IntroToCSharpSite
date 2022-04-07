@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
@@ -7,9 +8,13 @@ namespace IntroToCSharp.Shared.Components.Nix
 
     public sealed partial class Nix
     {
+        private User? UserData;
         private Dictionary<string, string> Projects = new Dictionary<string, string>();
+        private string? _selected;
         private static int s_NEXT_ID = 0;
-        private string? _url = "https://replit.com/@JosephCollard/C-Project?lite=true";
+        private string? _url;
+        private bool IsLoggedIn => UserData != null && UserData.IsLoggedIn;
+        private bool IsEmpty => Projects.Count == 0;
         private string Url
         {
             get => _url == null ? "" : _url;
@@ -32,10 +37,50 @@ namespace IntroToCSharp.Shared.Components.Nix
         public string ID => $"nix-{_id}";
         protected override void OnInitialized()
         {
-            Projects["Project 1"] = "https://replit.com/@JosephCollard/C-Project?lite=true";
-            Projects["Project 2"] = "https://replit.com/@JosephCollard/AskName?lite=true";
-            OpenConfig();
+            UserService.Service.OnUserChange += OnUserChanged;
         }
+        private void OnUserChanged(User userData)
+        {
+            this.UserData = userData;
+            if (this.UserData.ProjectData != null)
+            {
+                this.UserData.ProjectData.DataChanged += UpdateProjects;
+            }
+            if (this.UserData.DefaultProject != null)
+            {
+                this.UserData.DefaultProject.DataChanged += UpdateDefaultProject;
+            }
+            StateHasChanged();
+        }
+
+        private void UpdateProjects(string? data)
+        {
+            this.Projects = JsonSerializer.Deserialize<Dictionary<string, string>>(data!)!;
+            if (_selected != null && !this.Projects.ContainsKey(_selected))
+            {
+                _selected = Projects.First().Key;
+                UserService.Service.UpdateDefaultProject(Projects[_selected]);
+                this.SetURL(Projects[_selected]);
+            }
+            StateHasChanged();
+        }
+
+        private void UpdateDefaultProject(string? defaultProject)
+        {
+            if (_url == null && defaultProject != null)
+            {
+                if (Projects.ContainsValue(defaultProject))
+                {
+                    _selected = Projects.First(x => x.Value == defaultProject).Key;
+                }
+                else
+                {
+                    _selected = Projects.First().Key;
+                }
+                this.SetURL(Projects[_selected]);
+            }
+        }
+
         private async void ResizeFrame()
         {
             await Task.Run(() =>
@@ -57,9 +102,16 @@ namespace IntroToCSharp.Shared.Components.Nix
             DialogService.Show<ConfigPanel>();
         }
 
+        private void SetURL(string? project)
+        {
+            Url = $"{ConfigPanel.PREFIX}{project}?lite=true";
+        }
+
         private void ChangeProject(ChangeEventArgs e)
         {
-            Url = e.Value?.ToString()!;
+            UserService.Service.UpdateDefaultProject(e.Value?.ToString()!);
+            _selected = Projects.First(x => x.Value == e.Value?.ToString()!).Key;
+            SetURL(e.Value?.ToString());
         }
     }
 }

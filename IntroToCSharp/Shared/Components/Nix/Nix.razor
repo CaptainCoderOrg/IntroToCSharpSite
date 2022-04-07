@@ -1,23 +1,56 @@
-<div style="position:relative; top:45px; margin-top:-45px">
-    <MudStack Row="true" Spacing="0">
-        @if (OnClose != null)
-        {
-            <MudTooltip Text="Close Console">
-                <MudIconButton Color="Color.Error" Icon="@Icons.Material.Filled.Close"  OnClick="@OnClose"/>
-            </MudTooltip>
-        }
-        <MudTooltip Text="Refresh Console">
-            <MudIconButton Style="display:inline-block" Color="Color.Tertiary" Icon="@Icons.Material.Filled.Cached"  OnClick="@ReloadIFrame"/>
+@if (!IsLoggedIn)
+{
+    <MudPaper Elevation="0" Class="pa-4">
+        You must be logged in to use the console feature.
+    </MudPaper>
+}
+else if (IsEmpty)
+{
+    <MudPaper Elevation="0" Class="pa-4">
+        <p>You have not configured any console projects.</p>
+        <MudTooltip Text="Open Console Activity">
+            <MudFab
+                Href="activites/setup-console"
+                Label="Learn about the console"
+                Color="Color.Primary"
+                Icon="@Icons.Material.Outlined.School"/>
         </MudTooltip>
-        <select onchange="@ChangeProject" style="height:35px;margin-top: 7px;border: 1px solid black;border-radius: 6px;max-width: 200px;">
-            @foreach (string key in Projects.Keys)
+        <MudTooltip Text="Open Console Configuration">
+            <MudFab
+                OnClick="@OpenConfig"
+                Label="Open Console Config"
+                Color="Color.Primary"
+                Icon="@Icons.Material.Outlined.Add"/>
+        </MudTooltip>
+    </MudPaper>
+}
+else
+{
+    <div style="position:relative; top:45px; margin-top:-45px">
+        <MudStack Row="true" Spacing="0">
+            @if (OnClose != null)
             {
-                <option value="@Projects[key]">@key</option>
+                <MudTooltip Text="Close Console">
+                    <MudIconButton Color="Color.Error" Icon="@Icons.Material.Filled.Close"  OnClick="@OnClose"/>
+                </MudTooltip>
             }
-        </select>
-        <MudTooltip Text="Configure Console">
-            <MudIconButton Color="Color.Dark" Icon="@Icons.Material.Filled.Settings"  OnClick="@OpenConfig"/>
-        </MudTooltip>
-    </MudStack>
-</div>
-<iframe id="@ID" style="overflow:auto;" frameborder="0" src="@Url" onload="@ResizeFrame"></iframe>
+            <MudTooltip Text="Refresh Console">
+                <MudIconButton Style="display:inline-block" Color="Color.Tertiary" Icon="@Icons.Material.Filled.Cached"  OnClick="@ReloadIFrame"/>
+            </MudTooltip>
+            <select onchange="@ChangeProject" style="height:35px;margin-top: 7px;border: 1px solid black;border-radius: 6px;max-width: 200px;">
+                @foreach (string key in Projects.Keys)
+                {
+                    <option
+                      value="@Projects[key]"
+                      selected="@(key == _selected)">
+                          @key
+                    </option>
+                }
+            </select>
+            <MudTooltip Text="Configure Console">
+                <MudIconButton Color="Color.Dark" Icon="@Icons.Material.Filled.Settings"  OnClick="@OpenConfig"/>
+            </MudTooltip>
+        </MudStack>
+    </div>
+    <iframe id="@ID" style="overflow:auto;" frameborder="0" src="@Url" onload="@ResizeFrame"></iframe>
+}
