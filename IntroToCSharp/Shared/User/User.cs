@@ -36,6 +36,17 @@ public class User
     public DataReference<bool>? DarkMode;
 
     /// <summary>
+    /// A Reference to this users ProjectData.
+    /// </summary>
+    public DataReference<string>? ProjectData;
+    private Dictionary<string, string>? _projects;
+
+    public Dictionary<string, string> Projects
+    {
+        get => _projects == null ? new Dictionary<string, string>() : _projects;
+    }
+
+    /// <summary>
     /// Given an authentication response, constructs a User object from that JSON data.
     /// </summary>
     /// <param name="response">"null" if the user is not authenticated otherwise a JSON string with 'displayName' and 'email'</param>
@@ -48,6 +59,8 @@ public class User
             this.Email = null;
             this.IsLoggedIn = false;
             this.DarkMode = null;
+            this.ProjectData = null;
+            this._projects = null;
         }
         else
         {
@@ -59,6 +72,16 @@ public class User
             this.IsLoggedIn = true;
             // TODO(jcollard 2022-04-04): default to localstorage.DarkMode?
             this.DarkMode = DataReference.Bool($"/users/{this.UID}/prefs/DarkMode", false, "Dark Mode");
+            this.ProjectData = DataReference.String($"/users/{this.UID}/projectData", "{}", "Project Data");
+            this.ProjectData.DataChanged += data =>
+            {
+                if (data == null || data == "{}")
+                {
+                    _projects = null;
+                    return;
+                }
+                _projects = JsonSerializer.Deserialize<Dictionary<string, string>>(data!);
+            };
         }
     }
 

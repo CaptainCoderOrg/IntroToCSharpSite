@@ -1,5 +1,6 @@
 using IntroToCSharp.Shared.Layout;
 using Microsoft.JSInterop;
+using System.Text.Json;
 
 public class UserService
 {
@@ -69,4 +70,10 @@ public class UserService
     /// Sets the DarkModePreference of the current user
     /// </summary>
     public void UpdateDarkModePreference(bool value) => _userData.DarkMode?.Set(value, true);
+
+    /// <summary>
+    /// Updates the ProjectData of the current user
+    /// </summary>
+    /// <param name="projects"></param>
+    public void UpdateProjectData(Dictionary<string, string> projects) => _userData.ProjectData?.Set(JsonSerializer.Serialize(projects));
 }
