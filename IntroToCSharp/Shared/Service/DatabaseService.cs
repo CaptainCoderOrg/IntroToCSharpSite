@@ -110,7 +110,7 @@ public class DefaultResultHandler : IResultHandler
     [JSInvokable]
     public async void OnException(string exception) => await NotificationService.Service.Add(exception, Severity.Warning);
     [JSInvokable]
-    public void OnSuccess() {}
+    public void OnSuccess() { }
 }
 
 /// <summary>
@@ -135,13 +135,14 @@ public interface IChangeHandler
 public class DataReference
 {
     public static DataReference<bool> Bool(string path, bool defaultValue = false, string? niceName = null) => BoolDataReference.GetRef(path, defaultValue, niceName);
+    public static DataReference<string> String(string path, string defaultValue = "", string? niceName = null) => StringDataReference.GetRef(path, defaultValue, niceName);
 }
 
 /// <summary>
 /// A DataReference is a helper class for reading and writing data within the database.
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public abstract class DataReference<T>  : IResultHandler, IChangeHandler
+public abstract class DataReference<T> : IResultHandler, IChangeHandler
 {
     private readonly string? _niceName;
     private T? _defaultValue;
@@ -150,7 +151,7 @@ public abstract class DataReference<T>  : IResultHandler, IChangeHandler
     private bool _hasRef = false;
     private event Action<T?>? _dataChanged;
     private readonly string _path;
-    
+
     /// <summary>
     /// The nice name for this data reference, if one exists.
     /// </summary>
@@ -262,12 +263,12 @@ internal class BoolDataReference : DataReference<bool>
         }
         return value;
     }
-    private BoolDataReference(string path, bool defaultValue = false, string? niceName = null) : base(path, defaultValue, niceName) {}
+    private BoolDataReference(string path, bool defaultValue = false, string? niceName = null) : base(path, defaultValue, niceName) { }
 
     protected override void HandleChange(string data)
     {
         try
-        {   
+        {
             Val = JsonDocument.Parse(data).RootElement.GetBoolean();
         }
         catch (InvalidOperationException)
@@ -284,5 +285,41 @@ internal class BoolDataReference : DataReference<bool>
     {
         IResultHandler handler = notifyOnSuccess ? this : IResultHandler.Default;
         await DatabaseService.Service.Set<bool>(Path, data, handler);
+    }
+}
+
+internal class StringDataReference : DataReference<string>
+{
+    private static readonly Dictionary<string, StringDataReference> DataRefs = new Dictionary<string, StringDataReference>();
+    internal static DataReference<string> GetRef(string path, string defaultValue = "", string? niceName = null)
+    {
+        if (!DataRefs.TryGetValue(path, out StringDataReference? value))
+        {
+            value = new StringDataReference(path, defaultValue, niceName);
+        }
+        return value;
+    }
+    private StringDataReference(string path, string defaultValue = "", string? niceName = null) : base(path, defaultValue, niceName) { }
+
+    protected override void HandleChange(string data)
+    {
+        try
+        {
+            Val = JsonDocument.Parse(data).RootElement.GetString();
+        }
+        catch (InvalidOperationException)
+        {
+            NotificationService.Service.Add($"Error loading {NiceName}. Expected bool but found: {data}", Severity.Error).AndForget();
+        }
+        catch
+        {
+            NotificationService.Service.Add($"Error loading {NiceName}.", Severity.Error).AndForget();
+        }
+    }
+
+    public override async void Set(string data, bool notifyOnSuccess = true)
+    {
+        IResultHandler handler = notifyOnSuccess ? this : IResultHandler.Default;
+        await DatabaseService.Service.Set<string>(Path, data, handler);
     }
 }
