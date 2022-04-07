@@ -38,10 +38,7 @@ function firebaseLogin(provider) {
     // const provider = providernew firebase_auth.GoogleAuthProvider();
     const auth = firebase_auth.getAuth();
     firebase_auth.signInWithPopup(auth, provider)
-        .then((result) => {
-            // TODO: Redirect?
-        }).catch((error) => {
-            // TODO: Redirect?
+        .then((result) => {}).catch((error) => {
             console.error("Error!");
             console.error(error);
         });

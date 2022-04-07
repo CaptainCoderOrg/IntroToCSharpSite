@@ -1,8 +1,8 @@
 /** Heavily inspired by this work: https://htmldom.dev/create-resizable-split-views/ */
 
 .split-pane {
+    border: none;
     display: flex;
-    border: 1px solid #cbd5e0;
     height: 95vh;
 }
 
