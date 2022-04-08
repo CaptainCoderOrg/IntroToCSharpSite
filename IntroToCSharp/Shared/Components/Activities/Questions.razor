@@ -1,7 +1,9 @@
 <Section Title="@Title">
     <MudText Class="pa-2">@Message</MudText>
     <MudList Clickable="true">
-        @ChildContent
+        <CascadingValue Value="@this">
+            @ChildContent
+        </CascadingValue>
     </MudList>
 </Section>
 @code
