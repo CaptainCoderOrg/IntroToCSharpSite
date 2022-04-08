@@ -77,4 +77,36 @@ public class UserService
     /// <param name="projects"></param>
     public void UpdateProjectData(Dictionary<string, string> projects) => _userData.ProjectData?.Set(JsonSerializer.Serialize(projects));
     public void UpdateDefaultProject(string projectName) => _userData.DefaultProject?.Set(projectName);
+
+    /// <summary>
+    /// Given a path to a question and an answer to that question, updates the
+    /// answer in the database.
+    /// </summary>
+    /// <param name="path"></param>
+    /// <param name="answer"></param>
+    public void UpdateQuestionAnswer(string path, string answer)
+    {
+        if (_userData.IsLoggedIn)
+        {
+            DataReference<string> reference = DataReference.String($"/users/{_userData.UID}/{path}", "Question Data");
+            reference.Set(answer);
+        }
+    }
+
+    /// <summary>
+    /// Attempts to get a reference to an answer in the database. This method
+    /// returns true if there is a user logged in and they can access the
+    /// specified path. Otherwise, this method returns false and the reference
+    /// is not set.
+    /// </summary>
+    /// <param name="path"></param>
+    /// <param name="reference"></param>
+    /// <returns></returns>
+    public bool TryGetQuestionAnswer(string path, out DataReference<string> reference)
+    {
+        reference = null!;
+        if (!_userData.IsLoggedIn) return false;
+        reference = DataReference.String($"/users/{_userData.UID}/{path}");
+        return true;
+    }
 }
