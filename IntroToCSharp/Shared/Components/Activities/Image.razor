@@ -11,5 +11,5 @@
     public string Src { get; set; } = null!;
     [Parameter]
     public string Alt { get; set; } = "";
-    private string Path => $"imgs/{NavigationManager.Uri.Substring(NavigationManager.BaseUri.Length)}/{Src}";
+    private string Path => $"imgs/{NavigationManager.GetRoute()}/{Src}";
 }
