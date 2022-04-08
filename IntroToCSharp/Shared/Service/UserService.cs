@@ -88,7 +88,7 @@ public class UserService
     {
         if (_userData.IsLoggedIn)
         {
-            DataReference<string> reference = DataReference.String($"/users/{_userData.UID}/{path}", "Question Data");
+            DataReference<string> reference = DataReference.String($"/users/{_userData.UID}/{path}");
             reference.Set(answer);
         }
     }
@@ -107,6 +107,38 @@ public class UserService
         reference = null!;
         if (!_userData.IsLoggedIn) return false;
         reference = DataReference.String($"/users/{_userData.UID}/{path}");
+        return true;
+    }
+
+    /// <summary>
+    /// Given a path to a task and the state of the task, updates the
+    /// task in the database.
+    /// </summary>
+    /// <param name="path"></param>
+    /// <param name="answer"></param>
+    public void UpdateTaskItem(string path, bool isChecked)
+    {
+        if (_userData.IsLoggedIn)
+        {
+            DataReference<bool> reference = DataReference.Bool($"/users/{_userData.UID}/{path}");
+            reference.Set(isChecked);
+        }
+    }
+
+    /// <summary>
+    /// Attempts to get a reference to a task in the database. This method
+    /// returns true if there is a user logged in and they can access the
+    /// specified path. Otherwise, this method returns false and the reference
+    /// is not set.
+    /// </summary>
+    /// <param name="path"></param>
+    /// <param name="reference"></param>
+    /// <returns></returns>
+    public bool TryGetTask(string path, out DataReference<bool> reference)
+    {
+        reference = null!;
+        if (!_userData.IsLoggedIn) return false;
+        reference = DataReference.Bool($"/users/{_userData.UID}/{path}");
         return true;
     }
 }
