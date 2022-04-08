@@ -1,0 +1,10 @@
+<CascadingValue Value="@this">
+    @ChildContent
+</CascadingValue>
+@code 
+{
+    [Parameter, EditorRequired]
+    public string Name { get; set; } = String.Empty;
+    [Parameter]
+    public RenderFragment ChildContent { get; set; } = null!;
+}

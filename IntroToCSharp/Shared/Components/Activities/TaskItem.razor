@@ -1,0 +1,69 @@
+@inject NavigationManager NavigationManager
+
+<MudCheckBox @bind-Checked="@IsChecked" >
+    @if (IsChecked)
+    {
+        <del>@ChildContent</del>
+    }
+    else
+    {
+        @ChildContent
+    }
+</MudCheckBox>
+<br/>
+@code
+{
+    private bool _isChecked = false;
+    private bool IsDisabled = true;
+    private string Tip = "";
+    private bool IsChecked
+    {
+        get => _isChecked;
+        set
+        {
+            if (_isChecked == value) return;
+            if (IsDisabled)
+            {
+                NotificationService.Service.Add("Log in to save your progress.", Severity.Warning).AndForget();
+            }
+            _isChecked = value;
+            UpdateAndSaveTask();
+        }
+    }
+    private string ParentName => Parent == null ? "" : Parent.Name;
+    private string Path => $"{NavigationManager.GetRoute()}/tasks/{Utils.SanitizeDBName(ParentName)}/{Utils.SanitizeDBName(Name)}";
+
+    [CascadingParameter, EditorRequired]
+    public TaskList? Parent { get; set; } = null;
+    [Parameter, EditorRequired]
+    public string Name { get; set; } = String.Empty;
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; } = null!;
+
+    protected override void OnInitialized()
+    {
+        UserService.Service.OnUserChange += HandleUserChange;
+    }
+
+    private void HandleUserChange(User userData)
+    {
+        IsDisabled = !userData.IsLoggedIn;
+        if (userData.IsLoggedIn)
+        {
+            if(UserService.Service.TryGetTask(Path, out DataReference<bool> isChecked)){
+                isChecked.DataChanged += val =>
+                {
+                    _isChecked = val!;
+                    StateHasChanged();
+                };
+            }
+        }
+        StateHasChanged();
+    }
+
+    private void UpdateAndSaveTask()
+    {
+        UserService.Service.UpdateTaskItem(Path, _isChecked);
+    }
+}
