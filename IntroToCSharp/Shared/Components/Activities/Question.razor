@@ -23,7 +23,7 @@
         }
     }
 
-    private string Path => $"questions/{NavigationManager.GetRoute()}/{Utils.SanitizeDBName(Parent.Title)}/{Utils.SanitizeDBName(Text)}";
+    private string Path => $"{NavigationManager.GetRoute()}/questions/{Utils.SanitizeDBName(Parent.Title)}/{Utils.SanitizeDBName(Text)}";
 
     protected override void OnInitialized()
     {
