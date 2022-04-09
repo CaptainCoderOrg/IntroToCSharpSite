@@ -1,0 +1,118 @@
+@page "/getting-started/replit-console"
+<h1>Replit Console</h1>
+<Section Title="Overview">
+    <p>
+        <MudLink Href="https://replit.com">Replit</MudLink> is an online platform that allows 
+        users to write code and build apps directly in their web browser without the need
+        to download or install software on their personal computer. This allows users
+        to quickly get up and running and learn the basics of programming in a Linux
+        based environment. For this reason, I have tried to integrate Replit into this
+        book in an attempt to make it easy for the absolute beginner to learn without
+        being burdened by the need to install and configure a development environment
+        on their local computer.
+    </p>
+
+    <p>
+        Throughout this book, I make the assumption that you are using a Linux based
+        console with .NET 6 and git installed. If you are comfortable setting up
+        your own development environment on your local computer, go for it! 
+        However, if you're completely new to these concepts, I recommend starting
+        with the Replit console that I've connected to this book. Although this
+        book is a work in progress, I hope to add in a section for developing in
+        both 
+        <MudLink Target="_blank" Href="https://visualstudio.microsoft.com/">Visual Studio</MudLink> 
+        and <MudLink Target="_blank" Href="https://code.visualstudio.com/">Visual Studio Code</MudLink>.
+    </p>
+
+    <Note>
+        As of writing this, Replit is far from a perfect development environment
+        for any large C# or .NET project. As you grow as a programmer, you will
+        eventually want to move to a local development environment.
+    </Note>
+</Section>
+
+<Section Title="Before Starting">
+    <p>
+        I've tried to make it as easy as possible to integrate your own Replit environment
+        directly into this book. In the top bar you will find a console icon which will 
+        <MudIcon Icon="@Icons.Material.Outlined.Terminal" /> activate the built in Replit
+        console. Before you can use this feature you need to have a Replit account,
+        be logged into your Replit account, and you must also be logged into this book.
+        After you have completed these steps, click the icon to to open the Replit panel.
+    </p>
+
+    <TaskItem Name="Login Replit">Login to your Replit account: <MudLink Target="_blank" Href="https://replit.com/">LINK</MudLink></TaskItem>
+    <TaskItem Name="Login">Login to your account</TaskItem>
+    <TaskItem Name="Open Console">Click the <MudIcon Icon="@Icons.Material.Outlined.Terminal" /> icon to activate the panel.</TaskItem>
+</Section>
+
+<Section Title="Forking a Replit Project">
+    <p>
+        If this is your first time using the Replit console, you will be greeted 
+        with two options. The first option is a link to this page. The second
+        is a button that opens the configuration panel. This is where you can 
+        connect an existing Replit project to your account.
+    </p>
+    <p>
+        Before you can connect an existing Replit project, you need to create one.
+        For most projects, I have provided a starter Replit that you can fork to help
+        you get started. Forking a project makes a copy of that project and adds it
+        to your personal Replit account. Let's start by forking a simple Replit project
+        that is configured to use C#.
+    </p>
+    <TaskItem Name="Open URL">Open the Project on Replit: <ReplitLink Path="JosephCollard/C-Project">Link</ReplitLink></TaskItem>
+    <TaskItem Name="Fork REPL">In the top right corner, click the Fork repl button.</TaskItem>
+    <Image Src="fork.png" />
+
+    <p>
+        After a moment, you should be redirected to your newly forked copy of the project. It should look something like the image below.
+
+        <Note>
+            Your fork should have your Replit username as a prefix to the project name.
+        </Note>
+    </p>
+
+    <Image Src="newFork.png" />
+</Section>
+
+<Section Title="Connecting a Replit Project">
+    <p>
+        Now that you have a Replit project that you would like to attach connect
+        to this book, you can click the <Code>Open Console Config</Code> button
+        in the Replit Console area. This will open a dialog window where you can
+        add a new Replit project by entering a Nick Name to use within the book
+        and the URL to your Replit project.
+    </p>
+    <TaskItem Name="Copy URL">Copy the URL from your Replit project</TaskItem>
+    <Image Src="copyIRL.png" />
+    <TaskItem Name="Open Dialog">Open the Console Config</TaskItem>
+    <Image Src="firstTime.png"/>
+    <TaskItem Name="Enter a Nick Name">Enter a Nick Name</TaskItem>
+    <TaskItem Name="Paste URL">Paste the URL</TaskItem>
+    <TaskItem Name="Click Add">Click the Add Icon</TaskItem>
+    <Image Src="addProject.png" />
+    <TaskItem Name="Close Dialog">Close the Config Dialog</TaskItem>
+    <p>
+        If all went well, you will now see your project loaded in the bottom panel
+        within this book. It should look similar to this:
+    </p>
+    <Image Src="connected.png" />
+    
+</Section>
+
+<Section Title="Wrapping Up">
+    <p>
+        This book utilizes Replit's embeddable projects to allow you to work on your
+        project directly within the book itself. This requires you to be logged
+        into both Replit and the book. One thing to note is that if you are not
+        logged into Replit, any changes you make within your embedded project will not
+        be saved. One way to tell at a glance if you are logged into your project
+        is the sidebar on the left of the Replit interface. If it has a "Secrets"
+        and "Version Control" tab, this means you're logged in and changes will 
+        be saved.
+    </p>
+
+    <Image Src="loggedin.png" />
+
+
+</Section>

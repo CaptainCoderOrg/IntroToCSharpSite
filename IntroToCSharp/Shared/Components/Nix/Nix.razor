@@ -8,20 +8,24 @@ else if (IsEmpty)
 {
     <MudPaper Elevation="0" Class="pa-4">
         <p>You have not configured any console projects.</p>
-        <MudTooltip Text="Open Console Activity">
-            <MudFab
-                Href="activites/setup-console"
-                Label="Learn about the console"
-                Color="Color.Primary"
-                Icon="@Icons.Material.Outlined.School"/>
-        </MudTooltip>
-        <MudTooltip Text="Open Console Configuration">
-            <MudFab
-                OnClick="@OpenConfig"
-                Label="Open Console Config"
-                Color="Color.Primary"
-                Icon="@Icons.Material.Outlined.Add"/>
-        </MudTooltip>
+        <p>
+            <MudTooltip Text="Open Console Activity">
+                <MudFab
+                    Href="activites/setup-console"
+                    Label="Learn about the console"
+                    Color="Color.Primary"
+                    Icon="@Icons.Material.Outlined.School"/>
+            </MudTooltip>
+        </p>
+        <p>
+            <MudTooltip Text="Open Console Configuration">
+                <MudFab
+                    OnClick="@OpenConfig"
+                    Label="Open Console Config"
+                    Color="Color.Primary"
+                    Icon="@Icons.Material.Outlined.Add"/>
+            </MudTooltip>
+        </p>
     </MudPaper>
 }
 else

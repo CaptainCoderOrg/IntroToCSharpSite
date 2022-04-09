@@ -1,0 +1,13 @@
+<MudLink
+    Target="_blank" 
+    Href="@Url">
+    @ChildContent
+    </MudLink>
+@code
+{
+    [Parameter]
+    public RenderFragment ChildContent { get; set; } = null!;
+    [Parameter, EditorRequired]
+    public string Path { get; set; } = String.Empty;
+    private string Url => $"https://replit.com/@{Path}";
+}
