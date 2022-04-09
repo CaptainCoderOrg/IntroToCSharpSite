@@ -2,61 +2,120 @@
 @using IntroToCSharp.Shared.Components.ReplIt
 
 <h1>Intro to Coding in C#</h1>
-<p>
-    Welcome to Intro to Coding in C#! This site is designed to be an interactive
-    text book where you can track your progress, complete activities, and grow
-    as a programmer. Although you can use this site without an account, you will
-    be missing out on some of progress tracking features that are built in.
-</p>
-<h2>How to use this book</h2>
-<h3>Code Examples</h3>
-<p>
-    Throughout this book, you will find code examples like the one below.
-</p>
-<CodeBlock Filename="NewProgram.cs" />
-<p>
-    Often, you will find that you copy and paste has been disabled on these code examples.
-</p>
-<Note>
-    This is intentional.
-</Note>
-<p>
-    When you are learning to program, it is important to memorize the syntax of
-    the language.
-    Many students find this frustating because they would like to work through the
-    book quickly. However, I encourage you to embrace the idea of slowing down to learn
-    and to think through the code examples as you type them out.
-</p>
-<h3>Running Code Examples</h3>
-<p>
-    It is often helpful to execute the code examples to see the output and to interact
-    with a program. To facilitate this, we utilize an
-    online service called <MudLink Href="https://replit.com" Target="_blank">Repl.it</MudLink>
-    which provides online tools for writing and executing programs. You'll learn more about
-    Repl.it in the Development Environment chapter of this book.
-</p>
-<p>
-    Below is a simple program that asks the user to enter their name
-    and then displays the results to the console.
-    You can test this short program by
-    clicking the <Code>Run Code</Code> button at the bottom of the example. This will launch
-    a <MudLink Href="https://replit.com" Target="_blank">Repl.it</MudLink> console below the
-    code example. After it loads, click the play button
-    to compile and run the program. You should see <Code>dotnet run</Code> displayed in the console.
-    This is the command that is used to compile and run C# programs.
-    If you are logged into Repl.it in your browser, this will run on your account.
-    Go ahead and try it now.
-</p>
-<Note>
-    If you are not logged in or if you are using a free tier account, compilation may
-    take 15 - 20 seconds.
-</Note>
+<Section Title="Overview">
+    <p>
+        Welcome to Intro to Coding in C#! This site is designed to be an interactive
+        text book where you can track your progress, complete activities, and grow
+        as a programmer. Please note that this book is still a work in progress
+        but I hope you will find it useful.
+    </p>
+</Section>
+<Section Title="Tracking Progress">
+    <p>
+        Although you can learn and grow from this book without an account, you
+        will miss out on the progress saving feature and Replit integration.
+        Currently, this book allows you to sign-up using a Google or GitHub
+        account and doesn't save your personally identifying information 
+        (name or email address). If you are logged in, this book will remember
+        which activities you have visited, which sections you've collapsed,
+        your answers to questions, your checked off tasks, and the Replit
+        projects you've added to your account.
+    </p>
+    <p>
+        The goal here is to provide an easy way to remember where you left off
+        when you return to the book and to know where to pick up on your return.
+        You can try this out now by collapsing this "Overview" section above
+        and refreshing the page. You'll notice, that the "Overview" section
+        will remain collapsed. As you finish sections in this book, I encourage
+        you to mark them complete by collapsing them. By doing this, when you return 
+        to an activity or a page, you will know where you left off.
+    </p>
+</Section>
+<Section Title="Questions">
+    <p>
+        In addition to tracking your progress by marking sections read, this book
+        also acts as a "work book" in which you can write answers and check off
+        tasks within an activity or project. For example, most activities in this
+        book will start with a "Pre-Knowledge Check" where I encourage you
+        to try to answer questions you may not know the answers to. At the
+        end of the activity, there will be a "Post-Knowledge Check" with the
+        same (or similar) questions. The goal here is to see what we already know,
+        what we might think we know, and what we are not sure about. Below
+        is an example of what this looks like.
+    </p>
+</Section>
 
-<CodeBlock Filename="AskName.cs" ReplIt="JosephCollard/AskName" />
+<Questions Title="Pre-Knowledge Check">
+    <Message>If you're logged in, your answers to these questions will be saved.</Message>
+    <ChildContent>
+        <Question Text="What is a program?" />
+        <Question Text="What is a programming language?" />
+        <Question Text="What is a compiler?" />
+    </ChildContent>
+</Questions>
 
-<Note>
-    Sometimes the console displays improperly. To fix this, you can click the
-    <MudIcon Color="Color.Tertiary" Icon="@Icons.Outlined.Cached"/> button to refresh the
-    console. When you're finished, you can close the console by clicking the
-    <MudIcon Color="Color.Error" Icon="@Icons.Outlined.Close" /> button.
-</Note>
+<Section Title="Example Task List">
+    <p>
+        As you check off items on Task Lists, your progess will be saved for future visits.
+    </p>
+    <TaskList Name="Title Page">
+        <TaskItem Name="Collapse">Collapse the Overview Panel</TaskItem>
+        <TaskItem Name="Answer Pre-Knowledge Check">Answer Pre-Knowledge Check</TaskItem>
+        <TaskItem Name="First">Complete Task List</TaskItem>
+    </TaskList>
+</Section>
+
+<Section Title="Code Examples">
+    <p>
+        Throughout this book, you will find code examples like the one below.
+    </p>
+    <CodeBlock Filename="NewProgram.cs" />
+    <p>
+        Often, you will find that you copy and paste has been disabled on these code examples.
+    </p>
+    <Note>
+        This is intentional.
+    </Note>
+    <p>
+        When you are learning to program, it is important to memorize the syntax of
+        the language.
+        Many students find this frustating because they would like to work through the
+        book quickly. However, I encourage you to embrace the idea of slowing down to learn
+        and to think through the code examples as you type them out.
+    </p>
+    <h3>Running Code Examples</h3>
+    <p>
+        It is often helpful to execute the code examples to see the output and to interact
+        with a program. To facilitate this, we utilize an
+        online service called <MudLink Href="https://replit.com" Target="_blank">Repl.it</MudLink>
+        which provides online tools for writing and executing programs. You'll learn more about
+        Repl.it in the Development Environment chapter of this book.
+    </p>
+    <p>
+        Below is a simple program that asks the user to enter their name
+        and then displays the results to the console.
+        You can test this short program by
+        clicking the <Code>Run Code</Code> button at the bottom of the example. This will launch
+        a <MudLink Href="https://replit.com" Target="_blank">Repl.it</MudLink> console below the
+        code example. After it loads, click the play button
+        to compile and run the program. You should see <Code>dotnet run</Code> displayed in the console.
+        This is the command that is used to compile and run C# programs.
+        If you are logged into Repl.it in your browser, this will run on your account.
+        Go ahead and try it now.
+    </p>
+    <Note>
+        If you are not logged in or if you are using a free tier account, compilation may
+        take 15 - 20 seconds.
+    </Note>
+
+    <CodeBlock Filename="AskName.cs" ReplIt="JosephCollard/AskName" />
+
+    <Note>
+        Sometimes the console displays improperly. To fix this, you can click the
+        <MudIcon Color="Color.Tertiary" Icon="@Icons.Outlined.Cached"/> button to refresh the
+        console. When you're finished, you can close the console by clicking the
+        <MudIcon Color="Color.Error" Icon="@Icons.Outlined.Close" /> button.
+    </Note>
+</Section>
+
+
