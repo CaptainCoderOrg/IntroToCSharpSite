@@ -87,3 +87,8 @@ pre {
 .mud-expand-panel-content {
     padding: 0 !important;
 }
+
+.mud-list-item-icon {
+    min-width: 0 !important;
+    padding-right: 16px !important;
+}
