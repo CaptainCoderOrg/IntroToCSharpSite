@@ -1,20 +1,37 @@
 @inject NavigationManager NavigationManager
+
 <MudListItem Icon="@Icons.Filled.QuestionAnswer" OnClick="@NotifyLoggedIn">
-    <MudTextField Label="@Text" @bind-Value="Answer" @bind-Disabled="@IsDisabled"></MudTextField>
+    <MudStack Row="true" AlignItems="AlignItems.Center">
+        @if (ShowSpoiler)
+        {
+        <MudTooltip Text="@SpoilerText" Placement="Placement.Right">
+            <MudIcon Icon="@Icons.Filled.Info" Color="Color.Tertiary"/>
+        </MudTooltip>
+        }
+        <MudTextField Label="@Text" @bind-Value="Answer" @bind-Disabled="@IsDisabled" />
+    </MudStack>
+    
 </MudListItem>
 @code
 {
     private bool IsDisabled = true;
+    private bool ShowSpoiler => !IsDisabled && _answer != String.Empty && Spoiler != String.Empty;
     private string _answer = String.Empty;
+    [Parameter]
+    public string Spoiler { get; set; } = String.Empty;
+    private string SpoilerText => ShowSpoiler ? Spoiler : String.Empty;
+    [Parameter]
+    public string Default { get; set; } = null!;
 
     [CascadingParameter]
     public Questions Parent {get; set;} = null!;
     
     [Parameter, EditorRequired]
     public string Text {get; set;} = null!;
+    public string ParentTitle => Parent == null ? "No-Parent" : Utils.SanitizeDBName(Parent.Title);
     
     private string Answer {
-        get => _answer;
+        get => _answer == String.Empty ? Default : _answer;
         set
         {
             if (_answer == value) return;
@@ -23,7 +40,7 @@
         }
     }
 
-    private string Path => $"{NavigationManager.GetRoute()}/questions/{Utils.SanitizeDBName(Parent.Title)}/{Utils.SanitizeDBName(Text)}";
+    private string Path => $"{NavigationManager.GetRoute()}/questions/{ParentTitle}/{Utils.SanitizeDBName(Text)}";
 
     protected override void OnInitialized()
     {
