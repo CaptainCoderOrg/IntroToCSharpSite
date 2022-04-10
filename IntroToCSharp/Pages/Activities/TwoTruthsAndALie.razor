@@ -17,7 +17,7 @@
 <Section Title="Learning Objectives">
     <MudList Clickable="true">
         <MudListItem Icon="@Icons.Filled.Circle">Learn the difference between a program and a programming language</MudListItem>
-        <MudListItem Icon="@Icons.Filled.Circle">Learn how to "talk" with the computer using a console</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Practice creating and navigating directories</MudListItem>
         <MudListItem Icon="@Icons.Filled.Circle">Learn how to create a new console C# project using the .NET CLI</MudListItem>
         <MudListItem Icon="@Icons.Filled.Circle">Learn how to compile and run a console C# project using the .NET CLI</MudListItem>
         <MudListItem Icon="@Icons.Filled.Circle">
@@ -25,6 +25,16 @@
             display text in the terminal
         </MudListItem>
     </MudList>
+</Section>
+<Section Title="Before Starting">
+    <p>
+        Before starting this activity, you should be familiar with creating
+        and navigating directories in the console using the <Code>mkdir</Code>
+        and <Code>cd</Code> commands. If you are unfamiliar or would like
+        a refresher, check out the 
+        <MudLink Href="/activities/console-basics">Console Basics</MudLink>
+        activity.
+    </p>
 </Section>
 
 <Questions Title="Pre-Knowledge Check">
@@ -37,7 +47,6 @@
     <ChildContent>
         <Question Text="What is a program?" />
         <Question Text="What is a programming language?" />
-        <Question Text="What is a console?" />
         <Question Text="What is .NET?" />
         <Question Text="What is a statement?" />
     </ChildContent>
@@ -92,106 +101,28 @@
 
 </Section>
 
-<Section Title="The Console">
+<Section Title="Creating a Project Directory">
     <p>
-        Next, let's start by creating a simple program by using the <Keyword Word="console"/>.
-        You have most likely heard the word <Keyword Word="console" /> in the
-        context of video games. In general, a <Keyword Word="console" /> is
-        a device that is used to send data to and receive data from a computer.
-        When you use a video game <Keyword Word="console" />, you are sending
-        your controller inputs to a computer which interprets them and sends
-        video and audio data to a screen. Throughout this book, we will use
-        the term <Keyword Word="console" /> to refer to the console you will
-        use to interact with the computer that is compiling and executing your
-        C# code.
-    </p>
-
-    <p>
-        Below is a Repl.it <Keyword Word="console" /> that is attached to a
-        Linux based computer that has .NET installed. Feel free to use this
-        <Keyword Word="console" /> for this activity. Just know that when you
-        leave this page, your work will not be saved.
-
-        TODO: Add Fork option
-    </p>
-
-</Section>
-
-<Questions Title="First Task">
-    <Message>
-        The console allows us to interact with the computer by typing in commands.
-        Let's try it now. Type in the following commands into your console and
-        then take a guess as to what each command does.
-    </Message>
-    <ChildContent>
-        <Question Text="date" />
-        <Question Text="echo Hello World" />
-        <Question Text="touch NewFile.txt" />
-        <Question Text="mkdir NewFolder" />
-        <Question Text="go steve go" />
-        <Question Text="ls" />
-    </ChildContent>
-</Questions>
-<Section Title="Understanding Commands">
-<p>
-When you type something into the terminal and press enter, the text you entered
-is sent to your operating system and the operating system tries to figure out
-what to do with it. The first word is typically referred to as a command.
-If the operating system finds a program associated with the command,
-it runs the program and uses the remaining words as inputs for the command. These
-remaining words are referred to as arguments.
-</p>
-<p>
-For example:
-<MudList Clickable="true">
-    <MudListItem Icon="@Icons.Filled.Circle"><Code>date</Code> - Executes the date command which displays the current date and time</MudListItem>
-    <MudListItem Icon="@Icons.Filled.Circle"><Code>echo Hello World</Code> - Executes the echo command which displays its arguments (Hello and World)</MudListItem>
-    <MudListItem Icon="@Icons.Filled.Circle"><Code>touch NewFile.txt</Code> - Executes the touch command which creates a file if it does not exist</MudListItem>
-    <MudListItem Icon="@Icons.Filled.Circle"><Code>mkdir NewFolder</Code> - Executes the mkdir command which creates a new folder</MudListItem>
-    <MudListItem Icon="@Icons.Filled.Circle"><Code>go steve go</Code> - Tries to find the go command but fails and reports that no go command exists</MudListItem>
-    <MudListItem Icon="@Icons.Filled.Circle"><Code>ls</Code> - Executes the ls command which lists the files in the current folder</MudListItem>
-</MudList>
-
-The touch program creates a new file with the name that was provided.
-The date program displays the current date and time
-</p>
-</Section>
-
-<Section Title="Creating a Project Folder">
-    <p>
-        Before going further, let's create a folder to store our first project.
+        Before going further, let's create a directory to store our project.
         Use the <Code>mkdir</Code> command to create a folder named TwoTruthsAndALie.
         Notice that I have no spaces in the name. If you put spaces, it will create
         a new folder for each word. Run the command now <Code>mkdir TwoTruthsAndALie</Code>.
+        After you create the directory, navigate into the directory using the <Code>cd</Code>
+        command.
     </p>
-    <p>
-        Next, we need to move our console into the new folder. You can do this with the
-        <Code>cd</Code> command which "changes directory". Run the command <Code>cd TwoTruthsAndALie</Code>.
-    </p>
-    <p>
-        Finally, we can verify that our console is in the new directory by using
-        the <Code>pwd</Code> command which will "print the working directory".
-        Run the command <Code>pwd</Code>. If all went well, your workspace
-        should look something like this:
-    </p>
-    <Image Src="workspace.png" Alt="Workspace after creating project" />
-    <Note>
-        The output from your pwd command will likely be different than mine.
-        However, the important thing is that it ends with "TwoTruthsAndALie"
-    </Note>
+    <TaskItem Name="mkdir TwoTruthsAndALie">Run <Code>mkdir TwoTruthsAndALie</Code></TaskItem>
+    <TaskItem Name="cd TwoTruthsAndALie">Run <Code>cd TwoTruthsAndALie</Code></TaskItem>
+    <TaskItem Name="pwd TwoTruthsAndALie">Run <Code>pwd</Code> to verify you're in the correct directory</TaskItem>
 </Section>
 
 
 <Section Title="Running the .NET CLI">
     <p>
-    Now that you know a little bit more about the console, let's try running the .NET CLI.
+    Next, let's try running the .NET CLI.
     CLI stands for Command Line Interface. This refers to a program that can be
-    used from the computers command line.
+    used from the computers command line (or command prompt).
     </p>
-    <p>
-        If you type <Code>dotnet</Code> into your console, this tells the operating
-        system to run the .NET CLI. Try it now.
-    </p>
+    <TaskItem Name="dotnet">Run <Code>dotnet</Code> to try the .NET CLI</TaskItem>
     <p>
         If all goes well, you should see something that looks like this:
     </p>
@@ -203,12 +134,10 @@ The date program displays the current date and time
         C# project we can give it 2 arguments: <Code>new</Code> and <Code>console</Code>.
         Let's try it:
     </p>
-    <TaskList Name="Running .NET CLI">
-        <TaskItem Name="Run In Console">In the console run: <Code>dotnet new console</Code></TaskItem>
-    </TaskList>
+    <TaskItem Name="Run new Console">Run <Code>dotnet new console</Code></TaskItem>
 
     <p>
-        If all goes well, you should see output that looks similar to this:
+        After a few moments, you should see the following output:
     </p>
 
     <Image Src="newconsole.png" Alt="Output from executing dotnet new console" />
@@ -233,7 +162,7 @@ The date program displays the current date and time
         argument <Code>run</Code>. Let's try it:
     </p>
     <TaskList Name="Run First Program">
-         <TaskItem Name="Dot Net Run">In the console run: <Code>dotnet run</Code></TaskItem>
+         <TaskItem Name="Dot Net Run">Run: <Code>dotnet run</Code></TaskItem>
     </TaskList>
     <p>
         This causes the C# project to be compiled (turned into computer instructions)
@@ -270,7 +199,7 @@ The date program displays the current date and time
 
 </Section>
 
-<Section Title="Second Task - Two Truths and a Lie">
+<Section Title="First Program - Two Truths and a Lie">
     <p>
         Let's practice using <Code>Console.WriteLine</Code> to output a few more
         lines of text to the console.
