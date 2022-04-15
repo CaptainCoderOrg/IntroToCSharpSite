@@ -5,7 +5,7 @@
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 
 @* MudBlazor Dependencies *@
-<MudThemeProvider @ref="_mudThemeProvider" Theme="Themes.s_CSharpTheme" />
+<MudThemeProvider @ref="_mudThemeProvider" Theme="Themes.s_CSharpTheme" @bind-IsDarkMode="@IsDarkMode" />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
