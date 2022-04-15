@@ -16,4 +16,4 @@
     </div>
 }
 
-<iframe id="@Path" style="min-height:@ResizeHeight; overflow:auto" frameborder="0" src="@Url" onload="@ResizeFrame"></iframe>
+<iframe id="@Path" style="min-height:@ResizeHeight; overflow:auto" frameborder="0" src="@Url" onload="@(new Action(ResizeFrame))"></iframe>
