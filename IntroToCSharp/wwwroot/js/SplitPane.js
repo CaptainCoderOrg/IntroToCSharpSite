@@ -2,7 +2,7 @@
 
 /**
  * Helper function for acquiring the current Height of a SplitPane
- * @param {string} d_id 
+ * @param {string} d_id
  * @returns height style of the specified element
  */
 function GetSplitPaneHeight(d_id) {
@@ -11,7 +11,7 @@ function GetSplitPaneHeight(d_id) {
 
 /**
  * Given an ID to an element, initialize it as a SplitPane
- * @param {string} d_id 
+ * @param {string} d_id
  */
 function SplitPane(d_id) {
     const resizer = document.getElementById(d_id);
@@ -47,9 +47,10 @@ function SplitPane(d_id) {
 
         switch (direction) {
             case 'vertical':
-                const h =
+                let h =
                     ((prevSiblingHeight + dy) * 100) /
                     resizer.parentNode.getBoundingClientRect().height;
+                h = Math.min(95, Math.max(5, h));
                 prevSibling.style.height = `${h}%`;
                 break;
             case 'horizontal':

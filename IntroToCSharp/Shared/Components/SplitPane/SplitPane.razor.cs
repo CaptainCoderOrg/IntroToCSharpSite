@@ -43,6 +43,11 @@ namespace IntroToCSharp.Shared.Components.SplitPane
             bool hasHeight = await localStorage.ContainKeyAsync("console-height");
             if (!hasHeight) return;
             _topStyle = await localStorage.GetItemAsync<string>("console-height");
+            _topStyle = _topStyle.Replace("height: ", "");
+            _topStyle = _topStyle.Replace("%", "");
+            float size = float.Parse(_topStyle);
+            size = Math.Clamp(size, 5, 95);
+            _topStyle = $"height: {size:#.##}%";
         }
 
         public async void ToggleBottomPanel()
