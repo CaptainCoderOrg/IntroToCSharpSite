@@ -1,0 +1,155 @@
+@page "/activities/mad-takes"
+<h1>Mad Takes</h1>
+<Section Title="Overview">
+    <p>
+        Mad Takes is a silly word game in which the players are asked to 
+        provide words that will be used to fill in missing words from a story (or other document).
+        Here's the catch: The players are not allowed to see the story before providing words
+        to fill in the blank! This can often result in a non-sensicle outcome.
+        I've written a simple Mad Take program in C#, you can play a Mad Take in the console below:
+    </p>
+    <ReplIt Path="JosephCollard/MadTakes"/>
+</Section>
+<Section Title="Learning Objectives">
+    <MudList Clickable="true">
+        <MudListItem Icon="@Icons.Filled.Circle">Practice creating a new C# project using the console</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Practice using the Console.WriteLine method to display output to the user</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Learn about the string data type</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Learn how to declate a string variable</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Learn how to use the assignment operator to store data in a variable</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Learn how to use the Console.ReadLine method to read user input from the console</MudListItem>
+    </MudList>
+</Section>
+<Section Title="Before Starting">
+    <p>
+        Before starting this activity, you should be familiar with creating
+        a C# project using the .NET CLI and feel comfortable using the 
+        Console.WriteLine method to display message to the console.
+    </p>
+    <p>
+        If you need a refresher, check out the 
+        <MudLink Href="/activities/two-truths-and-a-lie">
+            Two Truths and a Lie
+        </MudLink> 
+        activity which covers these topics.
+    </p>
+</Section>
+
+<Questions Title="Pre-Knowledge Check">
+    <Message>
+        Next, let's do a quick knowledge check to see what we already know and
+        where we have room to learn and grow. Don't be tempted to peek ahead at
+        the answers. It is okay if you don't know the answer yet. The goal here
+        is to see what knowledge we already have.
+    </Message>
+    <ChildContent>
+        <Question Text="What is an expression?" />
+        <Question Text="What does it mean to evaluate an expression?" />
+        <Question Text="What is a variable?" />
+        <Question Text="What is a string?" />
+        <Question Text="What is an operator?" />
+        <Question Text="What is a method?" />
+    </ChildContent>
+</Questions>
+
+<Section Title="Getting Started">
+    <p>
+        * Start by forking the base C# Project here: TODO
+        * I suggest using the Nick Name "Mad Takes"
+        * Next, we need to make a C# project. To do this, run <Code>dotnet new console</Code> in the console.
+        * Open Program.cs
+    </p>
+</Section>
+<Section Title="Basic User Input">
+
+    <p>
+        In the <MudLink Href="/activities/two-truths-and-a-lie">Two Truths and a Lie</MudLink>
+        activity, you created a program that, when executed, will always produce the same output.
+        In many ways, this isn't particularly useful or interesting. Most programs expect a 
+        user to provide input, perform a task with that input, and produce an output. For
+        example, the Mad Take above accepted 4 inputs from the user and, using that input,
+        produced a silly song.
+    </p>
+    <p>
+        In C#, we produce text output to the console using the <Keyword Word="Console.WriteLine"/> method.
+        Similarly, we can read text input from the console using the <Keyword Word="Console.ReadLine" /> method.    
+        The code example below demonstrates a simple C# program which prompts the user to enter their name.
+    </p>
+    <TaskList Name="AskName">
+        <TaskItem Name="copy-code">Update your Program.cs file to match the code below</TaskItem>
+        <TaskItem Name="run">Run your program</TaskItem>
+    </TaskList>
+    <CodeBlock Filename="MadTakes/AskName1.cs" />
+
+    <p>
+        If all went well, your output should look similar to this:
+        ???
+    </p>
+    <p>
+        When your program runs, it executes each statement. When it encounters the 
+        <Keyword Word="Console.ReadLine"/> method, it will suspend execution and wait for the user
+        to type something into the console before continuing to execute.
+    </p>
+    <Note>
+        You will notice that when you run your program, the user's input appears below the "Enter your name:" message. 
+        If you would like to have the user's input appear at the end of the line, after the colon, you can use the <Keyword Word="Console.Write" />
+        method. The code example below shows this change.
+    </Note>
+    <CodeBlock Filename="MadTakes/AskName2.cs" />
+</Section>
+<Section Title="Creating and Using Variables">
+    <p>
+        Currently, your program displays, "Enter your name: ". It waits for the user to enter text and 
+        press enter. Then, it exits. This isn't particularly useful because we are not able to use the
+        user's input to do anything.
+    </p>
+    <p>
+        To save the user's input, we first need to create space to store the input. To do this, we will
+        <Keyword Word="declare" /> a <Keyword Word="variable"/>. A <Keyword Word="variable"/> is a 
+        named location in memory where we can store data.
+    </p>
+    <TaskList Name="Declare Variable">
+        <TaskItem Name="declare-string">
+            Update your program to declare a string variable named userName
+        </TaskItem>
+    </TaskList>
+
+    <CodeBlock Filename="MadTakes/AskName3.cs" />
+
+    <p>
+        When we make a space to store data we must <Keyword Word="declare"/> two things: 1. The type of data to store
+        and 2. The name of the <Keyword Word="variable" />. In the example above, we declare a 
+        <Keyword Word="string"/> <Keyword Word="variable"/> named userName. 
+    </p>
+    <Note>
+        A <Keyword Word="string"/> is a data type which stores text.
+    </Note>
+
+    <p>
+        Now that you have space to store data, you can <Keyword Word="assign"/> a value to be stored.
+        To do this, we use the <Keyword Word="assignment operator"/> (=).
+    </p>
+    <TaskList Name="Assignment">
+        <TaskItem Name="assign-value">
+            Update your program to assign the users response to be stored in the userName variable
+        </TaskItem>
+    </TaskList>
+
+    <CodeBlock Filename="MadTakes/AskName4.cs" />
+
+    <p>
+        The <Keyword Word="assignment operator"/> expects two things: a variable on the left side and an
+        <Keyword Word="expression"/> on the right side. An <Keyword Word="expression"/> is any piece of code
+        which describes a value. During execution, when an <Keyword Word="expression"/> is encountered,
+        the computer will <Keyword Word="evaluate"/> it to find the actual value and substitutes that 
+        value into the program.
+    </p>
+    <p>
+        The code <Keyword Word="Console.ReadLine()"/> is an expression that, when evaluated, suspends
+        the program and waits until the user enters text and presses enter. Then, the entered text is
+        substituted into the program and the program continues to execute. 
+        When the <Keyword Word="statement"/> <Code>userName = Console.ReadLine();</Code> is executed 
+        the <Keyword Word="expression"/> on the right side of the assignment operator is <Keyword Word="evaluated"/> 
+        then that value is stored in the location of the <Code>userName</Code> variable.
+    </p>
+</Section>
