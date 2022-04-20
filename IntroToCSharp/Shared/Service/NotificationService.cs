@@ -31,7 +31,7 @@ public class NotificationService
 
     static NotificationService()
     {
-        MainLayout.OnInit += (JS, Snackbar) => Init(Snackbar);
+        MainLayout.OnInit += (_, Snackbar, _) => Init(Snackbar);
     }
 
     private ISnackbar? _snackbar;

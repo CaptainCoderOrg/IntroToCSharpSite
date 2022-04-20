@@ -30,7 +30,7 @@ public class DatabaseService
 
     static DatabaseService()
     {
-        MainLayout.OnInit += (JS, Snackbar) => Init(JS);
+        MainLayout.OnInit += (JS, _, _) => Init(JS);
     }
 
     private DatabaseService() { }

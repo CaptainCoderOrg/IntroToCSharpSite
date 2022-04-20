@@ -15,7 +15,7 @@ public class UserService
 
     static UserService()
     {
-        MainLayout.OnInit += (JS, Snackbar) => Init(JS);
+        MainLayout.OnInit += (JS, _, _) => Init(JS);
     }
 
     private IJSRuntime? _runtime;
