@@ -44,12 +44,11 @@
         is to see what knowledge we already have.
     </Message>
     <ChildContent>
-        <Question Text="What is an expression?" />
-        <Question Text="What does it mean to evaluate an expression?" />
-        <Question Text="What is a variable?" />
-        <Question Text="What is a string?" />
-        <Question Text="What is an operator?" />
         <Question Text="What is a method?" />
+        <Question Text="What is a variable?" />
+        <Question Text="What does it mean to declare a variable?"/>
+        <Question Text="In C#, what is required to declare a variable?"/>
+        <Question Text="What is a string?" />
     </ChildContent>
 </Questions>
 
@@ -62,7 +61,6 @@
     </p>
 </Section>
 <Section Title="Basic User Input">
-
     <p>
         In the <MudLink Href="/activities/two-truths-and-a-lie">Two Truths and a Lie</MudLink>
         activity, you created a program that, when executed, will always produce the same output.
@@ -72,8 +70,11 @@
         produced a silly song.
     </p>
     <p>
-        In C#, we produce text output to the console using the <Keyword Word="Console.WriteLine"/> method.
-        Similarly, we can read text input from the console using the <Keyword Word="Console.ReadLine" /> method.    
+        A <Keyword Word="method"/> is a reusable piece of code that can be used to perform a task. C# provides 
+        many built in <Keyword Word="method"/>s that can be used to accomplish a variet of tasks. When we
+        use a method, we say that we are "calling" the method.
+        In C#, we can write text output to the console by calling the <Keyword Word="Console.WriteLine"/> method.
+        Similarly, we can read text input from the console by calling the <Keyword Word="Console.ReadLine" /> method.
         The code example below demonstrates a simple C# program which prompts the user to enter their name.
     </p>
     <TaskList Name="AskName">
@@ -87,18 +88,18 @@
         ???
     </p>
     <p>
-        When your program runs, it executes each statement. When it encounters the 
+        When you run your program, it executes each statement in order from top to bottom. When it encounters the 
         <Keyword Word="Console.ReadLine"/> method, it will suspend execution and wait for the user
         to type something into the console before continuing to execute.
     </p>
     <Note>
         You will notice that when you run your program, the user's input appears below the "Enter your name:" message. 
         If you would like to have the user's input appear at the end of the line, after the colon, you can use the <Keyword Word="Console.Write" />
-        method. The code example below shows this change.
+        method instead of the <Keyword Word="Console.WriteLine" /> method. The code example below shows this change.
     </Note>
     <CodeBlock Filename="MadTakes/AskName2.cs" />
 </Section>
-<Section Title="Creating and Using Variables">
+<Section Title="Declaring Variables">
     <p>
         Currently, your program displays, "Enter your name: ". It waits for the user to enter text and 
         press enter. Then, it exits. This isn't particularly useful because we are not able to use the
@@ -111,40 +112,31 @@
     </p>
     <TaskList Name="Declare Variable">
         <TaskItem Name="declare-string">
-            Update your program to declare a string variable named userName
+            Update your program to declare a string variable named <Code>userName</Code>
         </TaskItem>
     </TaskList>
 
     <CodeBlock Filename="MadTakes/AskName3.cs" />
 
     <p>
-        When we make a space to store data we must <Keyword Word="declare"/> two things: 1. The type of data to store
+        To make space to store data in C#, we must <Keyword Word="declare"/> two things: 1. The type of data to store
         and 2. The name of the <Keyword Word="variable" />. In the example above, we declare a 
-        <Keyword Word="string"/> <Keyword Word="variable"/> named userName. 
+        <Keyword Word="string"/> <Keyword Word="variable"/> named <Code>userName</Code>. A <Keyword Word="string"/> is a data
+        type which stores text.
     </p>
-    <Note>
-        A <Keyword Word="string"/> is a data type which stores text.
-    </Note>
-
+</Section>
+<Section Title="Storing Data in a Variable">
     <p>
-        Now that you have space to store data, you can <Keyword Word="assign"/> a value to be stored.
-        To do this, we use the <Keyword Word="assignment operator"/> (=).
+        Now that we have space to store the users input, we can use the <Keyword Word="assignment operator"/> (=)
+        to set the data that is stored in the <Code>userName</Code> variable.
     </p>
     <TaskList Name="Assignment">
         <TaskItem Name="assign-value">
-            Update your program to assign the users response to be stored in the userName variable
+            Update your program to assign the users response to be stored in the <Code>userName</Code> variable
         </TaskItem>
     </TaskList>
 
     <CodeBlock Filename="MadTakes/AskName4.cs" />
-
-    <p>
-        The <Keyword Word="assignment operator"/> expects two things: a variable on the left side and an
-        <Keyword Word="expression"/> on the right side. An <Keyword Word="expression"/> is any piece of code
-        which describes a value. During execution, when an <Keyword Word="expression"/> is encountered,
-        the computer will <Keyword Word="evaluate"/> it to find the actual value and substitutes that 
-        value into the program.
-    </p>
     <p>
         The code <Keyword Word="Console.ReadLine()"/> is an expression that, when evaluated, suspends
         the program and waits until the user enters text and presses enter. Then, the entered text is
@@ -154,3 +146,52 @@
         then that value is stored in the location of the <Code>userName</Code> variable.
     </p>
 </Section>
+<Section Title="Retrieving Data From a Variable">
+    <p>
+        After data has been stored in a variable, you can access it by using the variables name.
+    </p>
+
+    <TaskList Name="Retrieve">
+        <TaskItem Name="retrieve-value">
+            Update your program to display "Nice to meet you, " + userName + "!"
+        </TaskItem>
+        <TaskItem Name="run-code">
+            Run your updated program.
+        </TaskItem>
+    </TaskList>
+
+    <CodeBlock Filename="MadTakes/AskName5.cs" />
+    <p>
+        There are a two important things to notice in the code you just wrote:
+
+        1. There is a space at the end of the string <Code>"Nice to meet you, "</Code> within the double quotes.
+        2. We are able to combine strings together using the <Code>+</Code> operator.
+
+    </p>
+    <ThinkAboutIt>
+        <p>
+            Answer this question without updating or running the code. The goal here is to try and 
+            think about how the computer works.
+        </p>
+        <Question Text="@NiceToMeetYou" />
+    </ThinkAboutIt>
+    <p>
+        Now, try updating the code such that there is no space: <Code>"Nice to meet you,"</Code>.
+        </p>
+        <TaskList Name="TryIt">
+            <TaskItem Name="nospace">
+                Update your program to display "Nice to meet you," + userName + "!"
+            </TaskItem>
+            <TaskItem Name="run-code">
+                Run your updated program.
+            </TaskItem>
+        </TaskList>
+
+    <Question Text="What was the result?" />
+    <Question Text="Why do you think this happened?" />
+</Section>
+
+@code
+{
+    private string NiceToMeetYou = "What do you think if you do not include a space at the end of the \"Nice to meet you, \" string?";
+}
