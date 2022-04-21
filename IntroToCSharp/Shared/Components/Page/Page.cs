@@ -9,8 +9,7 @@ namespace CaptainCoder
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
-            await Utils.ScrollToTop();
-            Console.WriteLine("OnAfterRendered");
+            Utils.ScrollToTop();
         }
 
     }
