@@ -54,11 +54,26 @@
 
 <Section Title="Getting Started">
     <p>
-        * Start by forking the base C# Project here: TODO
-        * I suggest using the Nick Name "Mad Takes"
-        * Next, we need to make a C# project. To do this, run <Code>dotnet new console</Code> in the console.
-        * Open Program.cs
+        Before starting this activity, you should have access to a Linux based
+        console that has the .NET 6 CLI available. 
+        If you have a Replit account, you can fork this 
+        <ReplitLink Path="JosephCollard/C-Project">C# Project</ReplitLink>
+        which is configured specifically for this activity. If you need
+        a refresher for forking / connecting a Replit project to this book,
+        you can follow the instruction here: 
+        <MudLink Href="getting-started/replit-console">LINK</MudLink>.
     </p>
+
+    <TaskList Name="GettingStarted">
+        <TaskItem Name="Create Project">Next, we need to make a C# project. To do this, run <Code>dotnet new console</Code> in the console.</TaskItem>
+        <TaskItem Name="Open Program">Open Program.cs</TaskItem>
+    </TaskList>
+
+    <p>
+        If all went well, your workspace should look similar to this:
+         <Image Src="init-project.png" Alt="An image showing the project initialized" />
+    </p>
+    
 </Section>
 <Section Title="Basic User Input">
     <p>
@@ -80,12 +95,13 @@
     <TaskList Name="AskName">
         <TaskItem Name="copy-code">Update your Program.cs file to match the code below</TaskItem>
         <TaskItem Name="run">Run your program</TaskItem>
+        <TaskItem Name="name">Enter your name and press enter</TaskItem>
     </TaskList>
     <CodeBlock Filename="MadTakes/AskName1.cs" />
 
     <p>
         If all went well, your output should look similar to this:
-        ???
+         <Image Src="proj-run.png" Alt="An image showing the programs output" />
     </p>
     <p>
         When you run your program, it executes each statement in order from top to bottom. When it encounters the 
@@ -119,8 +135,12 @@
     <CodeBlock Filename="MadTakes/AskName3.cs" />
 
     <p>
-        To make space to store data in C#, we must <Keyword Word="declare"/> two things: 1. The type of data to store
-        and 2. The name of the <Keyword Word="variable" />. In the example above, we declare a 
+        To make space to store data in C#, we must <Keyword Word="declare"/> two things: 
+        <MudList Clickable="true">
+            <MudListItem Icon="@Icons.Filled.Circle">1. The type of data to store (in this case a string)</MudListItem>
+            <MudListItem Icon="@Icons.Filled.Circle">2. The name of the <Keyword Word="variable" /> (in this case userName)</MudListItem>
+        </MudList>
+        In the example above, we declare a 
         <Keyword Word="string"/> <Keyword Word="variable"/> named <Code>userName</Code>. A <Keyword Word="string"/> is a data
         type which stores text.
     </p>
@@ -153,7 +173,7 @@
 
     <TaskList Name="Retrieve">
         <TaskItem Name="retrieve-value">
-            Update your program to display "Nice to meet you, " + userName + "!"
+            Update your program to display "Nice to meet you," + userName + "!"
         </TaskItem>
         <TaskItem Name="run-code">
             Run your updated program.
@@ -162,36 +182,71 @@
 
     <CodeBlock Filename="MadTakes/AskName5.cs" />
     <p>
-        There are a two important things to notice in the code you just wrote:
-
-        1. There is a space at the end of the string <Code>"Nice to meet you, "</Code> within the double quotes.
-        2. We are able to combine strings together using the <Code>+</Code> operator.
+        If all went well, your output should look like this:
+        <Image Src="output.png" />
 
     </p>
     <ThinkAboutIt>
         <p>
-            Answer this question without updating or running the code. The goal here is to try and 
-            think about how the computer works.
+            Answer this question without updating or running the code.
         </p>
         <Question Text="@NiceToMeetYou" />
     </ThinkAboutIt>
     <p>
-        Now, try updating the code such that there is no space: <Code>"Nice to meet you,"</Code>.
+        Now, try updating your code to add a space: <Code>"Nice to meet you, "</Code>.
         </p>
         <TaskList Name="TryIt">
             <TaskItem Name="nospace">
-                Update your program to display "Nice to meet you," + userName + "!"
+                Update your program to display "Nice to meet you, " + userName + "!"
             </TaskItem>
             <TaskItem Name="run-code">
                 Run your updated program.
             </TaskItem>
         </TaskList>
+</Section>
 
-    <Question Text="What was the result?" />
-    <Question Text="Why do you think this happened?" />
+<Questions Title="Post-Knowledge Check">
+    <Message>
+        Now that you've completed the activity, let's do a quick knowledge check
+        to see what you learned and identify areas where you should review
+        (feel free to look back and find the answers).
+    </Message>
+    <ChildContent>
+        <Question Text="What is a method?" />
+        <Question Text="What is a variable?" />
+        <Question Text="What does it mean to declare a variable?"/>
+        <Question Text="In C#, what is required to declare a variable?"/>
+        <Question Text="What is a string?" />
+    </ChildContent>
+</Questions>
+
+<Section Title="Challenge 1: Short Mad Take">
+    <p>
+        Now that you know the basics for reading user input and storing it in a variable,
+        you will write a short Mad Take program which accepts two inputs from the user: a noun
+        and an adjective. Then, it displays the output to the user. Below is a simple program
+        you can use to help get started:
+    </p>
+    <CodeBlock Filename="MadTakes/Starter.cs" />
+</Section>
+
+<Section Title="Challenge 2: Full Mad Take">
+    <p>
+        In this challenge you will create a longer Mad Take program. Come up with your own
+        Mad Take or find one here: <MudLink Href="https://www.madtakes.com/" Target="_blank">https://www.madtakes.com/</MudLink>.
+    </p>
+    <TaskList Name="Mad Take">
+        <TaskItem Name="Fork">Create a **NEW** C Sharp project. You may need to fork a new Replit.</TaskItem>
+        <TaskItem Name="RunNewConsole">Run <Code>dotnet new console</Code></TaskItem>
+        <TaskItem Name="Display Welcome">Display "Welcome to Mad Takes!"</TaskItem>
+        <TaskItem Name="Declare 8 variables">Declare at least 8 variables</TaskItem>
+        <TaskItem Name="Read Input">For each variable, prompt the user to enter a value and use <Code>Console.ReadLine()</Code> to get input.</TaskItem>
+        <TaskItem Name="Output">Output each sentence in your Mad Take on a separate line using <Code>Console.WriteLine</Code>.</TaskItem>
+        <TaskItem Name="Share">Share your Mad Take with a friend!</TaskItem>
+    </TaskList>
 </Section>
 
 @code
 {
-    private string NiceToMeetYou = "What do you think if you do not include a space at the end of the \"Nice to meet you, \" string?";
+    private string NiceToMeetYou = "Why does the userName appear directly after the comma?";
 }
