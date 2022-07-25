@@ -1,0 +1,83 @@
+@inherits CaptainCoder.Page
+@page "/activities/variables"
+
+<MudText Typo="Typo.h4" Style="font-weight:bold">Variables</MudText>
+<Section Title="Introduction">
+    <MudText>An essential part of a computer program is being about to store data or “remember” it for future use. Each
+        computer has the capacity to “remember” a lot of things. Computers can remember numbers, letters, whole words,
+        and a lot more. But they can't remember things that the programmer doesn’t explicitly tell them to. So, when we
+        are coding we must use variables to label and store bits and pieces of essential data that we will need later.
+    </MudText>
+</Section>
+<Section Title="The Basics of Variables">
+    <MudText>
+        A variable is a temporary piece of stored data within the computer's memory.
+    </MudText>
+    <Example Title="Home Address">
+        Your personal belongings are stored in your home but in order to find your house you need the home address. The
+        same is true for a variable. It has an address that allows us to access and alter its data in a program.
+    </Example>
+</Section>
+
+<Section Title="What Makes Up A Variable?">
+    <MudList Clickable="true">
+        <MudListItem Icon="@Icons.Material.Filled.Badge" IconColor="Color.Secondary" Text="Name">
+            <NestedList>
+                <MudListItem>
+                    <MudText>This is the “address” that you declare that allows you to access it later.</MudText>
+                </MudListItem>
+            </NestedList>
+        </MudListItem>
+        <MudListItem Icon="@Icons.Material.Filled.Category" IconColor="Color.Warning" Text="Type">
+            <NestedList>
+                <MudListItem>
+                    <MudText>The type refers to the data being stored. Data can be a bunch of different things so it’s
+                        important for the computer to know the type.
+                    </MudText>
+                    <Example Title="Ice Cream Truck">
+                        You are not going to go up to the ice cream truck and just say you want ice cream
+                        because the vender won’t know what flavor to give you. Instead, you tell him what flavor or type
+                        of ice cream you want. That way he can go straight to the freezer and get strawberry ice cream.
+                    </Example>
+                </MudListItem>
+            </NestedList>
+        </MudListItem>
+        <MudListItem Icon="@Icons.Material.Filled.Storage" IconColor="Color.Tertiary" Text="Data">
+            <NestedList>
+                <MudListItem>
+                    <MudText>Data is the actual information stored.</MudText>
+                    <Example Title="Fun Fact">
+                        Let's say that you memorize the date when the United States declared its
+                        independence. The "data" stored in your brain would be "July 4, 1776".
+                    </Example>
+                </MudListItem>
+            </NestedList>
+        </MudListItem>
+    </MudList>
+
+</Section>
+
+<Section Title="Using Variables">
+    <CodeBlock Filename="Variables/Test.cs" ReplIt="JoshuaJoshJosh1/VariablesExample" />
+    <MudText>
+        In order to declare a variable, you must first list the type (Ex: string, int, double, char) and then the chosen
+        name of the variable.
+    </MudText>
+    <Note>
+        The name of a variable is important for good programming practice. It should be concise and relevant to the
+        stored data.
+    </Note>
+
+    <MudText>
+        Once you have declared a variable, you can use the variable's name in an expression. If you do not declare your
+        variables beforehand, the program will not function.
+    </MudText>
+    <Note>
+        For proper formatting, variables are usually are placed at the very beginning of the program
+    </Note>
+    <MudText>
+        When writing a program, you will have many variables. Each one can be initialized only once, but can be
+        declared/reused
+        numerous times.
+    </MudText>
+</Section>
