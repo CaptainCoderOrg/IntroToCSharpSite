@@ -1,0 +1,49 @@
+@Question
+<MudStack>
+    <CascadingValue Value="@this">
+        @ChildContent
+    </CascadingValue>
+</MudStack>
+
+@if (!_isSubmitted) 
+{
+    <MudButton Class="mt-4" OnClick="@Submit" Variant="Variant.Filled" Color="Color.Success">Submit</MudButton>
+}
+else 
+{
+    <p>
+    Correct Answers: @GetCorrectAnswers()
+    Feedback: @GetFeedback()
+    </p>
+}
+
+
+
+@code {
+    [Parameter]
+    public bool IsMultiSelect { get; set; } = false;
+    [Parameter]
+    public string Question { get; set; } = "Undefined";
+    [Parameter]
+    public RenderFragment ChildContent { get; set; } = null!;
+    private bool _isSubmitted = false;
+
+    private List<CheckBoxOption> _options = new List<CheckBoxOption>();
+    public void Submit()
+    {
+        this._isSubmitted = true;
+        foreach (CheckBoxOption option in this._options)
+        {
+            option.Submit();
+        }
+    }
+
+    public void AddOption(CheckBoxOption child) => this._options.Add(child);
+    public string GetCorrectAnswers() {
+        return "";
+    }
+
+    public string GetFeedback() {
+        return "";
+    }
+}
