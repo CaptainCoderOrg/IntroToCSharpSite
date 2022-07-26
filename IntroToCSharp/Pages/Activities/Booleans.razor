@@ -1,0 +1,101 @@
+@inherits CaptainCoder.Page
+@page "/activities/booleans"
+
+
+<h1>Booleans</h1>
+<Section Title="What are booleans?">
+    <p>
+        In C# a boolean or a “bool”, is a value that attempts to answer one of the simplest questions in C#.
+        Is this statement true or false? It is important to remember that booleans are working and used to answer that question!
+        In order to create a boolean we simple make a boolean value and, depending on the situation, set it to either true or false.
+    </p>
+    <p>
+        While this is a very simple data type it can be monumentally helpful when deciding how a program should proceed, 
+        make decisions or even use logic to solve a problem. Consider this problem below.
+    </p>
+
+    <CodeBlock Filename="Booleans/IsLightSwitchOn.cs"/>
+
+    <p>
+        In this problem we can see that we have a boolean called IsLightSwitchOn. This is the question that our boolean is going to try to answer. For starters, you can see that right now the light switch is set to False. In other words the question “Is the Light Switch On?” is false, 
+        meaning that the Light Switch is Off. Go ahead now and copy the code. Try turning the light switch on and then off using the boolean.
+    </p>
+</Section>
+
+<Questions Title="Exploring Booleans">
+    <ChildContent>
+        <Question Text="What would you combine a boolean with to make it more complex?" />
+        <Question Text="Can you think of another question that could be a boolean?" />
+        <Question Text="How many answers does a boolean question have?" />
+    </ChildContent>
+</Questions>
+
+<Section Title="Exploring Booleans">
+<p>
+    	We can see from this that booleans can be a lot of fun to play with by themselves but where they really shine is when you start combining 
+        them with other pieces of code! Booleans thrive when working in together with other pieces of code such as <Keyword Word="conditional operators"/> and <Keyword Word="If-Else Statements"/>, 
+        along with a whole lot of other tools at our disposal.
+</p>
+</Section>
+
+<Questions Title="Testing your knowledge!">
+    <ChildContent>
+        <p>Are these Questions Booleans?</p>
+        <p>Replace me with multiple choice quiz</p>
+        <Question Text="Is it going to rain today?" />
+        <Question Text="1 + 1 = 2." />
+        <Question Text="Your shirt is red." />
+        <p> Answers; yes, no, no.</p>
+    </ChildContent>
+</Questions>
+
+<Section Title="Combining Colors!">
+    <p>
+        Let’s take a look at another problem here! 
+    </p>
+    <p>
+
+        For this code we are taking two colors and checking to see if they make purple. 
+        In this case we are using an IF Statement with a boolean to see what the result of the question "Is ColorOne red & Is ColorTwo blue?"" If <Keyword Word ="both"/> of those statements are true, 
+        then we are going to print that the color is purple! If those statements aren’t true then we are going to print that those colors aren't purple.
+    </p>
+
+    <CodeBlock Filename="Booleans/CombiningColors.cs" />
+
+</Section>
+
+<Section Title="How Computers Understand Booleans!">
+    <p>
+        Something know about booleans is that they don’t actually return true or false. 
+        What booleans are really returning is a 1 for true or a 0 for false.
+    </p>
+    <p>
+        You might have noticed that sometimes when you exit a program your terminal might say something along the lines of return with a value of 0. 
+        This is actually answering the question “Is there a problem running this program?” A value of 0 means the program ran perfectly fine according to the computer 
+        (although not always according to us humans!) While a 1 is usually accompanied with some type of code saying what went wrong with the program!
+    </p>
+</Section>
+
+<Section Title="Your Turn!">
+
+    <p>
+        Over the course of this lesson we looked at booleans and how they can be used to determine if something is true or false.
+        Now it is your turn to try things out!
+    </p>
+    <p>
+        For this preparation we are going to take the previous challenge and expand it to a few different colors!
+        This time however when the program runs you should get the color that ColorOne & ColorTwo combine to.
+    </p>
+    <p>
+        For example, if I ColorOne was "red" and ColorTwo was "yellow" you would get "orange". You are going to do this for every color in the rainbow!
+        Make a boolean for each of the colors listed below! Be sure that each of the strings that you input are in LOWER CASE. If they are in UPPER CASE, the program will not work!
+    </p>
+    <TaskItem Name="Red">Red</TaskItem>
+    <TaskItem Name="Yellow">Yellow</TaskItem>
+    <TaskItem Name="Blue">Blue</TaskItem>
+    <TaskItem Name="Purple">Purple</TaskItem>
+    <TaskItem Name="Orange">Orange</TaskItem>
+    <TaskItem Name="Green">Green</TaskItem>
+    <TaskItem Name="Challenge"> <Keyword Word="Special Challenge:"/>Can you figure out how to make it so that the string will work no matter if it is upper case or lower case? </TaskItem>
+    
+</Section>
