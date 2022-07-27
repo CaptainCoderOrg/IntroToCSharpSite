@@ -19,6 +19,16 @@
     </Example>
 </Section>
 
+<MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Default" OnClick="@ToggleOpen">Test</MudButton>
+<MudPopover Open="@_isOpen" Fixed="true" Class="px-4 pt-4" AnchorOrigin="Origin.TopCenter">
+    <div class="d-flex flex-column">
+        <MudText>Content of the popover can be anything.</MudText>
+        <MudButton OnClick="@ToggleOpen" Class="ml-auto mr-n3 mb-1" Color="Color.Error">Close</MudButton>
+    </div>
+</MudPopover>
+
+
+
 <Section Title="What Makes Up A Variable?">
     <MudList Clickable="true">
         <MudListItem Icon="@Icons.Material.Filled.Badge" IconColor="Color.Secondary" Text="Name">
@@ -100,12 +110,52 @@
     </SubSection>
     <SubSection Title="Coding Guidlines for Naming Variables">
         <InfoGrid>
-            <GridSquare>Use a name that accurately <Keyword Word="describes"></Keyword> what the variable holds, even if the name has to be <Keyword Word="longer"></Keyword>.</GridSquare>
+            <GridSquare>Use a name that accurately <Keyword Word="describes"></Keyword> what the variable holds, even if
+                the name has to be <Keyword Word="longer"></Keyword>.</GridSquare>
 
             <GridSquare> Avoid <Keyword Word="abbreviations"></Keyword> of words that you use as variables.</GridSquare>
-            <GridSquare>Do not use names that are <Keyword Word="not specific"></Keyword> such as text or number.</GridSquare> 
-            <GridSquare>Programmers use lowerCamelCase(each word is capitalized except for the first) or UpperCamelCase(each word is capitalized) for multi-word variables.</GridSquare>
+            <GridSquare>Do not use names that are <Keyword Word="not specific"></Keyword> such as text or number.
+            </GridSquare>
+            <GridSquare>Programmers use lowerCamelCase(each word is capitalized except for the first) or
+                UpperCamelCase(each word is capitalized) for multi-word variables.</GridSquare>
         </InfoGrid>
-        <MudText Class="pa-4">All of these guidelines are NOT required when naming variables; however, they make your code easier to follow and understand when referencing it.</MudText>
+        <MudText Class="pa-4">All of these guidelines are NOT required when naming variables; however, they make your
+            code easier to follow and understand when referencing it.</MudText>
     </SubSection>
 </Section>
+
+<Section Title="Let's Practice!">
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="Which of the following do variables have?"
+        Explanation="Variables have only a name, type, and data, but do not have a list or family.">
+        <CheckBoxOption Text="Data" IsCorrect="true" />
+        <CheckBoxOption Text="List" IsCorrect="false" />
+        <CheckBoxOption Text="Name" IsCorrect="true" />
+        <CheckBoxOption Text="Type" IsCorrect="true" />
+        <CheckBoxOption Text="A Family" IsCorrect="false" />
+
+    </MultipleChoiceQuestion>
+
+    <MudText Class="mt-6"></MudText>
+
+    <MultipleChoiceQuestion IsMultiSelect="false"
+        Question="Which of the following variable names follow the naming guidelines?"
+        Explanation="numCounter uses the appropriate camelcase and is a descriptive phrase whereas the other options do not follow the guidelines.">
+        <CheckBoxOption Text="n" IsCorrect="false" />
+        <CheckBoxOption Text="numCounter" IsCorrect="true" />
+        <CheckBoxOption Text="text" IsCorrect="false" />
+        <CheckBoxOption Text="7" IsCorrect="false" />
+    </MultipleChoiceQuestion>
+</Section>
+
+
+@code {
+    public bool _isOpen = true;
+
+    public void ToggleOpen()
+    {
+        if (_isOpen)
+            _isOpen = false;
+        else
+            _isOpen = true;
+    }
+}
