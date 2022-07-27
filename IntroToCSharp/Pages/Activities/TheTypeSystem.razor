@@ -1,0 +1,39 @@
+@inherits CaptainCoder.Page
+@page "/activities/the-type-system"
+
+<MudText Typo="Typo.h4" Style="font-weight:bold">The Type System</MudText>
+
+<Section Title="Introduction">
+    <MudText>As we learned in the <MudLink Href="/activities/variables">Variables</MudLink> lesson, each variables must
+        have a <Keyword Word="type"></Keyword> that describes its <Keyword Word="data"></Keyword>. There are <Keyword
+            Word="14"></Keyword> different types of data that programmers can use. Defining data types for our variables
+        allows the computer to know how to store it while our program runs.
+    </MudText>
+</Section>
+<Section Title="Integers">
+    <MudText>
+        There are 8 different integer types that each use a certain amount of bytes. The amount of bytes in a type
+        determines the amount of memory usage.
+    </MudText>
+    <Example Title="Home Address">
+        Your personal belongings are stored in your home but in order to find your house you need the home address. The
+        same is true for a variable. It has an address that allows us to access and alter its data in a program.
+    </Example>
+</Section>
+
+
+<DataTable Headers="@headers" Rows="@rows"></DataTable>
+
+@code {
+    string[] headers = { "Name", "Number of Bytes", "Negatives?", "Minimum", "Maximum" };
+    string[] rows = {
+                @"Byte 1 No 0 255",
+                @"sByte 1 Yes -128 127",
+                @"Short 2 Yes -32,768 32,767",
+                @"uShort 2 No 0 65,535",
+                @"int 4 Yes -2,147,483,648 2,147,483,647",
+                @"uInt 4 No 0 4,294,967,295",
+                @"long 8 Yes -9,223,372,036,854,775,808 9,223,372,036,854,775,807",
+                @"uLong 8 No 0 -18,446,744,073,709,551,615"
+                };
+}
