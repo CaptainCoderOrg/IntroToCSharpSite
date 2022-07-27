@@ -1,3 +1,5 @@
+@inject NavigationManager NavigationManager
+
 <MudPaper Class="pa-3 d-flex align-content-center" Style="@GetStyle()">
     <MudCheckBox Color="Color.Dark" @bind-Checked="@IsChecked" Label="@Text"></MudCheckBox>
 </MudPaper>
@@ -14,10 +16,33 @@
     [CascadingParameter]
     public MultipleChoiceQuestion Parent { get; set; }
 
+    public string ParentTitle => Parent == null ? "No-Parent" : Utils.SanitizeDBName(Parent.Question);
+    private string Path => $"{NavigationManager.GetRoute()}/questions/{ParentTitle}/{Utils.SanitizeDBName(Text)}";
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
         this.Parent.AddOption(this);
+        UserService.Service.OnUserChange += HandleUserChange;
+    }
+
+    private void HandleUserChange(User userData)
+    {
+        if (userData.IsLoggedIn)
+        {
+            if(UserService.Service.TryGetQuestionAnswer(Path, out DataReference<string> answer)){
+                answer.DataChanged += val =>
+                {
+                    this.IsChecked = bool.Parse(val!);
+                    StateHasChanged();
+                };
+            }
+        }
+        else
+        {
+            this.Reset();
+        }
+        StateHasChanged();
     }
 
     private string GetStyle()
@@ -31,10 +56,20 @@
 
     }
 
+    public void Reset()
+    {
+        this.IsChecked = false;
+        this.IsSubmitted = false;
+    }
 
-    public bool Submit()
+    public bool CheckAnswer()
     {
         this.IsSubmitted = true;
         return IsSubmissionCorrect;
+    }
+
+    public void UpdateAndSave()
+    {
+        UserService.Service.UpdateQuestionAnswer(Path, this.IsChecked.ToString());
     }
 }
