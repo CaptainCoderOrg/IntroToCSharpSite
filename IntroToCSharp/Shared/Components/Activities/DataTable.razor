@@ -1,0 +1,34 @@
+
+<MudSimpleTable Style="overflow-x: auto;">
+    <thead>
+        <tr>
+            @foreach (var h in Headers)
+            {
+                <th>@h</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var row in Rows)
+        {
+            <tr>
+                @foreach (var x in row.Split())
+                {
+                    <td>@x</td>
+                }
+            </tr>
+        }
+    </tbody>
+</MudSimpleTable>
+
+@code {
+    [Parameter]
+    public string[] Headers { get; set; } = {};
+    [Parameter]
+    public string[] Rows { get; set; } = {};
+
+    private string _headers => string.Join(", ", Headers);
+    private string _rows => string.Join(", ", Rows);
+
+
+}
