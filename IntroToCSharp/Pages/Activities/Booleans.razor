@@ -14,7 +14,11 @@
         make decisions or even use logic to solve a problem. Consider this problem below.
     </p>
 
+    <MudContainer Align="align-center">
+    <MudIcon Icon="@(FlashlightSwitch ? Icons.Material.Filled.FlashlightOn : Icons.Material.Filled.FlashlightOff)" Title="@(FlashlightSwitch ? "Flashlight On" : "Flashlight Off")"/>
+    <MudSwitch @bind-Checked="@FlashlightSwitch" ThumbIcon="@(FlashlightSwitch==true ? Icons.Material.Filled.Done : Icons.Material.Filled.Close)" ThumbIconColor="@(FlashlightSwitch==true ? Color.Success : Color.Error)">IsLightSwitchOn: @FlashlightSwitch</MudSwitch>
     <CodeBlock Filename="Booleans/IsLightSwitchOn.cs"/>
+    </MudContainer>
 
     <p>
         In this problem we can see that we have a boolean called IsLightSwitchOn. This is the question that our boolean is going to try to answer. For starters, you can see that right now the light switch is set to False. In other words the question “Is the Light Switch On?” is false, 
@@ -99,3 +103,9 @@
     <TaskItem Name="Challenge"> <Keyword Word="Special Challenge:"/>Can you figure out how to make it so that the string will work no matter if it is upper case or lower case? </TaskItem>
     
 </Section>
+
+@code {
+    public bool FlashlightSwitch {get; set;}
+
+    
+}
