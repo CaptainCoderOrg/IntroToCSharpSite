@@ -15,22 +15,112 @@
         There are 8 different integer types that each use a certain amount of bytes. The amount of bytes in a type
         determines the amount of memory usage.
     </MudText>
+    <Note>You do not need to memorize this table but it is good to be aware.</Note>
+    <DataTable Headers="@intHeaders" Rows="@intRows"></DataTable>
+    <CodeBlock Filename="TheTypeSystem/IntegerExample.cs" />
+    <Questions Title="Let's Practice!">
+        <Message>
+            Above is an example of declaring an int variable. Seems simple, right? Well, sometimes it can take some time
+            to think of the
+            appropriate name. In the lesson on variables, you learned about variable naming guidlines. Apply your
+            knowledge here
+            while you practice declaring int variables!
+        </Message>
+        <ChildContent>
+            <Question Text="Declare an int variable for your mother's age!" />
+            <Question Text="Declare an int variable for your father's age!" />
+        </ChildContent>
+    </Questions>
+</Section>
 
+<Section Title="Floating-Point Numbers">
+    <MudText>Integers are great for whole numbers, but what happens when we want to store decimals or even repeating
+        decimals like π? That's when programmers use floating-point data types. We will learn about 3 floating-point
+        data types: float, double, decimal.</MudText>
+    <Note>The phrase "floating-point" comes repeating or "floating" digits after the decimal or "point".</Note>
+    <MudElement Class="ma-4">
+        <DataTable Headers=@floatHeaders Rows=@floatRows></DataTable>
+    </MudElement>
+    <MudText>Float and double values are not exactly precise, they are simply estimations of those defined values.
+        But a decimal value is precise. You will see this in the below example.</MudText>
+
+    <CodeBlock Filename="TheTypeSystem/FloatPointExample.cs" ReplIt="JoshuaJoshJosh1/FloatPointExample" />
+    <MudText>The decimal value was able to perform the operation and print the exact value but both the float and double
+        were just a fraction off from the correct value.</MudText>
+
+    <Questions Title="Let's Practice!">
+        <Message>
+            Use the above example to practice declaring floating-point numbers!
+        </Message>
+        <ChildContent>
+            <Question Text="Declare a float!" />
+            <Question Text="Declare a double!" />
+            <Question Text="Declare a decimal!" />
+        </ChildContent>
+    </Questions>
+</Section>
+
+<Section Title="Strings">
+    <MudText>A string is text of any length. Generally speaking, strings contain letters, punctation, and a couple other
+        symbols. Strings are often used in programs for names, descriptions, or large bodies of text.</MudText>
+
+    <MudText>A string is made by placing text inside double quotes like this:</MudText>
+    <CodeBlock Filename="TheTypeSystem/Stringexample.cs" />
+    <Questions Title="Let's Practice!">
+        <Message>
+            Use the above example of declaring strings to complete the following practice.
+        </Message>
+        <ChildContent>
+            <Question Text="Declare a string variable for your name!" />
+        </ChildContent>
+    </Questions>
+
+</Section>
+<Section Title="Characters">
+    <MudText>A single character type is represented in C# by "char". The char type is not restricted to keyboard
+        characters due to the 2 bytes that it uses. This allows ofr a wide range of distinct and fun characters
+        that can be represented by a char type. </MudText>
+
+    <MudText>A char, unlike a string, is made by placing the character inside of single quotes like this:</MudText>
+    <CodeBlock Filename="TheTypeSystem/CharExample.cs" />
+    <Questions Title="Let's Practice!">
+        <Message>
+            Use the above example of declaring a character to complete the following practice.
+        </Message>
+        <ChildContent>
+            <Question Text="Declare a character for a letter in the alphabet!" />
+        </ChildContent>
+    </Questions>
+</Section>
+<Section Title="Bool">
+    <MudText>Bool is used to define the state of something within a program as either true or false. Yup, that's it! A
+        bool can only be either true or false.</MudText>
+    <Note>There is a whole lesson dedicated to bools! Check that out <MudButton Href="/" Variant="Variant.Filled"
+            Color="Color.Primary" Size="Size.Small" Class="pa-0">Here</MudButton>
+        !</Note>
 </Section>
 
 
-<DataTable Headers="@headers" Rows="@rows"></DataTable>
+
+
+
 
 @code {
-    string[] headers = { "Name", "Number of Bytes", "Negatives?", "Minimum", "Maximum" };
-    string[] rows = {
-                @"Byte 1 No 0 255",
-                @"sByte 1 Yes -128 127",
-                @"Short 2 Yes -32,768 32,767",
-                @"uShort 2 No 0 65,535",
-                @"int 4 Yes -2,147,483,648 2,147,483,647",
-                @"uInt 4 No 0 4,294,967,295",
-                @"long 8 Yes -9,223,372,036,854,775,808 9,223,372,036,854,775,807",
-                @"uLong 8 No 0 -18,446,744,073,709,551,615"
-                };
+    string[] intHeaders = { "Name", "Number of Bytes", "Negatives?", "Minimum", "Maximum" };
+    string[] intRows = {
+@"Byte 1 No 0 255",
+@"sByte 1 Yes -128 127",
+@"Short 2 Yes -32,768 32,767",
+@"uShort 2 No 0 65,535",
+@"int 4 Yes -2,147,483,648 2,147,483,647",
+@"uInt 4 No 0 4,294,967,295",
+@"long 8 Yes -9,223,372,036,854,775,808 9,223,372,036,854,775,807",
+@"uLong 8 No 0 -18,446,744,073,709,551,615"
+};
+
+    string[] floatHeaders = { "Type", "Bytes", "Digits of Precision", };
+    string[] floatRows = {
+@"float 4 7",
+@"double 8 15-16",
+@"decimal 16 28-29" };
 }
