@@ -1,0 +1,21 @@
+@if (KeywordRegistry.INSTANCE.Contains(Word)) {
+<MudButton Class="pb-0 pt-0 pl-1 pr-1" Size="Size.Small" Color="Color.Primary" Variant="Variant.Filled" OnClick="@ToggleOpen">
+    <MudPopover Open="@_isOpen" AnchorOrigin="@AnchorOrigin" TransformOrigin="@TransformOrigin">
+        <MudText Class="pa-2">@KeywordRegistry.INSTANCE.Get(Word)</MudText>
+    </MudPopover>
+    @Word
+</MudButton>
+} else {
+    <b>@Word</b>
+}
+@code
+{
+    [Parameter, EditorRequired]
+    public string Word { get; set; } = null!;
+    private bool _isOpen = false;
+
+    private Origin TransformOrigin = Origin.BottomCenter;
+    private Origin AnchorOrigin = Origin.TopCenter;
+
+    public void ToggleOpen() => _isOpen = !_isOpen;
+}
