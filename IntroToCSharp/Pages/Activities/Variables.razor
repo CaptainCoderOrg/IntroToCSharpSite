@@ -19,16 +19,6 @@
     </Example>
 </Section>
 
-<MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Default" OnClick="@ToggleOpen">Test</MudButton>
-<MudPopover Open="@_isOpen" Fixed="true" Class="px-4 pt-4" AnchorOrigin="Origin.TopCenter">
-    <div class="d-flex flex-column">
-        <MudText>Content of the popover can be anything.</MudText>
-        <MudButton OnClick="@ToggleOpen" Class="ml-auto mr-n3 mb-1" Color="Color.Error">Close</MudButton>
-    </div>
-</MudPopover>
-
-
-
 <Section Title="What Makes Up A Variable?">
     <MudList Clickable="true">
         <MudListItem Icon="@Icons.Material.Filled.Badge" IconColor="Color.Secondary" Text="Name">
@@ -97,8 +87,10 @@
 <Section Title="More on Naming Variables">
     <SubSection Title="The Rules">
         <InfoGrid>
-            <GridSquare>Variable names must start with a <Keyword Word="letter"></Keyword>(a-z)
-                or <Keyword Word="underscore"></Keyword>(_). </GridSquare>
+            <GridSquare>Variable names must start with a
+                <Keyword Word="letter" />(a-z)
+                or <Keyword Word="underscore"></Keyword>(_).
+            </GridSquare>
             <GridSquare>After you start your name, you can use numeric digits <Keyword Word="0 through 9"></Keyword>.
             </GridSquare>
             <GridSquare>Many <Keyword Word="symbols"></Keyword> and <Keyword Word="blank spaces"></Keyword> will cause
@@ -116,8 +108,8 @@
             <GridSquare> Avoid <Keyword Word="abbreviations"></Keyword> of words that you use as variables.</GridSquare>
             <GridSquare>Do not use names that are <Keyword Word="not specific"></Keyword> such as text or number.
             </GridSquare>
-            <GridSquare>Programmers use lowerCamelCase(each word is capitalized except for the first) or
-                UpperCamelCase(each word is capitalized) for multi-word variables.</GridSquare>
+            <GridSquare>Programmers use <Keyword Word = "lowerCamelCase"/> or
+                <Keyword Word = "UpperCamelCase"/> for multi-word variables.</GridSquare>
         </InfoGrid>
         <MudText Class="pa-4">All of these guidelines are NOT required when naming variables; however, they make your
             code easier to follow and understand when referencing it.</MudText>
