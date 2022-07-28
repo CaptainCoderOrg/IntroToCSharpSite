@@ -6,11 +6,13 @@ namespace CaptainCoder {
     /// </summary>
     public class KeywordRegistry {
         
+        /// <summary>
+        /// The singleton INSTANCE of the KeywordRegistry
+        /// </summary>
         public static readonly KeywordRegistry INSTANCE = new ();
         private readonly Dictionary<String, String> _registry = new ();
 
         static KeywordRegistry(){
-            // INSTANCE._registry["programmer"] = "A person who programs.";
             INSTANCE._registry["command prompt"] = "The area where you type in your console is called the command prompt.";
         }
 
