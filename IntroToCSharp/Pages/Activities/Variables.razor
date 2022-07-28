@@ -1,0 +1,148 @@
+@inherits CaptainCoder.Page
+@page "/activities/variables"
+
+<MudText Typo="Typo.h4" Style="font-weight:bold">Variables</MudText>
+<Section Title="Introduction">
+    <MudText>An essential part of a computer program is being about to store data or “remember” it for future use. Each
+        computer has the capacity to “remember” a lot of things. Computers can remember numbers, letters, whole words,
+        and a lot more. However, they can't remember things that the programmer doesn’t explicitly tell them to. So,
+        when we
+        are coding we must use variables to label and store bits and pieces of essential data that we will need later.
+    </MudText>
+</Section>
+<Section Title="The Basics of Variables">
+    <MudText>
+        A variable is a temporary piece of stored data within the computer's memory.
+    </MudText>
+    <Example Title="Home Address">
+        Your personal belongings are stored in your home but in order to find your house you need the home address. The
+        same is true for a variable. It has an address that allows us to access and alter its data.
+    </Example>
+</Section>
+
+<Section Title="What Makes Up A Variable?">
+    <MudList Clickable="true">
+        <MudListItem Icon="@Icons.Material.Filled.Badge" IconColor="Color.Secondary" Text="Name">
+            <NestedList>
+                <MudListItem>
+                    <MudText>This is the “address” that you declare that allows you to access the variable later.
+                    </MudText>
+                </MudListItem>
+            </NestedList>
+        </MudListItem>
+        <MudListItem Icon="@Icons.Material.Filled.Category" IconColor="Color.Warning" Text="Type">
+            <NestedList>
+                <MudListItem>
+                    <MudText>The type refers to the data being stored. Data can be a bunch of different things so it’s
+                        important for the computer to know what type of data it is handling.
+                    </MudText>
+                    <Example Title="Ice Cream Truck">
+                        You are not going to go up to the ice cream truck and just say you want ice cream
+                        because the vender won’t know what flavor to give you. Instead, you tell him what flavor or type
+                        of ice cream you want. That way he can go straight to the freezer and get strawberry ice cream.
+                    </Example>
+                </MudListItem>
+            </NestedList>
+        </MudListItem>
+        <MudListItem Icon="@Icons.Material.Filled.Storage" IconColor="Color.Tertiary" Text="Data">
+            <NestedList>
+                <MudListItem>
+                    <MudText>Data is the actual information stored.</MudText>
+                    <Example Title="Fun Fact">
+                        Let's say that you memorize the date when the United States declared its
+                        independence. The "data" stored in your brain would be "July 4, 1776".
+                    </Example>
+                </MudListItem>
+            </NestedList>
+        </MudListItem>
+    </MudList>
+
+</Section>
+
+<Section Title="Using Variables">
+
+    <Note>We will learn what Console.ReadLine() and Console.WriteLine() do later.</Note>
+    <CodeBlock Filename="Variables/Test.cs" ReplIt="JoshuaJoshJosh1/VariablesExample" />
+    <MudText>
+        In order to declare a variable, you must first list the type (Ex: string, int, double, char, etc.) and then the
+        chosen name of the variable. Once you have declared a variable, you can use the variable's name in an expression. 
+        If you do not declare your variables beforehand, the program will not function.
+    </MudText>
+    <Note>
+        For proper formatting, variables are usually are placed at the very beginning of the program
+    </Note>
+    <MudText>
+        When writing a program, you will have many variables. Each one can be initialized only once, but can be
+        declared/reused
+        numerous times.
+    </MudText>
+</Section>
+
+<Section Title="More on Naming Variables">
+    <SubSection Title="The Rules">
+        <InfoGrid>
+            <GridSquare>Variable names must start with a
+                <b>letter</b>(a-z)
+                or <b>underscore</b>(_).
+            </GridSquare>
+            <GridSquare>You can't use numeric digits <b>0 through 9</b> to start your name.
+            </GridSquare>
+            <GridSquare>Many <b>symbols</b> and <b>blank spaces</b> will cause
+                the computer to not know where the variable ends.
+            </GridSquare>
+            <GridSquare>Variables cannot have the same name as a keyword like <b>"string"</b>.
+            </GridSquare>
+        </InfoGrid>
+    </SubSection>
+    <SubSection Title="Coding Guidlines for Naming Variables">
+        <InfoGrid>
+            <GridSquare>Use a name that accurately <b>describes</b> what the variable holds, even if
+                the name has to be <b>longer</b>.</GridSquare>
+
+            <GridSquare> Avoid <b>abbreviations</b> of words that you use as variables.</GridSquare>
+            <GridSquare>Do not use names that are <b>not specific</b> such as "text" or "number".
+            </GridSquare>
+            <GridSquare>Use <Keyword Word="lowercamelcase"></Keyword> or
+                <Keyword Word="uppercamelcase"></Keyword> for multi-word variables.
+            </GridSquare>
+        </InfoGrid>
+        <MudText Class="pt-6">All of these guidelines are NOT required when naming variables; however, they make your
+            code easier to follow and understand when referencing it.</MudText>
+    </SubSection>
+</Section>
+
+<Section Title="Let's Practice!">
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="Which of the following do variables have?"
+        Explanation="Variables have only a name, type, and data, but do not have a list or family.">
+        <CheckBoxOption Text="Data" IsCorrect="true" />
+        <CheckBoxOption Text="List" IsCorrect="false" />
+        <CheckBoxOption Text="Name" IsCorrect="true" />
+        <CheckBoxOption Text="Type" IsCorrect="true" />
+        <CheckBoxOption Text="A Family" IsCorrect="false" />
+
+    </MultipleChoiceQuestion>
+
+    <MudText Class="mt-6"></MudText>
+
+    <MultipleChoiceQuestion IsMultiSelect="false"
+        Question="Which of the following variable names follow the naming guidelines?"
+        Explanation="numCounter uses the appropriate camelcase and is a descriptive phrase whereas the other options do not follow the guidelines.">
+        <CheckBoxOption Text="n" IsCorrect="false" />
+        <CheckBoxOption Text="numCounter" IsCorrect="true" />
+        <CheckBoxOption Text="text" IsCorrect="false" />
+        <CheckBoxOption Text="7" IsCorrect="false" />
+    </MultipleChoiceQuestion>
+</Section>
+
+
+@code {
+    public bool _isOpen = true;
+
+    public void ToggleOpen()
+    {
+        if (_isOpen)
+            _isOpen = false;
+        else
+            _isOpen = true;
+    }
+}

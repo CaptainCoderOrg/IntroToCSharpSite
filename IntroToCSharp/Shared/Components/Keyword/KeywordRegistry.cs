@@ -14,6 +14,8 @@ namespace CaptainCoder {
 
         static KeywordRegistry(){
             INSTANCE._registry["command prompt"] = "The area where you type in your console is called the command prompt.";
+            INSTANCE._registry["lowercamelcase"] = "Each word is capitalized except for the first (Ex: lowerCamelCase)";
+            INSTANCE._registry["uppercamelcase"] = "Each word is capitalized (Ex: UpperCamelCase)";
         }
 
         /// <summary>
