@@ -1,0 +1,12 @@
+<MudPaper Elevation="20" Class="pa-2 ma-5 mb-5" Style:>
+    <MudText Style="font-weight:bold">Example: @Title</MudText>
+    @ChildContent
+</MudPaper>
+
+@code
+{
+    [Parameter]
+    public string Title { get; set; } = "";
+    [Parameter]
+    public RenderFragment ChildContent { get; set; } = null!;
+}
