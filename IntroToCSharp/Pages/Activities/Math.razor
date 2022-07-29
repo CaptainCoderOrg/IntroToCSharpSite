@@ -1,0 +1,141 @@
+@inherits CaptainCoder.Page
+@page "/activities/math"
+
+<Section Title="Introduction">
+    <MudText>At the heart of all computers and computer programs is math. Most modern-day computers are cable of doing
+        math on an extremely large-scale,
+        but today we are going to learn about how to interpret and implement basic arithmetic within our own programs. A
+        math <Keyword Word="operation"></Keyword> is made up of <Keyword Word="operators"></Keyword> and <Keyword
+            Word="operands"></Keyword>. Now, let's learn how to make our computers do math for us!</MudText>
+</Section>
+
+<Section Title="Basic Math Operators">
+    <MudText>In C#, you treat math operations like you would in real life! Addition is "+", subtraction is "-",
+        multiplication is "*", division is "/", and the only operator that may be unfamiliar is remainder (also known as
+        mod
+        "%"). Mod allows the user to get the remainder of a division operation. Below are some examples!
+    </MudText>
+    <CodeBlock Filename="Math/AddSubExample.cs" />
+    <MudDivider Class="mt-6 mb-6" DividerType="DividerType.FullWidth"></MudDivider>
+    <CodeBlock Filename="Math/MultiplicationExample.cs" />
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="What is the value of j?"
+        Explanation="20 is the correct answer because 5 multiplied by 4 is 20!">
+        <CheckBoxOption Text="25" IsCorrect="false" />
+        <CheckBoxOption Text="9" IsCorrect="false" />
+        <CheckBoxOption Text="1" IsCorrect="false" />
+        <CheckBoxOption Text="20" IsCorrect="true" />
+    </MultipleChoiceQuestion>
+    <MudText Class="mt-6"></MudText>
+    <CodeBlock Filename="Math/Division.cs" />
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="What is the value of a?"
+        Explanation="The answer is 10 because 100 divided by 10 is 10!">
+        <CheckBoxOption Text="90" IsCorrect="false" />
+        <CheckBoxOption Text="10" IsCorrect="true" />
+        <CheckBoxOption Text="1/10" IsCorrect="false" />
+        <CheckBoxOption Text="1000" IsCorrect="false" />
+    </MultipleChoiceQuestion>
+    <MudText Class="mt-6"></MudText>
+    <CodeBlock Filename="Math/Mod1.cs" />
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="What is the value of c?"
+        Explanation="Remember that the percent symbol indicates we want the remainder of the numbers. 
+    That means it will act as a division sign, but give the remainder. 7 goes into 50 7 times (49), so the remainder would be 1!">
+        <CheckBoxOption Text="1" IsCorrect="true" />
+        <CheckBoxOption Text="7" IsCorrect="false" />
+        <CheckBoxOption Text="0" IsCorrect="false" />
+        <CheckBoxOption Text="50" IsCorrect="false" />
+    </MultipleChoiceQuestion>
+    <Note>Let's do one more remainder question to get you used to the operation!</Note>
+    <CodeBlock Filename="Math/Mod2.cs" />
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="What is the value of b?"
+        Explanation="The correct answer is 3 because 6 can only go into 63 ten full times before going over! 6 * 10 is 60 so the remainder is 3!">
+        <CheckBoxOption Text="7" IsCorrect="false" />
+        <CheckBoxOption Text="10.5" IsCorrect="false" />
+        <CheckBoxOption Text="3" IsCorrect="true" />
+        <CheckBoxOption Text="60" IsCorrect="false" />
+    </MultipleChoiceQuestion>
+</Section>
+
+<Section Title="Indicating Signs">
+    <MudText>
+        You can use the addition and subtraction signs to indicate if a number or variable is positve or negative!
+    </MudText>
+    <Example>
+        You can say that 5 is postive through the expression +5. If you want it to be negative, then it is -5! The same
+        applies for
+        variables that have been declared!
+    </Example>
+
+</Section>
+<Section Title="The Order of Operations">
+    <MudText>The order of operations in C# works just like it does in the real math world. Hopefully you remember
+        P.E.M.D.A.S., but if not, multiplication and divison(or mod) go before addition and subtraction and the
+        operation is evaluated left to right.</MudText>
+    <MudText Class="pt-4">Let's try a basic example!</MudText>
+    <CodeBlock Filename="Math/OrderOfOperations1.cs" />
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="What is the value of a?"
+        Explanation="Following the order of operations we would do the following: 1. 4 / 1 = 4     2. 4 * 2 = 8      3. 4 + 8 = 12 ">
+        <CheckBoxOption Text="6" IsCorrect="false"></CheckBoxOption>
+        <CheckBoxOption Text="12" IsCorrect="true"></CheckBoxOption>
+        <CheckBoxOption Text="4" IsCorrect="false"></CheckBoxOption>
+        <CheckBoxOption Text="1" IsCorrect="false"></CheckBoxOption>
+    </MultipleChoiceQuestion>
+    <MudText Class="pt-4">Unfortunately, it's not always that easy. C# and many other programming languages give us the
+        option to alter the order of operations using parentheses. At first this may feel confusing but it gives us
+        extreme versatility when designing math operations for our program.</MudText>
+
+    <MudText Class="pt-4">Let's look at the same example from above but this time I put parentheses to change the order
+        of operations!</MudText>
+    <CodeBlock Filename="Math/OrderOfOperationsWithParentheses.cs" />
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="What is the value of b?"
+        Explanation="Because of the parentheses we must do complete the operations (4 + 4) and (1 * 2) first. Then we do the final operation of (8 / 2) as a result to get 4 as our answer.">
+        <CheckBoxOption Text="6" IsCorrect="false"></CheckBoxOption>
+        <CheckBoxOption Text="12" IsCorrect="false"></CheckBoxOption>
+        <CheckBoxOption Text="4" IsCorrect="true"></CheckBoxOption>
+        <CheckBoxOption Text="1" IsCorrect="false"></CheckBoxOption>
+    </MultipleChoiceQuestion>
+
+</Section>
+<Section Title="Compound Assignment Operators">
+    <MudText> Compound assignment operators are a combination of an operator and an equal sign! These act as shortcuts
+        that change a variable
+        by using a math operation.
+    </MudText>
+    <Example Title="Compounding operators">
+        Instead of saying (j = j + 9;), you can change a variable by saying (j +=9;) The same applies for the other
+        operators.
+    </Example>
+    <MudText Class="pa-4">Let's try an example!</MudText>
+    <CodeBlock Filename="Math/PlusEquals.cs"></CodeBlock>
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="What is the value of j?"
+        Explanation="10 is the correct answer because the variable j is initially declared as 6, but is changed to 10 because 6 + 4 = 10">
+        <CheckBoxOption Text="10" IsCorrect="true" />
+        <CheckBoxOption Text="6" IsCorrect="false" />
+        <CheckBoxOption Text="4" IsCorrect="false" />
+        <CheckBoxOption Text="2" IsCorrect="false" />
+    </MultipleChoiceQuestion>
+</Section>
+<Section Title="More about Division">
+    <MudText>When dividing one integer by another integer(a.k.a. "integer divison") the remainder of the operation is
+        ignored. Here's an example!</MudText>
+    <CodeBlock Filename="Math/IntegerDivision.cs" ReplIt="cwarren5701/IntegerDivision" />
+    <MudText>We know that 50 / 7 would be 7 with a remainder of 1 but integer division ignores that remainder.</MudText>
+    <MudText Class="pt-4">Now, let's see what happens when we divide two floating-point numbers.</MudText>
+    <CodeBlock Filename="Math/DoubleDivision.cs" ReplIt="cwarren5701/DoubleDivision" />
+    <Questions Title="Use your knowledge!">
+        <Message></Message>
+        <ChildContent>
+            <Question Text="What's the difference between integer and floating-point division?">
+            </Question>
+        </ChildContent>
+    </Questions>
+    <ExplanationPanel>As we see in the example, double division results in an more exact number without ignoring the
+        remainder.</ExplanationPanel>
+</Section>
+
+<Section Title="Other Math Operators">
+    <MudText>In addition to the normal operators, you can use "Abs" for the absolute value, "Pow" and "Sqrt" for the
+        power and square root of a number,
+        and the trig functions "Sin", "Cos", and "Tan"! </MudText>
+    <Note>You will not use these very often, but they may be useful in certain situations!</Note>
+    <CodeBlock Filename="Math/OtherMathOperators.cs" ReplIt="joshuaJoshJosh1/otherMathOperators" />
+</Section>
