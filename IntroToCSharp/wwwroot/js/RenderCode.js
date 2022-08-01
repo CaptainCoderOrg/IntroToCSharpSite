@@ -16,6 +16,9 @@ function RenderCode(id, content) {
  */
 function HighlightCode(id) {
     const el = document.getElementById(id);
-    // el.style.visibility = "hidden";
+    const raw = document.getElementById(`${id}-raw`);
+    // Blazor adds in a <!--!--> to the begining of the element 
+    // so trim wasn't working properly. We remove it first then trim.
+    el.innerHTML = raw.innerHTML.replace("<!--!-->", "").trim();
     hljs.highlightElement(el);
 }
