@@ -1,8 +1,17 @@
+
 @inject NavigationManager NavigationManager
 
-<MudPaper Class="pa-3 d-flex align-content-center" Style="@GetStyle()">
+    <MudPaper Class="pa-3 d-flex align-content-center" Style="@GetStyle()">
+
+@if(IsMultiSelect) {
     <MudCheckBox Disabled="@IsSubmitted" Color="Color.Dark" @bind-Checked="@IsChecked" Label="@Text"></MudCheckBox>
+} else {
+    <MudRadio Disabled="@IsSubmitted" Option="@Text" Color="Color.Primary" UnCheckedColor="Color.Default">@Text</MudRadio>
+}
 </MudPaper>
+
+
+
 @code {
     [Parameter]
     public string Text { get; set; }
@@ -10,6 +19,8 @@
     public bool IsCorrect { get; set; }
     [Parameter]
     public bool IsChecked { get; set; } = false;
+    [Parameter]
+    public bool IsMultiSelect {get; set; } = false;
     public bool IsSubmitted { get; set; } = false;
     public bool IsSubmissionCorrect => (this.IsChecked && this.IsCorrect) || (!this.IsChecked && !this.IsCorrect);
 
