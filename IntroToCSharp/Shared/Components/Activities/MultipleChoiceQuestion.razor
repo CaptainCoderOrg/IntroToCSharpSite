@@ -13,28 +13,31 @@
 }
 else
 {
-    
-        @if (_isWrong)
+
+    @if (_isWrong)
+    {
+        <MudText Class="mt-4">Your answer is incorrect.</MudText>
+        <MudButton Class="mt-4" OnClick="@Reset" Variant="Variant.Filled" Color="Color.Error">Try Again</MudButton>
+        <MudButton Class="mt-4" OnClick="@ShowAnswer" Variant="Variant.Filled" Color="Color.Warning">Show Answer</MudButton>
+    }
+    else
+    {
+        @if (!Explanation.Equals(""))
         {
-            <MudText Class="mt-4">Your answer is incorrect.</MudText>
-            <MudButton Class="mt-4" OnClick="@Reset" Variant="Variant.Filled" Color="Color.Error">Try Again</MudButton>
-            <MudButton Class="mt-4" OnClick="@ShowAnswer" Variant="Variant.Filled" Color="Color.Warning">Show Answer</MudButton>
+        <MudExpansionPanels Class="mt-4">
+            <MudExpansionPanel Class="pl-4 pr-4" Style="@ExplanationStyle">
+                <TitleContent>
+                    <MudText Typo="Typo.h5">Explanation</MudText>
+                </TitleContent>
+                <ChildContent>
+                    <MudText Class="mt-4 pb-4">@Explanation</MudText>
+                </ChildContent>
+            </MudExpansionPanel>
+        </MudExpansionPanels>
         }
-        else
-        {
-            <MudExpansionPanels Class="mt-4">
-                <MudExpansionPanel Class="pl-4 pr-4" Style="@ExplanationStyle">
-                    <TitleContent>
-                        <MudText Typo="Typo.h5">Explanation</MudText>
-                    </TitleContent>
-                    <ChildContent>
-                        <MudText Class="mt-4 pb-4">@Explanation</MudText>
-                    </ChildContent>
-                </MudExpansionPanel>
-            </MudExpansionPanels>
-            
-        }
-    
+
+    }
+
 }
 
 
