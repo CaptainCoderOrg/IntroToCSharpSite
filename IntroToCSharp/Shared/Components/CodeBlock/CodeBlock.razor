@@ -5,6 +5,7 @@
     <MudPaper Style="overflow:auto;">
         <pre class="@GetAllowCopy()">
             <code id="@ID" class="language-@Language code-block"></code>
+            <code id="@($"{ID}-raw")" class="language-@Language code-block" style="visible:hidden">@ChildContent</code>
         </pre>
     </MudPaper>
     @if (ReplIt != null)

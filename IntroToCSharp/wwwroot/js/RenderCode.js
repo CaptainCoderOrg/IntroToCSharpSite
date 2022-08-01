@@ -9,3 +9,13 @@ function RenderCode(id, content) {
     el.innerHTML = content;
     hljs.highlightElement(el);
 }
+
+/**
+ * Given an id to an element and source code to highlight
+ * sets uses highlight.js to highlight the element.
+ */
+function HighlightCode(id) {
+    const el = document.getElementById(id);
+    // el.style.visibility = "hidden";
+    hljs.highlightElement(el);
+}
