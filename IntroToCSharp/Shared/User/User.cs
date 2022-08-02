@@ -1,3 +1,4 @@
+using CaptainCoder;
 using System.Text.Json;
 /// <summary>
 /// A User contains information about the current user of the application
@@ -40,6 +41,7 @@ public class User
     /// </summary>
     public DataReference<string>? ProjectData;
     public DataReference<string>? DefaultProject;
+    public DataReference<UserData>? UserData;
     private Dictionary<string, string>? _projects;
 
     public Dictionary<string, string> Projects

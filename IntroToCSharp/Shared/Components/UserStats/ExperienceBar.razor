@@ -1,0 +1,11 @@
+@import CaptainCoder.UserData;
+
+<MudElement Class="mr-6" Style="width:100px">
+    <MudText Class="pa-0 ma-0" Style="font-size:10px; text-align:center;"> @Data.XP / @Data.NextLevelXP</MudText>
+    <MudProgressLinear Color="Color.Success" Value="@Percent" />
+</MudElement>
+
+@code {
+    public UserData Data { get; set; } = new UserData();
+    public int Percent => (int)(((double)Data.XP / Data.NextLevelXP) * 100);
+}
