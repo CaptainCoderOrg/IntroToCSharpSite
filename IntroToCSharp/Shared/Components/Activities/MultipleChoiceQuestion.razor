@@ -52,10 +52,7 @@ else
     public RenderFragment ChildContent { get; set; } = null!;
     [Parameter]
     public string Explanation { get; set; } = "";
-<<<<<<< HEAD
-=======
     public string SelectedOption { get; set; }
->>>>>>> develop
     private bool _isSubmitted = false;
     private bool _isWrong = false;
     private int attempts = 0;
@@ -68,13 +65,10 @@ else
     {
         this.attempts++;
         this._isSubmitted = true;
-<<<<<<< HEAD
-=======
         if (!IsMultiSelect)
         {
             this._options.ForEach(option => option.IsChecked = this.SelectedOption == option.Text);
         }
->>>>>>> develop
         _isWrong = this._options.Where(option => !option.CheckAnswer()).Count() > 0;
         this.UpdateAndSave();
     }
@@ -102,12 +96,5 @@ else
     public void UpdateAndSave()
     {
         this._options.ForEach(option => option.UpdateAndSave());
-<<<<<<< HEAD
-        @* UserService.Service.UpdateQuestionAnswer *@
     }
-
-
-=======
-    }
->>>>>>> develop
 }
