@@ -1,7 +1,7 @@
 @using IntroToCSharp.Shared.Components.ReplIt
 
 <MudPaper MaxHeight="@MaxHeight" Class="d-flex flex-column flex-0 gap-1 my-2">
-
+    <div id="@($"{ID}-raw")" style="display:none">@ChildContent</div>
     <MudPaper Style="overflow:auto;">
         <pre class="@GetAllowCopy()">
             <code id="@ID" class="language-@Language code-block"></code>

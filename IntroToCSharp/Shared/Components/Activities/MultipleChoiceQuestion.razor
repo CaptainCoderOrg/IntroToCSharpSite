@@ -1,11 +1,14 @@
 @inject NavigationManager NavigationManager
 
-@Question
-<MudStack>
-    <CascadingValue Value="@this">
-        @ChildContent
-    </CascadingValue>
-</MudStack>
+<MudPaper Class="mt-4 pa-4" Elevation="5">
+<MudText Typo="Typo.h6">@Question</MudText>
+<MudRadioGroup @bind-SelectedOption="@SelectedOption">
+    <MudStack Class="mt-4">
+        <CascadingValue Value="@this">
+            @ChildContent
+        </CascadingValue>
+    </MudStack>
+</MudRadioGroup>
 
 @if (!_isSubmitted)
 {
@@ -13,31 +16,32 @@
 }
 else
 {
-    
-        @if (_isWrong)
+    @if (_isWrong)
+    {
+        <MudText Class="mt-4">Your answer is incorrect.</MudText>
+        <MudButton Class="mt-4" OnClick="@Reset" Variant="Variant.Filled" Color="Color.Error">Try Again</MudButton>
+        <MudButton Class="mt-4" OnClick="@ShowAnswer" Variant="Variant.Filled" Color="Color.Warning">Show Answer</MudButton>
+    }
+    else
+    {
+        @if (!Explanation.Equals(""))
         {
-            <MudText Class="mt-4">Your answer is incorrect.</MudText>
-            <MudButton Class="mt-4" OnClick="@Reset" Variant="Variant.Filled" Color="Color.Error">Try Again</MudButton>
-            <MudButton Class="mt-4" OnClick="@ShowAnswer" Variant="Variant.Filled" Color="Color.Warning">Show Answer</MudButton>
+        <MudExpansionPanels Class="mt-4">
+            <MudExpansionPanel Class="pl-4 pr-4" Style="@ExplanationStyle">
+                <TitleContent>
+                    <MudText Typo="Typo.h5">Explanation</MudText>
+                </TitleContent>
+                <ChildContent>
+                    <MudText Class="mt-4 pb-4">@Explanation</MudText>
+                </ChildContent>
+            </MudExpansionPanel>
+        </MudExpansionPanels>
         }
-        else
-        {
-            <MudExpansionPanels Class="mt-4">
-                <MudExpansionPanel Class="pl-4 pr-4" Style="@ExplanationStyle">
-                    <TitleContent>
-                        <MudText Typo="Typo.h5">Explanation</MudText>
-                    </TitleContent>
-                    <ChildContent>
-                        <MudText Class="mt-4 pb-4">@Explanation</MudText>
-                    </ChildContent>
-                </MudExpansionPanel>
-            </MudExpansionPanels>
-            
-        }
-    
+
+    }
+
 }
-
-
+</MudPaper>
 
 @code {
     [Parameter]
@@ -48,6 +52,10 @@ else
     public RenderFragment ChildContent { get; set; } = null!;
     [Parameter]
     public string Explanation { get; set; } = "";
+<<<<<<< HEAD
+=======
+    public string SelectedOption { get; set; }
+>>>>>>> develop
     private bool _isSubmitted = false;
     private bool _isWrong = false;
     private int attempts = 0;
@@ -60,6 +68,13 @@ else
     {
         this.attempts++;
         this._isSubmitted = true;
+<<<<<<< HEAD
+=======
+        if (!IsMultiSelect)
+        {
+            this._options.ForEach(option => option.IsChecked = this.SelectedOption == option.Text);
+        }
+>>>>>>> develop
         _isWrong = this._options.Where(option => !option.CheckAnswer()).Count() > 0;
         this.UpdateAndSave();
     }
@@ -87,8 +102,12 @@ else
     public void UpdateAndSave()
     {
         this._options.ForEach(option => option.UpdateAndSave());
+<<<<<<< HEAD
         @* UserService.Service.UpdateQuestionAnswer *@
     }
 
 
+=======
+    }
+>>>>>>> develop
 }
