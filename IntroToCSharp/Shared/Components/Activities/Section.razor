@@ -3,7 +3,11 @@
 
 <MudExpansionPanel @bind-IsExpanded="@IsExpanded" onclick="@(new Action(OnExpand))">
     <TitleContent>
-        <h2 class="@_theme pa-2">@Title</h2>
+        @if(!IsSubSection) {
+            <h2 class="@_theme pa-2">@Title</h2>
+        } else {
+            <h3 class="@_theme pa-2">@Title</h3>
+        }
     </TitleContent>
     <ChildContent>
         <MudText Class="px-2 ma-0">@ChildContent</MudText>
@@ -11,6 +15,8 @@
 </MudExpansionPanel>
 @code
 {
+    [Parameter]
+    public bool IsSubSection { get; set; } = false;
     [Parameter, EditorRequired]
     public string Title {get; set;} = null!;
     [Parameter]
