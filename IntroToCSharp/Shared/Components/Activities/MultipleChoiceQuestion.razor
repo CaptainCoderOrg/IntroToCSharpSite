@@ -1,0 +1,100 @@
+@inject NavigationManager NavigationManager
+
+<MudPaper Class="mt-4 pa-4" Elevation="5">
+<MudText Typo="Typo.h6">@Question</MudText>
+<MudRadioGroup @bind-SelectedOption="@SelectedOption">
+    <MudStack Class="mt-4">
+        <CascadingValue Value="@this">
+            @ChildContent
+        </CascadingValue>
+    </MudStack>
+</MudRadioGroup>
+
+@if (!_isSubmitted)
+{
+    <MudButton Class="mt-4" OnClick="@Submit" Variant="Variant.Filled" Color="Color.Success">Submit</MudButton>
+}
+else
+{
+    @if (_isWrong)
+    {
+        <MudText Class="mt-4">Your answer is incorrect.</MudText>
+        <MudButton Class="mt-4" OnClick="@Reset" Variant="Variant.Filled" Color="Color.Error">Try Again</MudButton>
+        <MudButton Class="mt-4" OnClick="@ShowAnswer" Variant="Variant.Filled" Color="Color.Warning">Show Answer</MudButton>
+    }
+    else
+    {
+        @if (!Explanation.Equals(""))
+        {
+        <MudExpansionPanels Class="mt-4">
+            <MudExpansionPanel Class="pl-4 pr-4" Style="@ExplanationStyle">
+                <TitleContent>
+                    <MudText Typo="Typo.h5">Explanation</MudText>
+                </TitleContent>
+                <ChildContent>
+                    <MudText Class="mt-4 pb-4">@Explanation</MudText>
+                </ChildContent>
+            </MudExpansionPanel>
+        </MudExpansionPanels>
+        }
+
+    }
+
+}
+</MudPaper>
+
+@code {
+    [Parameter]
+    public bool IsMultiSelect { get; set; } = false;
+    [Parameter]
+    public string Question { get; set; } = "Undefined";
+    [Parameter]
+    public RenderFragment ChildContent { get; set; } = null!;
+    [Parameter]
+    public string Explanation { get; set; } = "";
+    public string SelectedOption { get; set; }
+    private bool _isSubmitted = false;
+    private bool _isWrong = false;
+    private int attempts = 0;
+
+    private string ExplanationStyle = $"background: #ffffe3; color: {Themes.s_CSharpTheme.Palette.Black.ToString()};";
+
+    private List<CheckBoxOption> _options = new List<CheckBoxOption>();
+    private string Path => $"{NavigationManager.GetRoute()}/questions/{Question}";
+    public void Submit()
+    {
+        this.attempts++;
+        this._isSubmitted = true;
+        if (!IsMultiSelect)
+        {
+            this._options.ForEach(option => option.IsChecked = this.SelectedOption == option.Text);
+        }
+        _isWrong = this._options.Where(option => !option.CheckAnswer()).Count() > 0;
+        this.UpdateAndSave();
+    }
+
+    public void AddOption(CheckBoxOption child) => this._options.Add(child);
+    public string GetCorrectAnswers()
+    {
+        IEnumerable<string> correctAnswers = this._options.Where(option => option.IsCorrect).Select(option => option.Text);
+        return string.Join(", ", correctAnswers);
+    }
+
+    public void Reset()
+    {
+        this._isSubmitted = false;
+        this._options.ForEach(option => option.Reset());
+    }
+
+    public void ShowAnswer()
+    {
+        this._options.ForEach(option => option.IsChecked = option.IsCorrect);
+        this.Submit();
+        this.attempts = -1;
+    }
+
+    public void UpdateAndSave()
+    {
+        this._options.ForEach(option => option.UpdateAndSave());
+    }
+}
