@@ -18,7 +18,6 @@
   <ItemGroup>
 
     <Compile Remove="ReplIt\**" />
-    <Content Remove="wwwroot\examples\**" />
     <Compile Remove="wwwroot\examples\**" />
   </ItemGroup>
 
