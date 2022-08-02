@@ -36,9 +36,9 @@
     {
         if (userData.IsLoggedIn)
         {
-            if(UserService.Service.TryGetQuestionAnswer(Path, out DataReference<string> answer)){
-                answer.DataChanged += val =>
-                {
+            if(UserService.Service.TryGetQuestionAnswer(Path, out DataReference<string> answer))
+            {
+                answer.DataChanged += val => {
                     this.IsChecked = bool.Parse(val!);
                     StateHasChanged();
                 };
@@ -56,8 +56,7 @@
         if (!this.IsSubmitted || !this.IsChecked) return string.Empty;
 
         // Incorrect answers should highlight red
-        if (this.IsCorrect) return $"background: {Themes.s_CSharpTheme.Palette.SuccessLighten.ToString()}; color: {Themes.s_CSharpTheme.Palette.Black.ToString()}";;
-        // if (!this.IsCorrect)
+        if (this.IsCorrect) return $"background: {Themes.s_CSharpTheme.Palette.SuccessLighten.ToString()}; color: {Themes.s_CSharpTheme.Palette.Black.ToString()}";
         return $"background: {Themes.s_CSharpTheme.Palette.ErrorLighten.ToString()}; color: {Themes.s_CSharpTheme.Palette.White.ToString()}";
 
     }
