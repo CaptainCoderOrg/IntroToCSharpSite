@@ -1,16 +1,13 @@
-
 @inject NavigationManager NavigationManager
 
-    <MudPaper Class="pa-3 d-flex align-content-center" Style="@GetStyle()">
+    <MudElement Class="pa-0 d-flex align-content-center rounded" Style="@GetStyle()">
 
-@if(IsMultiSelect) {
+@if(this.Parent.IsMultiSelect) {
     <MudCheckBox Disabled="@IsSubmitted" Color="Color.Dark" @bind-Checked="@IsChecked" Label="@Text"></MudCheckBox>
 } else {
     <MudRadio Disabled="@IsSubmitted" Option="@Text" Color="Color.Primary" UnCheckedColor="Color.Default">@Text</MudRadio>
 }
-</MudPaper>
-
-
+    </MudElement>
 
 @code {
     [Parameter]
@@ -19,8 +16,6 @@
     public bool IsCorrect { get; set; }
     [Parameter]
     public bool IsChecked { get; set; } = false;
-    [Parameter]
-    public bool IsMultiSelect {get; set; } = false;
     public bool IsSubmitted { get; set; } = false;
     public bool IsSubmissionCorrect => (this.IsChecked && this.IsCorrect) || (!this.IsChecked && !this.IsCorrect);
 
@@ -62,7 +57,7 @@
 
         // Incorrect answers should highlight red
         if (this.IsCorrect) return $"background: {Themes.s_CSharpTheme.Palette.SuccessLighten.ToString()}; color: {Themes.s_CSharpTheme.Palette.Black.ToString()}";;
-        // if (!this.IsCorrect) 
+        // if (!this.IsCorrect)
         return $"background: {Themes.s_CSharpTheme.Palette.ErrorLighten.ToString()}; color: {Themes.s_CSharpTheme.Palette.White.ToString()}";
 
     }
@@ -72,7 +67,6 @@
         this.IsChecked = false;
         this.IsSubmitted = false;
     }
-
     public bool CheckAnswer()
     {
         this.IsSubmitted = true;

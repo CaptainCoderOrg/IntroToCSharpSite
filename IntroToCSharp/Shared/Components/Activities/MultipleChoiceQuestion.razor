@@ -1,12 +1,13 @@
 @inject NavigationManager NavigationManager
 
-@Question
+<MudPaper Class="mt-4 pa-4" Elevation="5">
+<MudText Typo="Typo.h6">@Question</MudText>
 <MudRadioGroup @bind-SelectedOption="@SelectedOption">
-<MudStack>
-    <CascadingValue Value="@this">
-        @ChildContent
-    </CascadingValue>
-</MudStack>
+    <MudStack Class="mt-4">
+        <CascadingValue Value="@this">
+            @ChildContent
+        </CascadingValue>
+    </MudStack>
 </MudRadioGroup>
 
 @if (!_isSubmitted)
@@ -40,8 +41,7 @@ else
     }
 
 }
-
-
+</MudPaper>
 
 @code {
     [Parameter]
@@ -65,6 +65,10 @@ else
     {
         this.attempts++;
         this._isSubmitted = true;
+        if (!IsMultiSelect)
+        {
+            this._options.ForEach(option => option.IsChecked = this.SelectedOption == option.Text);
+        }
         _isWrong = this._options.Where(option => !option.CheckAnswer()).Count() > 0;
         this.UpdateAndSave();
     }
@@ -92,8 +96,5 @@ else
     public void UpdateAndSave()
     {
         this._options.ForEach(option => option.UpdateAndSave());
-        @* UserService.Service.UpdateQuestionAnswer *@
     }
-
-
 }
