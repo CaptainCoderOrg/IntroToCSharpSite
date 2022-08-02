@@ -16,6 +16,7 @@
 
   <!-- Ignore ReplIt directory as it contains C# projects within -->
   <ItemGroup>
+
     <Compile Remove="ReplIt\**" />
     <Compile Remove="wwwroot\examples\**" />
   </ItemGroup>
