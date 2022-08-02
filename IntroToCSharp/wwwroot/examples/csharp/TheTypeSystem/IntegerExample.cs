@@ -1,1 +1,0 @@
-int childAge = 8;

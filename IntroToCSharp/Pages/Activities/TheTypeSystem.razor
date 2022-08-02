@@ -17,7 +17,9 @@
     </MudText>
     <Note>You do not need to memorize this table but it is good to be aware.</Note>
     <DataTable Headers="@intHeaders" Rows="@intRows"></DataTable>
-    <CodeBlock Filename="TheTypeSystem/IntegerExample.cs" />
+    <CodeBlock>
+        int childAge = 8;
+    </CodeBlock>
     <Questions Title="Let's Practice!">
         <Message>
             Above is an example of declaring an int variable. Seems simple, right? Well, sometimes it can take some time
@@ -44,7 +46,21 @@
     <MudText>Float and double values are not exactly precise, they are simply estimations of those defined values.
         But a decimal value is precise. You will see this in the below example.</MudText>
 
-    <CodeBlock Filename="TheTypeSystem/FloatPointExample.cs" ReplIt="JoshuaJoshJosh1/FloatPointExample" />
+    <CodeBlock ReplIt="JoshuaJoshJosh1/FloatPointExample">
+    using System;
+class FloatingPointNumbers
+{
+	public static void Main()
+	{
+		 float floatNumber = 1.5f;
+ 		 double doubleNumber = 1.5;
+   		 decimal decimalNumber = 1.5m;
+  		 Console.WriteLine(floatNumber - 1.0f);
+   		 Console.WriteLine(doubleNumber - 1);
+   		 Console.WriteLine(decimalNumber - 1.0m);
+	}
+}
+    </CodeBlock>
     <MudText>The decimal value was able to perform the operation and print the exact value but both the float and double
         were just a fraction off from the correct value.</MudText>
 
@@ -65,7 +81,10 @@
         symbols. Strings are often used in programs for names, descriptions, or large bodies of text.</MudText>
 
     <MudText>A string is made by placing text inside double quotes like this:</MudText>
-    <CodeBlock Filename="TheTypeSystem/Stringexample.cs" />
+    <CodeBlock>
+        string playerName = "Jimmy";
+string playerDescription = "Jimmy is tall and very fast.";
+    </CodeBlock>
     <Questions Title="Let's Practice!">
         <Message>
             Use the above example of declaring strings to complete the following practice.
@@ -82,7 +101,13 @@
         that can be represented by a char type. </MudText>
 
     <MudText>A char, unlike a string, is made by placing the character inside of single quotes like this:</MudText>
-    <CodeBlock Filename="TheTypeSystem/CharExample.cs" />
+    <CodeBlock>
+        using System;
+class CharExample
+{
+    char someLetter = 'j';
+}
+    </CodeBlock>
     <Questions Title="Let's Practice!">
         <Message>
             Use the above example of declaring a character to complete the following practice.
