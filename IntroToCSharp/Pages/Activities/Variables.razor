@@ -1,4 +1,4 @@
-dot@inherits CaptainCoder.Page
+@inherits CaptainCoder.Page
 @page "/activities/variables"
 
 <MudText Typo="Typo.h4" Style="font-weight:bold">Variables</MudText>
@@ -26,10 +26,11 @@ dot@inherits CaptainCoder.Page
         same is true for a variable. It has an address that allows us to access and alter its data.
     </Example>
 </Section>
-
 <Section Title="Recipe For Declaring a Variable">
     <MudText>Below is an example of how a programmer might declare a variable to store a players score in C#.</MudText>
-    <CodeBlock Filename="Variables/DeclaringAVariable.cs" />
+    <CodeBlock>
+        int playerScore;
+    </CodeBlock>
     <MudList Clickable="true">
         <MudListItem Icon="@Icons.Material.Filled.Category" IconColor="Color.Warning" Text="Type">
             <NestedList>
@@ -67,9 +68,15 @@ dot@inherits CaptainCoder.Page
         syntax:
         <Code>int playerScore = 0;</Code>
     </Note>
-    <CodeBlock Filename="Variables/InitializingVariables.cs" />
+    <CodeBlock>
+        int playerScore;
+playerScore = 0; // Initializing is the first time we store data.
+playerScore = 4; // This is "updating a variable because we are replacing the data that is already there.
+    </CodeBlock>
     <MudText>Can be written as:</MudText>
-    <CodeBlock Filename="Variables/SpecialSyntax.cs" />
+    <CodeBlock>
+        int playerScore = 4; // This is called initializing
+    </CodeBlock>
     <HorizontalDivider />
     <MudText>Now, let's look at what is one the right-hand side of the <Code>=</Code>.</MudText>
     <MudList Clickable="true">
@@ -88,13 +95,17 @@ dot@inherits CaptainCoder.Page
 </Section>
 
 <Section Title="Recipe for Reading Data">
-
-    <CodeBlock Filename="Variables/Test.cs" ReplIt="JoshuaJoshJosh1/VariablesExample" />
+    <CodeBlock ReplIt="JoshuaJoshJosh1/VariablesExample">
+    string name = "Bob";
+Console.WriteLine(name + " is learning C#!");
+    </CodeBlock>
     <MudText>
         To read data, you simply state the variable name. This tells the computer to "substitute" the value stored by
         that variable into the code. This process is called "evaluation". For example:
     </MudText>
-    <CodeBlock Filename="Variables/ReadingEx.cs" />
+    <CodeBlock>
+        int z = x + y;
+    </CodeBlock>
     <Note>
         For proper formatting, variables are usually are placed at the very beginning of the program
     </Note>
@@ -103,18 +114,24 @@ dot@inherits CaptainCoder.Page
         is. Let's assume that x stores the number 5 and y stores the number 7. During evaluation,
         the computer will substitute those values in like this:
     </MudText>
-    <CodeBlock Filename="Variables/ReadingEx2.cs" />
+    <CodeBlock>
+        int z = 5 + 7;
+    </CodeBlock>
     <MudText>
         It will then add them together:
     </MudText>
-    <CodeBlock Filename="Variables/ReadingEx3.cs" />
+    <CodeBlock>
+        int z = 12;
+    </CodeBlock>
     <MudText>
         And finally, it will store the value 12 in the variable z.
     </MudText>
 </Section>
 
 <Section Title="Using Variables">
-    <CodeBlock Filename="Variables/UsingVariablesEx.cs" />
+    <CodeBlock>
+        string playerName = "Bob the Slob";
+    </CodeBlock>
     <MudText>
         Answer some questions about the example above!
     </MudText>
@@ -144,7 +161,7 @@ dot@inherits CaptainCoder.Page
 </Section>
 
 <Section Title="Naming Variables">
-    <SubSection Title="The Rules">
+    <Section IsSubSection="true" Title="The Rules">
         <MudText>When programming, variables are essential for managing complexity. They are used to create labels that
             the programmer can use to store, update, and read data. You have a lot of flexibility in what you name your
             variables but there are a few restrictions. Below are the rules for naming a variable in C#:</MudText>
@@ -161,8 +178,8 @@ dot@inherits CaptainCoder.Page
             <GridSquare>Variables cannot have the same name as a keyword like <b>"string"</b>.
             </GridSquare>
         </InfoGrid>
-    </SubSection>
-    <SubSection Title="Coding Guidlines for Naming Variables">
+    </Section>
+    <Section IsSubSection="true" Title="Coding Guidlines for Naming Variables">
         <MudText>
             The rules above are enforced by the C# compiler. That is to say, you cannot violate them. This still leaves
             a lot of room for naming your variables in ways that can be confusing. Remember, as a programmer, your job
@@ -182,7 +199,7 @@ dot@inherits CaptainCoder.Page
         </InfoGrid>
         <MudText Class="pt-6">All of these guidelines are NOT required when naming variables; however, they make your
             code easier to follow and understand when referencing it.</MudText>
-    </SubSection>
+    </Section>
 </Section>
 
 <Section Title="Knowledge Check!">
@@ -195,9 +212,7 @@ dot@inherits CaptainCoder.Page
         <CheckBoxOption Text="A Family" IsCorrect="false" />
 
     </MultipleChoiceQuestion>
-
     <MudText Class="mt-6"></MudText>
-
     <MultipleChoiceQuestion IsMultiSelect="false"
         Question="Which of the following variable names follow the naming guidelines?"
         Explanation="numCounter uses the appropriate camelcase and is a descriptive phrase whereas the other options do not follow the guidelines.">
@@ -207,7 +222,6 @@ dot@inherits CaptainCoder.Page
         <CheckBoxOption Text="7" IsCorrect="false" />
     </MultipleChoiceQuestion>
 </Section>
-
 
 @code {
     public bool _isOpen = true;

@@ -1,1 +1,0 @@
-int playerScore = 4; // This is called initializing
