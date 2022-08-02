@@ -33,6 +33,9 @@ namespace IntroToCSharp.Shared.Components.CodeBlock
 
         [Parameter]
         public string? ReplIt { get; set; } = null;
+        [Parameter]
+        public RenderFragment ChildContent { get; set; } = null!;
+
         private bool IsReplItOpen { get; set; } = false;
         private string ReplItStyle => ReplIt != null && IsReplItOpen ? "min-height:250px; overflow:hidden;" : "display:none";
         private string PlayButtonStyle => ReplIt != null && !IsReplItOpen ? "" : "display:none";
@@ -47,7 +50,11 @@ namespace IntroToCSharp.Shared.Components.CodeBlock
 
         protected override async void OnAfterRender(bool firstRender)
         {
-            await JS.InvokeVoidAsync("RenderCode", ID, Output);
+            if (ChildContent == null) {
+                await JS.InvokeVoidAsync("RenderCode", ID, Output);
+            } else {
+                await JS.InvokeVoidAsync("HighlightCode", ID);
+            }
         }
 
         protected override async Task OnInitializedAsync()

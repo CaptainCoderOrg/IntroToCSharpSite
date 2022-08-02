@@ -1,0 +1,12 @@
+<MudItem Class="pa-4">
+    <MudPaper 
+    Elevation="20" 
+    Class="border-solid border-2 mud-border-primary rounded-xl d-flex" 
+    Height="150px" Width="300px">
+        <MudElement Class="pl-5 pr-5" Style="margin:auto">@ChildContent</MudElement></MudPaper>
+</MudItem>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent {get; set;} = null!;
+}
