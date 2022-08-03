@@ -13,7 +13,7 @@
         information. To help manage this complexity, we take use variables to give a label to those parts of memory.
     </MudText>
     <Note>
-        Program memory is volatile. That is, when you start a program, the computer has no "memories". Throughout the
+        Program memory is volatile. When you start a program, the computer has no "memories". Throughout the
         program, it gains memories and when the program exits, it completely forgets everything.
     </Note>
 </Section>
@@ -31,6 +31,8 @@
     <CodeBlock>
         int playerScore;
     </CodeBlock>
+    <HorizontalDivider/>
+    <MudText><b>The Recipe:</b></MudText>
     <MudList Clickable="true">
         <MudListItem Icon="@Icons.Material.Filled.Category" IconColor="Color.Warning" Text="Type">
             <NestedList>
@@ -53,7 +55,7 @@
                 <MudListItem>
                     <MudText>
                         This is the "label" that allows us to access the variable later. In the example above, the name
-                        is playerScore.
+                        is "playerScore".
                     </MudText>
                 </MudListItem>
             </NestedList>
@@ -106,9 +108,6 @@ Console.WriteLine(name + " is learning C#!");
     <CodeBlock>
         int z = x + y;
     </CodeBlock>
-    <Note>
-        For proper formatting, variables are usually are placed at the very beginning of the program
-    </Note>
     <MudText>
         When the computer tried to run the code above, it must first "evaluate" x and y before it can determine what z
         is. Let's assume that x stores the number 5 and y stores the number 7. During evaluation,
@@ -167,15 +166,15 @@ Console.WriteLine(name + " is learning C#!");
             variables but there are a few restrictions. Below are the rules for naming a variable in C#:</MudText>
         <InfoGrid>
             <GridSquare>Variable names must start with a
-                <b>letter</b>(a-z)
-                or <b>underscore</b>(_).
+                <b>letter</b> (a-z)
+                or <b>underscore</b> (_).
             </GridSquare>
-            <GridSquare>You can't use numeric digits <b>0 through 9</b> to start your name.
+            <GridSquare>You can't use numeric digits <b>0 through 9</b> to start a variable name.
             </GridSquare>
             <GridSquare>Many <b>symbols</b> and <b>blank spaces</b> will cause
                 the computer to not know where the variable ends.
             </GridSquare>
-            <GridSquare>Variables cannot have the same name as a keyword like <b>"string"</b>.
+            <GridSquare>Variables cannot have the same name as a keyword. An example of this is the word <b>"string"</b>.
             </GridSquare>
         </InfoGrid>
     </Section>
