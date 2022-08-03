@@ -1,58 +1,72 @@
 @inject NavigationManager NavigationManager
 
 <MudPaper Class="mt-4 pa-4" Elevation="5">
-<MudText Typo="Typo.h6">@Question</MudText>
-<MudRadioGroup @bind-SelectedOption="@SelectedOption">
-    <MudStack Class="mt-4">
-        <CascadingValue Value="@this">
-            @ChildContent
-        </CascadingValue>
-    </MudStack>
-</MudRadioGroup>
+    <MudText Typo="Typo.h6">@Question</MudText>
+    <MudRadioGroup @bind-SelectedOption="@SelectedOption">
+        <MudStack Class="mt-4">
+            <CascadingValue Value="@this">
+                @ChildContent
+            </CascadingValue>
+        </MudStack>
+    </MudRadioGroup>
 
-@if (!_isSubmitted)
-{
-    <MudButton Class="mt-4" OnClick="@Submit" Variant="Variant.Filled" Color="Color.Success">Submit</MudButton>
-}
-else
-{
-    @if (_isWrong)
+    @if (!_isSubmitted)
     {
-        <MudText Class="mt-4">Your answer is incorrect.</MudText>
-        <MudButton Class="mt-4" OnClick="@Reset" Variant="Variant.Filled" Color="Color.Error">Try Again</MudButton>
-        <MudButton Class="mt-4" OnClick="@ShowAnswer" Variant="Variant.Filled" Color="Color.Warning">Show Answer</MudButton>
+        <MudButton Class="mt-4" OnClick="@Submit" Variant="Variant.Filled" Color="Color.Success">Submit</MudButton>
     }
     else
     {
-        @if (!Explanation.Equals(""))
+        @if (_isWrong)
         {
-        <MudExpansionPanels Class="mt-4">
-            <MudExpansionPanel Class="pl-4 pr-4" Style="@ExplanationStyle">
-                <TitleContent>
-                    <MudText Typo="Typo.h5">Explanation</MudText>
-                </TitleContent>
-                <ChildContent>
-                    <MudText Class="mt-4 pb-4">@Explanation</MudText>
-                </ChildContent>
-            </MudExpansionPanel>
-        </MudExpansionPanels>
+            <MudText Class="mt-4">Your answer is incorrect.</MudText>
+            <MudButton Class="mt-4" OnClick="@Reset" Variant="Variant.Filled" Color="Color.Error">Try Again</MudButton>
+            <MudButton Class="mt-4" OnClick="@ShowAnswer" Variant="Variant.Filled" Color="Color.Warning">Show Answer</MudButton>
+        }
+        else
+        {
+            @if (!Explanation.Equals(""))
+            {
+                <MudExpansionPanels Class="mt-4">
+                    <MudExpansionPanel Class="pl-4 pr-4" Style="@ExplanationStyle">
+                        <TitleContent>
+                            <MudText Typo="Typo.h5">Explanation</MudText>
+                        </TitleContent>
+                        <ChildContent>
+                            <MudText Class="mt-4 pb-4">@Explanation</MudText>
+                        </ChildContent>
+                    </MudExpansionPanel>
+                </MudExpansionPanels>
+            }
+
         }
 
     }
-
-}
 </MudPaper>
 
 @code {
+    /// <summary>
+    /// Specifies if this question uses CheckBoxes (true) or RadioButtons (false). The
+    /// default behavior is RadioButtons (false).
+    /// </summary>
+    /// <value></value>
     [Parameter]
     public bool IsMultiSelect { get; set; } = false;
+
     [Parameter]
     public string Question { get; set; } = "Undefined";
+
     [Parameter]
     public RenderFragment ChildContent { get; set; } = null!;
+
+    /// <summary>
+    /// This is the explanation that appears after the user submits the question.
+    /// If no explanation is given, no Explanation box appears after submission.
+    /// </summary>
+    /// <value></value>
     [Parameter]
     public string Explanation { get; set; } = "";
-    public string SelectedOption { get; set; }
+
+    private string SelectedOption { get; set; }
     private bool _isSubmitted = false;
     private bool _isWrong = false;
     private int attempts = 0;
@@ -61,7 +75,7 @@ else
 
     private List<CheckBoxOption> _options = new List<CheckBoxOption>();
     private string Path => $"{NavigationManager.GetRoute()}/questions/{Question}";
-    public void Submit()
+    private void Submit()
     {
         this.attempts++;
         this._isSubmitted = true;
@@ -73,27 +87,34 @@ else
         this.UpdateAndSave();
     }
 
+    /// <summary>
+    /// Adds the given CheckBoxOption to this question.
+    /// </summary>
+    /// <param name="child"></param>
     public void AddOption(CheckBoxOption child) => this._options.Add(child);
-    public string GetCorrectAnswers()
-    {
-        IEnumerable<string> correctAnswers = this._options.Where(option => option.IsCorrect).Select(option => option.Text);
-        return string.Join(", ", correctAnswers);
-    }
 
-    public void Reset()
+    /// <summary>
+    /// Resets the question to the default state.
+    /// </summary>
+    private void Reset()
     {
         this._isSubmitted = false;
         this._options.ForEach(option => option.Reset());
     }
 
-    public void ShowAnswer()
+    /// <summary>
+    /// Based on the question type, finds the correct answer(s) and resubmits the quiz.
+    /// Note: This sets the number of attempts to -1 which represents the user clicked ShowAnswer.
+    /// </summary>
+    private void ShowAnswer()
     {
         this._options.ForEach(option => option.IsChecked = option.IsCorrect);
+        this.SelectedOption = this._options.First(option => option.IsCorrect).Text;
         this.Submit();
         this.attempts = -1;
     }
 
-    public void UpdateAndSave()
+    private void UpdateAndSave()
     {
         this._options.ForEach(option => option.UpdateAndSave());
     }
