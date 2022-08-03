@@ -59,6 +59,7 @@ namespace IntroToCSharp.Shared.Components.CodeBlock
 
         protected override async Task OnInitializedAsync()
         {
+            if (ChildContent != null) return;
             string key = $"examples/{Language}/{Filename}";
             if (!s_Cache.TryGetValue(key, out string? output))
             {
