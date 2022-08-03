@@ -1,0 +1,70 @@
+@inherits CaptainCoder.Page
+@page "/activities/basic-data-types"
+
+<Section Title="Introduction">Today, we are going to learn the basics of data types. These include int, string, double,
+    boolean. These four are called "primitive" data types. You will see "primitive" data type over and over. Each of them is unique, so let's get started!</Section>
+
+<Section Title="Int">
+    <MudText><Code>int</Code> is the data type for storing whole numbers. </MudText>
+    <MultipleChoiceQuestion IsMultiSelect="false" Question="Which of the following is an int?"
+        Explanation="8 is the only whole number in this example.">
+        <CheckBoxOption Text="hello" IsCorrect="false" />
+        <CheckBoxOption Text="13.1" IsCorrect="false" />
+        <CheckBoxOption Text="1.7" IsCorrect="false" />
+        <CheckBoxOption Text="8" IsCorrect="true" />
+    </MultipleChoiceQuestion>
+    <Note Class="pa-2 mt-4">There is a whole lesson dedicated to <Code>int</Code>. Check that out <MudButton
+            Href="/activites/integers" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" Class="pa-0">
+            Here!</MudButton>
+    </Note>
+</Section>
+
+<Section Title="String">
+    <MudText>A <Code>string</Code> is any length of text that is stored in a variable. </MudText>
+    <MultipleChoiceQuestion IsMultiSelect="false" Question="Which of the following is a string?"
+        Explanation="Captain Coder is the only length of text in this example. The others are numbers.">
+        <CheckBoxOption Text="77" IsCorrect="false" />
+        <CheckBoxOption Text="Captain Coder" IsCorrect="true" />
+        <CheckBoxOption Text="200" IsCorrect="false" />
+        <CheckBoxOption Text="45.7" IsCorrect="false" />
+    </MultipleChoiceQuestion>
+    <Note Class="pa-2 mt-4">There is a whole lesson dedicated to <Code>string</Code>. Check that out <MudButton
+            Href="/activites/strings" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" Class="pa-0">
+            Here!</MudButton>
+    </Note>
+</Section>
+
+<Section Title="Double">
+    <MudText>Just like an <Code>int</Code>, a <Code>double</Code> stores numbers; however a <Code>double</Code> stores
+        decimals, not whole numbers.</MudText>
+    <Questions Title="Let's Practice!">
+        <Message>
+            Provide two examples of a double.
+        </Message>
+        <ChildContent>
+            <Question Text="What is an example of a double value?" />
+            <Question Text="What is a different example of a double value?" />
+        </ChildContent>
+    </Questions>
+    <Note Class="pa-2 mt-4">There is a whole lesson dedicated to <Code>double</Code>. Check that out <MudButton
+            Href="/activites/doubles" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" Class="pa-0">
+            Here!</MudButton>
+    </Note>
+
+</Section>
+
+
+<Section Title="Boolean">
+    <MudText>Booleans are used to define the state of something within a program as either true or false.</MudText>
+    <CodeBlock>
+        bool IsAnswerCorrect = false;
+    </CodeBlock>
+    <MudText>In this line of code, you can see the boolean "IsAnswerCorrect" being declared. The answer can only be correct or incorrect
+        (true or false) and that is why we use a boolean in this case.
+    </MudText>
+
+    <Note Class="pa-2 mt-4">There is a whole lesson dedicated to <Code>bool</Code>. Check that out <MudButton
+            Href="/activites/booleans" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" Class="pa-0">
+            Here!</MudButton>
+    </Note>
+</Section>
