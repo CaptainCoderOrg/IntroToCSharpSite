@@ -5,8 +5,8 @@
 
 <Section Title="Introduction">
     <MudText>As we learned in the <MudLink Href="/activities/variables">Variables</MudLink> lesson, each variables must
-        have a <Keyword Word="type"></Keyword> that describes its <Keyword Word="data"></Keyword>. There are <Keyword
-            Word="14"></Keyword> different types of data that programmers can use. Defining data types for our variables
+        have a <Keyword Word="type"/> that describes its <Keyword Word="data"/>. There are <Keyword
+            Word="14"/> different types of data that programmers can use. Defining data types for our variables
         allows the computer to know how to store it while our program runs.
     </MudText>
 </Section>
@@ -47,19 +47,12 @@
         But a decimal value is precise. You will see this in the below example.</MudText>
 
     <CodeBlock ReplIt="JoshuaJoshJosh1/FloatPointExample">
-    using System;
-class FloatingPointNumbers
-{
-	public static void Main()
-	{
-		 float floatNumber = 1.5f;
- 		 double doubleNumber = 1.5;
-   		 decimal decimalNumber = 1.5m;
-  		 Console.WriteLine(floatNumber - 1.0f);
-   		 Console.WriteLine(doubleNumber - 1);
-   		 Console.WriteLine(decimalNumber - 1.0m);
-	}
-}
+float floatNumber = 1.5f;
+double doubleNumber = 1.5;
+decimal decimalNumber = 1.5m;
+Console.WriteLine(floatNumber - 1.0f);
+Console.WriteLine(doubleNumber - 1);
+Console.WriteLine(decimalNumber - 1.0m);
     </CodeBlock>
     <MudText>The decimal value was able to perform the operation and print the exact value but both the float and double
         were just a fraction off from the correct value.</MudText>
@@ -102,11 +95,7 @@ string playerDescription = "Jimmy is tall and very fast.";
 
     <MudText>A char, unlike a string, is made by placing the character inside of single quotes like this:</MudText>
     <CodeBlock>
-        using System;
-class CharExample
-{
-    char someLetter = 'j';
-}
+char someLetter = 'j';
     </CodeBlock>
     <Questions Title="Let's Practice!">
         <Message>
@@ -124,11 +113,6 @@ class CharExample
             Color="Color.Primary" Size="Size.Small" Class="pa-0">Here</MudButton>
         !</Note>
 </Section>
-
-
-
-
-
 
 @code {
     string[] intHeaders = { "Name", "Number of Bytes", "Negatives?", "Minimum", "Maximum" };
