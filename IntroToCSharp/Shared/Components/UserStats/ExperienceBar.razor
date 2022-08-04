@@ -15,7 +15,7 @@
 
     private void UpdateUser(User newUser) 
     {
-        newUser.UserStatsRef.DataChanged += UpdateUserData;
+        newUser.UserStatsRef.DataChangedEvent += UpdateUserData;
     }
     private void UpdateUserData(UserStats newUserData)
     {

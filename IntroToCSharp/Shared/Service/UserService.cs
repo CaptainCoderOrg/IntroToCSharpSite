@@ -71,7 +71,7 @@ public class UserService
         UserData = new User(response);
         if (UserData.UserStatsRef != null)
         {
-            UserData.UserStatsRef.DataChanged += (userStats) => this._userStats = userStats!;
+            UserData.UserStatsRef.DataChangedEvent += (userStats) => this._userStats = userStats!;
         }
         
     }
