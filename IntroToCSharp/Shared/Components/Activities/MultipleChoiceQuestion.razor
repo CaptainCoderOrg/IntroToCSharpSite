@@ -77,13 +77,19 @@
     private string Path => $"{NavigationManager.GetRoute()}/questions/{Question}";
     private void Submit()
     {
-        this.attempts++;
+        // if the user hasn't selected "show answer", then...
+        if(this.attempts != -1 ) {
+            this.attempts++;
+        }
         this._isSubmitted = true;
         if (!IsMultiSelect)
         {
             this._options.ForEach(option => option.IsChecked = this.SelectedOption == option.Text);
         }
         _isWrong = this._options.Where(option => !option.CheckAnswer()).Count() > 0;
+        if(this.attempts < 4 && this.attempts != -1 && !_isWrong ) {
+            UserService.Service.GiveXP(30 / this.attempts);
+        } 
         this.UpdateAndSave();
     }
 
@@ -110,8 +116,9 @@
     {
         this._options.ForEach(option => option.IsChecked = option.IsCorrect);
         this.SelectedOption = this._options.First(option => option.IsCorrect).Text;
-        this.Submit();
+        // We had to move this line above so that the submit method can know when the user clicked "show answer" and then award xp accordingly. 
         this.attempts = -1;
+        this.Submit();
     }
 
     private void UpdateAndSave()
