@@ -38,7 +38,7 @@
         {
             if(UserService.Service.TryGetQuestionAnswer(Path, out DataReference<string> answer))
             {
-                answer.DataChanged += val => {
+                answer.DataChangedEvent += val => {
                     this.IsChecked = bool.Parse(val!);
                     StateHasChanged();
                 };

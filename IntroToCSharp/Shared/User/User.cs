@@ -79,9 +79,9 @@ public class User
             this.DarkMode = DataReference.Bool($"/users/{this.UID}/prefs/DarkMode", false, "Dark Mode");
             this.ProjectData = DataReference.String($"/users/{this.UID}/projectData", "{}", "Project Data");
             this.DefaultProject = DataReference.String($"/users/{this.UID}/prefs/DefaultProject", "", "Last Project");
-            this.UserStatsRef = CaptainCoder.UserStats.DataReference($"/users/{this.UID}/users_stats", UserStats.Default, "User Stats");
+            this.UserStatsRef = DataReference.Json<UserStats>($"/users/{this.UID}/users_stats", UserStats.Default, "User Stats");
 
-            this.ProjectData.DataChanged += data =>
+            this.ProjectData.DataChangedEvent += data =>
             {
                 if (data == null || data == "{}")
                 {
