@@ -152,6 +152,11 @@ public class UserService
         return true;
     }
 
+    /// <summary>
+    /// Updates the current users XP by adding the specified amount of XP to
+    /// the User. This updates the reference in the database.
+    /// </summary>
+    /// <param name="xpToGive">The amount to give (or remove)</param>
     public bool GiveXP(int xpToGive) {
         if (!_userData.IsLoggedIn) return false;
         UserStats newStats = new (_userStats.XP + xpToGive);
