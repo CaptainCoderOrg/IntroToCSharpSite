@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "IntroToCSharp/wwwroot/examples/csharp"
+		}
+	],
+	"settings": {}
+}

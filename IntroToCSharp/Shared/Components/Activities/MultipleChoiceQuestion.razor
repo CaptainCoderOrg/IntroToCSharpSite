@@ -128,7 +128,6 @@
     {
         this._options.ForEach(option => option.IsChecked = option.IsCorrect);
         this.SelectedOption = this._options.First(option => option.IsCorrect).Text;
-        // We had to move this line above so that the submit method can know when the user clicked "show answer" and then award xp accordingly. 
         this.attempts = -1;
         this.Submit();
     }
