@@ -1,3 +1,4 @@
+using CaptainCoder;
 using IntroToCSharp.Shared.Layout;
 using Microsoft.JSInterop;
 using System.Text.Json;
@@ -20,6 +21,7 @@ public class UserService
 
     private IJSRuntime? _runtime;
     private User _userData = User.NoUser;
+    private UserStats _userStats = CaptainCoder.UserStats.Default;
     private event Action<User>? _onUserChange;
     public event Action<User> OnUserChange
     {
@@ -64,7 +66,15 @@ public class UserService
     [JSInvokable]
     /// Callback when the user changes. The response is a JSON object or "null" if the user is
     /// not authenticated.
-    public void UpdateUser(string response) => UserData = new User(response);
+    public void UpdateUser(string response)
+    {
+        UserData = new User(response);
+        if (UserData.UserStatsRef != null)
+        {
+            UserData.UserStatsRef.DataChanged += (userStats) => this._userStats = userStats!;
+        }
+        
+    }
 
     /// <summary>
     /// Sets the DarkModePreference of the current user
@@ -139,6 +149,18 @@ public class UserService
         reference = null!;
         if (!_userData.IsLoggedIn) return false;
         reference = DataReference.Bool($"/users/{_userData.UID}/{path}");
+        return true;
+    }
+
+    /// <summary>
+    /// Updates the current users XP by adding the specified amount of XP to
+    /// the User. This updates the reference in the database.
+    /// </summary>
+    /// <param name="xpToGive">The amount to give (or remove)</param>
+    public bool GiveXP(int xpToGive) {
+        if (!_userData.IsLoggedIn) return false;
+        UserStats newStats = new (_userStats.XP + xpToGive);
+        _userData.UserStatsRef?.Set(newStats);
         return true;
     }
 }

@@ -12,6 +12,8 @@
     <MudSpacer />
     @if (UserData.IsLoggedIn)
     {
+        <ExperienceBar/>
+        
         <MudElement>@UserData.DisplayName </MudElement>
         <MudMenu>
             <ActivatorContent>
