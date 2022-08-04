@@ -1,3 +1,4 @@
+using CaptainCoder;
 using System.Text.Json;
 /// <summary>
 /// A User contains information about the current user of the application
@@ -40,6 +41,7 @@ public class User
     /// </summary>
     public DataReference<string>? ProjectData;
     public DataReference<string>? DefaultProject;
+    public readonly DataReference<UserStats>? UserStatsRef;
     private Dictionary<string, string>? _projects;
 
     public Dictionary<string, string> Projects
@@ -63,6 +65,7 @@ public class User
             this.ProjectData = null;
             this._projects = null;
             this.DefaultProject = null;
+            this.UserStatsRef = null;
         }
         else
         {
@@ -76,6 +79,8 @@ public class User
             this.DarkMode = DataReference.Bool($"/users/{this.UID}/prefs/DarkMode", false, "Dark Mode");
             this.ProjectData = DataReference.String($"/users/{this.UID}/projectData", "{}", "Project Data");
             this.DefaultProject = DataReference.String($"/users/{this.UID}/prefs/DefaultProject", "", "Last Project");
+            this.UserStatsRef = CaptainCoder.UserStats.DataReference($"/users/{this.UID}/users_stats", UserStats.Default, "User Stats");
+
             this.ProjectData.DataChanged += data =>
             {
                 if (data == null || data == "{}")
