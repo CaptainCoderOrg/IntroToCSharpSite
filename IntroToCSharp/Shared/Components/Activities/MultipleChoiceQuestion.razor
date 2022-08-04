@@ -1,7 +1,7 @@
 @inject NavigationManager NavigationManager
 
 <MudPaper Class="mt-4 pa-4" Elevation="5">
-    <MudText Typo="Typo.h6">@Question</MudText>
+    <MudText Typo="Typo.h6">@Question @Award</MudText>
     <MudRadioGroup @bind-SelectedOption="@SelectedOption">
         <MudStack Class="mt-4">
             <CascadingValue Value="@this">
@@ -57,6 +57,10 @@
 
     [Parameter]
     public RenderFragment ChildContent { get; set; } = null!;
+    [Parameter]
+    public int XP { get; set; } = 30;
+    public int Award => attempts >= 0 ? Math.Max(5, (XP / (attempts+1))*5) : 0;
+    
 
     /// <summary>
     /// This is the explanation that appears after the user submits the question.
@@ -88,7 +92,7 @@
         }
         _isWrong = this._options.Where(option => !option.CheckAnswer()).Count() > 0;
         if(this.attempts < 4 && this.attempts != -1 && !_isWrong ) {
-            UserService.Service.GiveXP(30 / this.attempts);
+            UserService.Service.GiveXP(Award);
         } 
         this.UpdateAndSave();
     }
