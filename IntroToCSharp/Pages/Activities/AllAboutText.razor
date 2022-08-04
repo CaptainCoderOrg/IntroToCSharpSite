@@ -1,0 +1,71 @@
+@inherits CaptainCoder.Page
+@page "/activities/all-about-text"
+
+<Section Title="Strings">
+    <MudText>A <Code>string</Code> is text of any length. Generally speaking, strings contain letters, punctation, and a
+        couple other
+        symbols. They are often used in programs for names, descriptions, or large bodies of text.
+    </MudText>
+    <MudText>A string is made by placing text inside double quotes like this:</MudText>
+    <CodeBlock>
+        string playerName = "Jimmy";
+        string playerDescription = "Jimmy is tall and very fast.";
+    </CodeBlock>
+    <Questions Title="Let's Practice!">
+        <Message>
+            Use the above example of declaring strings to complete the following practice.
+        </Message>
+        <ChildContent>
+            <Question Text="Declare a string variable for your name!" />
+        </ChildContent>
+    </Questions>
+    <CodeBlock>
+        string name;
+        name = "Jimmy";
+        string lastName;
+        lastName = "Bob";
+        string fullName = name + lastName;
+        Console.WriteLine(fullName);
+    </CodeBlock>
+    <CodeBlock ReplIt="JoshuaJoshJosh1/StringExample">
+        Console.WriteLine("Enter your name: ");
+        string name = Console.ReadLine();
+        Console.WriteLine(name + " is learning C#!!");
+    </CodeBlock>
+
+    <MudText>The examples above display different ways to use strings!</MudText>
+</Section>
+
+<Section Title="Characters">
+    <MudText>A single character type is represented in C# by <Code>char</Code>. This allows for a wide range of distinct
+        and fun characters
+        that can be represented by the <Code>char</Code> type. </MudText>
+
+    <MudText>A <Code>char</Code>, unlike a <Code>string</Code>, is made by placing the character inside of single quotes
+        like this:</MudText>
+    <CodeBlock>
+        char someLetter = 'j';
+    </CodeBlock>
+    <Questions Title="Let's Practice!">
+        <Message>
+            Use the above example of declaring a character to complete the following practice.
+        </Message>
+        <ChildContent>
+            <Question Text="Declare a character for a letter in the alphabet!" />
+        </ChildContent>
+    </Questions>
+    <HorizontalDivider/>
+    <MudText>Let's see this in action.</MudText>
+    <CodeBlock ReplIt="cwarren5701/CharReadLine">
+        Console.WriteLine("Enter the first letter of your name:");
+char firstInital = char.Parse(Console.ReadLine());
+
+Console.WriteLine("Enter the first letter of your last name: ");
+char lastInital = char.Parse(Console.ReadLine());
+
+Console.WriteLine("Your initals are: " + firstInital + ". " + lastInital + ".");
+    </CodeBlock>
+    <MudText>Although, the character you just defined appears to be just a letter in the alphabet, our computer are
+        actually storing it as number. The system that does this is called American Standard Code For Information
+        Interchange or "ASCII"(pronounced as-key). The ASCII value for 'a' is 97, and the letters of the alphabet follow it accordingly: 'b' = 98, 'c' = 99, 'd' = 100 ...</MudText>
+</Section>
