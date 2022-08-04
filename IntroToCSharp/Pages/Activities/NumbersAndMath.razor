@@ -1,0 +1,240 @@
+@inherits CaptainCoder.Page
+@page "/activities/numbers-and-math"
+
+<Section Title="Integers">
+    <MudText>
+        In C#, if you want to store a number you will often create an <Code>int</Code>, which is short for "integer". An
+        int is always
+        a whole number meaning it has no decimals.
+    </MudText>
+    <MudText Class="mt-4">Here's an example of declaring an <Code>int</Code>.</MudText>
+    <CodeBlock>
+        int currentYear = 2022;
+    </CodeBlock>
+</Section>
+
+<Section Title="Doubles">
+    <MudText>When we want to store decimals, we use the <Code>double</Code> data type.</MudText>
+    <MudText Class="mt-4">Here's an example of declaring a <Code>double</Code></MudText>
+    <CodeBlock>
+        double weight = 112.7;
+    </CodeBlock>
+</Section>
+
+<Section Title="Math Application">
+    <MudText>At the heart of all computers and computer programs is math. Today, modern computers are capable of doing
+        thousands of mathematical computations per minute. In this lesson we are going to learn about how to interpret
+        and implement basic arithmetic within our own programs. A
+        math <Keyword Word="operation"></Keyword> is made up of <Keyword Word="operators"></Keyword> and <Keyword
+            Word="operands"></Keyword>. Now, let's learn how to program our computer to evaluate basic operations for
+        us!</MudText>
+
+    <MudText>In C#, you treat math operations like you would in real life! Addition is "+", subtraction is "-",
+        multiplication is "*", division is "/", and the only operator that may be unfamiliar is remainder (also known as
+        mod "%"). Below are some examples!
+    </MudText>
+    <CodeBlock>
+        // This would evaluate to 10 and store that number(int) in the variable
+int a = 7 + 3;
+
+// This would evaluate to 1 and store that number(double) in the variable
+double b = 1.5 - 0.5;
+    </CodeBlock>
+    <MudDivider Class="mt-6 mb-6" DividerType="DividerType.FullWidth"></MudDivider>
+    <CodeBlock>
+        int j = 5 * 4;
+    </CodeBlock>
+
+    <MultipleChoiceQuestion IsMultiSelect="false" Question="What is the value of j?"
+        Explanation="20 is the correct answer because 5 multiplied by 4 is 20!">
+        <CheckBoxOption Text="25" IsCorrect="false" />
+        <CheckBoxOption Text="9" IsCorrect="false" />
+        <CheckBoxOption Text="1" IsCorrect="false" />
+        <CheckBoxOption Text="20" IsCorrect="true" />
+    </MultipleChoiceQuestion>
+    <MudText Class="mt-6"></MudText>
+    <CodeBlock>
+        int a = 100 / 10;
+    </CodeBlock>
+    <MultipleChoiceQuestion IsMultiSelect="false" Question="What is the value of a?"
+        Explanation="The answer is 10 because 100 divided by 10 is 10!">
+        <CheckBoxOption Text="90" IsCorrect="false" />
+        <CheckBoxOption Text="10" IsCorrect="true" />
+        <CheckBoxOption Text="1/10" IsCorrect="false" />
+        <CheckBoxOption Text="1000" IsCorrect="false" />
+    </MultipleChoiceQuestion>
+    <MudText Class="mt-6"></MudText>
+    <CodeBlock>
+        double m = 1.5 / 0.5;
+    </CodeBlock>
+    <MultipleChoiceQuestion IsMultiSelect="false" Question="What is the value of m?"
+        Explanation="The answer is 3.0 because 1.5 divided by 0.5 is 3, but it's a double value so we write it as 3.0!">
+        <CheckBoxOption Text="1" IsCorrect="false" />
+        <CheckBoxOption Text="3" IsCorrect="false" />
+        <CheckBoxOption Text="0.5" IsCorrect="false" />
+        <CheckBoxOption Text="3.0" IsCorrect="true" />
+    </MultipleChoiceQuestion>
+    <MudText Class="mt-6"></MudText>
+    <CodeBlock>
+        double m = 1.5 / 0.5;
+double x = m / 1.5;
+    </CodeBlock>
+    <MultipleChoiceQuestion IsMultiSelect="false" Question="What is the value of x?"
+        Explanation="The answer is 2.0 because 3.0 divided by 1.5 is 2.0!">
+        <CheckBoxOption Text="2.5" IsCorrect="false" />
+        <CheckBoxOption Text="1.0" IsCorrect="false" />
+        <CheckBoxOption Text="2.0" IsCorrect="true" />
+        <CheckBoxOption Text="2" IsCorrect="false" />
+    </MultipleChoiceQuestion>
+    <MudText Class="mt-6"></MudText>
+</Section>
+
+
+<Section Title="Remainder or Mod Operator">
+    <MudText>The remainder operator (%) finds the remainder when two numbers are divided! Try some examples below!
+    </MudText>
+    <CodeBlock>
+        int c = 50 % 7;
+    </CodeBlock>
+    <MultipleChoiceQuestion IsMultiSelect="false" Question="What is the value of c?"
+        Explanation="Remember that the percent symbol indicates we want the remainder of the numbers. 
+    That means it will act as a division sign, but give the remainder. 7 goes into 50 7 times, so the remainder would be 1!">
+        <CheckBoxOption Text="1" IsCorrect="true" />
+        <CheckBoxOption Text="7" IsCorrect="false" />
+        <CheckBoxOption Text="0" IsCorrect="false" />
+        <CheckBoxOption Text="50" IsCorrect="false" />
+    </MultipleChoiceQuestion>
+    <MudText Class="mt-6"></MudText>
+    <CodeBlock>
+        int b = 63 % 6;
+    </CodeBlock>
+    <MultipleChoiceQuestion IsMultiSelect="false" Question="What is the value of b?"
+        Explanation="The correct answer is 3 because 6 can only go into 63 ten full times before going over! 6 * 10 is 60 so the remainder is 3!">
+        <CheckBoxOption Text="7" IsCorrect="false" />
+        <CheckBoxOption Text="10.5" IsCorrect="false" />
+        <CheckBoxOption Text="3" IsCorrect="true" />
+        <CheckBoxOption Text="60" IsCorrect="false" />
+    </MultipleChoiceQuestion>
+</Section>
+
+<Section Title="Indicating Signs">
+    <MudText>
+        You can use the addition and subtraction signs to indicate if a number or variable is positve or negative!
+    </MudText>
+    <Example>
+        You can say that 5 is postive through the expression +5. If you want it to be negative, then it is -5! The same
+        applies for
+        variables that have been declared!
+    </Example>
+
+</Section>
+<Section Title="The Order of Operations">
+    <MudText>The order of operations in C# works just like it does in the real math world. Hopefully you remember
+        P.E.M.D.A.S., but if not, multiplication and divison(or mod) go before addition and subtraction and the
+        operation is evaluated left to right.</MudText>
+    <MudText Class="pt-4">Let's try a basic example!</MudText>
+    <CodeBlock>
+        int a = 4 + 4 / 1 * 2;
+    </CodeBlock>
+    <MultipleChoiceQuestion IsMultiSelect="false" Question="What is the value of a?"
+        Explanation="Following the order of operations we would do the following: 1) 4 / 1 = 4     2) 4 * 2 = 8      3) 4 + 8 = 12 ">
+        <CheckBoxOption Text="6" IsCorrect="false"></CheckBoxOption>
+        <CheckBoxOption Text="12" IsCorrect="true"></CheckBoxOption>
+        <CheckBoxOption Text="4" IsCorrect="false"></CheckBoxOption>
+        <CheckBoxOption Text="1" IsCorrect="false"></CheckBoxOption>
+    </MultipleChoiceQuestion>
+    <MudText Class="pt-4">Unfortunately, it's not always that easy. C# gives us the
+        option to alter the order of operations using parentheses. At first this may feel confusing but it gives us
+        extreme versatility when designing math operations for our program.</MudText>
+
+    <MudText Class="pt-4">Let's look at the same example from above but this time I put parentheses to change the order
+        of operations!</MudText>
+    <CodeBlock>
+        int b = (4 + 4) / (1 * 2);
+    </CodeBlock>
+    <MultipleChoiceQuestion IsMultiSelect="false" Question="What is the value of b?"
+        Explanation="Because of the parentheses we must do complete the operations (4 + 4) and (1 * 2) first. Then we do the final operation of (8 / 2) as a result to get 4 as our answer.">
+        <CheckBoxOption Text="6" IsCorrect="false"></CheckBoxOption>
+        <CheckBoxOption Text="12" IsCorrect="false"></CheckBoxOption>
+        <CheckBoxOption Text="4" IsCorrect="true"></CheckBoxOption>
+        <CheckBoxOption Text="1" IsCorrect="false"></CheckBoxOption>
+    </MultipleChoiceQuestion>
+
+</Section>
+<Section Title="Compound Assignment Operators">
+    <MudText> Compound assignment operators are a combination of an operator and an equal sign! These act as shortcuts
+        that change a variable
+        by using a math operation.
+    </MudText>
+    <Example Title="Compounding operators">
+        Instead of saying (j = j + 9;), you can change a variable by saying (j +=9;) The same applies for the other
+        operators.
+    </Example>
+    <MudText Class="pt-4 pb-4">Let's try an example!</MudText>
+    <CodeBlock>
+        int j = 6;
+j += 4;
+    </CodeBlock>
+    <MultipleChoiceQuestion IsMultiSelect="false" Question="What is the value of j?"
+        Explanation="10 is the correct answer because the variable j is initially declared as 6, but is changed to 10 because 6 + 4 = 10">
+        <CheckBoxOption Text="10" IsCorrect="true" />
+        <CheckBoxOption Text="6" IsCorrect="false" />
+        <CheckBoxOption Text="4" IsCorrect="false" />
+        <CheckBoxOption Text="2" IsCorrect="false" />
+    </MultipleChoiceQuestion>
+    <MudText Class="mt-6"></MudText>
+    <CodeBlock>
+        double y = 2.5;
+y += 1.25;
+    </CodeBlock>
+    <MultipleChoiceQuestion IsMultiSelect="false" Question="What is the value of y?"
+        Explanation="3.75 is the correct answer because the variable y is initially declared as 2.5, but is changed to 3.75 because 2.5 + 1.25 = 3.75">
+        <CheckBoxOption Text="10" IsCorrect="false" />
+        <CheckBoxOption Text="3" IsCorrect="false" />
+        <CheckBoxOption Text="3.75" IsCorrect="true" />
+        <CheckBoxOption Text="3.5" IsCorrect="false" />
+    </MultipleChoiceQuestion>
+</Section>
+<Section Title="More about Division">
+    <MudText>When dividing one integer by another integer(a.k.a. "integer divison") the remainder of the operation is
+        ignored. Here's an example!</MudText>
+    <CodeBlock ReplIt="cwarren5701/IntegerDivision">
+        int a = 50;
+int b = 7;
+int result = a / b;
+Console.WriteLine(result);
+    </CodeBlock>
+    <MudText>We know that 50 / 7 would be 7 with a remainder of 1 but integer division ignores that remainder.</MudText>
+    <MudText Class="pt-4">Now, let's see what happens when we divide two floating-point numbers.</MudText>
+    <CodeBlock ReplIt="cwarren5701/DoubleDivision">
+        double a = 5.0;
+double b = 2.0;
+double result = a / b;
+Console.WriteLine(result);
+    </CodeBlock>
+    <Questions Title="Use your knowledge!">
+        <Message></Message>
+        <ChildContent>
+            <Question Text="What's the difference between integer and floating-point division?">
+            </Question>
+        </ChildContent>
+    </Questions>
+    <MudText>As we see in the example, double division results in an more exact number without ignoring the
+        remainder.</MudText>
+    <Note>Just like in the real math world, you cannot divide by zero!</Note>
+
+</Section>
+
+<Section Title="Other Math Operators">
+    <MudText>In addition to the normal operators, you can use "Abs" for the absolute value, "Pow" and "Sqrt" for the
+        power and square root of a number,
+        and the trig functions "Sin", "Cos", and "Tan"! </MudText>
+    <Note>You will not use these very often, but they may be useful in certain situations!</Note>
+    <CodeBlock ReplIt="joshuaJoshJosh1/otherMathOperators">
+        double squareRoot = Math.Sqrt(100);
+int absoluteVal = Math.Abs(-7);
+
+Console.WriteLine(squareRoot);
+Console.WriteLine(absoluteVal);
+    </CodeBlock>
+</Section>
