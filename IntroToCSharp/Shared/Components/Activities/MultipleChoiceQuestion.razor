@@ -61,7 +61,7 @@
     public int XP { get; set; } = 30;
     [Parameter]
     public string Class {get; set; } = "mt-4 pa-4";
-    public int Award => attempts >= 0 ? Math.Max(5, (XP / (attempts+1))*5) : 0;
+    public int Award => _attempts >= 0 ? Math.Max(5, (XP / (_attempts+1))*5) : 0;
     
 
     /// <summary>
@@ -75,25 +75,66 @@
     private string SelectedOption { get; set; }
     private bool _isSubmitted = false;
     private bool _isWrong = false;
-    private int attempts = 0;
+    private int _attempts = 0;
 
     private string ExplanationStyle = $"background: #ffffe3; color: {Themes.s_CSharpTheme.Palette.Black.ToString()};";
 
     private List<CheckBoxOption> _options = new List<CheckBoxOption>();
     private string Path => $"{NavigationManager.GetRoute()}/questions/{Question}";
-    private void Submit()
+    private DataReference<MultipleChoiceQuestionData>? _dataReference;
+    
+    protected override void OnInitialized()
     {
-        // if the user hasn't selected "show answer", then...
-        if(this.attempts != -1 ) {
-            this.attempts++;
+        base.OnInitialized();
+        UserService.Service.OnUserChange += HandleUserChange;
+    }
+
+    private void HandleUserChange(User userData)
+    {
+        if (userData.IsLoggedIn)
+        {
+            _dataReference = UserService.Service.GetJsonDataReference<MultipleChoiceQuestionData>(Path, Question);
+            _dataReference.DataChangedEvent += HandleDataChanged;
         }
-        this._isSubmitted = true;
+        else
+        {
+            this._attempts = 0;
+            this.Reset();
+        }
+    }
+
+    private void HandleDataChanged(MultipleChoiceQuestionData newData)
+    {
+        _options.ForEach(o => o.IsChecked = newData.Answers.Contains(o.Text));
+        this.SelectedOption = newData.Answers.Count() > 0 ? newData.Answers[0] : "";
+        this._isSubmitted = newData.IsSubmitted;
+        this._attempts = newData.Attempts;
+        this.LoadSubmit();
+        this.StateHasChanged();
+    }
+
+    private void LoadSubmit()
+    {
+        if (!this._isSubmitted)
+        {
+            this.Reset();
+        }
         if (!IsMultiSelect)
         {
             this._options.ForEach(option => option.IsChecked = this.SelectedOption == option.Text);
         }
         _isWrong = this._options.Where(option => !option.CheckAnswer()).Count() > 0;
-        if(this.attempts < 4 && this.attempts != -1 && !_isWrong ) {
+    }
+
+    private void Submit()
+    {
+        // if the user hasn't selected "show answer", then...
+        if(this._attempts != -1 ) {
+            this._attempts++;
+        }
+        this._isSubmitted = true;
+        LoadSubmit();
+        if(this._attempts < 4 && this._attempts != -1 && !_isWrong ) {
             UserService.Service.GiveXP(Award);
         } 
         this.UpdateAndSave();
@@ -112,6 +153,8 @@
     {
         this._isSubmitted = false;
         this._options.ForEach(option => option.Reset());
+        this.SelectedOption = null;
+        this.StateHasChanged();
     }
 
     /// <summary>
@@ -123,12 +166,14 @@
         this._options.ForEach(option => option.IsChecked = option.IsCorrect);
         this.SelectedOption = this._options.First(option => option.IsCorrect).Text;
         // We had to move this line above so that the submit method can know when the user clicked "show answer" and then award xp accordingly. 
-        this.attempts = -1;
+        this._attempts = -1;
         this.Submit();
     }
 
     private void UpdateAndSave()
     {
-        this._options.ForEach(option => option.UpdateAndSave());
+        string[] options = this._options.Where(o => o.IsChecked).Select(o => o.Text).ToArray();
+        MultipleChoiceQuestionData data = new MultipleChoiceQuestionData(options, this._isSubmitted, this._attempts);
+        UserService.Service.SaveJsonData<MultipleChoiceQuestionData>(Path, data);
     }
 }
