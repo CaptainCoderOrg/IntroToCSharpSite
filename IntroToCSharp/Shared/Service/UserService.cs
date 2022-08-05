@@ -188,7 +188,14 @@ public class UserService
     /// <param name="xpToGive">The amount to give (or remove)</param>
     public bool GiveXP(int xpToGive) {
         if (!_userData.IsLoggedIn) return false;
-        UserStats newStats = new (_userStats.XP + xpToGive);
+        UserStats newStats = new (_userStats.XP + xpToGive, _userStats.Gold);
+        _userData.UserStatsRef?.Set(newStats);
+        return true;
+    }
+
+    public bool GiveGold(int goldToGive) {
+        if (!_userData.IsLoggedIn) return false;
+        UserStats newStats = new (_userStats.XP, _userStats.Gold + goldToGive);
         _userData.UserStatsRef?.Set(newStats);
         return true;
     }

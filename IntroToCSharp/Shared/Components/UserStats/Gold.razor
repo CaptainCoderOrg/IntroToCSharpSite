@@ -1,0 +1,32 @@
+@using CaptainCoder
+<MudImage Src="/imgs/top-menu/coin.png" Width="30" Height="30"></MudImage>
+<MudElement Class="ml-0 mr-6" Style="width:100px">
+    <MudText Class="pa-0 ma-0" Style="font-size:10px; text-align:center;">Gold: @Data.Gold</MudText>
+</MudElement>
+
+<!-- <MudButton OnClick="@GiveGold">Give gold</MudButton> -->
+
+@code {
+    public UserStats Data { get; set; } = UserStats.Default;
+
+    protected override void OnInitialized()
+    {
+        UserService.Service.OnUserChange += this.UpdateUser;
+    }
+
+    private void UpdateUser(User newUser)
+    {
+        newUser.UserStatsRef.DataChangedEvent += UpdateUserData;
+    }
+    private void UpdateUserData(UserStats newUserData)
+    {
+        Data = newUserData;
+        this.StateHasChanged();
+    }
+
+    public void GiveGold()
+    {
+        UserService.Service.GiveGold(30);
+    }
+
+}
