@@ -2,12 +2,12 @@
 
 <MudPaper Class="mt-4 pa-4" Elevation="5">
     <MudStack Justify="Justify.SpaceBetween" Row="true">
-        <MudPaper Elevation="0">
-            <MudText Typo="Typo.h6">@Question</MudText> 
-        </MudPaper>
-        <MudPaper Class="pa-2 border-solid border-2 mud-border-success" Style="@XPDisplayStyle" Elevation="0">
-            <MudText Typo="Typo.body1"><b>XP: @Award</b></MudText>
-        </MudPaper>
+            <MudPaper Elevation="0">
+                <MudText Typo="Typo.h6">@Question</MudText>
+            </MudPaper>
+            <MudPaper Class="pa-2 border-solid border-2 mud-border-success rounded-pill" Style="@XPDisplayStyle" Elevation="0" MinWidth="70px" MaxHeight="44px">
+                <MudText Typo="Typo.body1"><b>XP: @Award</b></MudText>
+            </MudPaper>
     </MudStack>
     <MudRadioGroup @bind-SelectedOption="@SelectedOption">
         <MudStack Class="mt-4">
@@ -48,9 +48,9 @@
         }
 
     }
-</MudPaper>
+    </MudPaper>
 
-@code {
+    @code {
     /// <summary>
     /// Specifies if this question uses CheckBoxes (true) or RadioButtons (false). The
     /// default behavior is RadioButtons (false).
@@ -66,10 +66,10 @@
     public RenderFragment ChildContent { get; set; } = null!;
     [Parameter]
     public int XP { get; set; } = 30;
-    public string Class {get; set; } = "mt-4 pa-4";
-    public int Award => attempts >= 0 ? Math.Max(5, ((XP / (attempts+1))/5)*5) : 0;
+    public string Class { get; set; } = "mt-4 pa-4";
+    public int Award => attempts >= 0 ? Math.Max(5, ((XP / (attempts + 1)) / 5) * 5) : 0;
 
-    
+
 
     /// <summary>
     /// This is the explanation that appears after the user submits the question.
@@ -90,7 +90,7 @@
     private List<CheckBoxOption> _options = new List<CheckBoxOption>();
     private string Path => $"{NavigationManager.GetRoute()}/questions/{Question}";
     private DataReference<MultipleChoiceQuestionData>? _dataReference;
-    
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
@@ -132,12 +132,9 @@
             this._options.ForEach(option => option.IsChecked = this.SelectedOption == option.Text);
         }
         _isWrong = this._options.Where(option => !option.CheckAnswer()).Count() > 0;
-        if(this.attempts != -1 && !_isWrong ) {
+        if (this.attempts != -1 && !_isWrong)
+        {
             UserService.Service.GiveXP(Award);
-        } 
-        // if the user hasn't selected "show answer", then...
-        if(this.attempts != -1 ) {
-            this.attempts++;
         }
     }
 
@@ -145,6 +142,11 @@
     {
         this._isSubmitted = true;
         LoadSubmit();
+        // if the user hasn't selected "show answer", then...
+        if (this.attempts != -1 && _isWrong)
+        {
+            this.attempts++;
+        }
         this.UpdateAndSave();
     }
 
