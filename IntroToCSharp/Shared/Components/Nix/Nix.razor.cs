@@ -44,11 +44,11 @@ namespace IntroToCSharp.Shared.Components.Nix
             this.UserData = userData;
             if (this.UserData.ProjectData != null)
             {
-                this.UserData.ProjectData.DataChanged += UpdateProjects;
+                this.UserData.ProjectData.DataChangedEvent += UpdateProjects;
             }
             if (this.UserData.DefaultProject != null)
             {
-                this.UserData.DefaultProject.DataChanged += UpdateDefaultProject;
+                this.UserData.DefaultProject.DataChangedEvent += UpdateDefaultProject;
             }
             StateHasChanged();
         }

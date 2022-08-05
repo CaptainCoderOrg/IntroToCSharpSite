@@ -71,7 +71,7 @@ public class UserService
         UserData = new User(response);
         if (UserData.UserStatsRef != null)
         {
-            UserData.UserStatsRef.DataChanged += (userStats) => this._userStats = userStats!;
+            UserData.UserStatsRef.DataChangedEvent += (userStats) => this._userStats = userStats!;
         }
         
     }
@@ -101,6 +101,35 @@ public class UserService
             DataReference<string> reference = DataReference.String($"/users/{_userData.UID}/{path}");
             reference.Set(answer);
         }
+    }
+
+    /// <summary>
+    /// Given a relative path for the logged in user, saves the specified
+    /// data as a JSON object. If the object cannot be converted to JSON,
+    /// this method will fail.
+    /// </summary>
+    public void SaveJsonData<T>(string path, T data)
+    {
+        if (_userData.IsLoggedIn)
+        {
+            DataReference<T> reference = DataReference.Json<T>($"/users/{_userData.UID}/{path}");
+            reference.Set(data);
+        }
+    }
+
+    /// <summary>
+    /// Given a relative path for the logged in user, retrieves a
+    /// DataReference to an object in the database at that path.
+    /// If the user is not logged in, this method returns null.
+    /// </summary>
+    public DataReference<T>? GetJsonDataReference<T>(string path, string? niceName = null)
+    {
+        if (_userData.IsLoggedIn)
+        {
+            DataReference<T> reference = DataReference.Json<T>($"/users/{_userData.UID}/{path}", default, niceName);
+            return reference;
+        }
+        return null;
     }
 
     /// <summary>

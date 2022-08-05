@@ -66,7 +66,9 @@
     public RenderFragment ChildContent { get; set; } = null!;
     [Parameter]
     public int XP { get; set; } = 30;
+    public string Class {get; set; } = "mt-4 pa-4";
     public int Award => attempts >= 0 ? Math.Max(5, ((XP / (attempts+1))/5)*5) : 0;
+
     
 
     /// <summary>
@@ -87,9 +89,44 @@
 
     private List<CheckBoxOption> _options = new List<CheckBoxOption>();
     private string Path => $"{NavigationManager.GetRoute()}/questions/{Question}";
-    private void Submit()
+    private DataReference<MultipleChoiceQuestionData>? _dataReference;
+    
+    protected override void OnInitialized()
     {
-        this._isSubmitted = true;
+        base.OnInitialized();
+        UserService.Service.OnUserChange += HandleUserChange;
+    }
+
+    private void HandleUserChange(User userData)
+    {
+        if (userData.IsLoggedIn)
+        {
+            _dataReference = UserService.Service.GetJsonDataReference<MultipleChoiceQuestionData>(Path, Question);
+            _dataReference.DataChangedEvent += HandleDataChanged;
+        }
+        else
+        {
+            this.attempts = 0;
+            this.Reset();
+        }
+    }
+
+    private void HandleDataChanged(MultipleChoiceQuestionData newData)
+    {
+        _options.ForEach(o => o.IsChecked = newData.Answers.Contains(o.Text));
+        this.SelectedOption = newData.Answers.Count() > 0 ? newData.Answers[0] : "";
+        this._isSubmitted = newData.IsSubmitted;
+        this.attempts = newData.Attempts;
+        this.LoadSubmit();
+        this.StateHasChanged();
+    }
+
+    private void LoadSubmit()
+    {
+        if (!this._isSubmitted)
+        {
+            this.Reset();
+        }
         if (!IsMultiSelect)
         {
             this._options.ForEach(option => option.IsChecked = this.SelectedOption == option.Text);
@@ -102,6 +139,12 @@
         if(this.attempts != -1 ) {
             this.attempts++;
         }
+    }
+
+    private void Submit()
+    {
+        this._isSubmitted = true;
+        LoadSubmit();
         this.UpdateAndSave();
     }
 
@@ -118,6 +161,8 @@
     {
         this._isSubmitted = false;
         this._options.ForEach(option => option.Reset());
+        this.SelectedOption = null;
+        this.StateHasChanged();
     }
 
     /// <summary>
@@ -134,6 +179,8 @@
 
     private void UpdateAndSave()
     {
-        this._options.ForEach(option => option.UpdateAndSave());
+        string[] options = this._options.Where(o => o.IsChecked).Select(o => o.Text).ToArray();
+        MultipleChoiceQuestionData data = new MultipleChoiceQuestionData(options, this._isSubmitted, this.attempts);
+        UserService.Service.SaveJsonData<MultipleChoiceQuestionData>(Path, data);
     }
 }

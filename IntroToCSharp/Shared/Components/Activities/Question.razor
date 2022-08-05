@@ -53,7 +53,7 @@
         {
             IsDisabled = false;
             if(UserService.Service.TryGetQuestionAnswer(Path, out DataReference<string> answer)){
-                answer.DataChanged += val =>
+                answer.DataChangedEvent += val =>
                 {
                     _answer = val!;
                     StateHasChanged();
