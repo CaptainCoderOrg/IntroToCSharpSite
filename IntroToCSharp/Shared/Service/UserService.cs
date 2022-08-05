@@ -104,6 +104,35 @@ public class UserService
     }
 
     /// <summary>
+    /// Given a relative path for the logged in user, saves the specified
+    /// data as a JSON object. If the object cannot be converted to JSON,
+    /// this method will fail.
+    /// </summary>
+    public void SaveJsonData<T>(string path, T data)
+    {
+        if (_userData.IsLoggedIn)
+        {
+            DataReference<T> reference = DataReference.Json<T>($"/users/{_userData.UID}/{path}");
+            reference.Set(data);
+        }
+    }
+
+    /// <summary>
+    /// Given a relative path for the logged in user, retrieves a
+    /// DataReference to an object in the database at that path.
+    /// If the user is not logged in, this method returns null.
+    /// </summary>
+    public DataReference<T>? GetJsonDataReference<T>(string path, string? niceName = null)
+    {
+        if (_userData.IsLoggedIn)
+        {
+            DataReference<T> reference = DataReference.Json<T>($"/users/{_userData.UID}/{path}", default, niceName);
+            return reference;
+        }
+        return null;
+    }
+
+    /// <summary>
     /// Attempts to get a reference to an answer in the database. This method
     /// returns true if there is a user logged in and they can access the
     /// specified path. Otherwise, this method returns false and the reference

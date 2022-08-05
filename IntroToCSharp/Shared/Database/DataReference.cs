@@ -11,7 +11,7 @@ public static class DataReference
 {
     public static DataReference<bool> Bool(string path, bool defaultValue = false, string? niceName = null) => BoolDataReference.GetRef(path, defaultValue, niceName);
     public static DataReference<string> String(string path, string defaultValue = "", string? niceName = null) => StringDataReference.GetRef(path, defaultValue, niceName);
-    public static DataReference<T> Json<T>(string path, T defaultValue, string? niceName = null) => new JsonDataReference<T>(path, defaultValue, niceName);
+    public static DataReference<T> Json<T>(string path, T? defaultValue = default, string? niceName = null) => new JsonDataReference<T>(path, defaultValue, niceName);
 }
 
 /// <summary>
@@ -146,13 +146,15 @@ internal class JsonDataReference<T> : DataReference<T>
             string jsonString = JsonDocument.Parse(data).RootElement.GetString()!;
             Val = JsonSerializer.Deserialize<T>(jsonString);
         }
-        catch (JsonException)
+        catch (JsonException jse)
         {
             NotificationService.Service.Add($"Error loading {NiceName}. Expected UserData but found: {data}", Severity.Error).AndForget();
+            Console.Error.WriteLine(jse);
         }
-        catch
+        catch (Exception e)
         {
             NotificationService.Service.Add($"Error loading {NiceName}.", Severity.Error).AndForget();
+            Console.Error.WriteLine(e);
         }
     }
 }
