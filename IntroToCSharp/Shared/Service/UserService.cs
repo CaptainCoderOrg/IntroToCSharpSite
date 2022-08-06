@@ -1,7 +1,8 @@
-using CaptainCoder;
 using IntroToCSharp.Shared.Layout;
 using Microsoft.JSInterop;
 using System.Text.Json;
+
+namespace CaptainCoder;
 
 public class UserService
 {
@@ -9,7 +10,7 @@ public class UserService
 
     private static void Init(IJSRuntime JS)
     {
-        if (JS == null) throw new ArgumentNullException("IJSRuntime cannot be null.");
+        if (JS == null) throw new ArgumentNullException(nameof(JS), "IJSRuntime cannot be null.");
         if (Service._runtime != null) throw new InvalidOperationException("UserService cannot be initialized multiple times.");
         Service.SetRuntime(JS);
     }
@@ -22,16 +23,16 @@ public class UserService
     private IJSRuntime? _runtime;
     private User _userData = User.NoUser;
     private UserStats _userStats = CaptainCoder.UserStats.Default;
-    private event Action<User>? _onUserChange;
+    private event Action<User>? UserChangedEvent;
     public event Action<User> OnUserChange
     {
         add
         {
-            if (value == null) throw new ArgumentNullException("Cannot register null event.");
+            if (value == null) throw new ArgumentNullException(nameof(value), "Cannot register null event.");
             value.Invoke(UserData);
-            _onUserChange += value;
+            UserChangedEvent += value;
         }
-        remove => _onUserChange -= value;
+        remove => UserChangedEvent -= value;
     }
 
     private User UserData
@@ -40,7 +41,7 @@ public class UserService
         set
         {
             _userData = value;
-            _onUserChange?.Invoke(value);
+            UserChangedEvent?.Invoke(value);
         }
     }
 
@@ -50,7 +51,7 @@ public class UserService
     {
         this._runtime = runtime;
         // On initialization, register this object to be notified when the user changes
-        runtime.InvokeVoidAsync("onAuthStateChanged", DotNetObjectReference.Create(this));
+        runtime.InvokeVoidAsync("onAuthStateChanged", DotNetObjectReference.Create(this)).AsTask().RunSynchronously();
     }
 
     private async Task<IJSRuntime> GetRuntime()
@@ -61,6 +62,7 @@ public class UserService
 
     public async Task GoogleLogin() => await (await GetRuntime()).InvokeVoidAsync("firebaseGoogleLogin");
     public async Task GitHubLogin() => await (await GetRuntime()).InvokeVoidAsync("firebaseGitHubLogin");
+    public async Task EmailLogin(string email, string password) => await (await GetRuntime()).InvokeVoidAsync("firebaseEmailLogin", email, password);
     public async Task Logout() => await (await GetRuntime()).InvokeVoidAsync("firebaseLogout");
 
     [JSInvokable]
@@ -68,12 +70,12 @@ public class UserService
     /// not authenticated.
     public void UpdateUser(string response)
     {
-        UserData = new User(response);
+        UserData = User.Create(response);
         if (UserData.UserStatsRef != null)
         {
             UserData.UserStatsRef.DataChangedEvent += (userStats) => this._userStats = userStats!;
         }
-        
+
     }
 
     /// <summary>
@@ -186,9 +188,10 @@ public class UserService
     /// the User. This updates the reference in the database.
     /// </summary>
     /// <param name="xpToGive">The amount to give (or remove)</param>
-    public bool GiveXP(int xpToGive) {
+    public bool GiveXP(int xpToGive)
+    {
         if (!_userData.IsLoggedIn) return false;
-        UserStats newStats = new (_userStats.XP + xpToGive);
+        UserStats newStats = new(_userStats.XP + xpToGive);
         _userData.UserStatsRef?.Set(newStats);
         return true;
     }

@@ -1,0 +1,24 @@
+@page "/dev/login"
+<MudForm>
+    <MudText>Username:
+        <MudInput @bind-Value="@Username" />
+    </MudText>
+    <MudText>Password:
+        <MudInput InputType="InputType.Password" @bind-Value="@Password" />
+    </MudText>
+    <MudText>
+        <MudButton OnClick="@Login">Submit</MudButton>
+    </MudText>
+</MudForm>
+
+@code {
+    private string Username { get; set; }
+    private string Password { get; set; }
+
+    private void Login()
+    {
+        Console.WriteLine($"{Username}, {Password}");
+        UserService.Service.EmailLogin(Username, Password);
+        Console.WriteLine("Login Submitted");
+    }
+}
