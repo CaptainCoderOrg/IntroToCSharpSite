@@ -13,46 +13,22 @@
     <MudButton Variant="Variant.Filled" Class="pl-8 pr-8 pa-3">Item 9</MudButton>
 </MudStack>
 
-
 <MudGrid Spacing="1" Justify="Justify.SpaceEvenly">
-    <ItemDisplay 
-        Image="/imgs/store/gun2.png" 
-        Name="Machine Gun" Cost="45000">
-        This is a fully automatic machine gun.
-    </ItemDisplay>
-    <ItemDisplay 
-        Image="/imgs/store/gun2.png" 
-        Name="Hand Gun" Cost="2000">
-        This is a fully automatic machine gun.
-    </ItemDisplay>
-    <ItemDisplay 
-        Image="/imgs/store/gun2.png" 
-        Name="RPG" Cost="5000">
-        This is a fully automatic machine gun.
-    </ItemDisplay>
-    <ItemDisplay 
-        Image="/imgs/store/gun2.png" 
-        Name="Sniper Rifle" Cost="100000">
-        This is a fully automatic machine gun.
-    </ItemDisplay>
-     <ItemDisplay 
-        Image="/imgs/store/gun2.png" 
-        Name="Machine Gun" Cost="45000">
-        This is a fully automatic machine gun.
-    </ItemDisplay>
-     <ItemDisplay 
-        Image="/imgs/store/gun2.png" 
-        Name="Machine Gun" Cost="45000">
-        This is a fully automatic machine gun.
-    </ItemDisplay>
-     <ItemDisplay 
-        Image="/imgs/store/gun2.png" 
-        Name="Machine Gun" Cost="45000">
-        This is a fully automatic machine gun.
-    </ItemDisplay>
-     <ItemDisplay 
-        Image="/imgs/store/gun2.png" 
-        Name="Machine Gun" Cost="45000">
-        This is a fully automatic machine gun.
-    </ItemDisplay>
+    <ItemDisplay Item="simpleAxe"></ItemDisplay>
+    <ItemDisplay Item="ironSword"></ItemDisplay>
+    <ItemDisplay Item="goldSword"></ItemDisplay>
+    <ItemDisplay Item="goldAxe"></ItemDisplay>
+
+
 </MudGrid>
+
+@code {
+    StoreItem simpleAxe = new("Axe", "Weapon", 1000, "A simple, but effective axe.",
+        "/imgs/store/weapons/axe.png");
+    StoreItem ironSword = new("Iron Sword", "Weapon", 1500, "A durable sword made of iron.",
+        "/imgs/store/weapons/IronSword.png");
+    StoreItem goldSword = new("Golden Sword", "Weapon", 3000, "A strong and fast sword, but breaks easily.",
+        "/imgs/store/weapons/GoldSword.png");
+    StoreItem goldAxe = new("Golden Axe", "Weapon", 3000, "A very heavy hitting axe, but not super durable.",
+        "/imgs/store/weapons/GoldAxe.png");
+}

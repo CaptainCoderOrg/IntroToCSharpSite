@@ -12,10 +12,12 @@ public class UserStats
     public int Level { get => XPToLevel(this.XP); }
     [JsonIgnore]
     public int NextLevelXP { get => XPForLevel(this.Level+1); }
+    public int Gold { get; private set; }
 
-    public UserStats(int xp)
+    public UserStats(int xp, int gold)
     {
         this.XP = xp;
+        this.Gold = gold;
     }
 
     public static int XPToLevel(int xp)
@@ -29,5 +31,5 @@ public class UserStats
         return 100 * level * level;
     }
 
-    public readonly static UserStats Default = new (0);
+    public readonly static UserStats Default = new (0, 0);
 }
