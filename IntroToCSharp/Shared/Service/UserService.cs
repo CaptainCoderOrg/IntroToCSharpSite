@@ -51,7 +51,7 @@ public class UserService
     {
         this._runtime = runtime;
         // On initialization, register this object to be notified when the user changes
-        runtime.InvokeVoidAsync("onAuthStateChanged", DotNetObjectReference.Create(this)).AsTask().RunSynchronously();
+        runtime.InvokeVoidAsync("onAuthStateChanged", DotNetObjectReference.Create(this));
     }
 
     private async Task<IJSRuntime> GetRuntime()
