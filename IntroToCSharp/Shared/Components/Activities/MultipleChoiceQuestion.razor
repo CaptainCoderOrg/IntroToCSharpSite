@@ -5,7 +5,7 @@
             <MudPaper Elevation="0">
                 <MudText Typo="Typo.h6">@Question</MudText>
             </MudPaper>
-            <MudPaper Class="pa-2 border-solid border-2 mud-border-success rounded-pill" Style="@XPDisplayStyle" Elevation="0" MinWidth="70px" MaxHeight="44px">
+            <MudPaper Class="pa-2 border-solid border-2 mud-border-success rounded-pill" Style="@_xpDisplayStyle" Elevation="0" MinWidth="70px" MaxHeight="44px">
                 <MudText Typo="Typo.body1"><b>XP: @Award</b></MudText>
             </MudPaper>
     </MudStack>
@@ -34,7 +34,7 @@
             @if (!Explanation.Equals(""))
             {
                 <MudExpansionPanels Class="mt-4">
-                    <MudExpansionPanel Class="pl-4 pr-4" Style="@ExplanationStyle">
+                    <MudExpansionPanel Class="pl-4 pr-4" Style="@_explanationStyle">
                         <TitleContent>
                             <MudText Typo="Typo.h5">Explanation</MudText>
                         </TitleContent>
@@ -67,7 +67,7 @@
     [Parameter]
     public int XP { get; set; } = 30;
     public string Class { get; set; } = "mt-4 pa-4";
-    public int Award => attempts >= 0 ? Math.Max(5, ((XP / (attempts + 1)) / 5) * 5) : 0;
+    public int Award => _attempts >= 0 ? Math.Max(5, ((XP / (_attempts + 1)) / 5) * 5) : 0;
 
 
 
@@ -82,10 +82,10 @@
     private string SelectedOption { get; set; }
     private bool _isSubmitted = false;
     private bool _isWrong = false;
-    private int attempts = 0;
+    private int _attempts = 0;
 
-    private string ExplanationStyle = $"background: #ffffe3; color: {Themes.s_CSharpTheme.Palette.Black.ToString()};";
-    private string XPDisplayStyle = $"color: {Themes.s_CSharpTheme.Palette.Success.ToString()};";
+    private string _explanationStyle = $"background: #ffffe3; color: {Themes.s_CSharpTheme.Palette.Black.ToString()};";
+    private string _xpDisplayStyle = $"color: {Themes.s_CSharpTheme.Palette.Success.ToString()};";
 
     private List<CheckBoxOption> _options = new List<CheckBoxOption>();
     private string Path => $"{NavigationManager.GetRoute()}/questions/{Question}";
@@ -106,7 +106,7 @@
         }
         else
         {
-            this.attempts = 0;
+            this._attempts = 0;
             this.Reset();
         }
     }
@@ -116,7 +116,7 @@
         _options.ForEach(o => o.IsChecked = newData.Answers.Contains(o.Text));
         this.SelectedOption = newData.Answers.Count() > 0 ? newData.Answers[0] : "";
         this._isSubmitted = newData.IsSubmitted;
-        this.attempts = newData.Attempts;
+        this._attempts = newData.Attempts;
         this.LoadSubmit();
         this.StateHasChanged();
     }
@@ -132,7 +132,7 @@
             this._options.ForEach(option => option.IsChecked = this.SelectedOption == option.Text);
         }
         _isWrong = this._options.Where(option => !option.CheckAnswer()).Count() > 0;
-        if (this.attempts != -1 && !_isWrong)
+        if (this._attempts != -1 && !_isWrong)
         {
             UserService.Service.GiveXP(Award);
         }
@@ -143,9 +143,9 @@
         this._isSubmitted = true;
         LoadSubmit();
         // if the user hasn't selected "show answer", then...
-        if (this.attempts != -1 && _isWrong)
+        if (this._attempts != -1 && _isWrong)
         {
-            this.attempts++;
+            this._attempts++;
         }
         this.UpdateAndSave();
     }
@@ -175,14 +175,14 @@
     {
         this._options.ForEach(option => option.IsChecked = option.IsCorrect);
         this.SelectedOption = this._options.First(option => option.IsCorrect).Text;
-        this.attempts = -1;
+        this._attempts = -1;
         this.Submit();
     }
 
     private void UpdateAndSave()
     {
         string[] options = this._options.Where(o => o.IsChecked).Select(o => o.Text).ToArray();
-        MultipleChoiceQuestionData data = new MultipleChoiceQuestionData(options, this._isSubmitted, this.attempts);
+        MultipleChoiceQuestionData data = new MultipleChoiceQuestionData(options, this._isSubmitted, this._attempts);
         UserService.Service.SaveJsonData<MultipleChoiceQuestionData>(Path, data);
     }
 }
