@@ -2,6 +2,7 @@ namespace CaptainCoder;
 
 public class StoreItem 
 {
+    public static readonly StoreItem Default = new StoreItem("Loading...", "Loading...", 1_000_000, "Loading...", "/imgs/store/loading.png");
     public string Name {get; }
     public string Type {get; }
     public int Cost {get; }

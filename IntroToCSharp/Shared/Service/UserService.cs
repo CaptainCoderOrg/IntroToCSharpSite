@@ -23,6 +23,7 @@ public class UserService
     private IJSRuntime? _runtime;
     private User _userData = User.NoUser;
     private UserStats _userStats = CaptainCoder.UserStats.Default;
+    private UserInventory _userInventory = CaptainCoder.UserInventory.Default;
     private event Action<User>? UserChangedEvent;
     public event Action<User> OnUserChange
     {
@@ -74,6 +75,14 @@ public class UserService
         if (UserData.UserStatsRef != null)
         {
             UserData.UserStatsRef.DataChangedEvent += (userStats) => this._userStats = userStats!;
+        }
+
+        if (UserData.UserInventoryRef != null)
+        {
+            UserData.UserInventoryRef.DataChangedEvent += (userInventory) => {
+                Console.WriteLine($"User Inventory Updated: {userInventory}");
+                this._userInventory = userInventory!;
+            };
         }
 
     }
@@ -200,6 +209,15 @@ public class UserService
         if (!_userData.IsLoggedIn) return false;
         UserStats newStats = new (_userStats.XP, _userStats.Gold + goldToGive);
         _userData.UserStatsRef?.Set(newStats);
+        return true;
+    }
+
+    public bool BuyItem(StoreItem toBuy) {
+        if (!_userData.IsLoggedIn) return false;
+        this.GiveGold(-toBuy.Cost);
+        UserInventory newInventory = _userInventory.AddItem(toBuy);
+        Console.WriteLine(newInventory.Items.Length);
+        _userData.UserInventoryRef?.Set(newInventory);
         return true;
     }
 }

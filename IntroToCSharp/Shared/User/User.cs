@@ -44,6 +44,7 @@ public abstract class User
     public DataReference<string>? ProjectData;
     public DataReference<string>? DefaultProject;
     public DataReference<UserStats>? UserStatsRef { get; protected set; }
+    public DataReference<UserInventory>? UserInventoryRef { get; protected set; }
     protected Dictionary<string, string>? _projects;
 
     public Dictionary<string, string> Projects
@@ -83,6 +84,7 @@ public abstract class User
         this.ProjectData = DataReference.String($"/users/{this.UID}/projectData", "{}", "Project Data");
         this.DefaultProject = DataReference.String($"/users/{this.UID}/prefs/DefaultProject", "", "Last Project");
         this.UserStatsRef = DataReference.Json<UserStats>($"/users/{this.UID}/users_stats", UserStats.Default, "User Stats");
+        this.UserInventoryRef = DataReference.Json<UserInventory>($"/users/{this.UID}/inventory", UserInventory.Default, "User Inventory");
 
         this.ProjectData.DataChangedEvent += data =>
         {

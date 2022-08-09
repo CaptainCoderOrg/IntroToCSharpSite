@@ -19,6 +19,26 @@ public static class Utils
         };
     }
 
+    public static string FormatGold(int amount) 
+    {  
+        if (amount < 1_000_000) {
+            string hundreds = $"{amount % 1000}".PadLeft(3, '0');
+            string thousands = $"{amount / 1000}";
+            return $"{thousands},{hundreds}";
+        }
+        return FormatGold(amount/1000, amount%1000, 1);
+    }
+
+    private static string FormatGold(int amount, int mod, int thousands) 
+    {
+        if (amount >= 1000) {
+            return FormatGold(amount/1000, amount%1000, thousands+1);
+        }
+        string[] vals = {"h", "t", "M", "B", "T", "q", "Q", "s", "S"};
+        string dec = $"{mod}".PadLeft(3, '0');
+        return $"{amount}.{dec} {vals[thousands]}";
+    }
+
     public static async Task<IJSRuntime> GetJSRunTime()
     {
         await Task.Run(() => { while(s_JS == null) Thread.Sleep(10); } );

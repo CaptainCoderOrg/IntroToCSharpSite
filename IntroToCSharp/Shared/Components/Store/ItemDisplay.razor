@@ -1,4 +1,10 @@
+@inject IDialogService DialogService
+
 <MudCard Class="ma-2" Outlined="true" Style="width: 450px">
+
+    <MudButton OnClick="@GiveGold" Variant="Variant.Filled" Color="Color.Tertiary">Become Rich!</MudButton>
+    <MudButton OnClick="@GoBankrupt" Variant="Variant.Filled" Color="Color.Warning">Go Bankrupt!</MudButton>
+
     <MudCardMedia Image="@Item.Image" Height="200" />
     <MudCardContent Class="pa-2">
         <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center">
@@ -16,22 +22,25 @@
     </MudCardActions>
 </MudCard>
 
-
 @code {
     [Parameter]
-    public StoreItem Item { get; set; }
-
+    public StoreItem Item { get; set; } = StoreItem.Default;
     private UserStats _userData { get; set; } = UserStats.Default;
-
     public void Purchase()
     {
+        var options = new DialogOptions { CloseOnEscapeKey = true };
+        var parameters = new DialogParameters();
+        parameters.Add("Item", Item);
         if (_userData.Gold > Item.Cost)
         {
-            UserService.Service.GiveGold(Item.Cost * -1);
-
+            DialogService.Show<ConfirmDialog>("Confirm", parameters, options);
+            // add item to list of purchased items
+        }
+        else
+        {
+            DialogService.Show<NotEnoughGoldDialog>("Oh no!", parameters, options);
         }
     }
-
     protected override void OnInitialized()
     {
         UserService.Service.OnUserChange += this.UpdateUser;
@@ -39,7 +48,8 @@
 
     private void UpdateUser(User newUser)
     {
-        if (newUser.IsLoggedIn && newUser.UserStatsRef != null) {
+        if (newUser.IsLoggedIn && newUser.UserStatsRef != null)
+        {
             newUser.UserStatsRef.DataChangedEvent += UpdateUserData;
         }
     }
@@ -49,6 +59,15 @@
         if (newUserData == null) return;
         this._userData = newUserData;
         this.StateHasChanged();
+    }
+
+    public void GiveGold()
+    {
+        UserService.Service.GiveGold(100000);
+    }
+    public void GoBankrupt(){
+        UserService.Service.GiveGold(-100000);
+
     }
 
 }

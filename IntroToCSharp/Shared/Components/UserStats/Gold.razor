@@ -1,7 +1,7 @@
 @using CaptainCoder
 <MudImage Class="mr-0 pr-0" Src="/imgs/top-menu/coin.png" Width="25" Height="25"></MudImage>
 <MudElement Class="ml-0 mr-6" Style="width:100px">
-    <MudText Class="pa-0 ma-0" Style="text-align:center;" Typo="Typo.h6">@Data.Gold</MudText>
+    <MudText Class="pa-0 ma-0" Style="text-align:center;" Typo="Typo.h6">@(Utils.FormatGold(Data.Gold))</MudText>
 </MudElement>
 
 @code {

@@ -33,3 +33,36 @@ public class UserStats
 
     public readonly static UserStats Default = new (0, 0);
 }
+
+public class UserInventory
+{
+    public static readonly UserInventory Default = new UserInventory();
+    private readonly List<StoreItem> _items;
+    public StoreItem[] Items 
+    {
+        get => _items.ToArray();
+        set {
+            _items.Clear(); 
+            _items.AddRange(value);
+        }
+    } 
+
+
+    public UserInventory()
+    {
+        _items = new ();
+    }
+    public UserInventory(List<StoreItem> items)
+    {
+        _items = new (items);
+    }
+
+    private UserInventory(UserInventory old, StoreItem toAdd) : this (old._items) {
+        _items.Add(toAdd);
+    }
+
+    public UserInventory AddItem(StoreItem toAdd) 
+    {
+        return new UserInventory(this, toAdd);
+    }
+}

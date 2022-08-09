@@ -1,0 +1,16 @@
+<MudDialog>
+    <DialogContent>
+        You do not have enough gold to buy <b>@Item.Name</b>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="@Exit" Variant="Variant.Filled" Color="Color.Success">Ok</MudButton>
+    </DialogActions>
+</MudDialog>
+@code {
+    [CascadingParameter] MudDialogInstance? MudDialog { get; set; }
+
+    [Parameter]
+    public StoreItem Item { get; set; } = StoreItem.Default;
+    
+    void Exit() => MudDialog?.Close(DialogResult.Ok(true));
+}
