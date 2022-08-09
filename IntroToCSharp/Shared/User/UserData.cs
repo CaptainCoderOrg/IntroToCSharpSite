@@ -47,7 +47,6 @@ public class UserInventory
         }
     } 
 
-
     public UserInventory()
     {
         _items = new ();
