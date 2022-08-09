@@ -1,7 +1,15 @@
 @inject NavigationManager NavigationManager
 
-<MudPaper Class="@Class" Elevation="5">
-    <MudText Typo="Typo.h6">@Question @Award</MudText>
+<MudPaper Class="mt-4 pa-4" Elevation="5">
+    <MudStack Justify="Justify.SpaceBetween" Row="true">
+        <MudPaper Elevation="0">
+            <MudText Typo="Typo.h6">@Question</MudText>
+        </MudPaper>
+        <MudPaper Class="pa-2 border-solid border-2 mud-border-success rounded-pill" Style="@_xpDisplayStyle"
+            Elevation="0" MinWidth="70px" MaxHeight="44px">
+            <MudText Typo="Typo.body1"><b>XP: @Award</b></MudText>
+        </MudPaper>
+    </MudStack>
     <MudRadioGroup @bind-SelectedOption="@SelectedOption">
         <MudStack Class="mt-4">
             <CascadingValue Value="@this">
@@ -27,7 +35,7 @@
             @if (!Explanation.Equals(""))
             {
                 <MudExpansionPanels Class="mt-4">
-                    <MudExpansionPanel Class="pl-4 pr-4" Style="@ExplanationStyle">
+                    <MudExpansionPanel Class="pl-4 pr-4" Style="@_explanationStyle">
                         <TitleContent>
                             <MudText Typo="Typo.h5">Explanation</MudText>
                         </TitleContent>
@@ -59,10 +67,10 @@
     public RenderFragment ChildContent { get; set; } = null!;
     [Parameter]
     public int XP { get; set; } = 30;
-    [Parameter]
-    public string Class {get; set; } = "mt-4 pa-4";
-    public int Award => _attempts >= 0 ? Math.Max(5, (XP / (_attempts+1))*5) : 0;
-    
+    public string Class { get; set; } = "mt-4 pa-4";
+    public int Award => _attempts >= 0 ? Math.Max(5, ((XP / (_attempts + 1)) / 5) * 5) : 0;
+
+
 
     /// <summary>
     /// This is the explanation that appears after the user submits the question.
@@ -77,12 +85,13 @@
     private bool _isWrong = false;
     private int _attempts = 0;
 
-    private string ExplanationStyle = $"background: #ffffe3; color: {Themes.s_CSharpTheme.Palette.Black.ToString()};";
+    private string _explanationStyle = $"background: #ffffe3; color: {Themes.s_CSharpTheme.Palette.Black.ToString()};";
+    private string _xpDisplayStyle = $"color: {Themes.s_CSharpTheme.Palette.Success.ToString()};";
 
     private List<CheckBoxOption> _options = new List<CheckBoxOption>();
     private string Path => $"{NavigationManager.GetRoute()}/questions/{Question}";
     private DataReference<MultipleChoiceQuestionData>? _dataReference;
-    
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
@@ -124,19 +133,21 @@
             this._options.ForEach(option => option.IsChecked = this.SelectedOption == option.Text);
         }
         _isWrong = this._options.Where(option => !option.CheckAnswer()).Count() > 0;
+        if (this._attempts != -1 && !_isWrong)
+        {
+            UserService.Service.GiveXP(Award);
+        }
     }
 
     private void Submit()
     {
-        // if the user hasn't selected "show answer", then...
-        if(this._attempts != -1 ) {
-            this._attempts++;
-        }
         this._isSubmitted = true;
         LoadSubmit();
-        if(this._attempts < 4 && this._attempts != -1 && !_isWrong ) {
-            UserService.Service.GiveXP(Award);
-        } 
+        // if the user hasn't selected "show answer", then...
+        if (this._attempts != -1 && _isWrong)
+        {
+            this._attempts++;
+        }
         this.UpdateAndSave();
     }
 
@@ -165,7 +176,6 @@
     {
         this._options.ForEach(option => option.IsChecked = option.IsCorrect);
         this.SelectedOption = this._options.First(option => option.IsCorrect).Text;
-        // We had to move this line above so that the submit method can know when the user clicked "show answer" and then award xp accordingly. 
         this._attempts = -1;
         this.Submit();
     }
