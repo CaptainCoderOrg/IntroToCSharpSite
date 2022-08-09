@@ -2,12 +2,13 @@
 
 <MudPaper Class="mt-4 pa-4" Elevation="5">
     <MudStack Justify="Justify.SpaceBetween" Row="true">
-            <MudPaper Elevation="0">
-                <MudText Typo="Typo.h6">@Question</MudText>
-            </MudPaper>
-            <MudPaper Class="pa-2 border-solid border-2 mud-border-success rounded-pill" Style="@_xpDisplayStyle" Elevation="0" MinWidth="70px" MaxHeight="44px">
-                <MudText Typo="Typo.body1"><b>XP: @Award</b></MudText>
-            </MudPaper>
+        <MudPaper Elevation="0">
+            <MudText Typo="Typo.h6">@Question</MudText>
+        </MudPaper>
+        <MudPaper Class="pa-2 border-solid border-2 mud-border-success rounded-pill" Style="@_xpDisplayStyle"
+            Elevation="0" MinWidth="70px" MaxHeight="44px">
+            <MudText Typo="Typo.body1"><b>XP: @Award</b></MudText>
+        </MudPaper>
     </MudStack>
     <MudRadioGroup @bind-SelectedOption="@SelectedOption">
         <MudStack Class="mt-4">
@@ -48,9 +49,9 @@
         }
 
     }
-    </MudPaper>
+</MudPaper>
 
-    @code {
+@code {
     /// <summary>
     /// Specifies if this question uses CheckBoxes (true) or RadioButtons (false). The
     /// default behavior is RadioButtons (false).
