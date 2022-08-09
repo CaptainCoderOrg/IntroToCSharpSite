@@ -31,6 +31,5 @@ public class UserStats
         return 100 * level * level;
     }
 
-
     public readonly static UserStats Default = new (0, 0);
 }
