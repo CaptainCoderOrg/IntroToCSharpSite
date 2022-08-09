@@ -17,8 +17,13 @@
         <MudText Typo="Typo.body2">@Item.Description</MudText>
     </MudCardContent>
     <MudCardActions>
+    @if(Array.Exists(@InventoryData.Items, element => element.Name == Item.Name)) {
+        <MudButton OnClick="@Purchase" Variant="Variant.Filled" Color="Color.Primary" Class="pl-8 pr-8"
+            FullWidth="true">Purchase</MudButton>
+    } else {
         <MudButton OnClick="@Purchase" Variant="Variant.Filled" Color="Color.Success" Class="pl-8 pr-8"
             FullWidth="true">Buy</MudButton>
+    }
     </MudCardActions>
 </MudCard>
 
@@ -26,6 +31,9 @@
     [Parameter]
     public StoreItem Item { get; set; } = StoreItem.Default;
     private UserStats _userData { get; set; } = UserStats.Default;
+
+    public UserInventory InventoryData { get; set; } = UserInventory.Default;
+
     public void Purchase()
     {
         var options = new DialogOptions { CloseOnEscapeKey = true };
@@ -69,5 +77,4 @@
         UserService.Service.GiveGold(-100000);
 
     }
-
 }
