@@ -2,6 +2,6 @@ namespace CaptainCoder;
 
 public interface IItemDatabase
 {
-    public string[] Filters {get;}
+    public Filter[] Filters {get;}
     public List<StoreItem> GetItems(string filter);
 }
