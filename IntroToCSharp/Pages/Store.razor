@@ -1,22 +1,27 @@
 @inherits CaptainCoder.Page
 @page "/store"
 
-<FilterBar></FilterBar>
+<MudStack Class="ma-6" Spacing="0" Row="true" Justify="Justify.Center">
+    @foreach(string filter in ItemDatabase.Filters){
+        <MudButton OnClick="@(() => ApplyFilter(filter))"Variant="Variant.Filled" Class="pl-8 pr-8 pa-3">@filter</MudButton>
+    }
+</MudStack>
 
 <MudGrid Spacing="1" Justify="Justify.SpaceEvenly">
-    <ItemDisplay Item="simpleAxe"></ItemDisplay>
-    <ItemDisplay Item="ironSword"></ItemDisplay>
-    <ItemDisplay Item="goldSword"></ItemDisplay>
-    <ItemDisplay Item="goldAxe"></ItemDisplay>
+    @foreach(StoreItem item in ItemDatabase.GetItems(currentFilter)) {
+        Console.WriteLine("filter: ");
+        Console.WriteLine(currentFilter);
+        <ItemDisplay Item="@item"/>
+    }
 </MudGrid>
 
 @code {
-    StoreItem simpleAxe = new("Axe", "Weapon", 1000, "A simple, but effective axe.",
-        "/imgs/store/weapons/axe.png");
-    StoreItem ironSword = new("Iron Sword", "Weapon", 1500, "A durable sword made of iron.",
-        "/imgs/store/weapons/IronSword.png");
-    StoreItem goldSword = new("Golden Sword", "Weapon", 30000000, "A strong and fast sword, but breaks easily.",
-        "/imgs/store/weapons/GoldSword.png");
-    StoreItem goldAxe = new("Golden Axe", "Weapon", 3000, "A very heavy hitting axe, but not super durable.",
-        "/imgs/store/weapons/GoldAxe.png");
+    private IItemDatabase ItemDatabase {get;} = new MockDatabase();
+
+    private string currentFilter = "All";
+    // You can't have a WriteLine outside of a method
+    private void ApplyFilter(string filter) {
+        Console.WriteLine(ItemDatabase.GetItems(currentFilter));
+        currentFilter = filter;
+    }
 }
