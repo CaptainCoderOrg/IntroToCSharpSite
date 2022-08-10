@@ -57,6 +57,8 @@ public static class Utils
         return s_LocalStorage!;
     }
 
+    public static int RoundToNearest(this int amount, int roundAmount) => roundAmount*(amount/roundAmount);
+
     /// <summary>
     /// Sanitize a database path by replacing illegal characters with underscores.
     /// </summary>

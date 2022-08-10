@@ -17,13 +17,16 @@
         <MudText Typo="Typo.body2">@Item.Description</MudText>
     </MudCardContent>
     <MudCardActions>
-    @if(Array.Exists(@InventoryData.Items, element => element.Name == Item.Name)) {
-        <MudButton OnClick="@Purchase" Variant="Variant.Filled" Color="Color.Primary" Class="pl-8 pr-8"
-            FullWidth="true">Purchase</MudButton>
-    } else {
-        <MudButton OnClick="@Purchase" Variant="Variant.Filled" Color="Color.Success" Class="pl-8 pr-8"
+        @if (InventoryData.Contains(Item))
+        {
+            <MudButton Disabled="true" Variant="Variant.Filled" Color="Color.Primary" Class="pl-8 pr-8" FullWidth="true">
+                Owned</MudButton>
+        }
+        else
+        {
+            <MudButton OnClick="@Purchase" Variant="Variant.Filled" Color="Color.Success" Class="pl-8 pr-8"
             FullWidth="true">Buy</MudButton>
-    }
+        }
     </MudCardActions>
 </MudCard>
 
@@ -49,6 +52,7 @@
             DialogService.Show<NotEnoughGoldDialog>("Oh no!", parameters, options);
         }
     }
+
     protected override void OnInitialized()
     {
         UserService.Service.OnUserChange += this.UpdateUser;
@@ -56,9 +60,10 @@
 
     private void UpdateUser(User newUser)
     {
-        if (newUser.IsLoggedIn && newUser.UserStatsRef != null)
+        if (newUser.IsLoggedIn)
         {
-            newUser.UserStatsRef.DataChangedEvent += UpdateUserData;
+            if (newUser.UserStatsRef != null) newUser.UserStatsRef.DataChangedEvent += UpdateUserData;
+            if (newUser.UserInventoryRef != null) newUser.UserInventoryRef.DataChangedEvent += UpdateUserInventory;
         }
     }
 
@@ -69,11 +74,20 @@
         this.StateHasChanged();
     }
 
+    private void UpdateUserInventory(UserInventory? newUserInventory)
+    {
+        if (newUserInventory == null) return;
+        this.InventoryData = newUserInventory;
+        this.StateHasChanged();
+
+    }
+
     public void GiveGold()
     {
         UserService.Service.GiveGold(100000);
     }
-    public void GoBankrupt(){
+    public void GoBankrupt()
+    {
         UserService.Service.GiveGold(-100000);
 
     }

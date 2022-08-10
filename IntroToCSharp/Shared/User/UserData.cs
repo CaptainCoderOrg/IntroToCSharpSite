@@ -56,12 +56,21 @@ public class UserInventory
         _items = new (items);
     }
 
-    private UserInventory(UserInventory old, StoreItem toAdd) : this (old._items) {
-        _items.Add(toAdd);
+    private UserInventory(UserInventory old, StoreItem item, bool add = true) : this (old._items) {
+        if (add)
+        {
+            _items.Add(item);
+        }
+        else 
+        {
+            Console.WriteLine($"Removing item: {item.Name}");
+            bool removed = _items.Remove(item);
+            Console.WriteLine($"Was Removed? {removed}");
+        }
     }
 
-    public UserInventory AddItem(StoreItem toAdd) 
-    {
-        return new UserInventory(this, toAdd);
-    }
+    public bool Contains(StoreItem toCheck) => _items.Contains(toCheck);
+
+    public UserInventory AddItem(StoreItem toAdd) => new UserInventory(this, toAdd, true);
+    public UserInventory RemoveItem(StoreItem toRemove) => new UserInventory(this, toRemove, false);
 }
