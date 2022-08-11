@@ -4,15 +4,11 @@
 <FilterBar @bind-Items="Items" />
 
 <MudGrid Spacing="1" Justify="Justify.SpaceEvenly">
-
     @foreach (StoreItem item in Items)
     {
         <ItemDisplay Item="@item" />
     }
-</MudGrid>
-
-@code {
-
+    </MudGrid>
+    @code {
     private List<StoreItem> Items { get; set; } = new();
-
 }

@@ -12,12 +12,18 @@
     </MudCardContent>
 </MudCard>
 @code {
+    /// <summary>
+    /// The item displayed in the store or inventory.
+    /// </summary>
+    /// <value>The item to be displayed.</value>
     [Parameter]
     public StoreItem Item { get; set; } = StoreItem.Default;
-
+    /// <summary>
+    /// The contents of the users inventory.
+    /// </summary>
+    /// <value>Store items are kept in the inventory data.</value>
     public UserInventory InventoryData { get; set; } = UserInventory.Default;
-
-    public void Sell() {
+    private void Sell() {
         var options = new DialogOptions { CloseOnEscapeKey = true };
         var parameters = new DialogParameters();
         parameters.Add("Item", Item);

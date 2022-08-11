@@ -139,7 +139,7 @@ internal class JsonDataReference<T> : DataReference<T>
         Console.WriteLine(jsonData);
         await DatabaseService.Service.Set<string>(Path, jsonData, handler);
     }
-
+    /// <inheritdoc/>
     protected override void HandleChange(string data)
     {
         try
@@ -162,7 +162,7 @@ internal class JsonDataReference<T> : DataReference<T>
 
 internal class BoolDataReference : DataReference<bool>
 {
-    private static readonly Dictionary<string, BoolDataReference> DataRefs = new ();
+    private static readonly Dictionary<string, BoolDataReference> DataRefs = new();
     internal static DataReference<bool> GetRef(string path, bool defaultValue = false, string? niceName = null)
     {
         if (!DataRefs.TryGetValue(path, out BoolDataReference? value))
@@ -173,6 +173,7 @@ internal class BoolDataReference : DataReference<bool>
     }
     private BoolDataReference(string path, bool defaultValue = false, string? niceName = null) : base(path, defaultValue, niceName) { }
 
+    /// <inheritdoc/>
     protected override void HandleChange(string data)
     {
         try
@@ -188,7 +189,7 @@ internal class BoolDataReference : DataReference<bool>
             NotificationService.Service.Add($"Error loading {NiceName}.", Severity.Error).AndForget();
         }
     }
-
+    /// <inheritdoc/>
     public override async void Set(bool data, bool notifyOnSuccess = true)
     {
         IResultHandler handler = notifyOnSuccess ? this : IResultHandler.Default;
@@ -198,7 +199,7 @@ internal class BoolDataReference : DataReference<bool>
 
 internal class StringDataReference : DataReference<string>
 {
-    private static readonly Dictionary<string, StringDataReference> DataRefs = new ();
+    private static readonly Dictionary<string, StringDataReference> DataRefs = new();
     internal static DataReference<string> GetRef(string path, string defaultValue = "", string? niceName = null)
     {
         if (!DataRefs.TryGetValue(path, out StringDataReference? value))
@@ -208,7 +209,7 @@ internal class StringDataReference : DataReference<string>
         return value;
     }
     private StringDataReference(string path, string defaultValue = "", string? niceName = null) : base(path, defaultValue, niceName) { }
-
+    /// <inheritdoc/>
     protected override void HandleChange(string data)
     {
         try
@@ -224,7 +225,7 @@ internal class StringDataReference : DataReference<string>
             NotificationService.Service.Add($"Error loading {NiceName}.", Severity.Error).AndForget();
         }
     }
-
+    /// <inheritdoc/>
     public override async void Set(string data, bool notifyOnSuccess = true)
     {
         IResultHandler handler = notifyOnSuccess ? this : IResultHandler.Default;

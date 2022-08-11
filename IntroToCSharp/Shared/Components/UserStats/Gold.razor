@@ -5,13 +5,17 @@
 </MudElement>
 
 @code {
+    /// <summary>
+    /// Gets the user data.
+    /// </summary>
+    /// <value>The user's data.</value>
     public UserStats Data { get; set; } = UserStats.Default;
-
+    
+    /// <inheritdoc/>
     protected override void OnInitialized()
     {
         UserService.Service.OnUserChange += this.UpdateUser;
     }
-
     private void UpdateUser(User newUser)
     {
         newUser.UserStatsRef.DataChangedEvent += UpdateUserData;

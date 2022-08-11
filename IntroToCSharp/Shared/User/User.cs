@@ -67,9 +67,7 @@ public abstract class User
         this._projects = null;
         this.DefaultProject = null;
         this.UserStatsRef = null;
-
     }
-
     public override string ToString()
     {
         return $"User {{ {DisplayName}, {Email} }}";
@@ -77,7 +75,6 @@ public abstract class User
 
     internal protected void DoLogin()
     {
-
         this.IsLoggedIn = true;
         // TODO(jcollard 2022-04-04): default to localstorage.DarkMode?
         this.DarkMode = DataReference.Bool($"/users/{this.UID}/prefs/DarkMode", false, "Dark Mode");
