@@ -1,9 +1,67 @@
 <MudStack Class="ma-6" Spacing="0" Row="true" Justify="Justify.Center">
-    <MudButton Variant="Variant.Filled" Class="pl-8 pr-8 pa-3">All</MudButton>
-    <MudButton Variant="Variant.Filled" Class="pl-8 pr-8 pa-3">Weapons</MudButton>
-    <MudButton Variant="Variant.Filled" Class="pl-8 pr-8 pa-3">Item 3</MudButton>
-    <MudButton Variant="Variant.Filled" Class="pl-8 pr-8 pa-3">Item 4</MudButton>
-    <MudButton Variant="Variant.Filled" Class="pl-8 pr-8 pa-3">Item 5</MudButton>
-    <MudButton Variant="Variant.Filled" Class="pl-8 pr-8 pa-3">Item 6</MudButton>
-</MudStack>
+    @foreach (Filter filter in ItemDatabase.Filters)
+    {
+        @if (!filter.hasSubFilters)
+        {
+            <MudButton OnClick="@(() => ApplyFilter(filter.Name))" Variant="Variant.Filled" Class="pa=0" Size="Size.Large">
+                @filter.Name
+            </MudButton>
+        }
+        else
+        {
+            <MudMenu Label="@filter.Name" Variant="Variant.Filled" Class="pa-0" Size="Size.Large" FullWidth="false">
+                @foreach (string subFilter in filter.subFilters)
+                {
+                    <MudMenuItem OnClick="@(() => ApplySubFilter(subFilter))">@subFilter</MudMenuItem>
+                }
+            </MudMenu>
+        }
+    }
+    </MudStack>
 
+@code {
+    [Parameter]
+    public IItemDatabase ItemDatabase { get; set; } = new MockDatabase();
+    [Parameter]
+    public List<StoreItem> Items { get; set; } = new ();
+    [Parameter]
+    public EventCallback<List<StoreItem>> ItemsChanged { get; set; }
+    private async Task UpdateItemsFromChild()
+    {
+        await ItemsChanged.InvokeAsync(Items);
+    }
+    private void ApplyFilter(string filter)
+    {
+        Items = ItemDatabase.GetItems(filter);
+        this.UpdateItemsFromChild().AndForget();
+    }
+
+    private void ApplySubFilter(string subFilter)
+    {
+        Items = ItemDatabase.GetSubItems(subFilter);
+        this.UpdateItemsFromChild().AndForget();
+    }
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        this.ApplyFilter("All");
+        <!-- UserService.Service.OnUserChange += this.UpdateUser; -->
+    }
+
+    <!-- private void UpdateUser(User newUser)
+    {
+        if (!newUser.IsLoggedIn || newUser.UserInventoryRef == null)
+        {
+            InventoryData = UserInventory.Default;
+        }
+        else
+        {
+            newUser.UserInventoryRef.DataChangedEvent += UpdateUserData!;
+        }
+    }
+    private void UpdateUserData(UserInventory newInventory)
+    {
+        this.InventoryData = newInventory;
+        this.StateHasChanged();
+    } -->
+}

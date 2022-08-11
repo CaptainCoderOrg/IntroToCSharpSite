@@ -1,63 +1,18 @@
 @inherits CaptainCoder.Page
 @page "/store"
 
-<MudStack Class="ma-6" Spacing="0" Row="true" Justify="Justify.Center">
-    @foreach (Filter filter in ItemDatabase.Filters)
-    {
-        @if (!filter.hasSubFilters)
-        {
-            <MudButton OnClick="@(() => ApplyFilter(filter.Name))" Variant="Variant.Filled" Class="pa=0" Size="Size.Large">
-                @filter.Name
-            </MudButton>
-        }
-        else
-        {
-            <MudMenu Label="@filter.Name" Variant="Variant.Filled" Class="pa-0" Size="Size.Large" FullWidth="false">
-                @foreach (string subFilter in filter.subFilters)
-                {
-                    <MudMenuItem OnClick="@(() => ApplySubFilter(subFilter))">@subFilter</MudMenuItem>
-                }
-            </MudMenu>
-        }
-    }
-
-</MudStack>
+<FilterBar @bind-Items="Items" />
 
 <MudGrid Spacing="1" Justify="Justify.SpaceEvenly">
-    @if (!subFilterApplied)
-    {
-        @foreach (StoreItem item in ItemDatabase.GetItems(currentFilter))
-        {
-            Console.WriteLine("filter: ");
-            Console.WriteLine(currentFilter);
-            <ItemDisplay Item="@item" />
-        }
-    } else {
-        @foreach (StoreItem item in ItemDatabase.GetSubItems(currentFilter))
-        {
-            Console.WriteLine("filter: ");
-            Console.WriteLine(currentFilter);
-            <ItemDisplay Item="@item" />
-        }
-    }
 
+    @foreach (StoreItem item in Items)
+    {
+        <ItemDisplay Item="@item" />
+    }
 </MudGrid>
 
 @code {
-    private IItemDatabase ItemDatabase { get; } = new MockDatabase();
-    private bool subFilterApplied;
 
-    private string currentFilter = "All";
-    // You can't have a WriteLine outside of a method
-    private void ApplyFilter(string filter)
-    {
-        Console.WriteLine(ItemDatabase.GetItems(currentFilter));
-        currentFilter = filter;
-    }
+    private List<StoreItem> Items { get; set; } = new();
 
-    private void ApplySubFilter(string subFilter)
-    {
-        currentFilter = subFilter;
-        subFilterApplied = true;
-    }
 }
