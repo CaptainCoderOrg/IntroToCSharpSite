@@ -2,13 +2,22 @@
 
 <MudPaper Class="mt-4 pa-4" Elevation="5">
     <MudStack Justify="Justify.SpaceBetween" Row="true">
-        <MudPaper Elevation="0">
-            <MudText Typo="Typo.h6">@Question</MudText>
-        </MudPaper>
-        <MudPaper Class="pa-2 border-solid border-2 mud-border-success rounded-pill" Style="@_xpDisplayStyle"
-            Elevation="0" MinWidth="70px" MaxHeight="44px">
-            <MudText Typo="Typo.body1"><b>XP: @Award</b></MudText>
-        </MudPaper>
+        <MudElement>
+            <MudPaper Elevation="0">
+                <MudText Typo="Typo.h6">@Question</MudText>
+            </MudPaper>
+        </MudElement>
+        <MudStack Row="true">
+            <MudStack Class="pa-0 pr-3 border-solid border-2 mud-border-warning rounded-pill"
+                Elevation="0" MinWidth="70px" MaxHeight="44px" Row="true" AlignItems="AlignItems.Center">
+                <MudImage Src="/imgs/top-menu/coin.png" Width="20" Height="20"></MudImage>
+                <MudText Typo="Typo.body1"><b>@GoldAward</b></MudText>
+            </MudStack>
+            <MudPaper Class="pa-2 border-solid border-2 mud-border-success rounded-pill" Style="@_xpDisplayStyle"
+                Elevation="0" MinWidth="70px" MaxHeight="44px">
+                <MudText Typo="Typo.body1"><b>XP: @XPAward</b></MudText>
+            </MudPaper>
+        </MudStack>
     </MudStack>
     <MudRadioGroup @bind-SelectedOption="@SelectedOption">
         <MudStack Class="mt-4">
@@ -49,9 +58,9 @@
         }
 
     }
-</MudPaper>
+    </MudPaper>
 
-@code {
+    @code {
     /// <summary>
     /// Specifies if this question uses CheckBoxes (true) or RadioButtons (false). The
     /// default behavior is RadioButtons (false).
@@ -67,8 +76,10 @@
     public RenderFragment ChildContent { get; set; } = null!;
     [Parameter]
     public int XP { get; set; } = 30;
+    [Parameter]
+    public int GoldAward { get; set; } = 100;
     public string Class { get; set; } = "mt-4 pa-4";
-    public int Award => _attempts >= 0 ? Math.Max(5, ((XP / (_attempts + 1)) / 5) * 5) : 0;
+    public int XPAward => _attempts >= 0 ? Math.Max(5, ((XP / (_attempts + 1)) / 5) * 5) : 0;
 
 
 
@@ -135,7 +146,7 @@
         _isWrong = this._options.Where(option => !option.CheckAnswer()).Count() > 0;
         if (this._attempts != -1 && !_isWrong)
         {
-            UserService.Service.GiveXP(Award);
+            UserService.Service.GiveXP(XPAward);
         }
     }
 
