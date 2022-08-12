@@ -1,36 +1,43 @@
-﻿
-<MudDrawer @bind-Open="@Main.IsNavMenuOpen" Elevation="25" Variant="@DrawerVariant.Persistent" Style="position:fixed">
-    <MudDrawerHeader Class="pr-4">
-
-        <MudElement Class="d-flex flex-row justify-space-between" Style="width:100%">
-            <MudText Typo="Typo.h6">
-                <a href="">Intro To C#</a>
-            </MudText>
-            <MudIconButton Class="pa-0" Icon="@Icons.Material.Outlined.ArrowCircleLeft" Color="Color.Inherit" OnClick="@Main.ToggleNavMenu"/>
+﻿<MudDrawer @bind-Open="@Main.IsNavMenuOpen" Elevation="25" Variant="@DrawerVariant.Persistent" Style="position:fixed">
+    <MudElement Style="height:calc(100vh - 90px); overflow:scroll; overflow-y:auto">
+        <MudDrawerHeader Class="pr-4">
+            <MudElement Class="d-flex flex-row justify-space-between" Style="width:100%">
+                <MudText Typo="Typo.h6">
+                    <a href="">Intro To C#</a>
+                </MudText>
+                <MudIconButton Class="pa-0" Icon="@Icons.Material.Outlined.ArrowCircleLeft" Color="Color.Inherit"
+                    OnClick="@Main.ToggleNavMenu" />
+            </MudElement>
+        </MudDrawerHeader>
+        <MudNavMenu Bordered="true">
+            <MudNavGroup Title="Getting Started">
+                <MudNavLink Href="">Introduction</MudNavLink>
+                <MudNavLink Href="getting-started/replit-console">Replit Console</MudNavLink>
+            </MudNavGroup>
+            <MudNavGroup Title="Activities">
+                <MudNavLink Href="activities/console-basics">Console Basics</MudNavLink>
+                <MudNavLink Href="activities/two-truths-and-a-lie">Two Truths and a Lie</MudNavLink>
+                <MudNavLink Href="activities/mad-takes">Mad Takes</MudNavLink>
+                <MudNavLink Href="activities/variables">Variables</MudNavLink>
+            </MudNavGroup>
+            <MudNavGroup Title="Examples">
+                <MudNavLink Href="examples/read-input">Read Input</MudNavLink>
+                <MudNavLink Href="examples/display-options">Display Options</MudNavLink>
+                <MudNavLink Href="examples/random-dog-generator">Random Dog Generator</MudNavLink>
+                <MudNavLink Href="examples/association-list">Association List</MudNavLink>
+            </MudNavGroup>
+        </MudNavMenu>
+    </MudElement>
+    <MudElement Style="flex: 0 1">
+        <MudElement Style="display:flex; flex-direction:column">
+            <MudButton Style="margin-top:auto" Class="object-bottom" Variant="Variant.Filled"
+                StartIcon="@Icons.Filled.Inventory" Color="Color.Primary" Href="/inventory">Inventory</MudButton>
         </MudElement>
-    </MudDrawerHeader>
-    <MudNavMenu Bordered="true">
-        <MudNavGroup Title="Getting Started">
-            <MudNavLink Href="">Introduction</MudNavLink>
-            <MudNavLink Href="getting-started/replit-console">Replit Console</MudNavLink>
-        </MudNavGroup>
-        <MudNavGroup Title="Activities">
-            <MudNavLink Href="activities/console-basics">Console Basics</MudNavLink>
-            <MudNavLink Href="activities/two-truths-and-a-lie">Two Truths and a Lie</MudNavLink>
-            <MudNavLink Href="activities/mad-takes">Mad Takes</MudNavLink>
-            <MudNavLink Href="activities/variables">Variables</MudNavLink>
-        </MudNavGroup>
-        <MudNavGroup Title="Examples">
-            <MudNavLink Href="examples/read-input" >Read Input</MudNavLink>
-            <MudNavLink Href="examples/display-options">Display Options</MudNavLink>
-            <MudNavLink Href="examples/random-dog-generator">Random Dog Generator</MudNavLink>
-            <MudNavLink Href="examples/association-list">Association List</MudNavLink>
-        </MudNavGroup>
-    </MudNavMenu>
+    </MudElement>
 </MudDrawer>
 
 @code
 {
     [Parameter, EditorRequired]
-    public MainLayout Main {get; set;} = null!;
+    public MainLayout Main { get; set; } = null!;
 }
