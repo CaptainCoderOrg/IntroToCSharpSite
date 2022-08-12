@@ -15,7 +15,7 @@ jobs:
       with:
         dotnet-version: 6.0.201
     - name: Publish Project
-      run: dotnet publish IntroToCSharp/IntroToCSharp.csproj -c Release -o release --nologo
+      run: dotnet publish IntroToCSharp/IntroToCSharp.csproj -warnaserror -c Release -o release --nologo
     - name: Add .nojekyll file
       run: touch release/wwwroot/.nojekyll
     - name: Copy index.html to 404.html

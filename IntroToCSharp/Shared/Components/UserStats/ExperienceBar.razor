@@ -15,11 +15,18 @@
 
     private void UpdateUser(User newUser) 
     {
-        newUser.UserStatsRef.DataChangedEvent += UpdateUserData;
+        if (newUser.IsLoggedIn)
+        {
+            if (newUser.UserStatsRef != null) newUser.UserStatsRef.DataChangedEvent += UpdateUserData;
+        }
+        else
+        {
+            Data = UserStats.Default;
+        }
     }
-    private void UpdateUserData(UserStats newUserData)
+    private void UpdateUserData(UserStats? newUserData)
     {
-        Data = newUserData;
+        Data = newUserData == null ? UserStats.Default : newUserData;
         this.StateHasChanged();
     }
 
