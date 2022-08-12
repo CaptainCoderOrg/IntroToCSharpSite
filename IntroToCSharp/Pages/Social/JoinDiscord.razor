@@ -1,0 +1,32 @@
+@inherits CaptainCoder.Page
+@page "/social/join-discord"
+
+<tag>Discord</tag>
+
+<Section Title="Join our Discord">
+
+    <p> Join Captian Coder's Discord server! With just one click, you'll have access to learning support,
+        other programming students and even more fun!</p>
+
+    <p>
+        Captian Coder's Discord provides a central place to meet can grow alongside others in a growing community
+        of supportive members. When you click the following link, you'll be redirected to a link to join our discord server!
+    </p>
+
+    <MudImage Src="/imgs/social/joindiscord/jones.jpg" Alt="Jones" Elevation="25" Class="rounded-lg"/>
+
+
+    <MudButton Href="https://discord.gg/aBJVDvHf6A"
+           Target="_blank"
+           FullWidth="true"
+           Variant="Variant.Filled"
+           EndIcon="@Icons.Material.Filled.AddCircle"
+           Color="Color.Warning"
+           Disabled=@disabled>
+        Discord Link
+    </MudButton>
+</Section>
+
+@code{
+    bool disabled = false;
+}
