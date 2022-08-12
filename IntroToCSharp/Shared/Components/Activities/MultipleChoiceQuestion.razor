@@ -72,9 +72,10 @@
 
         }
     }
-    </MudPaper>
 
-    @code {
+</MudPaper>
+
+@code {
     /// <summary>
     /// Specifies if this question uses CheckBoxes (true) or RadioButtons (false). The
     /// default behavior is RadioButtons (false).
@@ -88,10 +89,10 @@
     /// <value>The question string.</value>
     [Parameter]
     public string Question { get; set; } = "Undefined";
-    
+
     [Parameter]
     public RenderFragment ChildContent { get; set; } = null!;
-    
+
     /// <summary>
     /// The max XP to be awarded.
     /// </summary>
@@ -108,7 +109,7 @@
 
     private string Class { get; set; } = "mt-4 pa-4";
     private int XPAward => _attempts >= 0 ? Math.Max(5, ((XP / (_attempts + 1)) / 5) * 5) : 0;
-    
+
     /// <summary>
     /// This is the explanation that appears after the user submits the question.
     /// If no explanation is given, no Explanation box appears after submission.
@@ -117,7 +118,7 @@
     [Parameter]
     public string Explanation { get; set; } = "";
 
-    private string SelectedOption { get; set; }
+    private string? SelectedOption { get; set; }
     private bool _isSubmitted = false;
     private bool _isWrong = false;
     private int _attempts = 0;
@@ -140,7 +141,7 @@
         if (userData.IsLoggedIn)
         {
             _dataReference = UserService.Service.GetJsonDataReference<MultipleChoiceQuestionData>(Path, Question);
-            _dataReference.DataChangedEvent += HandleDataChanged;
+            _dataReference!.DataChangedEvent += HandleDataChanged!;
         }
         else
         {
