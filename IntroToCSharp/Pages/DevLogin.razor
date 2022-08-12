@@ -12,13 +12,8 @@
 </MudForm>
 
 @code {
-    private string Username { get; set; }
-    private string Password { get; set; }
+    private string Username { get; set; } = String.Empty;
+    private string Password { get; set; } = String.Empty;
 
-    private void Login()
-    {
-        Console.WriteLine($"{Username}, {Password}");
-        UserService.Service.EmailLogin(Username, Password);
-        Console.WriteLine("Login Submitted");
-    }
+    private void Login() => UserService.Service.EmailLogin(Username, Password).AndForget();
 }
