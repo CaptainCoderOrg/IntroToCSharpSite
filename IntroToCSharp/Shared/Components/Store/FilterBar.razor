@@ -1,4 +1,5 @@
 <MudStack Class="ma-6" Spacing="0" Row="true" Justify="Justify.Center">
+
     @foreach (Filter filter in ItemDatabase.Filters)
     {
         @if (!filter.hasSubFilters)
@@ -10,16 +11,19 @@
         else
         {
             <MudMenu Label="@filter.Name" Variant="Variant.Filled" Class="pa-0" Size="Size.Large" FullWidth="false">
+
                 @foreach (string subFilter in filter.subFilters)
                 {
                     <MudMenuItem OnClick="@(() => ApplySubFilter(subFilter))">@subFilter</MudMenuItem>
                 }
+
             </MudMenu>
         }
     }
+
 </MudStack>
 
-    @code {
+@code {
     /// <summary>
     /// The Database that contains the information to be displayed in inventory or store.
     /// </summary>
