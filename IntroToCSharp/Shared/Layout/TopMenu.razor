@@ -1,19 +1,17 @@
 <MudAppBar Elevation="25">
-    <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" OnClick="@Main.ToggleNavMenu" Edge="Edge.Start"/>
+    <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" OnClick="@Main.ToggleNavMenu"
+        Edge="Edge.Start" />
     <MudSpacer />
-    <MudToggleIconButton @bind-Toggled="@Main.IsDarkMode"
-                         ToggledIcon="@Icons.Material.Outlined.LightMode"
-                         Icon="@Icons.Material.Outlined.DarkMode"
-                         Color="Color.Inherit" />
-    <MudIconButton Icon="@Icons.Material.Outlined.Terminal" 
-                   Color="Color.Inherit"
-                   OnClick="@Main.ToggleConsole" />
-    
+    <MudToggleIconButton @bind-Toggled="@Main.IsDarkMode" ToggledIcon="@Icons.Material.Outlined.LightMode"
+        Icon="@Icons.Material.Outlined.DarkMode" Color="Color.Inherit" />
+    <MudIconButton Icon="@Icons.Material.Outlined.Terminal" Color="Color.Inherit" OnClick="@Main.ToggleConsole" />
+    <MudIconButton Icon="@Icons.Material.Filled.Storefront" Color="Color.Inherit" Href="/store" />
+
     <MudSpacer />
     @if (UserData.IsLoggedIn)
     {
-        <Gold/>
-        <ExperienceBar/>
+        <Gold />
+        <ExperienceBar />
         <MudElement>@UserData.DisplayName </MudElement>
         <MudMenu>
             <ActivatorContent>
@@ -26,25 +24,26 @@
     }
     else
     {
-        <MudMenu Label="Login" Variant="Variant.Filled" Color="Color.Tertiary" class="ml-md-auto" ActivationEvent="@MouseEvent.MouseOver">
+        <MudMenu Label="Login" Variant="Variant.Filled" Color="Color.Tertiary" class="ml-md-auto"
+        ActivationEvent="@MouseEvent.MouseOver">
             <MudMenuItem OnClick="@UserService.Service.GoogleLogin">Google</MudMenuItem>
             <MudMenuItem OnClick="@UserService.Service.GitHubLogin">GitHub</MudMenuItem>
         </MudMenu>
     }
-</MudAppBar>
+    </MudAppBar>
 
-@code
-{
+    @code
+    {
     [Parameter, EditorRequired]
-    public MainLayout Main {get; set;} = null!;
+    public MainLayout Main { get; set; } = null!;
+    // The user's data
     public User UserData = User.NoUser;
-
     private void UpdateUser(User user)
     {
         UserData = user;
         InvokeAsync(StateHasChanged);
     }
-
+    /// <inheritdoc/>
     protected override void OnInitialized()
     {
         UserService.Service.OnUserChange += UpdateUser;

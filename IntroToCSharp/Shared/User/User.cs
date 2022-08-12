@@ -44,6 +44,7 @@ public abstract class User
     public DataReference<string>? ProjectData;
     public DataReference<string>? DefaultProject;
     public DataReference<UserStats>? UserStatsRef { get; protected set; }
+    public DataReference<UserInventory>? UserInventoryRef { get; protected set; }
     protected Dictionary<string, string>? _projects;
 
     public Dictionary<string, string> Projects
@@ -66,9 +67,7 @@ public abstract class User
         this._projects = null;
         this.DefaultProject = null;
         this.UserStatsRef = null;
-
     }
-
     public override string ToString()
     {
         return $"User {{ {DisplayName}, {Email} }}";
@@ -76,13 +75,13 @@ public abstract class User
 
     internal protected void DoLogin()
     {
-
         this.IsLoggedIn = true;
         // TODO(jcollard 2022-04-04): default to localstorage.DarkMode?
         this.DarkMode = DataReference.Bool($"/users/{this.UID}/prefs/DarkMode", false, "Dark Mode");
         this.ProjectData = DataReference.String($"/users/{this.UID}/projectData", "{}", "Project Data");
         this.DefaultProject = DataReference.String($"/users/{this.UID}/prefs/DefaultProject", "", "Last Project");
         this.UserStatsRef = DataReference.Json<UserStats>($"/users/{this.UID}/users_stats", UserStats.Default, "User Stats");
+        this.UserInventoryRef = DataReference.Json<UserInventory>($"/users/{this.UID}/inventory", UserInventory.Default, "User Inventory");
 
         this.ProjectData.DataChangedEvent += data =>
         {

@@ -4,8 +4,15 @@ using System.Text.Json;
 
 namespace CaptainCoder;
 
+/// <summary>
+/// UserService provides methods for keeping track of the user and preforming important actions. It is constructed without parameters.
+/// </summary>
 public class UserService
 {
+    /// <summary>
+    /// A new UserService.
+    /// </summary>
+    /// <returns>A new UserService.</returns>
     public static UserService Service { get; } = new UserService();
 
     private static void Init(IJSRuntime JS)
@@ -23,6 +30,7 @@ public class UserService
     private IJSRuntime? _runtime;
     private User _userData = User.NoUser;
     private UserStats _userStats = CaptainCoder.UserStats.Default;
+    private UserInventory _userInventory = CaptainCoder.UserInventory.Default;
     private event Action<User>? UserChangedEvent;
     public event Action<User> OnUserChange
     {
@@ -65,15 +73,27 @@ public class UserService
     public async Task EmailLogin(string email, string password) => await (await GetRuntime()).InvokeVoidAsync("firebaseEmailLogin", email, password);
     public async Task Logout() => await (await GetRuntime()).InvokeVoidAsync("firebaseLogout");
 
+    public User GetNonUpdatingUser() => _userData;
+
     [JSInvokable]
-    /// Callback when the user changes. The response is a JSON object or "null" if the user is
-    /// not authenticated.
+    /// <summary>
+    /// Callback when the user changes. The response is a JSON object or "null" if the user is not authenticated.
+    /// </summary>
+    /// <param name="response">The response</param>
     public void UpdateUser(string response)
     {
         UserData = User.Create(response);
         if (UserData.UserStatsRef != null)
         {
             UserData.UserStatsRef.DataChangedEvent += (userStats) => this._userStats = userStats!;
+        }
+        if (UserData.UserInventoryRef != null)
+        {
+            UserData.UserInventoryRef.DataChangedEvent += (userInventory) =>
+            {
+                Console.WriteLine($"User Inventory Updated: {userInventory}");
+                this._userInventory = userInventory!;
+            };
         }
 
     }
@@ -191,15 +211,50 @@ public class UserService
     public bool GiveXP(int xpToGive)
     {
         if (!_userData.IsLoggedIn) return false;
-        UserStats newStats = new (_userStats.XP + xpToGive, _userStats.Gold);
+        UserStats newStats = new(_userStats.XP + xpToGive, _userStats.Gold);
         _userData.UserStatsRef?.Set(newStats);
         return true;
     }
-
-    public bool GiveGold(int goldToGive) {
+    /// <summary>
+    /// Updates the current users Gold by adding the specified amount of Gold to
+    /// the User. This updates the reference in the database.
+    /// </summary>
+    /// <param name="goldToGive">The amount of gold to give(or remove)</param>
+    /// <returns>False if user is not logged in. Returns true otherwise.</returns>
+    public bool GiveGold(int goldToGive)
+    {
         if (!_userData.IsLoggedIn) return false;
-        UserStats newStats = new (_userStats.XP, _userStats.Gold + goldToGive);
+        UserStats newStats = new(_userStats.XP, _userStats.Gold + goldToGive);
         _userData.UserStatsRef?.Set(newStats);
+        return true;
+    }
+    /// <summary>
+    /// Updates the users gold based on if the user buys the item from the store. The item is added to the user's inventory.
+    /// </summary>
+    /// <param name="toBuy">The item to buy.</param>
+    /// <returns>False if the user is not logged in. Returns true otherwise.</returns>
+    public bool BuyItem(StoreItem toBuy)
+    {
+        if (!_userData.IsLoggedIn) return false;
+        this.GiveGold(-toBuy.Cost);
+        UserInventory newInventory = _userInventory.AddItem(toBuy);
+        Console.WriteLine(newInventory.Items.Length);
+        _userData.UserInventoryRef?.Set(newInventory);
+        return true;
+    }
+    /// <summary>
+    /// Updates the user's gold based on if the user sells the item. And removes the given item from the user's inventory.
+    /// </summary>
+    /// <param name="toSell">The item to sell.</param>
+    /// <param name="value">The amount the item is sold for.</param>
+    /// <returns>False if user is not logged in. Returns true otherwise.</returns>
+    public bool SellItem(StoreItem toSell, int value)
+    {
+        if (!_userData.IsLoggedIn) return false;
+        this.GiveGold(value);
+        UserInventory newInventory = _userInventory.RemoveItem(toSell);
+        Console.WriteLine(newInventory.Items.Length);
+        _userData.UserInventoryRef?.Set(newInventory);
         return true;
     }
 }

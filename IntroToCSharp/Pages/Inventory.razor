@@ -1,0 +1,40 @@
+@inherits CaptainCoder.Page
+@page "/inventory"
+
+<FilterBar @bind-Items="Items" ItemDatabase="UserInventoryDatabase" />
+
+<MudGrid Spacing="1" Justify="Justify.SpaceEvenly">
+
+    @foreach (StoreItem item in Items)
+    {
+        <InventoryItemDisplay Item="@item" />
+    }
+
+</MudGrid>
+
+@code {
+    private List<StoreItem> Items { get; set; } = new();
+    private IItemDatabase UserInventoryDatabase = new InventoryDatabase(UserInventory.Default);
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        UserService.Service.OnUserChange += this.UpdateUser;
+    }
+    private void UpdateUser(User newUser)
+    {
+        if (!newUser.IsLoggedIn || newUser.UserInventoryRef == null)
+        {
+            UserInventoryDatabase = new InventoryDatabase(UserInventory.Default);
+        }
+        else
+        {
+            newUser.UserInventoryRef.DataChangedEvent += UpdateInventory!;
+        }
+    }
+    private void UpdateInventory(UserInventory newInventory)
+    {
+        this.UserInventoryDatabase = new InventoryDatabase(newInventory);
+        this.Items = this.UserInventoryDatabase.GetItems("All");
+        this.StateHasChanged();
+    }
+}
