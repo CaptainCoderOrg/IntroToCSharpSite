@@ -48,6 +48,12 @@ public class UserStats
         level--;
         return 100 * level * level;
     }
+
+    public override string ToString()
+    {
+        return $"UserStats: XP: {this.XP}, Gold: {this.Gold}";
+    }
+
     /// <summary>
     /// Default UserStats object.
     /// </summary>

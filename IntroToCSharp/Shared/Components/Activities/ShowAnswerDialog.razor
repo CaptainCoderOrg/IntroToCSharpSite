@@ -1,0 +1,20 @@
+<MudDialog>
+    <DialogContent>
+        If you view the answer, you will not recieve any gold. Are you sure you want to show the answer?
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Error" OnClick="@Exit" Variant="Variant.Filled">No</MudButton>
+        <MudButton Color="Color.Success" OnClick="@Confirm" Variant="Variant.Filled">Yes</MudButton>
+    </DialogActions>
+</MudDialog>
+@code {
+    [CascadingParameter] MudDialogInstance? MudDialog { get; set; }
+    [Parameter]
+    public Action OnSubmit { get; set; } = () => {};
+    private void Exit() => MudDialog?.Close(DialogResult.Ok(true));
+
+    private void Confirm() {
+        MudDialog?.Close(DialogResult.Ok(true));
+        OnSubmit.Invoke();
+    }
+}

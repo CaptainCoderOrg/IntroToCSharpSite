@@ -203,31 +203,29 @@ public class UserService
         return true;
     }
 
+    public bool GiveXPAndGold(int xpToGive, int goldToGive)
+    {
+        if (!_userData.IsLoggedIn) return false;
+        UserStats newStats = new(_userStats.XP + xpToGive, _userStats.Gold + goldToGive);
+        _userData.UserStatsRef?.Set(newStats);
+        return true;
+    }
+
     /// <summary>
     /// Updates the current users XP by adding the specified amount of XP to
     /// the User. This updates the reference in the database.
     /// </summary>
     /// <param name="xpToGive">The amount to give (or remove)</param>
-    public bool GiveXP(int xpToGive)
-    {
-        if (!_userData.IsLoggedIn) return false;
-        UserStats newStats = new(_userStats.XP + xpToGive, _userStats.Gold);
-        _userData.UserStatsRef?.Set(newStats);
-        return true;
-    }
+    public bool GiveXP(int xpToGive) => GiveXPAndGold(xpToGive, 0);
+
     /// <summary>
     /// Updates the current users Gold by adding the specified amount of Gold to
     /// the User. This updates the reference in the database.
     /// </summary>
     /// <param name="goldToGive">The amount of gold to give(or remove)</param>
     /// <returns>False if user is not logged in. Returns true otherwise.</returns>
-    public bool GiveGold(int goldToGive)
-    {
-        if (!_userData.IsLoggedIn) return false;
-        UserStats newStats = new(_userStats.XP, _userStats.Gold + goldToGive);
-        _userData.UserStatsRef?.Set(newStats);
-        return true;
-    }
+    public bool GiveGold(int goldToGive) => GiveXPAndGold(0, goldToGive);
+
     /// <summary>
     /// Updates the users gold based on if the user buys the item from the store. The item is added to the user's inventory.
     /// </summary>
