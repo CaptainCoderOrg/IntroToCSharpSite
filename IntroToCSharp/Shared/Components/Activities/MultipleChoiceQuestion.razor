@@ -12,17 +12,23 @@
 
             @if (!this._isSubmitted || this._isWrong)
             {
-                <MudPaper Class="pt-1 pl-2 pb-1 pr-3 border-solid border-2 rounded-pill" Style="border-color: #fec426"
+                @if (GoldAward > 0)
+                {
+                    <MudPaper Class="pt-1 pl-2 pb-1 pr-3 border-solid border-2 rounded-pill" Style="border-color: #fec426"
                 Elevation="0" MinWidth="70px" MaxHeight="44px">
-                    <MudText Style="color:#fec426" Typo="Typo.body1">
-                        <MudImage Src="/imgs/top-menu/coin.png" Width="20" Height="20"
+                        <MudText Style="color:#fec426" Typo="Typo.body1">
+                            <MudImage Src="/imgs/top-menu/coin.png" Width="20" Height="20"
                         Style="display: inline; top:5px; position:relative;"></MudImage> <b>@GoldAward</b>
-                    </MudText>
-                </MudPaper>
-                <MudPaper Class="pa-2 border-solid border-2 mud-border-success rounded-pill" Style="@_xpDisplayStyle"
+                        </MudText>
+                    </MudPaper>
+                }
+                @if (XP > 0)
+                {
+                    <MudPaper Class="pa-2 border-solid border-2 mud-border-success rounded-pill" Style="@_xpDisplayStyle"
                 Elevation="0" MinWidth="70px" MaxHeight="44px">
-                    <MudText Typo="Typo.body1"><b>XP: @XPAward</b></MudText>
-                </MudPaper>
+                        <MudText Typo="Typo.body1"><b>XP: @XPAward</b></MudText>
+                    </MudPaper>
+                }
             }
             else
             {
@@ -98,14 +104,14 @@
     /// </summary>
     /// <value>The amount of xp.</value>
     [Parameter]
-    public int XP { get; set; } = 30;
+    public int XP { get; set; } = 0;
 
     /// <summary>
     /// The gold to be awarded.
     /// </summary>
     /// <value>The amount of gold.</value>
     [Parameter]
-    public int GoldAward { get; set; } = 100;
+    public int GoldAward { get; set; } = 0;
 
     private string Class { get; set; } = "mt-4 pa-4";
     private int XPAward => _attempts >= 0 ? Math.Max(5, ((XP / (_attempts + 1)) / 5) * 5) : 0;
