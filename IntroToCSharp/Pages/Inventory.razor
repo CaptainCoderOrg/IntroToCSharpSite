@@ -4,13 +4,15 @@
 <FilterBar @bind-Items="Items" ItemDatabase="UserInventoryDatabase" />
 
 <MudGrid Spacing="1" Justify="Justify.SpaceEvenly">
+
     @foreach (StoreItem item in Items)
     {
         <InventoryItemDisplay Item="@item" />
     }
-    </MudGrid>
 
-    @code {
+</MudGrid>
+
+@code {
     private List<StoreItem> Items { get; set; } = new();
     private IItemDatabase UserInventoryDatabase = new InventoryDatabase(UserInventory.Default);
     protected override void OnInitialized()
