@@ -2,7 +2,7 @@
 @page "/activities/booleans"
 
 
-<h1>Booleans</h1>
+<tag>Booleans</tag>
 <Section Title="What are booleans?">
     <p>
         In C# a boolean or a “bool”, is a value that attempts to answer one of the simplest questions in C#.
@@ -43,14 +43,16 @@
 </Section>
 
 <Questions Title="Testing your knowledge!">
-    <ChildContent>
-        <p>Are these Questions Booleans?</p>
-        <p>Replace me with multiple choice quiz</p>
-        <Question Text="Is it going to rain today?" />
-        <Question Text="1 + 1 = 2." />
-        <Question Text="Your shirt is red." />
-        <p> Answers; yes, no, no.</p>
-    </ChildContent>
+        <MultipleChoiceQuestion IsMultiSelect="true" Question="Which of the following are booleans?" Explanation="The first question is a boolen while the other two are statements. 
+        Booleans answer true or false question. They don't access whether a question is actually accurate.">
+        <CheckBoxOption Text="Is it going to rain today?" IsCorrect="true"/>
+        <CheckBoxOption Text="1 + 1 = 2" IsCorrect="false"/>
+        <CheckBoxOption Text="Your shirt is red." IsCorrect="false"/>
+        @* <QuestionFeedback>
+
+        </QuestionFeedback> *@
+        @* <CheckBoxOption Text="@("hello\")" IsCorrect="false"/> *@
+    </MultipleChoiceQuestion>
 </Questions>
 
 <Section Title="Combining Colors!">
