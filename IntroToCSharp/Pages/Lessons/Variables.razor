@@ -1,5 +1,5 @@
 @inherits CaptainCoder.Page
-@page "/activities/variables"
+@page "/lessons/variables"
 
 <MudText Typo="Typo.h4" Style="font-weight:bold">Variables</MudText>
 <Section Title="Introduction">
@@ -135,16 +135,25 @@ Console.WriteLine(name + " is learning C#!");
     <MudText>
         Answer some questions about the example above!
     </MudText>
-    <MultipleChoiceQuestion IsMultiSelect="false" Question="What is the name of the variable in the example above?"
-        Explanation="">
+    <MultipleChoiceQuestion 
+      IsMultiSelect="false" 
+      Question="What is the name of the variable in the example above?"
+      Explanation=""
+      XP=0
+      GoldAward=100
+      >
         <CheckBoxOption Text="string" IsCorrect="false" />
         <CheckBoxOption Text="playerName" IsCorrect="true" />
         <CheckBoxOption Text="Bob" IsCorrect="false" />
         <CheckBoxOption Text="Bob the Slob" IsCorrect="false" />
     </MultipleChoiceQuestion>
 
-    <MultipleChoiceQuestion IsMultiSelect="false" Question="What is the type of the variable in the example above?"
-        Explanation="">
+    <MultipleChoiceQuestion 
+      IsMultiSelect="false" 
+      Question="What is the type of the variable in the example above?"
+      XP=30
+      GoldAward=0
+      Explanation="">
         <CheckBoxOption Text="string" IsCorrect="true" />
         <CheckBoxOption Text="playerName" IsCorrect="false" />
         <CheckBoxOption Text="Bob" IsCorrect="false" />
@@ -152,6 +161,8 @@ Console.WriteLine(name + " is learning C#!");
     </MultipleChoiceQuestion>
 
     <MultipleChoiceQuestion IsMultiSelect="false" Question="What is the data being stored in the example above?"
+        XP=30
+        GoldAward=100
         Explanation="">
         <CheckBoxOption Text="string" IsCorrect="false" />
         <CheckBoxOption Text="playerName" IsCorrect="false" />
@@ -204,7 +215,9 @@ Console.WriteLine(name + " is learning C#!");
 
 <Section Title="Knowledge Check!">
     <MultipleChoiceQuestion IsMultiSelect="true" Question="Which of the following do variables have?"
-        Explanation="Variables have only a name, type, and data, but do not have a list or family.">
+        Explanation="Variables have only a name, type, and data, but do not have a list or family."
+        XP=10
+        GoldAward=50>
         <CheckBoxOption Text="Data" IsCorrect="true" />
         <CheckBoxOption Text="List" IsCorrect="false" />
         <CheckBoxOption Text="Name" IsCorrect="true" />
@@ -215,7 +228,9 @@ Console.WriteLine(name + " is learning C#!");
     <MudText Class="mt-6"></MudText>
     <MultipleChoiceQuestion IsMultiSelect="false"
         Question="Which of the following variable names follow the naming guidelines?"
-        Explanation="numCounter uses the appropriate camelcase and is a descriptive phrase whereas the other options do not follow the guidelines.">
+        Explanation="numCounter uses the appropriate camelcase and is a descriptive phrase whereas the other options do not follow the guidelines."
+        XP=25
+        GoldAward=25>
         <CheckBoxOption Text="n" IsCorrect="false" />
         <CheckBoxOption Text="numCounter" IsCorrect="true" />
         <CheckBoxOption Text="text" IsCorrect="false" />

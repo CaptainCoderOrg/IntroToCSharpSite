@@ -1,3 +1,4 @@
+using CaptainCoder;
 using System.Text.Json;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -9,7 +10,7 @@ namespace IntroToCSharp.Shared.Components.Nix
     public sealed partial class Nix
     {
         private User? UserData;
-        private Dictionary<string, string> Projects = new Dictionary<string, string>();
+        private Dictionary<string, string> Projects = new ();
         private string? _selected;
         private static int s_NEXT_ID = 0;
         private string? _url;
@@ -17,14 +18,14 @@ namespace IntroToCSharp.Shared.Components.Nix
         private bool IsEmpty => Projects.Count == 0;
         private string Url
         {
-            get => _url == null ? "" : _url;
+            get => _url ?? "";
             set
             {
                 _url = value;
                 StateHasChanged();
             }
         }
-        private int _id = s_NEXT_ID++;
+        private readonly int _id = s_NEXT_ID++;
         [Inject]
         IDialogService DialogService { get; set; } = null!;
         [Inject]
@@ -44,11 +45,11 @@ namespace IntroToCSharp.Shared.Components.Nix
             this.UserData = userData;
             if (this.UserData.ProjectData != null)
             {
-                this.UserData.ProjectData.DataChanged += UpdateProjects;
+                this.UserData.ProjectData.DataChangedEvent += UpdateProjects;
             }
             if (this.UserData.DefaultProject != null)
             {
-                this.UserData.DefaultProject.DataChanged += UpdateDefaultProject;
+                this.UserData.DefaultProject.DataChangedEvent += UpdateDefaultProject;
             }
             StateHasChanged();
         }

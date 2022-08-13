@@ -1,0 +1,80 @@
+@inject IDialogService DialogService
+
+<MudCard Class="ma-2" Outlined="true" Style="width: 450px">
+    <MudCardMedia Image="@Item.Image" Height="200" />
+    <MudCardContent Class="pa-2">
+        <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center">
+            <MudText Class="mr-4" Typo="Typo.h5">@Item.Name</MudText>
+            <MudStack AlignItems="AlignItems.Center" Row="true" Class="ml-4 border-2 mud-border-default rounded-pill">
+                <MudImage Class="ml-3 mr-0 mt-2 mb-2" Src="/imgs/top-menu/coin.png" Width="25" Height="25"></MudImage>
+                <MudText Class="mr-3 ml-0" Typo="Typo.body1">@Item.Cost.ToString("#,##")</MudText>
+            </MudStack>
+        </MudStack>
+        <MudText Typo="Typo.body2">@Item.Description</MudText>
+    </MudCardContent>
+    <MudCardActions>
+        @if (InventoryData.Contains(Item))
+        {
+            <MudButton Disabled="true" Variant="Variant.Filled" Color="Color.Primary" Class="pl-8 pr-8" FullWidth="true">
+                Owned</MudButton>
+        }
+        else
+        {
+            <MudButton OnClick="@Purchase" Variant="Variant.Filled" Color="Color.Success" Class="pl-8 pr-8"
+            FullWidth="true">Buy</MudButton>
+        }
+    </MudCardActions>
+</MudCard>
+
+@code {
+    /// <summary>
+    /// The item displayed in the store or inventory.
+    /// </summary>
+    /// <value>The item to be displayed.</value>
+    [Parameter]
+    public StoreItem Item { get; set; } = StoreItem.Default;
+    private UserStats _userData { get; set; } = UserStats.Default;
+    /// <summary>
+    /// The contents of the users inventory.
+    /// </summary>
+    /// <value>Store items are kept in the inventory data.</value>
+    public UserInventory InventoryData { get; set; } = UserInventory.Default;
+    private void Purchase()
+    {
+        var options = new DialogOptions { CloseOnEscapeKey = true };
+        var parameters = new DialogParameters();
+        parameters.Add("Item", Item);
+        if (_userData.Gold > Item.Cost)
+        {
+            DialogService.Show<ConfirmDialog>("Confirm", parameters, options);
+        }
+        else
+        {
+            DialogService.Show<NotEnoughGoldDialog>("Oh no!", parameters, options);
+        }
+    }
+    protected override void OnInitialized()
+    {
+        UserService.Service.OnUserChange += this.UpdateUser;
+    }
+    private void UpdateUser(User newUser)
+    {
+        if (newUser.IsLoggedIn)
+        {
+            if (newUser.UserStatsRef != null) newUser.UserStatsRef.DataChangedEvent += UpdateUserData;
+            if (newUser.UserInventoryRef != null) newUser.UserInventoryRef.DataChangedEvent += UpdateUserInventory;
+        }
+    }
+    private void UpdateUserData(UserStats? newUserData)
+    {
+        if (newUserData == null) return;
+        this._userData = newUserData;
+        this.StateHasChanged();
+    }
+    private void UpdateUserInventory(UserInventory? newUserInventory)
+    {
+        if (newUserInventory == null) return;
+        this.InventoryData = newUserInventory;
+        this.StateHasChanged();
+    }
+}
