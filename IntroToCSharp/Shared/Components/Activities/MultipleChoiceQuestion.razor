@@ -1,14 +1,44 @@
 @inject NavigationManager NavigationManager
+@inject IDialogService DialogService
 
 <MudPaper Class="mt-4 pa-4" Elevation="5">
     <MudStack Justify="Justify.SpaceBetween" Row="true">
-        <MudPaper Elevation="0">
-            <MudText Typo="Typo.h6">@Question</MudText>
-        </MudPaper>
-        <MudPaper Class="pa-2 border-solid border-2 mud-border-success rounded-pill" Style="@_xpDisplayStyle"
-            Elevation="0" MinWidth="70px" MaxHeight="44px">
-            <MudText Typo="Typo.body1"><b>XP: @Award</b></MudText>
-        </MudPaper>
+        <MudElement>
+            <MudPaper Elevation="0">
+                <MudText Typo="Typo.h6">@Question</MudText>
+            </MudPaper>
+        </MudElement>
+        <MudStack Row="true">
+
+            @if (!this._isSubmitted || this._isWrong)
+            {
+                @if (GoldAward > 0)
+                {
+                    <MudPaper Class="pt-1 pl-2 pb-1 pr-3 border-solid border-2 rounded-pill" Style="border-color: #fec426"
+                Elevation="0" MinWidth="70px" MaxHeight="44px">
+                        <MudText Style="color:#fec426" Typo="Typo.body1">
+                            <MudImage Src="/imgs/top-menu/coin.png" Width="20" Height="20"
+                        Style="display: inline; top:5px; position:relative;"></MudImage> <b>@GoldAward</b>
+                        </MudText>
+                    </MudPaper>
+                }
+                @if (XP > 0)
+                {
+                    <MudPaper Class="pa-2 border-solid border-2 mud-border-success rounded-pill" Style="@_xpDisplayStyle"
+                Elevation="0" MinWidth="70px" MaxHeight="44px">
+                        <MudText Typo="Typo.body1"><b>XP: @XPAward</b></MudText>
+                    </MudPaper>
+                }
+            }
+            else
+            {
+                <MudPaper Class="pa-2 border-solid border-2 mud-border-success rounded-pill" Style="@_xpDisplayStyle"
+                Elevation="0" MaxHeight="44px">
+                    <MudIcon Icon="@Icons.Material.Filled.Check" Color="Color.Success" />
+                </MudPaper>
+            }
+
+        </MudStack>
     </MudStack>
     <MudRadioGroup @bind-SelectedOption="@SelectedOption">
         <MudStack Class="mt-4">
@@ -47,8 +77,8 @@
             }
 
         }
-
     }
+
 </MudPaper>
 
 @code {
@@ -59,18 +89,32 @@
     /// <value></value>
     [Parameter]
     public bool IsMultiSelect { get; set; } = false;
-
+    /// <summary>
+    /// The question asked to the user.
+    /// </summary>
+    /// <value>The question string.</value>
     [Parameter]
     public string Question { get; set; } = "Undefined";
 
     [Parameter]
     public RenderFragment ChildContent { get; set; } = null!;
+
+    /// <summary>
+    /// The max XP to be awarded.
+    /// </summary>
+    /// <value>The amount of xp.</value>
     [Parameter]
-    public int XP { get; set; } = 30;
-    public string Class { get; set; } = "mt-4 pa-4";
-    public int Award => _attempts >= 0 ? Math.Max(5, ((XP / (_attempts + 1)) / 5) * 5) : 0;
+    public int XP { get; set; } = 0;
 
+    /// <summary>
+    /// The gold to be awarded.
+    /// </summary>
+    /// <value>The amount of gold.</value>
+    [Parameter]
+    public int GoldAward { get; set; } = 0;
 
+    private string Class { get; set; } = "mt-4 pa-4";
+    private int XPAward => _attempts >= 0 ? Math.Max(5, ((XP / (_attempts + 1)) / 5) * 5) : 0;
 
     /// <summary>
     /// This is the explanation that appears after the user submits the question.
@@ -80,7 +124,7 @@
     [Parameter]
     public string Explanation { get; set; } = "";
 
-    private string SelectedOption { get; set; }
+    private string? SelectedOption { get; set; }
     private bool _isSubmitted = false;
     private bool _isWrong = false;
     private int _attempts = 0;
@@ -103,7 +147,7 @@
         if (userData.IsLoggedIn)
         {
             _dataReference = UserService.Service.GetJsonDataReference<MultipleChoiceQuestionData>(Path, Question);
-            _dataReference.DataChangedEvent += HandleDataChanged;
+            _dataReference!.DataChangedEvent += HandleDataChanged!;
         }
         else
         {
@@ -114,7 +158,7 @@
 
     private void HandleDataChanged(MultipleChoiceQuestionData newData)
     {
-        _options.ForEach(o => o.IsChecked = newData.Answers.Contains(o.Text));
+        _options.ForEach(o => o.SetIsChecked(newData.Answers.Contains(o.Text)));
         this.SelectedOption = newData.Answers.Count() > 0 ? newData.Answers[0] : "";
         this._isSubmitted = newData.IsSubmitted;
         this._attempts = newData.Attempts;
@@ -130,17 +174,23 @@
         }
         if (!IsMultiSelect)
         {
-            this._options.ForEach(option => option.IsChecked = this.SelectedOption == option.Text);
+            this._options.ForEach(option => option.SetIsChecked(this.SelectedOption == option.Text));
         }
         _isWrong = this._options.Where(option => !option.CheckAnswer()).Count() > 0;
-        if (this._attempts != -1 && !_isWrong)
+
+    }
+
+    private void GiveReward()
+    {
+        if (!this._isSubmitted && this._attempts != -1 && !_isWrong)
         {
-            UserService.Service.GiveXP(Award);
+            UserService.Service.GiveXPAndGold(XPAward, GoldAward);
         }
     }
 
     private void Submit()
     {
+        GiveReward();
         this._isSubmitted = true;
         LoadSubmit();
         // if the user hasn't selected "show answer", then...
@@ -174,7 +224,16 @@
     /// </summary>
     private void ShowAnswer()
     {
-        this._options.ForEach(option => option.IsChecked = option.IsCorrect);
+        var options = new DialogOptions { CloseOnEscapeKey = true };
+        var parameters = new DialogParameters();
+        parameters.Add("OnSubmit", () => DoShowAnswer());
+        DialogService.Show<ShowAnswerDialog>("Show Answer", parameters, options);
+    }
+
+    private void DoShowAnswer()
+    {
+        GoldAward = 0;
+        this._options.ForEach(option => option.SetIsChecked(option.IsCorrect));
         this.SelectedOption = this._options.First(option => option.IsCorrect).Text;
         this._attempts = -1;
         this.Submit();

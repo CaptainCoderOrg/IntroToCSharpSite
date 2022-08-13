@@ -12,30 +12,59 @@ public static class Utils
 
     static Utils()
     {
-        MainLayout.OnInit += (JS, SnackBar, LocalStorage) => {
+        MainLayout.OnInit += (JS, SnackBar, LocalStorage) =>
+        {
             Utils.s_JS = JS;
             Utils.s_SnackBar = SnackBar;
             Utils.s_LocalStorage = LocalStorage;
         };
     }
 
+    public static string FormatGold(int amount)
+    {
+        if (amount < 1_000)
+        {
+            return $"{amount}";
+        }
+        if (amount < 1_000_000)
+        {
+            string hundreds = $"{amount % 1000}".PadLeft(3, '0');
+            string thousands = $"{amount / 1000}";
+            return $"{thousands},{hundreds}";
+        }
+        return FormatGold(amount / 1000, amount % 1000, 1);
+    }
+
+    private static string FormatGold(int amount, int mod, int thousands)
+    {
+        if (amount >= 1000)
+        {
+            return FormatGold(amount / 1000, amount % 1000, thousands + 1);
+        }
+        string[] vals = { "h", "t", "M", "B", "T", "q", "Q", "s", "S" };
+        string dec = $"{mod}".PadLeft(3, '0');
+        return $"{amount}.{dec} {vals[thousands]}";
+    }
+
     public static async Task<IJSRuntime> GetJSRunTime()
     {
-        await Task.Run(() => { while(s_JS == null) Thread.Sleep(10); } );
+        await Task.Run(() => { while (s_JS == null) Thread.Sleep(10); });
         return s_JS!;
     }
 
     public static async Task<ISnackbar> GetSnackbar()
     {
-        await Task.Run(() => { while(s_JS == null) Thread.Sleep(10); } );
+        await Task.Run(() => { while (s_JS == null) Thread.Sleep(10); });
         return s_SnackBar!;
     }
 
     public static async Task<ILocalStorageService> GetLocalStorage()
     {
-        await Task.Run(() => { while(s_LocalStorage == null) Thread.Sleep(10); } );
+        await Task.Run(() => { while (s_LocalStorage == null) Thread.Sleep(10); });
         return s_LocalStorage!;
     }
+
+    public static int RoundToNearest(this int amount, int roundAmount) => roundAmount * (amount / roundAmount);
 
     /// <summary>
     /// Sanitize a database path by replacing illegal characters with underscores.

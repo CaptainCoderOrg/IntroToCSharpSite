@@ -1,0 +1,42 @@
+<MudDialog>
+    <DialogContent>
+        Are you sure you want to buy <b>@Item.Name</b>?
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Error" OnClick="@Exit" Variant="Variant.Filled">No</MudButton>
+        <MudButton Color="Color.Success" OnClick="@Confirm" Variant="Variant.Filled">Yes</MudButton>
+    </DialogActions>
+</MudDialog>
+@code {
+    [CascadingParameter] MudDialogInstance? MudDialog { get; set; }
+    /// <summary>
+    /// The item purchased in the store.
+    /// </summary>
+    /// <value>The item to be purchased..</value>
+    [Parameter]
+    public StoreItem Item { get; set; } = StoreItem.Default;
+    private UserStats _userData { get; set; } = UserStats.Default;
+    private void Exit() => MudDialog?.Close(DialogResult.Ok(true));
+    private void Confirm()
+    {
+        MudDialog?.Close(DialogResult.Ok(true));
+        UserService.Service.BuyItem(Item);
+    }
+    protected override void OnInitialized()
+    {
+        UserService.Service.OnUserChange += this.UpdateUser;
+    }
+    private void UpdateUser(User newUser)
+    {
+        if (newUser.IsLoggedIn && newUser.UserStatsRef != null)
+        {
+            newUser.UserStatsRef.DataChangedEvent += UpdateUserData;
+        }
+    }
+    private void UpdateUserData(UserStats? newUserData)
+    {
+        if (newUserData == null) return;
+        this._userData = newUserData;
+        this.StateHasChanged();
+    }
+}

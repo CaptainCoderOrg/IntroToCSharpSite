@@ -1,24 +1,32 @@
 @using CaptainCoder
 <MudImage Class="mr-0 pr-0" Src="/imgs/top-menu/coin.png" Width="25" Height="25"></MudImage>
 <MudElement Class="ml-0 mr-6" Style="width:100px">
-    <MudText Class="pa-0 ma-0" Style="text-align:center;" Typo="Typo.h6">@Data.Gold</MudText>
+    <MudText Class="pa-0 ma-0" Style="text-align:center;" Typo="Typo.h6">@(Utils.FormatGold(Data.Gold))</MudText>
 </MudElement>
 
 @code {
+    /// <summary>
+    /// Gets the user data.
+    /// </summary>
+    /// <value>The user's data.</value>
     public UserStats Data { get; set; } = UserStats.Default;
-
+    
+    /// <inheritdoc/>
     protected override void OnInitialized()
     {
         UserService.Service.OnUserChange += this.UpdateUser;
     }
-
     private void UpdateUser(User newUser)
     {
-        newUser.UserStatsRef.DataChangedEvent += UpdateUserData;
+        if (newUser.UserStatsRef == null) {
+            this.Data = UserStats.Default;
+        } else {
+            newUser.UserStatsRef.DataChangedEvent += UpdateUserData;
+        }
     }
-    private void UpdateUserData(UserStats newUserData)
+    private void UpdateUserData(UserStats? newUserData)
     {
-        Data = newUserData;
+        Data = newUserData == null ? UserStats.Default : newUserData;
         this.StateHasChanged();
     }
 }
