@@ -51,7 +51,7 @@
         if (userData.IsLoggedIn)
         {
             if(UserService.Service.TryGetTask(Path, out DataReference<bool> isChecked)){
-                isChecked.DataChanged += val =>
+                isChecked.DataChangedEvent += val =>
                 {
                     _isChecked = val!;
                     StateHasChanged();

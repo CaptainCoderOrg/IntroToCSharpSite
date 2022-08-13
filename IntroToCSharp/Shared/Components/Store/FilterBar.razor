@@ -1,0 +1,63 @@
+<MudStack Class="ma-6" Spacing="0" Row="true" Justify="Justify.Center">
+
+    @foreach (Filter filter in ItemDatabase.Filters)
+    {
+        @if (!filter.hasSubFilters)
+        {
+            <MudButton OnClick="@(() => ApplyFilter(filter.Name))" Variant="Variant.Filled" Class="pa=0" Size="Size.Large">
+                @filter.Name
+            </MudButton>
+        }
+        else
+        {
+            <MudMenu Label="@filter.Name" Variant="Variant.Filled" Class="pa-0" Size="Size.Large" FullWidth="false">
+
+                @foreach (string subFilter in filter.subFilters)
+                {
+                    <MudMenuItem OnClick="@(() => ApplySubFilter(subFilter))">@subFilter</MudMenuItem>
+                }
+
+            </MudMenu>
+        }
+    }
+
+</MudStack>
+
+@code {
+    /// <summary>
+    /// The Database that contains the information to be displayed in inventory or store.
+    /// </summary>
+    [Parameter]
+    public IItemDatabase ItemDatabase { get; set; } = new MockDatabase();
+    /// <summary>
+    /// Creats a new list of store items.
+    /// </summary>
+    /// <returns>the items in the store.</returns>
+    [Parameter]
+    public List<StoreItem> Items { get; set; } = new();
+    /// <summary>
+    /// The event in which other methods are called on.
+    /// </summary>
+    /// <value>An event.</value>
+    [Parameter]
+    public EventCallback<List<StoreItem>> ItemsChanged { get; set; }
+    private async Task UpdateItemsFromChild()
+    {
+        await ItemsChanged.InvokeAsync(Items);
+    }
+    private void ApplyFilter(string filter)
+    {
+        Items = ItemDatabase.GetItems(filter);
+        this.UpdateItemsFromChild().AndForget();
+    }
+    private void ApplySubFilter(string subFilter)
+    {
+        Items = ItemDatabase.GetSubItems(subFilter);
+        this.UpdateItemsFromChild().AndForget();
+    }
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        this.ApplyFilter("All");
+    }
+}
