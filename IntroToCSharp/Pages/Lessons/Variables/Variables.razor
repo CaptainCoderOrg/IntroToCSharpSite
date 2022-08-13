@@ -3,7 +3,8 @@
 
 <MudText Typo="Typo.h4" Style="font-weight:bold">Variables</MudText>
 <Section Title="Introduction">
-    <MudText>An essential part of programming is being able to store data for future use. For example, in a video game
+    <MudText>
+        An essential part of programming is being able to store data for future use. For example, in a video game
         you might track the amount of experience a player has gained throughout their adventure. To do this, programmers
         utilize the computers Random Access Memory, often called RAM. Throughout this book we will simply refer to this
         as "memory".
@@ -27,7 +28,9 @@
     </Example>
 </Section>
 <Section Title="Recipe For Declaring a Variable">
-    <MudText>Below is an example of how a programmer might declare a variable to store a players score in C#.</MudText>
+    <MudText>
+        Below is an example of how a programmer might declare a variable to store a players score in C#.
+    </MudText>
     <CodeBlock>
         int playerScore;
     </CodeBlock>
@@ -70,8 +73,8 @@
     </Note>
     <CodeBlock>
         int playerScore;
-playerScore = 0; // Initializing is the first time we store data.
-playerScore = 4; // This is "updating a variable because we are replacing the data that is already there.
+        playerScore = 0; // Initializing is the first time we store data.
+        playerScore = 4; // This is "updating a variable because we are replacing the data that is already there.
     </CodeBlock>
     <MudText>Can be written as:</MudText>
     <CodeBlock>
@@ -96,8 +99,8 @@ playerScore = 4; // This is "updating a variable because we are replacing the da
 
 <Section Title="Recipe for Reading Data">
     <CodeBlock ReplIt="JoshuaJoshJosh1/VariablesExample">
-    string name = "Bob";
-Console.WriteLine(name + " is learning C#!");
+        string name = "Bob";
+        Console.WriteLine(name + " is learning C#!");
     </CodeBlock>
     <MudText>
         To read data, you simply state the variable name. This tells the computer to "substitute" the value stored by
@@ -135,35 +138,24 @@ Console.WriteLine(name + " is learning C#!");
     <MudText>
         Answer some questions about the example above!
     </MudText>
-    <MultipleChoiceQuestion 
-      IsMultiSelect="false" 
-      Question="What is the name of the variable in the example above?"
-      Explanation=""
-      XP=0
-      GoldAward=100
-      >
+    <MultipleChoiceQuestion IsMultiSelect="false" Question="What is the name of the variable in the example above?"
+        Explanation="" XP=0 GoldAward=100>
         <CheckBoxOption Text="string" IsCorrect="false" />
         <CheckBoxOption Text="playerName" IsCorrect="true" />
         <CheckBoxOption Text="Bob" IsCorrect="false" />
         <CheckBoxOption Text="Bob the Slob" IsCorrect="false" />
     </MultipleChoiceQuestion>
 
-    <MultipleChoiceQuestion 
-      IsMultiSelect="false" 
-      Question="What is the type of the variable in the example above?"
-      XP=30
-      GoldAward=0
-      Explanation="">
+    <MultipleChoiceQuestion IsMultiSelect="false" Question="What is the type of the variable in the example above?"
+        XP=30 GoldAward=0 Explanation="">
         <CheckBoxOption Text="string" IsCorrect="true" />
         <CheckBoxOption Text="playerName" IsCorrect="false" />
         <CheckBoxOption Text="Bob" IsCorrect="false" />
         <CheckBoxOption Text="Bob the Slob" IsCorrect="false" />
     </MultipleChoiceQuestion>
 
-    <MultipleChoiceQuestion IsMultiSelect="false" Question="What is the data being stored in the example above?"
-        XP=30
-        GoldAward=100
-        Explanation="">
+    <MultipleChoiceQuestion IsMultiSelect="false" Question="What is the data being stored in the example above?" XP=30
+        GoldAward=100 Explanation="">
         <CheckBoxOption Text="string" IsCorrect="false" />
         <CheckBoxOption Text="playerName" IsCorrect="false" />
         <CheckBoxOption Text="Bob" IsCorrect="false" />
@@ -215,9 +207,7 @@ Console.WriteLine(name + " is learning C#!");
 
 <Section Title="Knowledge Check!">
     <MultipleChoiceQuestion IsMultiSelect="true" Question="Which of the following do variables have?"
-        Explanation="Variables have only a name, type, and data, but do not have a list or family."
-        XP=10
-        GoldAward=50>
+        Explanation="Variables have only a name, type, and data, but do not have a list or family." XP=10 GoldAward=50>
         <CheckBoxOption Text="Data" IsCorrect="true" />
         <CheckBoxOption Text="List" IsCorrect="false" />
         <CheckBoxOption Text="Name" IsCorrect="true" />
@@ -229,8 +219,7 @@ Console.WriteLine(name + " is learning C#!");
     <MultipleChoiceQuestion IsMultiSelect="false"
         Question="Which of the following variable names follow the naming guidelines?"
         Explanation="numCounter uses the appropriate camelcase and is a descriptive phrase whereas the other options do not follow the guidelines."
-        XP=25
-        GoldAward=25>
+        XP=25 GoldAward=25>
         <CheckBoxOption Text="n" IsCorrect="false" />
         <CheckBoxOption Text="numCounter" IsCorrect="true" />
         <CheckBoxOption Text="text" IsCorrect="false" />
@@ -240,6 +229,7 @@ Console.WriteLine(name + " is learning C#!");
 
 @code {
     public bool _isOpen = true;
+    public static string Href { get; } = "/lessons/variables";
 
     public void ToggleOpen()
     {
