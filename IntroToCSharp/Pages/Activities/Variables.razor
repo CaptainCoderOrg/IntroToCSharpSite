@@ -1,0 +1,251 @@
+@inherits CaptainCoder.Page
+@page "/activities/variables"
+
+<MudText Typo="Typo.h4" Style="font-weight:bold">Variables</MudText>
+<Section Title="Introduction">
+    <MudText>An essential part of programming is being able to store data for future use. For example, in a video game
+        you might track the amount of experience a player has gained throughout their adventure. To do this, programmers
+        utilize the computers Random Access Memory, often called RAM. Throughout this book we will simply refer to this
+        as "memory".
+    </MudText>
+    <MudText>
+        When programming, we need to be able to store, update, and read parts of the computer memory to keep track of
+        information. To help manage this complexity, we take use variables to give a label to those parts of memory.
+    </MudText>
+    <Note>
+        Program memory is volatile. That is, when you start a program, the computer has no "memories". Throughout the
+        program, it gains memories and when the program exits, it completely forgets everything.
+    </Note>
+</Section>
+<Section Title="The Basics of Variables">
+    <MudText>
+        A variable is a label that allows us to read, store, and update data in a computer's memory.
+    </MudText>
+    <Example Title="Home Address">
+        Your personal belongings are stored in your home but in order to find your house you need the home address. The
+        same is true for a variable. It has an address that allows us to access and alter its data.
+    </Example>
+</Section>
+<Section Title="Recipe For Declaring a Variable">
+    <MudText>Below is an example of how a programmer might declare a variable to store a players score in C#.</MudText>
+    <CodeBlock>
+        int playerScore;
+    </CodeBlock>
+    <MudList Clickable="true">
+        <MudListItem Icon="@Icons.Material.Filled.Category" IconColor="Color.Warning" Text="Type">
+            <NestedList>
+                <MudListItem>
+                    <MudText>In C#, we must specify the type of data being stored. In the example above, the type of the
+                        data being stored is an <Code>int</Code>. Don't worry too much if you're not sure what an
+                        <Code>int</Code> is. For now all
+                        you need to know is it is used to store a number.
+                    </MudText>
+                    <Example Title="Ice Cream Truck">
+                        You are not going to go up to the ice cream truck and just say you want ice cream
+                        because the vender won’t know what flavor to give you. Instead, you tell him what flavor or type
+                        of ice cream you want. That way he can go straight to the freezer and get strawberry ice cream.
+                    </Example>
+                </MudListItem>
+            </NestedList>
+        </MudListItem>
+        <MudListItem Icon="@Icons.Material.Filled.Badge" IconColor="Color.Secondary" Text="Name">
+            <NestedList>
+                <MudListItem>
+                    <MudText>
+                        This is the "label" that allows us to access the variable later. In the example above, the name
+                        is playerScore.
+                    </MudText>
+                </MudListItem>
+            </NestedList>
+        </MudListItem>
+    </MudList>
+</Section>
+
+<Section Title="Recipe for Storing Data">
+    <MudText>The next step in using variables is storing data. You can only store data in a variable after it has been
+        declared. After a variable has been declared, you can initialize it (store data for the first time).</MudText>
+    <Note Class="mb-5 pa-2">Initializing a variable immediately after declaring it happens so often there is special
+        syntax:
+        <Code>int playerScore = 0;</Code>
+    </Note>
+    <CodeBlock>
+        int playerScore;
+playerScore = 0; // Initializing is the first time we store data.
+playerScore = 4; // This is "updating a variable because we are replacing the data that is already there.
+    </CodeBlock>
+    <MudText>Can be written as:</MudText>
+    <CodeBlock>
+        int playerScore = 4; // This is called initializing
+    </CodeBlock>
+    <HorizontalDivider />
+    <MudText>Now, let's look at what is one the right-hand side of the <Code>=</Code>.</MudText>
+    <MudList Clickable="true">
+        <MudListItem Icon="@Icons.Material.Filled.Storage" IconColor="Color.Tertiary" Text="Data">
+            <NestedList>
+                <MudListItem>
+                    <MudText>Data is the actual information stored.</MudText>
+                    <Example Title="Fun Fact">
+                        Let's say that you memorize the date when the United States declared its
+                        independence. The "data" stored in your brain would be "July 4, 1776".
+                    </Example>
+                </MudListItem>
+            </NestedList>
+        </MudListItem>
+    </MudList>
+</Section>
+
+<Section Title="Recipe for Reading Data">
+    <CodeBlock ReplIt="JoshuaJoshJosh1/VariablesExample">
+    string name = "Bob";
+Console.WriteLine(name + " is learning C#!");
+    </CodeBlock>
+    <MudText>
+        To read data, you simply state the variable name. This tells the computer to "substitute" the value stored by
+        that variable into the code. This process is called "evaluation". For example:
+    </MudText>
+    <CodeBlock>
+        int z = x + y;
+    </CodeBlock>
+    <Note>
+        For proper formatting, variables are usually are placed at the very beginning of the program
+    </Note>
+    <MudText>
+        When the computer tried to run the code above, it must first "evaluate" x and y before it can determine what z
+        is. Let's assume that x stores the number 5 and y stores the number 7. During evaluation,
+        the computer will substitute those values in like this:
+    </MudText>
+    <CodeBlock>
+        int z = 5 + 7;
+    </CodeBlock>
+    <MudText>
+        It will then add them together:
+    </MudText>
+    <CodeBlock>
+        int z = 12;
+    </CodeBlock>
+    <MudText>
+        And finally, it will store the value 12 in the variable z.
+    </MudText>
+</Section>
+
+<Section Title="Using Variables">
+    <CodeBlock>
+        string playerName = "Bob the Slob";
+    </CodeBlock>
+    <MudText>
+        Answer some questions about the example above!
+    </MudText>
+    <MultipleChoiceQuestion 
+      IsMultiSelect="false" 
+      Question="What is the name of the variable in the example above?"
+      Explanation=""
+      XP=0
+      GoldAward=100
+      >
+        <CheckBoxOption Text="string" IsCorrect="false" />
+        <CheckBoxOption Text="playerName" IsCorrect="true" />
+        <CheckBoxOption Text="Bob" IsCorrect="false" />
+        <CheckBoxOption Text="Bob the Slob" IsCorrect="false" />
+    </MultipleChoiceQuestion>
+
+    <MultipleChoiceQuestion 
+      IsMultiSelect="false" 
+      Question="What is the type of the variable in the example above?"
+      XP=30
+      GoldAward=0
+      Explanation="">
+        <CheckBoxOption Text="string" IsCorrect="true" />
+        <CheckBoxOption Text="playerName" IsCorrect="false" />
+        <CheckBoxOption Text="Bob" IsCorrect="false" />
+        <CheckBoxOption Text="Bob the Slob" IsCorrect="false" />
+    </MultipleChoiceQuestion>
+
+    <MultipleChoiceQuestion IsMultiSelect="false" Question="What is the data being stored in the example above?"
+        XP=30
+        GoldAward=100
+        Explanation="">
+        <CheckBoxOption Text="string" IsCorrect="false" />
+        <CheckBoxOption Text="playerName" IsCorrect="false" />
+        <CheckBoxOption Text="Bob" IsCorrect="false" />
+        <CheckBoxOption Text="Bob the Slob" IsCorrect="true" />
+    </MultipleChoiceQuestion>
+</Section>
+
+<Section Title="Naming Variables">
+    <Section IsSubSection="true" Title="The Rules">
+        <MudText>When programming, variables are essential for managing complexity. They are used to create labels that
+            the programmer can use to store, update, and read data. You have a lot of flexibility in what you name your
+            variables but there are a few restrictions. Below are the rules for naming a variable in C#:</MudText>
+        <InfoGrid>
+            <GridSquare>Variable names must start with a
+                <b>letter</b>(a-z)
+                or <b>underscore</b>(_).
+            </GridSquare>
+            <GridSquare>You can't use numeric digits <b>0 through 9</b> to start your name.
+            </GridSquare>
+            <GridSquare>Many <b>symbols</b> and <b>blank spaces</b> will cause
+                the computer to not know where the variable ends.
+            </GridSquare>
+            <GridSquare>Variables cannot have the same name as a keyword like <b>"string"</b>.
+            </GridSquare>
+        </InfoGrid>
+    </Section>
+    <Section IsSubSection="true" Title="Coding Guidlines for Naming Variables">
+        <MudText>
+            The rules above are enforced by the C# compiler. That is to say, you cannot violate them. This still leaves
+            a lot of room for naming your variables in ways that can be confusing. Remember, as a programmer, your job
+            is to manage complexity. To help with that, here are some guidelines to help you give your variables "good"
+            names:
+        </MudText>
+        <InfoGrid>
+            <GridSquare>Use a name that accurately <b>describes</b> what the variable holds, even if
+                the name has to be <b>longer</b>.</GridSquare>
+
+            <GridSquare> Avoid <b>abbreviations</b> of words that you use as variables.</GridSquare>
+            <GridSquare>Do not use names that are <b>not specific</b> such as "text" or "number".
+            </GridSquare>
+            <GridSquare>Use <Keyword Word="camel case"></Keyword> or
+                <Keyword Word="pascal case"></Keyword> for multi-word variables.
+            </GridSquare>
+        </InfoGrid>
+        <MudText Class="pt-6">All of these guidelines are NOT required when naming variables; however, they make your
+            code easier to follow and understand when referencing it.</MudText>
+    </Section>
+</Section>
+
+<Section Title="Knowledge Check!">
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="Which of the following do variables have?"
+        Explanation="Variables have only a name, type, and data, but do not have a list or family."
+        XP=10
+        GoldAward=50>
+        <CheckBoxOption Text="Data" IsCorrect="true" />
+        <CheckBoxOption Text="List" IsCorrect="false" />
+        <CheckBoxOption Text="Name" IsCorrect="true" />
+        <CheckBoxOption Text="Type" IsCorrect="true" />
+        <CheckBoxOption Text="A Family" IsCorrect="false" />
+
+    </MultipleChoiceQuestion>
+    <MudText Class="mt-6"></MudText>
+    <MultipleChoiceQuestion IsMultiSelect="false"
+        Question="Which of the following variable names follow the naming guidelines?"
+        Explanation="numCounter uses the appropriate camelcase and is a descriptive phrase whereas the other options do not follow the guidelines."
+        XP=25
+        GoldAward=25>
+        <CheckBoxOption Text="n" IsCorrect="false" />
+        <CheckBoxOption Text="numCounter" IsCorrect="true" />
+        <CheckBoxOption Text="text" IsCorrect="false" />
+        <CheckBoxOption Text="7" IsCorrect="false" />
+    </MultipleChoiceQuestion>
+</Section>
+
+@code {
+    public bool _isOpen = true;
+
+    public void ToggleOpen()
+    {
+        if (_isOpen)
+            _isOpen = false;
+        else
+            _isOpen = true;
+    }
+}
