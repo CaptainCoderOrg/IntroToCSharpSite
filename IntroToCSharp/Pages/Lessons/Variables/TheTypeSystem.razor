@@ -1,0 +1,155 @@
+@inherits CaptainCoder.Page
+@page "/lessons/variables/the-type-system"
+
+<Title>The C# Type System</Title>
+
+<Section Title="Introduction">
+    <MudText>
+        In the <MudLink Href="@BasicDataTypes.Href">Basic Data Types</MudLink>
+        lesson, we learn that all <Keyword Word="data" /> in a computer is
+        stored as sequences of <Keyword Word="bits" />. As programmers, we
+        design different <Keyword Word="binary encoding" />s to represent
+        different types of data. These are called <Keyword Word="data type" />s.
+        C# has <b>14</b> built in <Keyword Word="primitive data type" />s that
+        we use to encode different types of data. This section of the book is a
+        high level reference of those 14 <Keyword Word="data type" />s.
+    </MudText>
+</Section>
+<Section Title="Integers">
+    <MudText>
+        There are 8 different integer types each of which is represented using a
+        different number of <Keyword Word="byte" />s as well as being 
+        <Keyword Word="signed"/> or <Keyword Word="unsigned"/>.
+    </MudText>
+    <Note>You do not need to memorize this table but it is good to be aware.</Note>
+    <DataTable Headers="@intHeaders" Rows="@intRows"></DataTable>
+</Section>
+
+<Section Title="Characters">
+    <MudText>
+        To represent text, we use the <Keyword Word="string"/> data type. This
+        is short for "string of characters". In C#, a single character can be
+        declared using the <Keyword Word="char"/> data type. The
+        <Code>char</Code>data type is stored as 2 bytes of data resulting in
+        65,536 distinct characters.
+    </MudText>
+    <MudText>
+        Unlike a <Code>string</Code>, a <Code>char</Code> is created by placing
+        a single character inside of single quotes like this:
+    </MudText>
+    <CodeBlock AllowCopy>char someLetter = 'j';</CodeBlock>
+    <Note>You must place <b>exactly</b> one character between the single quotes.</Note>
+    <MudText>
+        Another interesting thing to note is that a <Code>char</Code> is not limited to the keys
+        on the keyboard. You can place any <Keyword Word="unicode"/> character between
+        the single quotes.
+    </MudText>
+    <CodeBlock AllowCopy ReplIt="JosephCollard/BallChar">
+char ball = '⚽';
+Console.WriteLine(ball);
+    </CodeBlock>
+    <MudText>
+        Each character has a hexidecimal <b>unicode</b> encoding associated with
+        it. If you happen to know the value (or search for one using your
+        favorite search engine), you can enter it using an 
+        <Keyword Word="escape code"/>:
+    </MudText>
+    <CodeBlock AllowCopy ReplIt="JosephCollard/SmileyChar">
+char smiley = '\u263A';
+Console.WriteLine(smiley);
+</CodeBlock>
+    <Note>
+        When you use an escape code like the one above, you are only providing a
+        single character between the single quotes.
+    </Note>
+</Section>
+
+<Section Title="Floating-Point Numbers">
+    <MudText>
+        Integers are great for whole numbers, but what happens when we want to
+        store decimals or even repeating decimals like π? Floating-point numbers
+        are a data type that allows programmers to <b>approximate</b> a real number.
+    </MudText>
+    <MudElement Class="ma-4">
+        <DataTable Headers=@floatHeaders Rows=@floatRows/>
+    </MudElement>
+    <MudText>
+        The three floating point numbers shown in the table above allow you to
+        represent decimal numbers both very large and very small. The most
+        common of these in practice is the <Code>double</Code> data type. It
+        provides an incredibly large range while also using the same amount of
+        memory as an <Code>int</Code>. To declare a <Code>double</Code> literal,
+        you simply write the value.
+    </MudText>
+    <CodeBlock AllowCopy>double speed = 12.8;</CodeBlock>
+    <MudText>
+        If you are writing code that you would like to be as memory efficient as
+        possible, you may decide you would like to use a <Code>float</Code>. To
+        indicate that a number literal is a <Code>float</Code> we put an
+        <Code>F</Code> at the end of the number.
+    </MudText>
+    <CodeBlock AllowCopy>float gravity = 9.8F;</CodeBlock>
+    <MudText>
+        Be careful when using the float and double types. As stated above, they
+        are only approximations that should be "close-enough" to a value. If you
+        need a decimal number to have exact precision, you should use the
+        <Code>decimal</Code> type by adding in a <Code>M</Code> at the end of the
+        number. To see an example of a rounding error, run the example
+        below:
+    </MudText>
+
+    <CodeBlock AllowCopy ReplIt="JosephCollard/Floating-Point-Errors">
+float flt = 2.0F - 1.9F;
+double dbl = 2.0 - 1.9;
+decimal dec = 2.0M - 1.9M;
+Console.WriteLine($"Float: {flt}");
+Console.WriteLine($"Double: {dbl}");
+Console.WriteLine($"Decimal: {dec}");
+    </CodeBlock>
+    <MudText>
+        In the above example, you might expect the result of all three values to
+        be <Code>0.1</Code>. However, because float and double are
+        approximations, we see a <Keyword Word="rounding error"/> in the output.
+    </MudText>
+    <Note>
+        The range of a <Code>decimal</Code> value is the smallest of the three
+        floating point numbers and also takes up the most amount of memory (16
+        bytes).
+    </Note>
+</Section>
+
+<Section Title="Booleans">
+    <MudText>
+        A <b>boolean</b> is a value that is either <b>true</b> or <b>false</b>.  
+        In C#, we use the <Keyword Word="bool"/> keyword to represent a variable
+        that stores a boolean.
+    </MudText>
+<CodeBlock>
+bool hasSword = true;
+bool isGameOver = false;
+</CodeBlock>
+</Section>
+
+@code {
+    public static readonly string Href = "/lessons/variables/the-type-system";
+    private string[] intHeaders = { "Name", "Number of Bytes", "Negatives?", "Minimum", "Maximum" };
+    private string[][] intRows = {
+     new string[]{"byte", "1", "No", "0", "255"},
+     new string[]{"sbyte", "1", "Yes", "-128", "127"},
+     new string[]{"short", "2", "Yes", "-32,768", "32,767"},
+     new string[]{"ushort", "2", "No", "0", "65,535"},
+     new string[]{"int", "4", "Yes", "-2,147,483,648", "2,147,483,647"},
+     new string[]{"uint", "4", "No", "0", "4,294,967,295"},
+     new string[]{"long", "8", "Yes", "-9,223,372,036,854,775,808", "9,223,372,036,854,775,807"},
+     new string[]{"ulong", "8", "No", "0", "-18,446,744,073,709,551,615"},
+    };
+
+    private string[] floatHeaders = { "Type", "Bytes", "Range", "Literal Indicator", "Approximation" };
+    private string[][] floatRows = {
+        new string[]{"float", "4", "±(~10<sup>−45</sup>  &nbsp; to ~10<sup>38</sup>)", "F", "Yes"},
+        new string[]{"double", "8", "±(~10<sup>−324</sup>  &nbsp; to ~10<sup>308</sup>)", "D (optional)", "Yes"},
+        new string[]{"decimal", "16", "±(~10<sup>-28</sup>  &nbsp; to 10<sup>28</sup>)", "M", "No"},
+    };
+}
+
+
