@@ -1,0 +1,12 @@
+@inherits CaptainCoder.Page
+@page "/journal/journal-entries"
+
+<MudPaper MaxWidth=500px>
+    <MudDatePicker Label="Journal Date" @bind-Date="date" Color="Color.Success" Elevation="12"/>
+    <MudTextField T="string" Label="Multiline" Variant="Variant.Text" Lines="5" />
+</MudPaper>
+
+
+@code{
+    DateTime? date = DateTime.Today;
+}
