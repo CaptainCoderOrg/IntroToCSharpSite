@@ -1,12 +1,123 @@
 @inherits CaptainCoder.Page
 @page "/journal/journal-entries"
 
-<MudPaper MaxWidth=500px>
+<MudPaper align-center>
     <MudDatePicker Label="Journal Date" @bind-Date="date" Color="Color.Success" Elevation="12"/>
-    <MudTextField T="string" Label="Multiline" Variant="Variant.Text" Lines="5" />
-</MudPaper>
+
+    @if(IsEverythingCompleted)
+    {
+        <MudPaper>
+            <MudTextField @bind-Value="stringTime" Label="Filled" Variant="Variant.Filled"></MudTextField>
+        </MudPaper>
+    }
+
+    @if(IsJournalRevealed || IsEverythingCompleted){
+    <Section Title = "Journal Entry">
+    <MudTextField T="string" Label="Today I am going to..." Variant="Variant.Text"  ReadOnly="@_isReadOnly" Lines="5" />
+    </Section>
 
 
+    <Section Title = "Project Entry">
+    <MudTextField T="string" Label="Today my project is..." Variant="Variant.Text"  ReadOnly="@_isReadOnly" Lines="5" />
+    <MudPaper Class="d-flex align-baseline flex-grow-1 gap-4" Elevation="0">
+    <MudNumericField @bind-Value="DoubleValue" Label="And I will work on it for..." Variant="Variant.Text" ReadOnly="@_isReadOnly" Min="0.0" />
+    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" ReadOnly="@_isReadOnly">
+    <MudSelectItem Value="@("Hour(s)")" />
+    <MudSelectItem Value="@("Minute(s)")" />
+    </MudSelect>
+    </MudPaper>
+    </Section>
+    }
+    @if (!IsJournalSubmitted)
+    {
+        <MudButton OnClick="@SubmitJournal"> Submit </MudButton>
+    }
+    @if(IsEverythingCompleted && IsJournalSubmitted)
+    {
+        <MudButton OnClick="@EditJournal"> Edit Journal </MudButton>
+    }
+    </MudPaper>
+
+    <MudPaper>
+    @if(IsReflectionRevealed || IsEverythingCompleted)
+    {
+    <Section Title = "Reflection Entry">
+    <MudTextField T="string" Label="Today I was confused about..." Variant="Variant.Text"  ReadOnly="@_isReflectionReadOnly" Lines="5" />
+    </Section>
+    }
+    </MudPaper>
+
+    @if(!IsReflectionSubmitted && IsReflectionRevealed)
+    {
+        <MudButton OnClick="@SubmitReflection"> Submit </MudButton>
+    }
+    @if(IsEverythingCompleted && IsReflectionSubmitted)
+    {
+        <MudButton OnClick="@EditReflection"> Edit Reflection </MudButton>
+    }
 @code{
+    public bool IsJournalSubmitted {get; set;} = false;
+    public bool IsReflectionSubmitted {get; set; } = false;
+    public bool IsJournalRevealed {get; set;} = true;
+    public bool IsReflectionRevealed = false;
+    public bool IsEverythingCompleted = false;
+    private bool _isReadOnly = false;
+    private bool _isReflectionReadOnly = false;
+    public bool IsTimerGoing = false;
+    public double DoubleValue { get; set; }
     DateTime? date = DateTime.Today;
+
+    public DateTime startTime;
+    public DateTime elapsedTime;
+    public TimeSpan totalTime;
+    public string? stringTime;
+
+
+    public void SubmitJournal()
+    {
+        IsJournalRevealed = false;
+        IsJournalSubmitted = true;
+        _isReadOnly = true;
+
+        IsReflectionRevealed = true;
+
+        if(!IsEverythingCompleted)
+        {
+            TimerController();
+        }
+    }
+        public void SubmitReflection()
+    {
+        IsJournalRevealed = true;
+        IsReflectionSubmitted = true;
+        _isReflectionReadOnly = true;
+        IsEverythingCompleted = true;
+
+        TimerController();
+    }
+    public void EditJournal()
+    {
+        _isReadOnly = false;
+        IsJournalSubmitted = false;
+    }
+    public void EditReflection()
+    {
+        _isReflectionReadOnly = false;
+        IsReflectionSubmitted = false;
+    }
+
+    public void TimerController()
+    {
+        if(!IsTimerGoing)
+        {
+            startTime = DateTime.UtcNow;
+            IsTimerGoing = true;
+        }
+        else if(IsTimerGoing)
+        {
+        elapsedTime = DateTime.UtcNow;
+        totalTime = elapsedTime.Subtract(startTime);
+        stringTime = totalTime.ToString(@"hh\:mm\:ss");
+        }
+    }
 }
