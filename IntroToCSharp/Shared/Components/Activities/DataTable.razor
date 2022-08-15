@@ -13,7 +13,7 @@
             <tr>
                 @foreach (var cell in row)
                 {
-                    <td>@cell</td>
+                    <td>@((MarkupString)cell)</td>
                 }
             </tr>
         }
