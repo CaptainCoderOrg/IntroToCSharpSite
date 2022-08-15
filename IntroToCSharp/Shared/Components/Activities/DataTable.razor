@@ -11,9 +11,9 @@
         @foreach (var row in Rows)
         {
             <tr>
-                @foreach (var x in row.Split())
+                @foreach (var cell in row)
                 {
-                    <td>@x</td>
+                    <td>@cell</td>
                 }
             </tr>
         }
@@ -24,7 +24,5 @@
     [Parameter]
     public string[] Headers { get; set; } = { };
     [Parameter]
-    public string[] Rows { get; set; } = { };
-    private string _headers => string.Join(", ", Headers);
-    private string _rows => string.Join(", ", Rows);
+    public string[][] Rows { get; set; } = { };
 }
