@@ -1,27 +1,41 @@
 @inherits CaptainCoder.Page
 @page "/journal/journal-entries"
+@inject IDialogService DialogService
 
 <MudPaper align-center>
     <MudDatePicker Label="Journal Date" @bind-Date="date" Color="Color.Success" Elevation="12"/>
+
+    
+    <MudList>
+        @foreach(JournalItem item in JournalItems) {
+            <MudListItem Text="@item.Text" @bind-Checked="@Gutters" Color="Color.Secondary"/>
+        }
+    </MudList>
+
+    @* <MudButton OnClick="@AddJournalItem">Add Entry</MudButton> *@
+    <MudButton @onclick="AddJournalItem" Variant="Variant.Filled" Color="Color.Primary">
+        Open Dialog
+    </MudButton>
+
 
     @if(IsEverythingCompleted)
     {
         <MudPaper>
             <MudTextField @bind-Value="stringTime" Label="Filled" Variant="Variant.Filled"></MudTextField>
-        </MudPaper>
+        </MudPaper> 
     }
 
     @if(IsJournalRevealed || IsEverythingCompleted){
     <Section Title = "Journal Entry">
-    <MudTextField T="string" Label="Today I am going to..." Variant="Variant.Text"  ReadOnly="@_isReadOnly" Lines="5" />
+    <MudTextField T="string" @bind-Value="JournalEntryText" Label="Today I am going to..." Variant="Variant.Text"  ReadOnly="@_isReadOnly" Lines="5" />
     </Section>
 
 
     <Section Title = "Project Entry">
-    <MudTextField T="string" Label="Today my project is..." Variant="Variant.Text"  ReadOnly="@_isReadOnly" Lines="5" />
+    <MudTextField @bind-Value="ProjectEntryText" T="string" Label="Today my project is..." Variant="Variant.Text"  ReadOnly="@_isReadOnly" Lines="5" />
     <MudPaper Class="d-flex align-baseline flex-grow-1 gap-4" Elevation="0">
     <MudNumericField @bind-Value="DoubleValue" Label="And I will work on it for..." Variant="Variant.Text" ReadOnly="@_isReadOnly" Min="0.0" />
-    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" ReadOnly="@_isReadOnly">
+    <MudSelect T="string" @bind-Value="ListText" AnchorOrigin="Origin.BottomCenter" ReadOnly="@_isReadOnly">
     <MudSelectItem Value="@("Hour(s)")" />
     <MudSelectItem Value="@("Minute(s)")" />
     </MudSelect>
@@ -42,7 +56,7 @@
     @if(IsReflectionRevealed || IsEverythingCompleted)
     {
     <Section Title = "Reflection Entry">
-    <MudTextField T="string" Label="Today I was confused about..." Variant="Variant.Text"  ReadOnly="@_isReflectionReadOnly" Lines="5" />
+    <MudTextField T="string" @bind-Value="ReflectionEntryText" Label="Today I was confused about..." Variant="Variant.Text"  ReadOnly="@_isReflectionReadOnly" Lines="5" />
     </Section>
     }
     </MudPaper>
@@ -55,7 +69,26 @@
     {
         <MudButton OnClick="@EditReflection"> Edit Reflection </MudButton>
     }
+
+    <Section Title="Danger Zone">
+    <MudPaper>
+        <MudButton Variant="Variant.Filled" OnClick="@TimerReset" StartIcon="@Icons.Custom.Uncategorized.Radioactive" Color="Color.Warning">Reset Timer</MudButton>
+    </MudPaper>
+    <MudPaper>
+        <MudButton Variant="Variant.Filled" OnClick="@JournalReset" StartIcon="@Icons.Custom.Uncategorized.Radioactive" Color="Color.Warning">Reset Journal Entry</MudButton>
+    </MudPaper>
+    </Section>
+
+
 @code{
+    private List<JournalItem> JournalItems = new();
+    
+    public string? ToDoItem {get; set; }
+    public string JournalEntryText {get; set;} = String.Empty;
+    public string ProjectEntryText {get; set;} = String.Empty;
+    public string ReflectionEntryText {get; set;} = String.Empty;
+    public string ListText {get; set;} = String.Empty;
+    public bool Gutters {get; set;} = false;
     public bool IsJournalSubmitted {get; set;} = false;
     public bool IsReflectionSubmitted {get; set; } = false;
     public bool IsJournalRevealed {get; set;} = true;
@@ -64,6 +97,7 @@
     private bool _isReadOnly = false;
     private bool _isReflectionReadOnly = false;
     public bool IsTimerGoing = false;
+    public bool Todo {get; set;}
     public double DoubleValue { get; set; }
     DateTime? date = DateTime.Today;
 
@@ -119,5 +153,46 @@
         totalTime = elapsedTime.Subtract(startTime);
         stringTime = totalTime.ToString(@"hh\:mm\:ss");
         }
+    }
+
+    public void TimerReset()
+    {
+        startTime = DateTime.UtcNow;        
+        elapsedTime = DateTime.UtcNow;
+        totalTime = elapsedTime.Subtract(startTime);
+        stringTime = totalTime.ToString(@"hh\:mm\:ss");
+    }
+
+    public void JournalReset()
+    {
+        YesNoDialog.Show(DialogService, "Are you sure? Doing this will delete all of your progress.", DoJournalReset);
+    }
+    private void DoJournalReset() {
+        IsJournalRevealed = true;
+
+        _isReadOnly = false;
+        _isReflectionReadOnly = false;
+        IsJournalSubmitted = false;
+        IsReflectionSubmitted = false;
+        IsReflectionRevealed = false;
+        IsEverythingCompleted = false;
+        JournalEntryText = String.Empty;
+        ProjectEntryText = String.Empty;
+        ReflectionEntryText = String.Empty;
+        ListText = String.Empty;
+        DoubleValue = 0;
+
+        TimerReset();
+        StateHasChanged();
+    }
+
+    DialogOptions topCenter = new DialogOptions() { Position = DialogPosition.TopCenter };
+    public void AddJournalItem()
+    {
+
+        @* Can't seem to figure out how to get the TextValue from the dialogue box? *@
+        DialogOptions closeOnEscapeKey = new DialogOptions() { CloseOnEscapeKey = true };
+        DialogService.Show<JournalEntryDialog>("Add Journal Entry", closeOnEscapeKey);
+        JournalItems.Add(new JournalItem()); 
     }
 }

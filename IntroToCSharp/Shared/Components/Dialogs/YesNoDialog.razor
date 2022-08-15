@@ -1,0 +1,39 @@
+<MudDialog>
+    <DialogContent>
+        @Text
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Error" OnClick="@Cancel" Variant="Variant.Filled">No</MudButton>
+        <MudButton Color="Color.Success" OnClick="@Confirm" Variant="Variant.Filled">Yes</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance? MudDialog { get; set; }
+    [Parameter]
+    public string Text { get; set; } = "Are you sure?";
+    [Parameter]
+    public Action OnNo { get; set; } = () => { return; };
+    [Parameter]
+    public Action OnYes { get; set; } = () => { return; };
+
+    private void Cancel()
+    {
+        MudDialog?.Close();
+        OnNo.Invoke();
+    }
+    private void Confirm()
+    {
+        MudDialog?.Close();
+        OnYes.Invoke();
+    }
+
+    public static void Show(IDialogService dialogService, String message, Action onYes)
+    {
+        var options = new DialogOptions { CloseOnEscapeKey = true };
+        var parameters = new DialogParameters();
+        parameters.Add("Text", "Are you sure? Doing this will delete all of your progress.");
+        parameters.Add("OnYes", onYes);
+        dialogService.Show<YesNoDialog>("Confirm", parameters, options);
+    }
+}
