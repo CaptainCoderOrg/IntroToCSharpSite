@@ -212,6 +212,39 @@ Console.WriteLine(name + " is learning C#!");
         <IntroToCSharp.Pages.Lessons.Variables.Examples.ComplexAssignmentExample/>
 </Section>
 
+<Section Title="Challenge: Evaluating Variables">
+        <MudText>Study the code below:</MudText>
+        <CodeBlock>
+int x = 5;
+int y = x + 1;
+x = x - 1;
+y = x + y;
+int z = x + y - 5;
+x = 6;
+        </CodeBlock>
+        <SimpleCodeQuestion Question="What is stored in x?">
+            <Block><CodeBlock>Console.WriteLine(x);</CodeBlock></Block>
+            <Answer><CheckBoxOption Text="10" IsCorrect="false"/></Answer>
+            <Answer><CheckBoxOption Text="6" IsCorrect="true"/></Answer>
+            <Answer><CheckBoxOption Text="1" IsCorrect="false"/></Answer>
+            <Answer><CheckBoxOption Text="9" IsCorrect="false"/></Answer>
+        </SimpleCodeQuestion>
+        <SimpleCodeQuestion Question="What is stored in y?">
+            <Block><CodeBlock>Console.WriteLine(y);</CodeBlock></Block>
+            <Answer><CheckBoxOption Text="10" IsCorrect="true"/></Answer>
+            <Answer><CheckBoxOption Text="6" IsCorrect="false"/></Answer>
+            <Answer><CheckBoxOption Text="1" IsCorrect="false"/></Answer>
+            <Answer><CheckBoxOption Text="9" IsCorrect="false"/></Answer>
+        </SimpleCodeQuestion>
+        <SimpleCodeQuestion Question="What is stored in z?">
+            <Block><CodeBlock>Console.WriteLine(z);</CodeBlock></Block>
+            <Answer><CheckBoxOption Text="10" IsCorrect="false"/></Answer>
+            <Answer><CheckBoxOption Text="6" IsCorrect="false"/></Answer>
+            <Answer><CheckBoxOption Text="1" IsCorrect="false"/></Answer>
+            <Answer><CheckBoxOption Text="9" IsCorrect="true"/></Answer>
+        </SimpleCodeQuestion>
+</Section>
+
 <Section Title="Naming Variables">
     <Section IsSubSection="true" Title="The Rules">
         <MudText>
@@ -290,6 +323,8 @@ Console.WriteLine(name + " is learning C#!");
         <CheckBoxOption Text="text" IsCorrect="false" />
         <CheckBoxOption Text="7" IsCorrect="false" />
     </MultipleChoiceQuestion>
+
+    
 </Section>
 
 @code {
