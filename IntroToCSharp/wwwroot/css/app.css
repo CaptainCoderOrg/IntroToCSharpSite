@@ -26,6 +26,13 @@ pre {
     padding: 0;
 }
 
+.output {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #eee;
+    color: black;
+}
+
 .code-block {
     padding: 0.5rem !important;
 }
