@@ -1,8 +1,10 @@
 using MudBlazor;
 
+namespace CaptainCoder;
+
 public class Themes
 {
-    public static readonly MudTheme s_CSharpTheme = new MudTheme()
+    public static readonly MudTheme s_CSharpTheme = new ()
     {
         // Palette = new Palette()
         // {

@@ -17,7 +17,7 @@
 
     <SplitPane @ref="_consoleSplitPane">
         <TopContent>
-            <MudPaper Elevation="0" Class="pa-4">
+            <MudPaper Elevation="0" Class="pa-4" Style="max-width:960px;">
                 @Body
             </MudPaper>
         </TopContent>
@@ -106,7 +106,7 @@
         {
             if (user == null) return;
             if (user.DarkMode != null)
-                user.DarkMode.DataChanged += HandleDarkMode;
+                user.DarkMode.DataChangedEvent += HandleDarkMode;
         });
     }
 

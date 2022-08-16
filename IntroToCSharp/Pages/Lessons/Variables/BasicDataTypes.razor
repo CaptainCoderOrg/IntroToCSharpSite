@@ -1,0 +1,228 @@
+@inherits CaptainCoder.Page
+@page "/lessons/variables/basic-data-types"
+
+<Title>Basic Data Types</Title>
+<Section Title="Introduction">
+    <MudText>
+    In <MudLink Href="@Variables.Href">The Basics</MudLink> we discussed how to
+    use <Keyword Word="variable"/>s to store, read, and update data in a
+    computer's memory. In C#, when you declare a <b>variable</b> you must
+    specify the type of data that will be stored. This is called a <Keyword
+    Word="data type"/>. This section provides a high level overview
+    of the 4 most commonly used <b>data types</b>:
+    </MudText>
+    <MudList Clickable="true">
+        <MudListItem Icon="@Icons.Filled.Circle" OnClick="@(() => Utils.ScrollIntoView("String"))">String</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle" OnClick="@(() => Utils.ScrollIntoView("Integer"))">Integer</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle" OnClick="@(() => Utils.ScrollIntoView("Double"))">Double</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle" OnClick="@(() => Utils.ScrollIntoView("Boolean"))">Boolean</MudListItem>
+    </MudList>
+</Section>
+
+<Section Title="String">
+    <MudText>
+        A <Code>string</Code> stores text. To create a <Code>string</Code>
+        <Keyword Word="literal"/>, place the desired text between a pair of double
+        quotes. For example:
+    </MudText>
+    <CodeBlock AllowCopy>
+string name = "Thor Odinson";
+string title = "God of Thunder";
+    </CodeBlock>
+    <MudText>
+        You can combine strings together using the concatenate operator: (<Code>+</Code>).
+    </MudText>
+    <CodeBlock AllowCopy ReplIt="JosephCollard/HelloWorldConcat">
+string message = "Hello" + ", world!";
+Console.WriteLine(message);
+    </CodeBlock>
+    <MudText>
+        You can use the concatenate operator multiple times in a single expression:
+    </MudText>
+    <CodeBlock AllowCopy ReplIt="JosephCollard/MultipleConcats">
+string firstName = "Captain";
+string lastName = "Coder";
+Console.WriteLine("Look it is " + firstName + " " + lastName + "!");
+    </CodeBlock>
+    <MudText>
+        Sometimes you might want to include a double quote in a string. To do this,
+        we use the <Keyword Word="escape sequence"/> <Code>\"</Code>. For example:
+    </MudText>
+    <CodeBlock AllowCopy ReplIt="JosephCollard/EscapeDoublequote">
+Console.WriteLine("The dog says, \"Woof!\"");
+Console.WriteLine("The cat says, \"Meow!\"");
+    </CodeBlock>
+    <MudText>
+        Below is a list of commonly used <b>escape sequences</b> that you might find useful:
+    </MudText>
+    <EscapeSequenceTable/>
+    <Challenge Title="Thor's Title">
+        <MudText>There is a bug in the code below:</MudText>
+        <CodeBlock AllowCopy ReplIt="JosephCollard/ThorConcatenate">Console.WriteLine(name + "the" + title);</CodeBlock>
+        <Question Text="What went wrong?" Spoiler="The spacing is off in the output."/>
+        <MudText>
+            Fix the code above so that it displays correctly: <Code>"Thor Odinson the God of Thunder"</Code>.
+        </MudText>
+        <Question Text="Answer Here" Spoiler="@("Console.WriteLine(name + \" the \" + title);")" />
+    </Challenge>
+    
+</Section>
+
+<Section Title="Integer">
+    <MudText>
+        An <b>integer</b> is a whole number (no decimals allowed).
+        In C#, we declare <b>integers</b> using the <Code>int</Code> data type. 
+        For example:
+    </MudText>
+    <CodeBlock AllowCopy>
+int power = 9001;
+int price = 42;
+int y = -17;
+    </CodeBlock>
+    <MudText>
+        Notice, in the above example, we did not use a comma to seperate the
+        digits in the <Code>int</Code> literal <Code>9001</Code>.
+        It can become difficult to read an <Code>int</Code> literal that has many digits. 
+        To help with this, C# allows you to use underscores (<Code>_</Code>)
+        within an <Code>int</Code> literal. For example:
+    </MudText>
+    <CodeBlock AllowCopy>int population = 329_500_000;</CodeBlock>
+    <Note>
+        The underscores may be placed anywhere in the number so you still need to
+        take care that you have the correct number of digits.
+    </Note>
+    
+    <Explore Title="Gravity as an Integer">
+        <MudText>
+            If you try to create an integer that has a decimal value, the compiler will complain.
+        </MudText>
+        <CodeBlock AllowCopy>int gravity = 9.8;</CodeBlock>
+        <TaskItem Name="TryGravity">Add the above line of code to a C# program.</TaskItem>
+        <Question Text="What is the error message that occurs when you write the code above?" />
+    </Explore>
+    <Explore Title="Testing Integer Range">
+        <MudText>
+            The <Code>int</Code> data type is represented using 4 <Keyword
+            Word="byte"/>s (32 bits) of memory. This means there are
+            2<sup>32</sup> distinct values that can be encoded as an
+            <Code>int</Code>. The smallest value is -2,147,483,648 and the
+            largest value is 2,147,483,647.
+        </MudText>
+        <MudText>
+            Write a program that does the following:
+        </MudText>
+        <TaskList Name="Min and Max Int Tasks">
+            <TaskItem Name="Step0">Create a new C# Console Program</TaskItem>
+            <TaskItem Name="Step1">Declare an <Code>int num;</Code></TaskItem>
+            <TaskItem Name="Step2">Assign <Code>num = 2_147_483_647 + 1;</Code></TaskItem>
+            <Question Text="What is the error message you receive?"/>
+            <TaskItem Name="Step3">Update your code to assign it the maximum value: <Code>2_147_483_647</Code></TaskItem>
+            <TaskItem Name="Step4">Update your code to display <Code>num + 1</Code> (Don't run your program yet)</TaskItem>
+            <Question Text="What do you think the output will be?"/>
+            <TaskItem Name="Step5">Run your program</TaskItem>
+            <Question Text="What was the output?"/>
+            <Question Text="What do you think the output will be if you display num + 2?"/>
+            <TaskItem Name="Step6">Update your code to display <Code>num + 2</Code></TaskItem>
+            <TaskItem Name="Step7">Run your program again</TaskItem>
+            <Question Text="What do you think is happening?"/>
+        </TaskList>
+    </Explore>
+</Section>
+
+<Section Title="Double">
+    <MudText>
+        Similar to an <Code>int</Code>, a <Code>double</Code> represents a number.
+        However, a <Code>double</Code> represents decimal numbers. For example:
+    </MudText>
+    <CodeBlock AllowCopy>
+double gravity = 9.81;
+double pi = 3.14159;
+double ice = 32;
+    </CodeBlock>
+    <MudText>
+        A <Code>double</Code> uses 8 <Keyword Word="byte"/>s of memory and is
+        capable of approximating incredibly large and incredibly small values.
+        The smallest value is approximately ±10<sup>-324</sup> and the largest
+        value is approximately ±10<sup>308</sup>. To achieve this incredible 
+        range of values using only 64 <Keyword Word="bit"/>s of memory we must
+        sacrifice a small amount of precision. That is, <Code>double</Code> values
+        are only approximations.
+    </MudText>
+    <Explore Title="Approximating Numbers">
+        <MudText>Don't run the code below just yet. Read it and answer the question.</MudText>
+        <CodeBlock AllowCopy ReplIt="JosephCollard/DoublePrecision">
+double error = 2.0 - 1.9;
+Console.WriteLine(error);
+        </CodeBlock>
+        <Question Text="What do you think the code below will display?"/>
+        <MudText>
+            <b>What happened?</b> <br/>
+            The code above demonstrates a <Keyword Word="rounding error"/>. This is
+            an error that occurs when a decimal value cannot be precisely represented.
+        </MudText>
+    </Explore>
+    <MudText>
+        Because <Code>doubles</Code> have such a massive range of values, you
+        may find that you need to create a <Code>double</Code> literal that is
+        incredibly long. For example, the "Avogadro Constant" is
+        602,200,000,000,000,000,000,000. This number is typically represented
+        using scientific notation as: 6.022x10<sup>23</sup>. For convenience, C#
+        allows you to use scientific notation to specify a <Code>double</Code>
+        literal.
+    </MudText>
+    <CodeBlock AllowCopy>double avogadrosConstant = 6.022e23;</CodeBlock>
+    <Note>
+        In the example above the <Code>e</Code> is short for "exponent".
+    </Note>
+    
+</Section>
+
+<Section Title="Boolean">
+    <MudText>
+        A boolean is a data type which represents a value that is one of two
+        values: <Code>true</Code> or <Code>false</Code>. In C#, we declare
+        <b>booleans</b> using the <Code>bool</Code> data type. For example:
+    </MudText>
+    <CodeBlock>
+bool hasSword = true;
+bool isGameOver = false;
+    </CodeBlock>
+    <FunFact>
+        The word "boolean" is named after the mathematician George Bool
+        who created a branch of mathematics called "Boolean Logic" which
+        is the centered around the idea of combining logical statements
+        that are either <Code>true</Code> or <Code>false</Code>.
+    </FunFact>
+</Section>
+
+<Section Title="Post Knowledge Check">
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="Which of the following are valid ints?" XP=5 GoldAward=100>
+        <CheckBoxOption Text="@("\"hello\"")" IsCorrect="false" />
+        <CheckBoxOption Text="8" IsCorrect="true" />
+        <CheckBoxOption Text="1.7" IsCorrect="false" />
+        <CheckBoxOption Text="-17" IsCorrect="true" />
+    </MultipleChoiceQuestion>
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="Which of the following are valid doubles?" XP=5 GoldAward=100>
+        <CheckBoxOption Text="13.1" IsCorrect="true" />
+        <CheckBoxOption Text="8" IsCorrect="true" />
+        <CheckBoxOption Text="-1.7" IsCorrect="true" />
+        <CheckBoxOption Text="false" IsCorrect="false" />
+    </MultipleChoiceQuestion>
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="Which of the following are valid strings?" XP=5 GoldAward=100>
+        <CheckBoxOption Text="@("\"hello\"")" IsCorrect="true" />
+        <CheckBoxOption Text="13.1" IsCorrect="false" />
+        <CheckBoxOption Text="8" IsCorrect="false" />
+        <CheckBoxOption Text="true" IsCorrect="false" />
+    </MultipleChoiceQuestion>
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="Which of the following are valid bools?" XP=5 GoldAward=100>
+        <CheckBoxOption Text="1.7" IsCorrect="false" />
+        <CheckBoxOption Text="true" IsCorrect="true" />
+        <CheckBoxOption Text="false" IsCorrect="true" />
+        <CheckBoxOption Text="0" IsCorrect="false" />
+    </MultipleChoiceQuestion>
+
+</Section>
+
+@code {
+    public const string Href = "/lessons/variables/basic-data-types";
+}

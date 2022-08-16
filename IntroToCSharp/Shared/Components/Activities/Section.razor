@@ -1,7 +1,7 @@
 @inject NavigationManager NavigationManager
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 
-<MudExpansionPanel @bind-IsExpanded="@IsExpanded" onclick="@(new Action(OnExpand))">
+<MudExpansionPanel id="@Title" @bind-IsExpanded="@IsExpanded" onclick="@(new Action(OnExpand))">
     <TitleContent>
         @if(!IsSubSection) {
             <h2 class="@_theme pa-2">@Title</h2>

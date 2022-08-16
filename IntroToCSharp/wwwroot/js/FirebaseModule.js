@@ -45,6 +45,19 @@ function firebaseLogin(provider) {
 }
 
 /**
+ * Invoke a Login with Email and Password
+ */
+export function firebaseEmailLogin(email, password) {
+    console.log(`Authenticating with email: ${email} ${password}`)
+    const auth = firebase_auth.getAuth();
+    firebase_auth.signInWithEmailAndPassword(auth, email, password)
+        .then((result) => { console.log("Authentication Successful."); }).catch((error) => {
+            console.error("Error!");
+            console.error(error);
+        });
+}
+
+/**
  * Invoke a Google Authentication popup
  */
 export function firebaseGoogleLogin() {
@@ -118,6 +131,7 @@ export function removeDatabase(path, handler) {
 // Expose functions for calling in Blazor App
 window.firebaseGoogleLogin = firebaseGoogleLogin;
 window.firebaseGitHubLogin = firebaseGitHubLogin;
+window.firebaseEmailLogin = firebaseEmailLogin;
 window.firebaseLogout = firebaseLogout;
 window.onAuthStateChanged = onAuthStateChanged;
 window.refDatabase = refDatabase;
