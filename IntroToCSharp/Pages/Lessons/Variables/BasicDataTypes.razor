@@ -6,10 +6,10 @@
     <MudText>
     In <MudLink Href="@Variables.Href">The Basics</MudLink> we discussed how to
     use <Keyword Word="variable"/>s to store, read, and update data in a
-    computer's memory. You learned that when you declare a <b>variable</b>
-    you must specify the type of data that will be stored. This is called a
-    <Keyword Word="data type"/>. In this section, we will examine 4 of the
-    commonly used <b>data types</b> in C#:
+    computer's memory. In C#, when you declare a <b>variable</b> you must
+    specify the type of data that will be stored. This is called a <Keyword
+    Word="data type"/>. This section provides a high level overview
+    of the 4 most commonly used <b>data types</b>:
     </MudText>
     <MudList Clickable="true">
         <MudListItem Icon="@Icons.Filled.Circle" OnClick="@(() => Utils.ScrollIntoView("String"))">String</MudListItem>
@@ -21,8 +21,8 @@
 
 <Section Title="String">
     <MudText>
-        A <Code>string</Code> is used to store text. To create a
-        <Code>string</Code> literal, place the desired text between double
+        A <Code>string</Code> stores text. To create a <Code>string</Code>
+        <Keyword Word="literal"/>, place the desired text between a pair of double
         quotes. For example:
     </MudText>
     <CodeBlock AllowCopy>
@@ -30,7 +30,7 @@ string name = "Thor Odinson";
 string title = "God of Thunder";
     </CodeBlock>
     <MudText>
-        You can combine <Code>string</Code>s together using the concatenate operator: (<Code>+</Code>).
+        You can combine strings together using the concatenate operator: (<Code>+</Code>).
     </MudText>
     <CodeBlock AllowCopy ReplIt="JosephCollard/HelloWorldConcat">
 string message = "Hello" + ", world!";
@@ -40,10 +40,22 @@ Console.WriteLine(message);
         You can use the concatenate operator multiple times in a single expression:
     </MudText>
     <CodeBlock AllowCopy ReplIt="JosephCollard/MultipleConcats">
-string firstName = "Captain"
-string lastName = "Coder"
+string firstName = "Captain";
+string lastName = "Coder";
 Console.WriteLine("Look it is " + firstName + " " + lastName + "!");
     </CodeBlock>
+    <MudText>
+        Sometimes you might want to include a double quote in a string. To do this,
+        we use the <Keyword Word="escape sequence"/> <Code>\"</Code>. For example:
+    </MudText>
+    <CodeBlock AllowCopy ReplIt="JosephCollard/EscapeDoublequote">
+Console.WriteLine("The dog says, \"Woof!\"");
+Console.WriteLine("The cat says, \"Meow!\"");
+    </CodeBlock>
+    <MudText>
+        Below is a list of commonly used <b>escape sequences</b> that you might find useful:
+    </MudText>
+    <EscapeSequenceTable/>
     <Challenge Title="Thor's Title">
         <MudText>There is a bug in the code below:</MudText>
         <CodeBlock AllowCopy ReplIt="JosephCollard/ThorConcatenate">Console.WriteLine(name + "the" + title);</CodeBlock>
@@ -53,6 +65,7 @@ Console.WriteLine("Look it is " + firstName + " " + lastName + "!");
         </MudText>
         <Question Text="Answer Here" Spoiler="@("Console.WriteLine(name + \" the \" + title);")" />
     </Challenge>
+    
 </Section>
 
 <Section Title="Integer">
@@ -104,8 +117,8 @@ int y = -17;
 
 <Section Title="Double">
     <MudText>
-        Just like an <Code>int</Code>, a <Code>double</Code> stores numbers;
-        however a <Code>double</Code> stores decimal numbers. For example:
+        Similar to an <Code>int</Code>, a <Code>double</Code> represents a number.
+        However, a <Code>double</Code> represents decimal numbers. For example:
     </MudText>
     <CodeBlock AllowCopy>
 double gravity = 9.81;
@@ -121,6 +134,19 @@ double ice = 32;
         sacrifice a small amount of precision. That is, <Code>double</Code> values
         are only approximations.
     </MudText>
+    <MudText>
+        Because <Code>doubles</Code> have such a massive range of values, you
+        may find that you need to create a <Code>double</Code> literal that is
+        incredibly long. For example, the "Avogadro Constant" is
+        602,200,000,000,000,000,000,000. This number is typically represented
+        using scientific notation as: 6.022x10<sup>23</sup>. For convenience, C#
+        allows you to use scientific notation to specify a <Code>double</Code>
+        literal.
+    </MudText>
+    <CodeBlock AllowCopy>double avogadrosConstant = 6.022e23;</CodeBlock>
+    <Note>
+        In the example above the <Code>e</Code> is short for "exponent".
+    </Note>
     <Challenge Title="Approximating Numbers">
         <MudText>Don't run the code below just yet. Read it and answer the question.</MudText>
         <CodeBlock AllowCopy ReplIt="JosephCollard/DoublePrecision">
@@ -134,26 +160,13 @@ Console.WriteLine(error);
             an error that occurs when a decimal value cannot be precisely represented.
         </MudText>
     </Challenge>
-    <MudText>
-        Because <Code>double</Code>s have such a massive range of values, you
-        may find that you need to create a <Code>double</Code> literal that is
-        incredibly long. For example, the "Avogadro Constant" is
-        602,200,000,000,000,000,000,000. This number is typically represented
-        using scientific notation as: 6.022x10<sup>23</sup>. For convenience, C#
-        allows you to use scientific notation to specify a <Code>double</Code>
-        literal.
-    </MudText>
-    <CodeBlock AllowCopy>double avogadrosConstant = 6.022e23;</CodeBlock>
-    <Note>
-        In the example above the <Code>e</Code> is short for "exponent".
-    </Note>
 </Section>
 
 <Section Title="Boolean">
     <MudText>
-        Booleans are a data type which can either be <Code>true</Code> or 
-        <Code>false</Code>. In C#, we declare <b>booleans</b> using the
-        <Code>bool</Code> data type. For example:
+        A boolean is a data type which represents a value that is one of two
+        values: <Code>true</Code> or <Code>false</Code>. In C#, we declare
+        <b>booleans</b> using the <Code>bool</Code> data type. For example:
     </MudText>
     <CodeBlock>
 bool hasSword = true;
