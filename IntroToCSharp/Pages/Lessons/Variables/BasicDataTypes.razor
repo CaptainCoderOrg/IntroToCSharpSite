@@ -8,14 +8,14 @@
     use <Keyword Word="variable"/>s to store, read, and update data in a
     computer's memory. You learned that when you declare a <b>variable</b>
     you must specify the type of data that will be stored. This is called a
-    <Keyword Word="data type"/>. In this section, we will examine the 4
-    most commonly used <b>data types</b> in C#:
+    <Keyword Word="data type"/>. In this section, we will examine 4 of the
+    commonly used <b>data types</b> in C#:
     </MudText>
     <MudList Clickable="true">
-        <MudListItem Icon="@Icons.Filled.Circle">String</MudListItem>
-        <MudListItem Icon="@Icons.Filled.Circle">Integer</MudListItem>
-        <MudListItem Icon="@Icons.Filled.Circle">Double</MudListItem>
-        <MudListItem Icon="@Icons.Filled.Circle">Boolean</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle" OnClick="@(() => Utils.ScrollIntoView("String"))">String</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle" OnClick="@(() => Utils.ScrollIntoView("Integer"))">Integer</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle" OnClick="@(() => Utils.ScrollIntoView("Double"))">Double</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle" OnClick="@(() => Utils.ScrollIntoView("Boolean"))">Boolean</MudListItem>
     </MudList>
 </Section>
 
@@ -55,7 +55,7 @@ Console.WriteLine("Look it is " + firstName + " " + lastName + "!");
     </Challenge>
 </Section>
 
-<Section Title="Integers">
+<Section Title="Integer">
     <MudText>
         An <b>integer</b> is a whole number (no decimals allowed).
         In C#, we declare <b>integers</b> using the <Code>int</Code> data type. 
