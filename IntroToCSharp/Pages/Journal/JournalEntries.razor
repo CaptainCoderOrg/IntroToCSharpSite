@@ -5,18 +5,18 @@
 <MudPaper align-center>
     <MudDatePicker Label="Journal Date" @bind-Date="date" Color="Color.Success" Elevation="12"/>
 
-    
+    <Section Title="To Do List">
     <MudList>
         @foreach(JournalItem item in JournalItems) {
             <MudListItem Text="@item.Text" @bind-Checked="@Gutters" Color="Color.Secondary"/>
         }
     </MudList>
-
+    
     @* <MudButton OnClick="@AddJournalItem">Add Entry</MudButton> *@
     <MudButton @onclick="AddJournalItem" Variant="Variant.Filled" Color="Color.Primary">
         Open Dialog
     </MudButton>
-
+    </Section>
 
     @if(IsEverythingCompleted)
     {
@@ -25,50 +25,61 @@
         </MudPaper> 
     }
 
-    @if(IsJournalRevealed || IsEverythingCompleted){
+    @if((!IsJournalSubmitted || !IsProjectSubmitted) || IsEverythingCompleted){
+    
     <Section Title = "Journal Entry">
     <MudTextField T="string" @bind-Value="JournalEntryText" Label="Today I am going to..." Variant="Variant.Text"  ReadOnly="@_isReadOnly" Lines="5" />
+        @if (!IsJournalSubmitted)
+        {
+            <MudButton OnClick="@SubmitJournal"> Submit Journal </MudButton>
+        }
+        @if(IsJournalSubmitted)
+        {
+            <MudButton OnClick="@EditJournal"> Edit Journal </MudButton>
+        }
     </Section>
 
 
     <Section Title = "Project Entry">
-    <MudTextField @bind-Value="ProjectEntryText" T="string" Label="Today my project is..." Variant="Variant.Text"  ReadOnly="@_isReadOnly" Lines="5" />
+    <MudTextField @bind-Value="ProjectEntryText" T="string" Label="Today my project is..." Variant="Variant.Text"  ReadOnly="@_isProjectReadOnly" Lines="5" />
     <MudPaper Class="d-flex align-baseline flex-grow-1 gap-4" Elevation="0">
-    <MudNumericField @bind-Value="DoubleValue" Label="And I will work on it for..." Variant="Variant.Text" ReadOnly="@_isReadOnly" Min="0.0" />
-    <MudSelect T="string" @bind-Value="ListText" AnchorOrigin="Origin.BottomCenter" ReadOnly="@_isReadOnly">
+    <MudNumericField @bind-Value="DoubleValue" Label="And I will work on it for..." Variant="Variant.Text" ReadOnly="@_isProjectReadOnly" Min="0.0" />
+    <MudSelect T="string" @bind-Value="ListText" AnchorOrigin="Origin.BottomCenter" ReadOnly="@_isProjectReadOnly">
     <MudSelectItem Value="@("Hour(s)")" />
     <MudSelectItem Value="@("Minute(s)")" />
     </MudSelect>
     </MudPaper>
+        @if (!IsProjectSubmitted)
+        {
+            <MudButton OnClick="@SubmitProject"> Submit </MudButton>
+        }
+        @if(IsProjectSubmitted)
+        {
+            <MudButton OnClick="@EditProject"> Edit Project </MudButton>
+        }
     </Section>
-    }
-    @if (!IsJournalSubmitted)
-    {
-        <MudButton OnClick="@SubmitJournal"> Submit </MudButton>
-    }
-    @if(IsEverythingCompleted && IsJournalSubmitted)
-    {
-        <MudButton OnClick="@EditJournal"> Edit Journal </MudButton>
     }
     </MudPaper>
 
+
+
     <MudPaper>
-    @if(IsReflectionRevealed || IsEverythingCompleted)
+    @if((IsJournalSubmitted && IsProjectSubmitted) || IsEverythingCompleted)
     {
     <Section Title = "Reflection Entry">
     <MudTextField T="string" @bind-Value="ReflectionEntryText" Label="Today I was confused about..." Variant="Variant.Text"  ReadOnly="@_isReflectionReadOnly" Lines="5" />
     </Section>
-    }
-    </MudPaper>
 
-    @if(!IsReflectionSubmitted && IsReflectionRevealed)
+    @if(!IsReflectionSubmitted)
     {
         <MudButton OnClick="@SubmitReflection"> Submit </MudButton>
     }
-    @if(IsEverythingCompleted && IsReflectionSubmitted)
+    @if(IsReflectionSubmitted)
     {
         <MudButton OnClick="@EditReflection"> Edit Reflection </MudButton>
     }
+    }
+    </MudPaper>
 
     <Section Title="Danger Zone">
     <MudPaper>
@@ -90,11 +101,11 @@
     public string ListText {get; set;} = String.Empty;
     public bool Gutters {get; set;} = false;
     public bool IsJournalSubmitted {get; set;} = false;
+    public bool IsProjectSubmitted {get; set;} = false;
     public bool IsReflectionSubmitted {get; set; } = false;
-    public bool IsJournalRevealed {get; set;} = true;
-    public bool IsReflectionRevealed = false;
     public bool IsEverythingCompleted = false;
     private bool _isReadOnly = false;
+    private bool _isProjectReadOnly = false;
     private bool _isReflectionReadOnly = false;
     public bool IsTimerGoing = false;
     public bool Todo {get; set;}
@@ -109,20 +120,23 @@
 
     public void SubmitJournal()
     {
-        IsJournalRevealed = false;
         IsJournalSubmitted = true;
         _isReadOnly = true;
-
-        IsReflectionRevealed = true;
 
         if(!IsEverythingCompleted)
         {
             TimerController();
         }
     }
+
+        public void SubmitProject()
+    {
+        IsProjectSubmitted = true;
+        _isProjectReadOnly = true;
+
+    }
         public void SubmitReflection()
     {
-        IsJournalRevealed = true;
         IsReflectionSubmitted = true;
         _isReflectionReadOnly = true;
         IsEverythingCompleted = true;
@@ -133,6 +147,11 @@
     {
         _isReadOnly = false;
         IsJournalSubmitted = false;
+    }
+        public void EditProject()
+    {
+        _isProjectReadOnly = false;
+        IsProjectSubmitted = false;
     }
     public void EditReflection()
     {
@@ -165,16 +184,17 @@
 
     public void JournalReset()
     {
-        YesNoDialog.Show(DialogService, "Are you sure? Doing this will delete all of your progress.", DoJournalReset);
+        @* Apparently this doesn't control the message prompt *@
+        YesNoDialog.Show(DialogService, "", DoJournalReset);
     }
     private void DoJournalReset() {
-        IsJournalRevealed = true;
 
         _isReadOnly = false;
+        _isProjectReadOnly = false;
         _isReflectionReadOnly = false;
         IsJournalSubmitted = false;
+        IsProjectSubmitted = false;
         IsReflectionSubmitted = false;
-        IsReflectionRevealed = false;
         IsEverythingCompleted = false;
         JournalEntryText = String.Empty;
         ProjectEntryText = String.Empty;
@@ -182,7 +202,6 @@
         ListText = String.Empty;
         DoubleValue = 0;
 
-        TimerReset();
         StateHasChanged();
     }
 

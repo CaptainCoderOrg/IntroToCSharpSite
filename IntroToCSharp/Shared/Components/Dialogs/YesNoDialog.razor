@@ -32,7 +32,7 @@
     {
         var options = new DialogOptions { CloseOnEscapeKey = true };
         var parameters = new DialogParameters();
-        parameters.Add("Text", "Are you sure? Doing this will delete all of your progress.");
+        parameters.Add("Text", "Are you sure? Doing this will delete all of your progress except for your timer.");
         parameters.Add("OnYes", onYes);
         dialogService.Show<YesNoDialog>("Confirm", parameters, options);
     }
