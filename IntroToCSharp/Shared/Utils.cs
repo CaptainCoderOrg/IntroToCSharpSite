@@ -81,4 +81,7 @@ public static class Utils
     }
 
     public async static void ScrollToTop() => await (await GetJSRunTime()).InvokeVoidAsync("ScrollToTop");
+    public static void ScrollIntoView(string id) {
+        GetJSRunTime().ContinueWith(runtime => runtime.Result.InvokeVoidAsync("ScrollIntoView", id).AndForget());
+    }
 }
