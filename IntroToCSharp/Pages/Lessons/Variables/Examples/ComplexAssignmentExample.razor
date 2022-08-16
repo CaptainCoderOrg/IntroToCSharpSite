@@ -1,6 +1,6 @@
 
     <MudText>
-        Let's take a look at a more complex example:
+        Study the code below:
     </MudText>
     <CodeBlock>
 int a = 42;
@@ -24,44 +24,67 @@ Console.WriteLine("c stores " + c);
         <Block>
             <CodeBlock>
 int a = 42; // &lt;--
+int b = 17;
+int c = a;
+a = b;
+b = 20;
+Console.WriteLine("a stores " + a);
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
             </CodeBlock>
-            <MudText>
+            <FadeText>
                 1. This line initializes the <Code>a</Code> variable to store the
                 value <Code>42</Code>.
-            </MudText>
+            </FadeText>
         </Block>
         <Block>
             <CodeBlock>
 int a = 42;
 int b = 17; // &lt;--
+int c = a;
+a = b;
+b = 20;
+Console.WriteLine("a stores " + a);
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
             </CodeBlock>
-            <MudText>
+            <FadeText>
                 2. This line initializes the <Code>b</Code> variable to store the
                 value <Code>17</Code>.
-            </MudText>
+            </FadeText>
         </Block>
         <Block>
             <CodeBlock>
 int a = 42;
 int b = 17;
 int c = a; // &lt;--
+a = b;
+b = 20;
+Console.WriteLine("a stores " + a);
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
             </CodeBlock>
-            <MudText>
+            <FadeText>
                 3. Before we can initialize the <Code>c</Code> variable, we must
                 first read the value stored in <Code>a</Code> and substitute it
                 into the expression.
-            </MudText>
+            </FadeText>
         </Block>
         <Block>
             <CodeBlock>
 int a = 42;
 int b = 17;
 int c = 42; // &lt;--
+a = b;
+b = 20;
+Console.WriteLine("a stores " + a);
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
             </CodeBlock>
-            <MudText>
+            <FadeText>
                 4. This line initializes the <Code>c</Code> variable to store the
                 value <Code>42</Code>.
-            </MudText>
+            </FadeText>
         </Block>
         <Block>
             <CodeBlock>
@@ -69,12 +92,16 @@ int a = 42;
 int b = 17;
 int c = 42;
 a = b; // &lt;--
+b = 20;
+Console.WriteLine("a stores " + a);
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
             </CodeBlock>
-            <MudText>
+            <FadeText>
                 5. Before we can reassign the <Code>a</Code> variable, we must
                 first read the value stored in <Code>b</Code> and substitute it
                 into the expression.
-            </MudText>
+            </FadeText>
         </Block>
         <Block>
             <CodeBlock>
@@ -82,11 +109,15 @@ int a = 42;
 int b = 17;
 int c = 42;
 a = 17; // &lt;--
+b = 20;
+Console.WriteLine("a stores " + a);
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
             </CodeBlock>
-            <MudText>
+            <FadeText>
                 6. This line reassigns the <Code>a</Code> variable to store
                 the value <Code>17</Code>.
-            </MudText>
+            </FadeText>
         </Block>
         <Block>
             <CodeBlock>
@@ -95,11 +126,14 @@ int b = 17;
 int c = 42;
 a = 17;
 b = 20; // &lt;--
+Console.WriteLine("a stores " + a);
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
             </CodeBlock>
-            <MudText>
+            <FadeText>
                 7. This line reassigns the <Code>b</Code> variable to store
                 the value <Code>20</Code>.
-            </MudText>
+            </FadeText>
         </Block>
         <Block>
              <CodeBlock>
@@ -109,12 +143,14 @@ int c = 42;
 a = 17; 
 b = 20;
 Console.WriteLine("a stores " + a); // &lt;--
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
              </CodeBlock>
-             <MudText>
+             <FadeText>
                 8. Before we can write to the console, we must first
                 first read the value stored in <Code>a</Code> and substitute it
                 into the expression.
-            </MudText>
+            </FadeText>
         </Block>
         <Block>
             <CodeBlock>
@@ -124,10 +160,12 @@ int c = 42;
 a = 17; 
 b = 20;
 Console.WriteLine("a stores " + 17); // &lt;--
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
             </CodeBlock>
-            <MudText>
+            <FadeText>
                 9. This line of code displays "a stores 17" in the console.
-            </MudText>
+            </FadeText>
         </Block>
         <Block>
             <CodeBlock>
@@ -136,14 +174,15 @@ int b = 17;
 int c = 42;
 a = 17; 
 b = 20;
-Console.WriteLine("a stores " + 17);
+Console.WriteLine("a stores 17");
 Console.WriteLine("b stores " + b); // &lt;--
+Console.WriteLine("c stores " + c);
             </CodeBlock>
-            <MudText>
+            <FadeText>
                 10. Before we can write to the console, we must first
                 first read the value stored in <Code>b</Code> and substitute it
                 into the expression.
-            </MudText>
+            </FadeText>
         </Block>
     
         <Block>
@@ -153,12 +192,13 @@ int b = 17;
 int c = 42;
 a = 17; 
 b = 20;
-Console.WriteLine("a stores " + 17);
+Console.WriteLine("a stores 17");
 Console.WriteLine("b stores " + 20); // &lt;--
+Console.WriteLine("c stores " + c);
          </CodeBlock>
-         <MudText>
+         <FadeText>
                 11. This line of code displays "b stores 20" in the console.
-            </MudText>
+            </FadeText>
         </Block>
         <Block>
             <CodeBlock>
@@ -167,15 +207,15 @@ int b = 17;
 int c = 42;
 a = 17; 
 b = 20;
-Console.WriteLine("a stores " + 17);
-Console.WriteLine("b stores " + 20);
+Console.WriteLine("a stores 17");
+Console.WriteLine("b stores 20"); 
 Console.WriteLine("c stores " + c); // &lt;--
             </CodeBlock>
-            <MudText>
+            <FadeText>
                 12. Before we can write to the console, we must first
                 first read the value stored in <Code>c</Code> and substitute it
                 into the expression.
-            </MudText>
+            </FadeText>
         </Block>
         <Block>
              <CodeBlock>
@@ -184,27 +224,27 @@ int b = 17;
 int c = 42;
 a = 17; 
 b = 20;
-Console.WriteLine("a stores " + 17);
-Console.WriteLine("b stores " + 20); 
+Console.WriteLine("a stores 17");
+Console.WriteLine("b stores 20"); 
 Console.WriteLine("c stores " + 42); // &lt;--
              </CodeBlock>
-             <MudText>
+             <FadeText>
                 13. This line of code displays "c stores 42" in the console.
-            </MudText>
+            </FadeText>
         </Block>
         <Block>
              <CodeBlock ReplIt="JosephCollard/ComplexReassignment">
 int a = 42;
 int b = 17;
-int c = 42;
-a = 17; 
+int c = a;
+a = b;
 b = 20;
-Console.WriteLine("a stores " + 17);
-Console.WriteLine("b stores " + 20); 
-Console.WriteLine("c stores " + 42);
+Console.WriteLine("a stores " + a);
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
              </CodeBlock>
-             <MudText>
+             <FadeText>
                 Run the program to see the output!
-             </MudText>
+             </FadeText>
         </Block>
     </CodeStepper>
