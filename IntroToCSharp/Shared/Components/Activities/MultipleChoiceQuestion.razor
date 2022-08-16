@@ -147,7 +147,7 @@
         if (userData.IsLoggedIn)
         {
             _dataReference = UserService.Service.GetJsonDataReference<MultipleChoiceQuestionData>(Path, Question);
-            _dataReference!.DataChangedEvent += HandleDataChanged!;
+            _dataReference!.DataChangedEvent += HandleDataChanged;
         }
         else
         {
@@ -156,8 +156,9 @@
         }
     }
 
-    private void HandleDataChanged(MultipleChoiceQuestionData newData)
+    private void HandleDataChanged(MultipleChoiceQuestionData? newData)
     {
+        if (newData == null) return;
         _options.ForEach(o => o.SetIsChecked(newData.Answers.Contains(o.Text)));
         this.SelectedOption = newData.Answers.Count() > 0 ? newData.Answers[0] : "";
         this._isSubmitted = newData.IsSubmitted;
