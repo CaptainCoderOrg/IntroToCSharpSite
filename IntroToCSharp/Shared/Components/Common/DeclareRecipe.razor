@@ -1,0 +1,21 @@
+<MudStack Row=true>
+    <b>The Recipe:</b>
+    <Code>
+        <MudText Class="d-inline" Color="Color.Warning">{Data-Type}</MudText> 
+        <MudText Class="d-inline" Color="Color.Secondary">{Variable-Name}</MudText>;
+    </Code>
+</MudStack>
+<MudList Clickable>
+    <MudListItem Icon="@Icons.Material.Filled.Category" IconColor="Color.Warning">
+        <MudStack Row=true AlignItems="AlignItems.Center">
+            <MudText Class="flex-none" Color="Color.Warning">{Data-Type}</MudText>
+            <MudText>The type of data that will be stored.</MudText>
+        </MudStack>
+    </MudListItem>
+    <MudListItem Icon="@Icons.Material.Filled.Badge" IconColor="Color.Secondary">
+        <MudStack Row=true AlignItems="AlignItems.Center">
+            <MudText Class="flex-none" Color="Color.Secondary">{Variable-Name}</MudText>
+            <MudText>The name we will us to refer to the data.</MudText>
+        </MudStack>
+    </MudListItem>
+</MudList>

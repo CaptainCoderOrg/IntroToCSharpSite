@@ -1,0 +1,14 @@
+@inherits MudText
+
+@{
+    base.BuildRenderTree(__builder);
+}
+
+@code {
+  protected override void OnInitialized()
+    {   
+        if (this.Style == null || this.Style == string.Empty) {
+            this.Style = "margin: 0.75rem 0rem";
+        }
+    }
+}

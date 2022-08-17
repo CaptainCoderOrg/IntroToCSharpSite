@@ -1,0 +1,57 @@
+@inherits CaptainCoder.Page
+@page "/lessons/variables/naming-variables"
+
+<Section Title="Naming Variables">
+    <Section IsSubSection="true" Title="The Rules">
+        <Text>
+            When programming, variables are essential for managing complexity.
+            They are used to create labels that the programmer can use to store,
+            update, and read data. You have a lot of flexibility in what you
+            name your variables but there are a few restrictions. Below are the
+            rules for naming a variable in C#:
+        </Text>
+        <InfoGrid>
+            <GridSquare>
+                Variable names must start with a
+                <b>letter</b> (a-z)
+                or <b>underscore</b> (_).
+            </GridSquare>
+            <GridSquare>You can't use numeric digits <b>0 through 9</b> to start a variable name.
+            </GridSquare>
+            <GridSquare>
+                Many <b>symbols</b> and <b>blank spaces</b> will cause
+                the computer to not know where the variable ends.
+            </GridSquare>
+            <GridSquare>
+                Variables cannot have the same name as a keyword. An example of
+                this is the word <b>"string"</b>.
+            </GridSquare>
+        </InfoGrid>
+    </Section>
+    <Section IsSubSection="true" Title="Coding Guidlines for Naming Variables">
+        <Text>
+            The rules above are enforced by the C# compiler. That is to say, you
+            cannot violate them. This still leaves a lot of room for naming your
+            variables in ways that can be confusing. Remember, as a programmer,
+            your job is to manage complexity. To help with that, here are some
+            guidelines to help you give your variables "good" names:
+        </Text>
+        <InfoGrid>
+            <GridSquare>
+                Use a name that accurately <b>describes</b> what the variable holds, even if
+                the name has to be <b>longer</b>.
+            </GridSquare>
+
+            <GridSquare> Avoid <b>abbreviations</b> of words that you use as variables.</GridSquare>
+            <GridSquare>Do not use names that are <b>not specific</b> such as "text" or "number".
+            </GridSquare>
+            <GridSquare>Use <Keyword Word="camel case"></Keyword> or
+                <Keyword Word="pascal case"></Keyword> for multi-word variables.
+            </GridSquare>
+        </InfoGrid>
+        <Note>
+            All of these guidelines are NOT required when naming variables; however, they make your
+            code easier to follow and understand when referencing it.
+        </Note>
+    </Section>
+</Section>
