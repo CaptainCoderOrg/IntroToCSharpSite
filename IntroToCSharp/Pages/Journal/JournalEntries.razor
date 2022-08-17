@@ -8,14 +8,12 @@
     <Section Title="To Do List">
     <MudList>
         @foreach(JournalItem item in JournalItems) {
-            <MudListItem Text="@item.Text" @bind-Checked="@Gutters" Color="Color.Secondary"/>
+            <MudCheckBox @onclick="@(() => ToggleJournalItem(item))" Checked="@item.Checked" Label="@item.Text" />
+            <MudIconButton @onclick="@(() => DeleteJournalItem(item))"  Variant="Variant.Outlined" Color="Color.Secondary" Icon="@Icons.Filled.Delete" Size=Size.Small/>
         }
     </MudList>
     
-    @* <MudButton OnClick="@AddJournalItem">Add Entry</MudButton> *@
-    <MudButton @onclick="AddJournalItem" Variant="Variant.Filled" Color="Color.Primary">
-        Open Dialog
-    </MudButton>
+     <MudButton StartIcon="@Icons.Material.Filled.AlarmAdd" IconColor="Color.Warning" @onclick="AddJournalItem">Add To Do Item</MudButton>
     </Section>
 
     @if(IsEverythingCompleted)
@@ -82,10 +80,8 @@
     </MudPaper>
 
     <Section Title="Danger Zone">
-    <MudPaper>
+    <MudPaper Class="d-flex align-content-start flex-wrap flex-grow-1 gap-4 pa-3">
         <MudButton Variant="Variant.Filled" OnClick="@TimerReset" StartIcon="@Icons.Custom.Uncategorized.Radioactive" Color="Color.Warning">Reset Timer</MudButton>
-    </MudPaper>
-    <MudPaper>
         <MudButton Variant="Variant.Filled" OnClick="@JournalReset" StartIcon="@Icons.Custom.Uncategorized.Radioactive" Color="Color.Warning">Reset Journal Entry</MudButton>
     </MudPaper>
     </Section>
@@ -211,7 +207,20 @@
 
         @* Can't seem to figure out how to get the TextValue from the dialogue box? *@
         DialogOptions closeOnEscapeKey = new DialogOptions() { CloseOnEscapeKey = true };
-        DialogService.Show<JournalEntryDialog>("Add Journal Entry", closeOnEscapeKey);
-        JournalItems.Add(new JournalItem()); 
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("JournalItems", JournalItems);
+        DialogService.Show<JournalEntryDialog>("Add Journal Entry", parameters, closeOnEscapeKey);
+        // TODO: State Changed
+    }
+
+    public void ToggleJournalItem(JournalItem item)
+    {
+        item.Checked = !item.Checked;
+        StateHasChanged();
+    }
+        public void DeleteJournalItem(JournalItem item)
+    {
+        JournalItems.Remove(item);
+        StateHasChanged();
     }
 }

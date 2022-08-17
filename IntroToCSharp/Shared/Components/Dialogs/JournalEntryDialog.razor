@@ -10,8 +10,16 @@
 @code {
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
 
-    public string? TextValue {get; set;}
-    void Submit() => MudDialog.Close(DialogResult.Ok(true));
+    [Parameter]
+    public List<JournalItem> JournalItems { get; set; } = null!;
+
+    public string TextValue {get; set;} = String.Empty;
+    void Submit() { 
+        MudDialog.Close(DialogResult.Ok(true));
+        JournalItem newItem = new JournalItem();
+        newItem.Text = TextValue;
+        JournalItems.Add(newItem); 
+    }
     void Cancel() => MudDialog.Cancel();
 
 }
