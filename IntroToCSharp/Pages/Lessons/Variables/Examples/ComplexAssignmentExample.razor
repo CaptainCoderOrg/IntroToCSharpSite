@@ -1,0 +1,361 @@
+
+    <Text>
+        Study the code below:
+    </Text>
+    <CodeBlock>
+int a = 42;
+int b = a - 25;
+int c = a;
+a = b;
+b = b + 3;
+Console.WriteLine("a stores " + a);
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
+    </CodeBlock>
+    <Text>Think about the code above but don't run it.</Text>
+    <Question Text="What do you think the program above will output?"/>
+    <HorizontalDivider/>
+    <Text>
+        Let's step through the example one line at a time and evaluate the code
+        the same way the computer would. Press the <b>Next</b> and <b>Back</b>
+        button to study the evaluation process.
+    </Text>
+    <CodeStepper>
+        <Block>
+            <CodeBlock>
+int a = 42; // &lt;--
+int b = a - 25;
+int c = a;
+a = b;
+b = b + 3;
+Console.WriteLine("a stores " + a);
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
+            </CodeBlock>
+            <FadeText>
+                This line initializes the <Code>a</Code> variable to store the
+                value <Code>42</Code>.
+            </FadeText>
+        </Block>
+        <Block>
+            <CodeBlock>
+int a = 42; 
+int b = a - 25; // &lt;--
+int c = a;
+a = b;
+b = b + 3;
+Console.WriteLine("a stores " + a);
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
+            </CodeBlock>
+            <FadeText>
+                Before we can initialize <Code>b</Code> we must <b>evaluate</b>
+                the <b>expression</b> on the right side of the 
+                <b>assignment operator</b> (<Code>=</Code>). To do this,
+                we must first read the value stored in <Code>a</Code> and substitute
+                it into the <b>expression</b>.
+            </FadeText>
+        </Block>
+        <Block>
+            <CodeBlock>
+int a = 42; 
+int b = 42 - 25; // &lt;--
+int c = a;
+a = b;
+b = b + 3;
+Console.WriteLine("a stores " + a);
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
+            </CodeBlock>
+            <FadeText>
+                We now have enough information to <b>evaluate</b> the <b>expression</b> on
+                the right side of the <b>assignment operator</b> (<Code>=</Code>).
+            </FadeText>
+        </Block>
+        <Block>
+            <CodeBlock>
+int a = 42; 
+int b = 17; // &lt;--
+int c = a;
+a = b;
+b = b + 3;
+Console.WriteLine("a stores " + a);
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
+            </CodeBlock>
+            <FadeText>
+                This line initializes <Code>b</Code> to store the value <Code>17</Code>.
+            </FadeText>
+        </Block>
+        <Block>
+            <CodeBlock>
+int a = 42; 
+int b = 17;
+int c = a; // &lt;--
+a = b;
+b = b + 3;
+Console.WriteLine("a stores " + a);
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
+            </CodeBlock>
+            <FadeText>
+                Before we can initialize the <Code>c</Code> variable, we must
+                first read the value stored in <Code>a</Code> and substitute it
+                into the expression.
+            </FadeText>
+        </Block>
+        <Block>
+            <CodeBlock>
+int a = 42; 
+int b = 17;
+int c = 42; // &lt;--
+a = b;
+b = b + 3;
+Console.WriteLine("a stores " + a);
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
+            </CodeBlock>
+            <FadeText>
+                This line initializes the <Code>c</Code> variable to store
+                the value <Code>42</Code>.
+            </FadeText>
+        </Block>
+        <Block>
+            <CodeBlock>
+int a = 42; 
+int b = 17;
+int c = 42;
+a = b; // &lt;--
+b = b + 3;
+Console.WriteLine("a stores " + a);
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
+            </CodeBlock>
+            <FadeText>
+                Before we can reassign the <Code>a</Code> variable, we must
+                first read the value stored in <Code>b</Code> and substitute it
+                into the expression.
+            </FadeText>
+        </Block>
+        <Block>
+             <CodeBlock>
+int a = 42; 
+int b = 17;
+int c = 42;
+a = 17; // &lt;--
+b = b + 3;
+Console.WriteLine("a stores " + a);
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
+             </CodeBlock>
+             <FadeText>
+                This line reassigns the <Code>a</Code> variable to store
+                the value <Code>17</Code>.
+            </FadeText>
+        </Block>
+        <Block>
+            <CodeBlock>
+int a = 42; 
+int b = 17;
+int c = 42;
+a = 17; 
+b = b + 3; // &lt;--
+Console.WriteLine("a stores " + a);
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
+            </CodeBlock>
+            <FadeText>
+                Before we can reassign the <Code>b</Code> variable, we must
+                first <b>evaluate</b> the <b>expression</b> on the right
+                side of the <b>assignment operator</b> (<Code>=</Code>).
+                To do this, we first read the value stored in <Code>b</Code> and
+                substitute it into the expression.
+            </FadeText>
+        </Block>
+        <Block>
+            <CodeBlock>
+int a = 42; 
+int b = 17;
+int c = 42;
+a = 17; 
+b = 17 + 3; // &lt;--
+Console.WriteLine("a stores " + a);
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
+            </CodeBlock>
+            <FadeText>
+                Next, we finish the evaluation of the <b>expression</b>.
+            </FadeText>
+        </Block>
+        <Block>
+            <CodeBlock>
+int a = 42; 
+int b = 17;
+int c = 42;
+a = 17; 
+b = 20; // &lt;--
+Console.WriteLine("a stores " + a);
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
+            </CodeBlock>
+            <FadeText>
+                This line reassigns the variable <Code>b</Code> to store the value <Code>20</Code>.
+            </FadeText>
+        </Block>
+        <Block>
+            <CodeBlock>
+int a = 42;
+int b = 17;
+int c = 42;
+a = 17; 
+b = 20;
+Console.WriteLine("a stores " + a); // &lt;--
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
+            </CodeBlock>
+            <FadeText>
+                Before we can write to the console, we must first
+                first read the value stored in <Code>a</Code> and substitute it
+                into the expression.
+            </FadeText>
+        </Block>
+        <Block>
+            <CodeBlock>
+int a = 42;
+int b = 17;
+int c = 42;
+a = 17; 
+b = 20;
+Console.WriteLine("a stores " + 17); // &lt;--
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
+            </CodeBlock>
+            <FadeText>
+                Next, we simplify the expression by combining <Code>"a store "</Code> with <Code>17</Code>.
+            </FadeText>
+        </Block>       
+        <Block>
+            <CodeBlock>
+int a = 42;
+int b = 17;
+int c = 42;
+a = 17; 
+b = 20;
+Console.WriteLine("a stores 17"); // &lt;--
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
+            </CodeBlock>
+            <FadeText>
+                This line of code displays "a stores 17" in the console.
+            </FadeText>
+        </Block>
+        <Block>
+            <CodeBlock>
+int a = 42;
+int b = 17;
+int c = 42;
+a = 17; 
+b = 20;
+Console.WriteLine("a stores 17");
+Console.WriteLine("b stores " + b); // &lt;--
+Console.WriteLine("c stores " + c);
+            </CodeBlock>
+            <FadeText>
+                Before we can write to the console, we must first
+                first read the value stored in <Code>b</Code> and substitute it
+                into the expression.
+            </FadeText>
+        </Block>
+        <Block>
+            <CodeBlock>
+int a = 42;
+int b = 17;
+int c = 42;
+a = 17; 
+b = 20;
+Console.WriteLine("a stores 17");
+Console.WriteLine("b stores " + 20); // &lt;--
+Console.WriteLine("c stores " + c);
+         </CodeBlock>
+         <FadeText>
+                Next, we simplify the expression by combining <Code>"b store "</Code> with <Code>20</Code>.
+            </FadeText>
+        </Block>
+        <Block>
+            <CodeBlock>
+int a = 42;
+int b = 17;
+int c = 42;
+a = 17; 
+b = 20;
+Console.WriteLine("a stores 17");
+Console.WriteLine("b stores 20"); // &lt;--
+Console.WriteLine("c stores " + c);
+         </CodeBlock>
+         <FadeText>
+                This line of code displays "b stores 20" in the console.
+            </FadeText>
+        </Block>
+        <Block>
+            <CodeBlock>
+int a = 42;
+int b = 17;
+int c = 42;
+a = 17; 
+b = 20;
+Console.WriteLine("a stores 17");
+Console.WriteLine("b stores 20"); 
+Console.WriteLine("c stores " + c); // &lt;--
+            </CodeBlock>
+            <FadeText>
+                Before we can write to the console, we must first
+                first read the value stored in <Code>c</Code> and substitute it
+                into the expression.
+            </FadeText>
+        </Block>
+        <Block>
+             <CodeBlock>
+int a = 42;
+int b = 17;
+int c = 42;
+a = 17; 
+b = 20;
+Console.WriteLine("a stores 17");
+Console.WriteLine("b stores 20"); 
+Console.WriteLine("c stores " + 42); // &lt;--
+             </CodeBlock>
+             <FadeText>
+                Next, we simplify the expression by combining <Code>"c store "</Code> with <Code>42</Code>.
+            </FadeText>
+        </Block>
+        <Block>
+             <CodeBlock>
+int a = 42;
+int b = 17;
+int c = 42;
+a = 17; 
+b = 20;
+Console.WriteLine("a stores 17");
+Console.WriteLine("b stores 20"); 
+Console.WriteLine("c stores 42"); // &lt;--
+             </CodeBlock>
+             <FadeText>
+                This line of code displays "c stores 42" in the console.
+            </FadeText>
+        </Block>
+        <Block>
+             <CodeBlock ReplIt="JosephCollard/ComplexReassignment">
+int a = 42;
+int b = a - 25;
+int c = a;
+a = b;
+b = b + 3;
+Console.WriteLine("a stores " + a);
+Console.WriteLine("b stores " + b);
+Console.WriteLine("c stores " + c);
+             </CodeBlock>
+             <FadeText>
+                Run the program to see the output!
+             </FadeText>
+        </Block>
+    </CodeStepper>
