@@ -1,0 +1,14 @@
+<MudDialog>
+    <DialogContent>
+            <MudImage Class="rounded" Style="max-width:calc(100vw - 100px); max-height:calc(100vh - 100px);" Src="@Src" onclick="@Exit" />
+    </DialogContent>
+</MudDialog>
+
+
+@code {
+
+    [CascadingParameter] public MudDialogInstance? MudDialog { get; set; }
+    [Parameter] public string Src { get; set; } = null!;
+
+    private void Exit() => MudDialog?.Close(DialogResult.Ok(true));
+}
