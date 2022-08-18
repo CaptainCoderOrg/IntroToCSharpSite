@@ -4,9 +4,9 @@
 <MudExpansionPanel id="@Title" @bind-IsExpanded="@IsExpanded" onclick="@(new Action(OnExpand))">
     <TitleContent>
         @if(!IsSubSection) {
-            <h2 class="@_theme pa-2">@Title</h2>
+            <h2 class="mud-theme-primary pa-2">@Title</h2>
         } else {
-            <h3 class="@_theme pa-2">@Title</h3>
+            <h3 class="mud-theme-primary pa-2">@Title</h3>
         }
     </TitleContent>
     <ChildContent>
@@ -25,8 +25,6 @@
     public bool StartClosed {get; set;} = false;
     private bool IsExpanded = true;
     private string Key => NavigationManager.Uri.Substring(NavigationManager.BaseUri.Length) + Title;
-    private string _theme = "mud-theme-primary";
-
     protected async override void OnInitialized()
     {
         bool contains = await localStorage.ContainKeyAsync(Key);
@@ -35,12 +33,6 @@
             IsExpanded = await localStorage.GetItemAsync<bool>(Key);
             StateHasChanged();
         }
-
-        MainLayout mainLayout = await MainLayout.GetInstance();
-        mainLayout.OnDarkModeChange += isDarkMode => {
-            _theme = isDarkMode ? "mud-theme-dark" : "mud-theme-primary";
-            StateHasChanged();
-        };
     }
 
     private async void OnExpand()

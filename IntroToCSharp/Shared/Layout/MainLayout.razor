@@ -45,7 +45,7 @@
             _onPaletteChange?.Invoke(this._palette);
         }
     }
-    private MudThemeProvider? _mudThemeProvider = null!;
+    private MudThemeProvider _mudThemeProvider = null!;
     private SplitPane? _consoleSplitPane = null!;
     private bool _isDarkMode = true;
     public bool IsNavMenuOpen = true;
@@ -143,6 +143,8 @@
                 await localStorage.SetItemAsync<bool>("DarkMode", systemPref);
             }
             IsDarkMode = await localStorage.GetItemAsync<bool>("DarkMode");
+            Palette = IsDarkMode ? _mudThemeProvider.Theme.PaletteDark : _mudThemeProvider.Theme.Palette;
+                
         }
     }
     public void ToggleNavMenu() => IsNavMenuOpen = !IsNavMenuOpen;
