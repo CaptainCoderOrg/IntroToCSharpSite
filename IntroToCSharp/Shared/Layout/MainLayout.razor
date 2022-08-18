@@ -35,7 +35,6 @@
     private static ILocalStorageService? s_LocalStorage;
     private static bool s_isInit = false;
     private static event Action<IJSRuntime, ISnackbar, ILocalStorageService>? s_onInit;
-    private event Action<bool>? _onDarkModeChange;
     private event Action<Palette>? _onPaletteChange;
     private Palette _palette = Themes.s_CSharpTheme.Palette;
     private Palette Palette {
@@ -62,7 +61,6 @@
             if (value == _isDarkMode) return;
             _isDarkMode = value;
             UserService.Service.UpdateDarkModePreference(value);
-            _onDarkModeChange?.Invoke(value);
             localStorage.SetItemAsync<bool>("DarkMode", value);
             if (_mudThemeProvider != null)
             {
@@ -79,16 +77,6 @@
             _onPaletteChange += value;
         }
         remove => _onPaletteChange -= value;
-    }
-
-    public event Action<bool> OnDarkModeChange
-    {
-        add
-        {
-            value.Invoke(IsDarkMode);
-            _onDarkModeChange += value;
-        }
-        remove => _onDarkModeChange -= value;
     }
 
     public static event Action<IJSRuntime, ISnackbar, ILocalStorageService> OnInit

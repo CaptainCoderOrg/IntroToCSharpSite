@@ -5,10 +5,8 @@ namespace CaptainCoder;
 public class Themes
 {
 
-    private static readonly DarkPalette DarkPalette = new () {
-        Primary = new MudBlazor.Utilities.MudColor("#27272f"),
-        PrimaryLighten = new MudBlazor.Utilities.MudColor("#27272f").ColorLighten(.025).ToString(),
-        PrimaryDarken = new MudBlazor.Utilities.MudColor("#27272f").ColorDarken(.025).ToString(),
+    private static readonly DarkPalette DarkPalette = new () { 
+        //#b2d9ff
     };
 
     public static readonly MudTheme s_CSharpTheme = new ()

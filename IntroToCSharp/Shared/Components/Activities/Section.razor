@@ -4,9 +4,9 @@
 <MudExpansionPanel id="@Title" @bind-IsExpanded="@IsExpanded" onclick="@(new Action(OnExpand))">
     <TitleContent>
         @if(!IsSubSection) {
-            <h2 class="mud-theme-primary pa-2">@Title</h2>
+            <h2 class="pa-2" style="@Style">@Title</h2>
         } else {
-            <h3 class="mud-theme-primary pa-2">@Title</h3>
+            <h3 class="pa-2" style="@Style">@Title</h3>
         }
     </TitleContent>
     <ChildContent>
@@ -23,6 +23,9 @@
     public RenderFragment ChildContent {get; set;} = null!;
     [Parameter]
     public bool StartClosed {get; set;} = false;
+    private string Background = "background: var(--mud-palette-appbar-background);";
+    private string Color = "color: var(--mud-palette-appbar-text);";
+    private string Style => $"{Background} {Color}";
     private bool IsExpanded = true;
     private string Key => NavigationManager.Uri.Substring(NavigationManager.BaseUri.Length) + Title;
     protected async override void OnInitialized()
