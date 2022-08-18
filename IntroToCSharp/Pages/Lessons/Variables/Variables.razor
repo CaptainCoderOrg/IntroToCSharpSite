@@ -4,23 +4,30 @@
 <Title>Variables</Title>
 <Section Title="Introduction">
     <Text>
-        An essential part of programming is being able to store data. For
+        An essential part of programming is being able to track values. For
         example, in a video game you might track the amount of experience a
         player has gained throughout their adventure. To do this, programmers
-        utilize the computer's <b>Random Access Memory</b> (RAM) to store data. Throughout
+        utilize the computer's <b>Random Access Memory</b> (RAM). Throughout
         this book we will simply refer to a computer's RAM as <b>memory</b>.
     </Text>
     <Text>
-        When programming, we need to be able to store, update, and read data in
+        When programming, we need to be able to store, update, and read values in
         the computer's memory to keep track of information. To help manage this
         complexity, we use variables to give a label to those parts of
-        memory. After completing this section, you should know the basics of:
+        memory. 
+    </Text>
+    <Note>
+        RAM is volatile. That is, when a program starts it has no "memories".
+        Throughout the execution of the program, it can gain "memories".
+        Finally, when the program finishes, it forgets all of its "memories".
+    </Note>
+    <Text>
+        After completing this section, you should know the basics of:
     </Text>
     <MudList Clickable="true">
-        <MudListItem Icon="@Icons.Filled.Circle" OnClick="@(() => Utils.ScrollIntoView("Declaring a Variable"))">Declaring a Variable</MudListItem>
-        <MudListItem Icon="@Icons.Filled.Circle" OnClick="@(() => Utils.ScrollIntoView("Stroing Data"))">Stroing Data in a Variable</MudListItem>
-        <MudListItem Icon="@Icons.Filled.Circle" OnClick="@(() => Utils.ScrollIntoView("Reading Data"))">Reading Data from a Variable</MudListItem>
-        <MudListItem Icon="@Icons.Filled.Circle" OnClick="@(() => Utils.ScrollIntoView("Evaluating Variables"))">Evaluating Variables in Code</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Declaring a variable</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Using the <Keyword Word="assignment operator"/> to initialize and update the value stored in a variable</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Evaluating variables in Code</MudListItem>
     </MudList>
 </Section>
 <Section Title="Declaring a Variable">
@@ -72,15 +79,15 @@
     </SimpleCodeQuestion>
 </Section>
 
-<Section Title="Storing Data">
+<Section Title="The Assignment Operator">
     <Text>
-        Once a variable has been declared, it is possible to store data in the
-        computer's memory. To do this, we use the <b>assignment operator</b> (<Code>=</Code>)
-        to store a value at the location specified by a variable name.
+        Once a variable has been declared, it is possible to store a value in
+        the labeled memory address. To do this, we use the <Keyword
+        Word="assignment operator"/> (<Code>=</Code>).
     </Text>
     
     <MudPaper Class="rounded pt-3 pl-4 pr-4" Elevation=3>
-        <StoringDataRecipe />
+        <AssignmentOperatorRecipe />
     </MudPaper>
 
     <Text><b>Examples</b></Text>
@@ -174,7 +181,7 @@ Console.WriteLine(name + " is learning C#!");
     <Text>
         When the computer encounters the code above, it must first
         <b>evaluate</b> <Code>x</Code> and <Code>y</Code> before it can
-        determine what value should be stored in <Code>z</Code>. To <b>evaluate</b>,
+        determine what value should be stored in <Code>z</Code>. To <b>evaluate</b>
         a variable, the computer <b>reads</b> the value stored in memory and
         substitutes it into the <b>expression</b>.
     </Text>
