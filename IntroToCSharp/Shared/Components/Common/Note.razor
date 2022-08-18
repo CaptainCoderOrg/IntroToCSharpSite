@@ -1,0 +1,14 @@
+<MudPaper Elevation="25" Class="@Class" Style="@Style"><b>Note: </b>@ChildContent</MudPaper>
+
+@code
+{
+    [Parameter]
+    public string Class {get; set;} = "pa-2 mb-2";
+    [Parameter]
+    public RenderFragment ChildContent {get; set;} = null!;
+
+    private Palette _palette = Themes.s_CSharpTheme.Palette;
+    private string Background => $"background: var(--mud-palette-primary-lighten);";
+    private string Color => $"color: var(--mud-palette-primary-text);";
+    private string Style => $"{Background} {Color} width:calc(100% - 20px); margin:auto;";
+}
