@@ -37,7 +37,7 @@ namespace IntroToCSharp.Shared.Components.CodeBlock
         public RenderFragment ChildContent { get; set; } = null!;
 
         private bool IsReplItOpen { get; set; } = false;
-        private string ReplItStyle => ReplIt != null && IsReplItOpen ? "min-height:250px; overflow:hidden;" : "display:none";
+        private string ReplItStyle => ReplIt != null && IsReplItOpen ? "min-height:350px; overflow:hidden;" : "display:none";
         private string PlayButtonStyle => ReplIt != null && !IsReplItOpen ? "" : "display:none";
 
         public string Output
