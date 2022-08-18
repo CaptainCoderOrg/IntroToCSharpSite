@@ -1,19 +1,16 @@
-<div style="position:relative; top:45px; margin-top:-45px; width:100px">
-    @if (OnClose != null)
-    {
-        <MudTooltip Text="Close Console">
-            <MudIconButton Color="Color.Error" Icon="@Icons.Material.Filled.Close"  OnClick="@OnClose"/>
+<MudPaper Style="height:348px">
+    <MudStack Row=true>
+        @if (OnClose != null)
+        {
+            <MudTooltip Text="Close Console">
+                <MudIconButton Color="Color.Error" Icon="@Icons.Material.Filled.Close"  OnClick="@OnClose"/>
+            </MudTooltip>
+        }
+        <MudTooltip Text="Refresh Console">
+            <MudIconButton Color="Color.Tertiary" Icon="@Icons.Material.Filled.Cached"  OnClick="@ReloadIFrame"/>
         </MudTooltip>
-    }
-    <MudTooltip Text="Refresh Console">
-        <MudIconButton Color="Color.Tertiary" Icon="@Icons.Material.Filled.Cached"  OnClick="@ReloadIFrame"/>
-    </MudTooltip>
-</div>
-@if (!ShareSource)
-{
-    <div style="position:relative; margin-top: -45px; top:45px; right: calc(-100% + 150px); width:150px">
-        <MudButton FullWidth="true" Style="height:40px" Href="https://replit.com/" Target="_blank" />
-    </div>
-}
+    </MudStack>
 
-<iframe id="@Path" style="min-height:@ResizeHeight; overflow:auto" frameborder="0" src="@Url" onload="@(new Action(ResizeFrame))"></iframe>
+    <iframe id="@Path" style="height:@ResizeHeight; overflow:auto;" frameborder="0" src="@Url" onload="@(new Action(ResizeFrame))"></iframe>
+    
+</MudPaper>
