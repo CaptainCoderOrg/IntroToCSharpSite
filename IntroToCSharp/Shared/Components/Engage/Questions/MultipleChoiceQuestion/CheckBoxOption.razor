@@ -20,25 +20,18 @@
     private bool IsSubmitted { get; set; } = false;
     private bool IsSubmissionCorrect => (this.IsChecked && this.IsCorrect) || (!this.IsChecked && !this.IsCorrect);
 
-    private Palette _palette = Themes.s_CSharpTheme.Palette;
     private bool IsHighlighted => (this.IsSubmitted && this.IsChecked);
-    private MudBlazor.Utilities.MudColor CorrectHighlight => _palette.Success;
-    private MudBlazor.Utilities.MudColor IncorrectHighlight => _palette.Error;
-    private MudBlazor.Utilities.MudColor Highlight => this.IsCorrect ? CorrectHighlight : IncorrectHighlight;
-    private MudBlazor.Utilities.MudColor CorrectColor => _palette.SuccessContrastText;
-    private MudBlazor.Utilities.MudColor IncorrectColor => _palette.ErrorContrastText;
-    private MudBlazor.Utilities.MudColor HighlightColor => this.IsCorrect ? CorrectColor : IncorrectColor;
-    private MudBlazor.Utilities.MudColor TextColor => this.IsHighlighted ? HighlightColor : _palette.TextPrimary;
-    private string Background => this.IsHighlighted ? $"background: {Highlight.ToString()};" : string.Empty;
-    private string Color => $"color: {TextColor.ToString()};";
+    private string Highlight => this.IsCorrect ? "var(--mud-palette-success)" : "var(--mud-palette-error)";
+    private string HighlightColor => this.IsCorrect ? "var(--mud-palette-success-text)" : "var(--mud-palette-error-text)";
+    private string TextColor => this.IsHighlighted ? HighlightColor : "var(--mud-palette-text-primary)";
+    private string Background => this.IsHighlighted ? $"background: {Highlight};" : string.Empty;
+    private string Color => $"color: {TextColor};";
     private string Style => $"{Background} {Color}";
 
-    protected async override void OnInitialized()
+    protected override void OnInitialized()
     {
         base.OnInitialized();
         this.Parent?.AddOption(this);
-        var mainLayout = await MainLayout.GetInstance();
-        mainLayout.OnPaletteChange += (palette) => _palette = palette;
     }
 
     public void Reset()
