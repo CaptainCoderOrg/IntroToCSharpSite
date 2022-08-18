@@ -36,6 +36,15 @@
     private static bool s_isInit = false;
     private static event Action<IJSRuntime, ISnackbar, ILocalStorageService>? s_onInit;
     private event Action<bool>? _onDarkModeChange;
+    private event Action<Palette>? _onPaletteChange;
+    private Palette _palette = Themes.s_CSharpTheme.Palette;
+    private Palette Palette {
+        get => this._palette;
+        set {
+            this._palette = value;
+            _onPaletteChange?.Invoke(this._palette);
+        }
+    }
     private MudThemeProvider? _mudThemeProvider = null!;
     private SplitPane? _consoleSplitPane = null!;
     private bool _isDarkMode = true;
@@ -55,8 +64,21 @@
             UserService.Service.UpdateDarkModePreference(value);
             _onDarkModeChange?.Invoke(value);
             localStorage.SetItemAsync<bool>("DarkMode", value);
+            if (_mudThemeProvider != null)
+            {
+                this.Palette = _isDarkMode ? _mudThemeProvider.Theme.PaletteDark : _mudThemeProvider.Theme.Palette;
+            }
             StateHasChanged();
         }
+    }
+    public event Action<Palette> OnPaletteChange
+    {
+        add
+        {
+            value.Invoke(_palette);
+            _onPaletteChange += value;
+        }
+        remove => _onPaletteChange -= value;
     }
 
     public event Action<bool> OnDarkModeChange
