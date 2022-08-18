@@ -21,6 +21,8 @@
     public string Title {get; set;} = null!;
     [Parameter]
     public RenderFragment ChildContent {get; set;} = null!;
+    [Parameter]
+    public bool StartClosed {get; set;} = false;
     private bool IsExpanded = true;
     private string Key => NavigationManager.Uri.Substring(NavigationManager.BaseUri.Length) + Title;
     private string _theme = "mud-theme-primary";
