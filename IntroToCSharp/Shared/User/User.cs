@@ -45,6 +45,7 @@ public abstract class User
     public DataReference<string>? DefaultProject;
     public DataReference<UserStats>? UserStatsRef { get; protected set; }
     public DataReference<UserInventory>? UserInventoryRef { get; protected set; }
+    public DataReference<UserPages>? UserPagesRef {get; protected set; }
     protected Dictionary<string, string>? _projects;
 
     public Dictionary<string, string> Projects
@@ -82,6 +83,7 @@ public abstract class User
         this.DefaultProject = DataReference.String($"/users/{this.UID}/prefs/DefaultProject", "", "Last Project");
         this.UserStatsRef = DataReference.Json<UserStats>($"/users/{this.UID}/users_stats", UserStats.Default, "User Stats");
         this.UserInventoryRef = DataReference.Json<UserInventory>($"/users/{this.UID}/inventory", UserInventory.Default, "User Inventory");
+        this.UserPagesRef = DataReference.Json<UserPages>($"/users/{this.UID}/pages", UserPages.Default, "User Inventory");
 
         this.ProjectData.DataChangedEvent += data =>
         {
@@ -96,7 +98,6 @@ public abstract class User
 
     internal static User Create(string loginResponse)
     {
-        Console.WriteLine(loginResponse);
         if (loginResponse == "null")
         {
             return new NoUser();
@@ -105,7 +106,6 @@ public abstract class User
         if (jsonDocument.RootElement.TryGetProperty("providerData", out JsonElement providerData))
         {
             string providerId = providerData[0].GetProperty("providerId").GetString()!;
-            Console.WriteLine(providerId);
             return providerId switch
             {
                 "password" => new PasswordUser(jsonDocument),

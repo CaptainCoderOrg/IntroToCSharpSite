@@ -31,6 +31,7 @@ public class UserService
     private User _userData = User.NoUser;
     private UserStats _userStats = CaptainCoder.UserStats.Default;
     private UserInventory _userInventory = CaptainCoder.UserInventory.Default;
+    private UserPages _userPages = CaptainCoder.UserPages.Default;
     private event Action<User>? UserChangedEvent;
     public event Action<User> OnUserChange
     {
@@ -87,11 +88,14 @@ public class UserService
         {
             UserData.UserStatsRef.DataChangedEvent += (userStats) => this._userStats = userStats!;
         }
+        if (UserData.UserPagesRef != null)
+        {
+            UserData.UserPagesRef.DataChangedEvent += (userPages) => this._userPages = userPages!;
+        }
         if (UserData.UserInventoryRef != null)
         {
             UserData.UserInventoryRef.DataChangedEvent += (userInventory) =>
             {
-                Console.WriteLine($"User Inventory Updated: {userInventory}");
                 this._userInventory = userInventory!;
             };
         }
@@ -236,7 +240,6 @@ public class UserService
         if (!_userData.IsLoggedIn) return false;
         this.GiveGold(-toBuy.Cost);
         UserInventory newInventory = _userInventory.AddItem(toBuy);
-        Console.WriteLine(newInventory.Items.Length);
         _userData.UserInventoryRef?.Set(newInventory);
         return true;
     }
@@ -251,8 +254,17 @@ public class UserService
         if (!_userData.IsLoggedIn) return false;
         this.GiveGold(value);
         UserInventory newInventory = _userInventory.RemoveItem(toSell);
-        Console.WriteLine(newInventory.Items.Length);
         _userData.UserInventoryRef?.Set(newInventory);
+        return true;
+    }
+
+    public bool AddPage(PageRef toAdd)
+    {
+        if (!_userData.IsLoggedIn) return false;
+        if (_userPages.Contains(toAdd)) return false;
+        if (_userData.UserPagesRef == null) return false;
+        _userPages.AddPage(toAdd.Name, PageStatus.New);
+        _userData.UserPagesRef.Set(_userPages);
         return true;
     }
 }

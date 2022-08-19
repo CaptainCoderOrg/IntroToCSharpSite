@@ -1,0 +1,21 @@
+<FadeIn>@ChildContent</FadeIn>
+
+@code {
+    [Parameter, EditorRequired]
+    public RenderFragment ChildContent { get; set; } = null!;
+
+    [CascadingParameter, EditorRequired]
+    public Adventure Parent { get; set; } = null!;
+    [CascadingParameter, EditorRequired]
+    public int Index { get; set; }
+
+    [Parameter]
+    public PageRef? Page { get; set; } = null;
+    public bool IsAdded {get; set;} = false;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        this.Parent.SetDialog(this, Index);
+    }
+}
