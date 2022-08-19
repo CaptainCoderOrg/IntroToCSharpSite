@@ -96,7 +96,6 @@ public abstract class User
 
     internal static User Create(string loginResponse)
     {
-        Console.WriteLine(loginResponse);
         if (loginResponse == "null")
         {
             return new NoUser();
@@ -105,7 +104,6 @@ public abstract class User
         if (jsonDocument.RootElement.TryGetProperty("providerData", out JsonElement providerData))
         {
             string providerId = providerData[0].GetProperty("providerId").GetString()!;
-            Console.WriteLine(providerId);
             return providerId switch
             {
                 "password" => new PasswordUser(jsonDocument),

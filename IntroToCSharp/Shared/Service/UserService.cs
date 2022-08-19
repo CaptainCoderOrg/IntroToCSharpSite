@@ -91,7 +91,6 @@ public class UserService
         {
             UserData.UserInventoryRef.DataChangedEvent += (userInventory) =>
             {
-                Console.WriteLine($"User Inventory Updated: {userInventory}");
                 this._userInventory = userInventory!;
             };
         }
@@ -236,7 +235,6 @@ public class UserService
         if (!_userData.IsLoggedIn) return false;
         this.GiveGold(-toBuy.Cost);
         UserInventory newInventory = _userInventory.AddItem(toBuy);
-        Console.WriteLine(newInventory.Items.Length);
         _userData.UserInventoryRef?.Set(newInventory);
         return true;
     }
@@ -251,7 +249,6 @@ public class UserService
         if (!_userData.IsLoggedIn) return false;
         this.GiveGold(value);
         UserInventory newInventory = _userInventory.RemoveItem(toSell);
-        Console.WriteLine(newInventory.Items.Length);
         _userData.UserInventoryRef?.Set(newInventory);
         return true;
     }

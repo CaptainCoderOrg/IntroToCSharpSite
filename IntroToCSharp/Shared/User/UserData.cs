@@ -107,9 +107,7 @@ public class UserInventory
         }
         else
         {
-            Console.WriteLine($"Removing item: {item.Name}");
             bool removed = _items.Remove(item);
-            Console.WriteLine($"Was Removed? {removed}");
         }
     }
     /// <summary>
