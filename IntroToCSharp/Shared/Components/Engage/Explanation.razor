@@ -1,16 +1,16 @@
-<MudExpansionPanel>
+<MudExpansionPanel Class="my-2">
     <TitleContent>
-            <h3 class="pa-2" style="@Style">Explanation</h3>
+            <h3 class="explanation pa-2">Explanation</h3>
     </TitleContent>
     <ChildContent>
-        @ChildContent
+        <MudStack Class="px-4">
+            @ChildContent
+        </MudStack>
     </ChildContent>
 </MudExpansionPanel>
 @code
 {
     [Parameter, EditorRequired]
     public RenderFragment ChildContent {get; set;} = null!;
-    private string Background = "background: var(--mud-app-bar-background);";
-    private string Color = "color: var(--mud-palette-appbar-text);";
-    private string Style => $"{Background} {Color}";
+    
 }

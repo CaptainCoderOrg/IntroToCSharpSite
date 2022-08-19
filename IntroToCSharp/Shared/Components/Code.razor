@@ -1,9 +1,13 @@
-<code class="code-tag" style="@Style">@ChildContent</code>
+<code Style="@Style">@ChildContent</code>
 @code
 {
     [Parameter]
     public RenderFragment ChildContent { get; set; } = null!;
-    private string Background = "background: var(--mud-palette-background-grey);";
-    private string Color = "color: var(--mud-palette-gray-default);";
-    private string Style => $"{Background} {Color}";
+    private static readonly string Style = @"
+    padding: .25rem .25rem;
+    border-radius: 6px;
+    background: var(--mud-palette-background-grey);
+    color: var(--mud-palette-grey-dark);
+    border: solid var(--mud-palette-grey-dark);
+    ".Trim();
 }
