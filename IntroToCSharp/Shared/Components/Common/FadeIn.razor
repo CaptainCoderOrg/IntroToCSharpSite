@@ -1,0 +1,10 @@
+<MudElement Style="@Style" Class="@("fade-in {Class}")">@ChildContent</MudElement>
+
+@code {
+    [Parameter]
+    public string Style { get; set;} = string.Empty;
+    [Parameter]
+    public string Class { get; set; } = string.Empty;
+    [Parameter]
+    public RenderFragment ChildContent {get; set;} = null!;
+}

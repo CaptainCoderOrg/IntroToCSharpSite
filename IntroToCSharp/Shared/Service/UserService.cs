@@ -31,6 +31,7 @@ public class UserService
     private User _userData = User.NoUser;
     private UserStats _userStats = CaptainCoder.UserStats.Default;
     private UserInventory _userInventory = CaptainCoder.UserInventory.Default;
+    private UserPages _userPages = CaptainCoder.UserPages.Default;
     private event Action<User>? UserChangedEvent;
     public event Action<User> OnUserChange
     {
@@ -86,6 +87,10 @@ public class UserService
         if (UserData.UserStatsRef != null)
         {
             UserData.UserStatsRef.DataChangedEvent += (userStats) => this._userStats = userStats!;
+        }
+        if (UserData.UserPagesRef != null)
+        {
+            UserData.UserPagesRef.DataChangedEvent += (userPages) => this._userPages = userPages!;
         }
         if (UserData.UserInventoryRef != null)
         {
@@ -250,6 +255,16 @@ public class UserService
         this.GiveGold(value);
         UserInventory newInventory = _userInventory.RemoveItem(toSell);
         _userData.UserInventoryRef?.Set(newInventory);
+        return true;
+    }
+
+    public bool AddPage(PageRef toAdd)
+    {
+        if (!_userData.IsLoggedIn) return false;
+        if (_userPages.Contains(toAdd)) return false;
+        if (_userData.UserPagesRef == null) return false;
+        _userPages.AddPage(toAdd.Name, PageStatus.New);
+        _userData.UserPagesRef.Set(_userPages);
         return true;
     }
 }

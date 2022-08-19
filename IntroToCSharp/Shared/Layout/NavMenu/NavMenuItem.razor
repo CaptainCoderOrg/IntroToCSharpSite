@@ -1,7 +1,8 @@
 @if (Item.Href == null) {
     <MudNavGroup Title="@Item.Name">
         @foreach(MenuItem item in Item.Children) {
-            <NavMenuItem Item="@item"/>
+            if (!Filter.Contains(item)) continue;
+            <NavMenuItem Item="@item" Filter="@Filter"/>
         }
     </MudNavGroup>
 }
@@ -12,4 +13,6 @@ else {
 @code {
     [Parameter, EditorRequired]
     public MenuItem Item { get; set; } = null!;
+    [Parameter, EditorRequired]
+    public HashSet<MenuItem> Filter { get; set; } = null!;
 }

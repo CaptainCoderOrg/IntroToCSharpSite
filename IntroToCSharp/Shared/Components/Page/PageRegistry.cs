@@ -51,7 +51,7 @@ public class PageRegistry
     {
         if (!_items.TryGetValue(name, out MenuItem? item) || item == null)
         {
-            item = new MenuItem(name, null, order);
+            item = new MenuItem(name, null, order, true);
             _items[name] = item;
         }
         else
@@ -78,7 +78,7 @@ public class PageRegistry
     {
         if (!_items.TryGetValue(parent, out MenuItem? parentItem) || parentItem == null)
         {
-            parentItem = new MenuItem(parent, null, -1);
+            parentItem = new MenuItem(parent, null, -1, true);
             _items[parent] = parentItem;
         }
         return parentItem;
@@ -88,7 +88,7 @@ public class PageRegistry
     {
         if (_items.ContainsKey(p.Name)) throw new InvalidOperationException($"The specified page {p.Name} already exists.");
         MenuItem parent = GetParent(p.Parent);
-        MenuItem page = new (p.Name, p.Href, p.Order, parent);
+        MenuItem page = new (p.Name, p.Href, p.Order, p.IsAdventure, parent);
         page.Parent = parent;
         parent.Children.Add(page);
         _items[p.Name] = page;
@@ -106,15 +106,17 @@ public class MenuItem : IComparable<MenuItem>
 {
     private readonly string _name;
     private readonly string? _href;
+    private readonly bool _isAdventure;
 
     private readonly List<MenuItem> _children = new ();
 
-    public MenuItem(string name, string? href, int order, MenuItem? parent = null)
+    public MenuItem(string name, string? href, int order, bool isAdventure, MenuItem? parent = null)
     {
         this._name = name;
         this._href = href;
         this.Order = order;
         this.Parent = parent;
+        this._isAdventure = isAdventure;
     }
 
     public MenuItem? Parent { get; set; } = null;
@@ -126,6 +128,7 @@ public class MenuItem : IComparable<MenuItem>
     }
     public string Name => _name;
     public string? Href => _href;
+    public bool IsAdventure => _isAdventure;
     public int Order {get; set;}
     public int CompareTo(MenuItem? other) => this.Order.CompareTo(other?.Order);
     public override string ToString() =>  $"MenuItem {Name}: {Href}";
