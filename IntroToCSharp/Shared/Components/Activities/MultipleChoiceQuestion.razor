@@ -135,10 +135,7 @@
     private List<CheckBoxOption> _options = new List<CheckBoxOption>();
     private string Path => $"{NavigationManager.GetRoute()}/questions/{Question}";
     private DataReference<MultipleChoiceQuestionData>? _dataReference;
-
-    private DateTime _lockTimer;
-    private DateTime _unlockTime;
-
+        
     protected override void OnInitialized()
     {
         base.OnInitialized();
