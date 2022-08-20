@@ -1,0 +1,32 @@
+<MudStack Row=true>
+    <TaskItem Name="@Name">@ChildContent </TaskItem>
+    @if (!_showSteps) {
+        <MudButton StartIcon="@Icons.Filled.Help" Color="Color.Primary" Variant="Variant.Filled" OnClick="ShowSteps">Show Steps for VS Code</MudButton>
+    }
+</MudStack>
+@if (_showSteps) {
+    <Section  IsSubSection=true Title="Creating a Console Project in VS Code">
+        <Text>
+            Below are the steps to create a console project using  VS Codes
+            integrated terminal. If you need a full refresher, check out the
+            <MudLink
+             Href="@ConsoleProject.PageRef.Href"
+             Target="_blank">
+                @ConsoleProject.PageRef.Name
+            </MudLink> lesson.
+        </Text>
+        <TaskItem Name="Create Folder">Create a folder for your project</TaskItem>
+        <TaskItem Name="Open Folder">In VS Code open the folder</TaskItem>
+        <TaskItem Name="Open Terminal">In VS Code open the integrated terminal</TaskItem>
+        <TaskItem Name="Run Dotnet">Run <Code>dotnet new console</Code> in the terminal</TaskItem>
+</Section>
+}
+
+@code {
+    [Parameter, EditorRequired]
+    public string Name { get; set; } = null!;
+    [Parameter, EditorRequired]
+    public RenderFragment ChildContent { get; set; } = null!;
+    private bool _showSteps = false;
+    private void ShowSteps() => _showSteps = true;
+}
