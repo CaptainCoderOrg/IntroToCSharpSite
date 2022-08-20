@@ -1,0 +1,7 @@
+<MudPaper Elevation=5 Class="note">@ChildContent</MudPaper>
+
+@code
+{
+    [Parameter]
+    public RenderFragment ChildContent {get; set;} = null!;
+}

@@ -37,20 +37,25 @@ pre {
     padding: 0.5rem !important;
 }
 
-.code-light {
-    color: #24292F;
-    background-color: #AFB8C133;
-    padding-left: .25rem;
-    padding-right: .25rem;
-    border-radius: 6px;
+.note {
+    padding: 0.5rem;
+    background: var(--mud-palette-background-grey) !important;
+    color: var(--mud-palette-grey-default) !important;
+    width: calc(100% - 20px);
+    margin: 1.0rem auto;
 }
 
-.code-dark {
-    background-color: #6E768166;
-    color: #C9D1D9;
-    padding-left: .25rem;
-    padding-right: .25rem;
-    border-radius: 6px;
+.explanation {
+    background: var(--mud-palette-appbar-background);
+    color: var(--mud-palette-appbar-text);
+}
+
+.fun-fact {
+    padding: 0.5rem;
+    background: var(--mud-palette-tertiary) !important;
+    color: var(--mud-palette-tertiary-text) !important;
+    width: calc(100% - 20px);
+    margin: 1.0rem auto;
 }
 
 .loading {
@@ -101,10 +106,10 @@ pre {
 }
 
 .clickable-image {
-    display: block; 
-    margin:auto; 
-    max-width:100%; 
-    max-height:300px;
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    max-height: 300px;
     box-shadow: 2px 2px 10px black;
 }
 

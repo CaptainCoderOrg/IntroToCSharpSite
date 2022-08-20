@@ -1,0 +1,18 @@
+@if (Item.Href == null) {
+    <MudNavGroup Title="@Item.Name">
+        @foreach(MenuItem item in Item.Children) {
+            if (!Filter.Contains(item)) continue;
+            <NavMenuItem Item="@item" Filter="@Filter"/>
+        }
+    </MudNavGroup>
+}
+else {
+    <MudNavLink Href="@Item.Href">@Item.Name</MudNavLink>
+}
+
+@code {
+    [Parameter, EditorRequired]
+    public MenuItem Item { get; set; } = null!;
+    [Parameter, EditorRequired]
+    public HashSet<MenuItem> Filter { get; set; } = null!;
+}

@@ -64,16 +64,11 @@
         {
             @if (!Explanation.Equals(""))
             {
-                <MudExpansionPanels Class="mt-4">
-                    <MudExpansionPanel Class="pl-4 pr-4" Style="@_explanationStyle">
-                        <TitleContent>
-                            <MudText Typo="Typo.h5">Explanation</MudText>
-                        </TitleContent>
-                        <ChildContent>
-                            <MudText Class="mt-4 pb-4">@Explanation</MudText>
-                        </ChildContent>
-                    </MudExpansionPanel>
-                </MudExpansionPanels>
+                <Explanation>
+                    <Text Class="px-4">
+                        @Explanation
+                    </Text>
+                </Explanation>
             }
 
         }
