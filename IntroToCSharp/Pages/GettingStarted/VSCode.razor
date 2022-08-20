@@ -81,6 +81,36 @@
     <Image Src="interactive-extension.png"/>
 </Section>
 
+<Section Title="What's Next?">
+    <Adventure Portrait="@Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+                <Text>
+                    Now that you have a programming environment, you're
+                    ready to start programming with C#.
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="@ConsoleProject.PageRef">
+                <Text>
+                    If you want to learn how to create a project from
+                    scratch, you should check out the <b>@ConsoleProject.PageRef.Name</b>
+                    lesson.
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="@AsciiArt.PageRef">
+                <Text>
+                    If you already know how to create a project and open it in VS Code,
+                    you might enjoy the <b>@AsciiArt.PageRef.Name</b> activity.
+                </Text>
+            </AdventureDialog>
+        </Item>
+    </Adventure>
+</Section>
+
 @code {
     public const string Href = "/getting-started/vs-code";
     public static readonly PageRef PageRef = new PageRef("Visual Studio Code", "/getting-started/vs-code", 1, "Getting Started");
