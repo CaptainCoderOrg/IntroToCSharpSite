@@ -1,0 +1,23 @@
+<MudExpansionPanel>
+    <TitleContent>
+            <h3 class="@_theme pa-2">Explanation</h3>
+    </TitleContent>
+    <ChildContent>
+        @ChildContent
+    </ChildContent>
+</MudExpansionPanel>
+@code
+{
+    [Parameter, EditorRequired]
+    public RenderFragment ChildContent {get; set;} = null!;
+    private string _theme = "mud-theme-primary";
+
+    protected async override void OnInitialized()
+    {
+        MainLayout mainLayout = await MainLayout.GetInstance();
+        mainLayout.OnDarkModeChange += isDarkMode => {
+            _theme = isDarkMode ? "mud-theme-dark" : "mud-theme-primary";
+            StateHasChanged();
+        };
+    }
+}
