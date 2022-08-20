@@ -1,10 +1,313 @@
 @inherits CaptainCoder.Page
 @page "/activites/ascii-art"
 
-<Title>Ascii Art</Title>
-<Text>
-    Coming soon!
-</Text>
+<Title>ASCII Art</Title>
+
+<Section Title="Overview">
+    <Text>
+        ASCII Art is a graphic design technique in which the artist uses text
+        to create a picture. For example:
+    </Text>
+    <Output>
+           .--._.--.
+          ( O     O )
+          /   . .   \
+         .`._______.'.
+        /(           )\
+      _/  \  \   /  /  \_
+   .~   `  \  \ /  /  '   ~.
+  {    -.   \  V  /   .-    }
+_ _`.    \  |  |  |  /    .'_ _
+&gt;_       _} |  |  | {_       _&lt;
+ /. - ~ ,_-'  .^.  `-_, ~ - .\
+         '-'|/   \|`-`
+    </Output>
+    <Text>
+        In this activity, you will learn how to create colorful text based
+        art in your terminal using C#.
+    </Text>
+
+</Section>
+<Section Title="Learning Objectives">
+    <MudList Clickable="true">
+        <MudListItem Icon="@Icons.Filled.Circle">Practice using <Code>Console.WriteLine</Code> method.</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Learn to use the <Code>Console.Write</Code> method.</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Learn about <Keyword Word="escape sequences"/>.</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Learn how to change the color of the terminal.</MudListItem>
+    </MudList>
+</Section>
+<Section Title="Before Starting">
+    <Adventure Portrait="@Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog Page="@ConsoleProject.PageRef">
+                <Text>
+                    Greetings coder! Before starting this activity, you should
+                    be comfortable with creating a new Console Project, running
+                    your project, and using <Code>Console.WriteLine</Code> to
+                    display text in the terminal. If you're not sure how to do
+                    this or you need a refresher, I can walk you through the
+                    process in the <b>@ConsoleProject.PageRef.Name</b> lesson.
+                </Text>
+            </AdventureDialog>
+        </Item>
+    </Adventure>
+</Section>
+<Section Title="Something Simple">
+
+    <Text>
+        Let's start by making a simple ASCII Dog:
+        <CodeBlock>
+ ..^____/
+`-. ___ )
+  ||  || mh
+        </CodeBlock>
+        <Note>
+            Art by Maija Haavisto
+        </Note>
+    </Text>
+    <ConsoleProjectTask Name="Create Project">Start by creating a new Console project named "ASCII Art"</ConsoleProjectTask>
+    <Text>Next, update your code with the following <Code>Console.WriteLine</Code> statements.</Text>
+    <TaskItem Name="Add Line 1"><Code>Console.WriteLine(" ..^____/");</Code></TaskItem>
+    <TaskItem Name="Add Line 2"><Code>Console.WriteLine("`-. ___ )");</Code></TaskItem>
+    <TaskItem Name="Add Line 3"><Code>Console.WriteLine("  ||  || mh");</Code></TaskItem>
+    <TaskItem Name="Save Work">Save your <Code>Program.cs</Code> file</TaskItem>
+    <TaskItem Name="Save Work">Run your program. In the terminal: <Code>dotnet run</Code></TaskItem>
+    <Text>
+        If all went well, you should see the dog above. If you're receiving
+        errors, make sure you have copied the lines above <b>EXACTLY</b> as they
+        are written.
+    </Text>
+    <Note>
+        If you're using your own original ASCII Art or some art you found, there
+        may be some illegal symbols. This is covered in a section below. For
+        now, you should follow this example.
+    </Note>
+</Section>
+<Section Title="Characters and Strings">
+    <Text>
+        Each symbol, letter, and space in the text you're writing is called a
+        <Keyword Word="character"/>. When you put one or more <b>characters</b>
+        between double quotes (<Code>"</Code>) you are creating a what is
+        referred to as a <Keyword Word="string"/> <b>literal</b>.
+    </Text>
+    <Note>The word <b>string</b> is short for "string of characters"</Note>
+    <Text>
+        In the above example, you created 3 <b>string</b> literals and passed
+        them as <Keyword Word="arguments"/> to the <Code>Console.WriteLine</Code> method.
+    </Text>
+
+    <Explore Title="Displaying a Double Quote">
+        <Text>
+            Any text placed between double quotes is called a <Keyword Word="string literal"/>.
+            What happens if we want to put a double quote inside of the <b>string</b>?
+        </Text>
+        <TaskItem Name="Add DoubleQuote">Add the statement <Code>Console.WriteLine(""");</Code> to a program.</TaskItem>
+        <TaskItem Name="Try Run">Try running your program. <Code>dotnet run</Code></TaskItem>
+        <Question Text="What is the error message you receive?"/>
+        <Explanation>
+            <Text>
+                The error message you're seeing is the computer stating that it
+                cannot find the end of a string. When it encounters the second
+                <Code>"</Code> it believes that you have end the string.
+            </Text>
+        </Explanation>
+        <Text>
+            Because the double quote is used to signify the end of a <b>string</b>, we need a way to
+            indicate that we would like to include that character within a <b>string literal</b>. To
+            do this, we use an <Keyword Word="escape sequence"/>: <Code>\"</Code>.
+        </Text>
+        <TaskItem Name="Update DoubleQuote">Update your code to <Code>Console.WriteLine("\"");</Code>.</TaskItem>
+        <TaskItem Name="Run your program">Run your program. <Code>dotnet run</Code></TaskItem>
+        <Text>
+            If all went well, you will see a <Code>"</Code> in your terminal.
+        </Text>
+        <Text>
+            An <b>escape sequence</b> is a special code used within a <b>string literal</b> to indicate
+            that we would like to use a character that would otherwise be considered illegal. In C#, <b>Escape
+            sequences</b> always start with a backslash (<Code>\</Code>). Because of this, there is an
+            <b>escape sequence</b> for the backslash character: two back slashes (<Code>\\</Code>).
+        </Text>
+        <TaskItem Name="Add Backslack">Update your code to <Code>Console.WriteLine("\\");</Code></TaskItem>
+        <TaskItem Name="Run your program again">Run your program. <Code>dotnet run</Code></TaskItem>
+        <Text>
+            If all went well, you will see <Code>\</Code> in your terminal.
+        </Text>
+    </Explore>
+</Section>
+<Section Title="Colors">
+    <Text>
+        Now that you can create some simple ASCII art, let's spice things up by
+        learning how to change the color of our text.
+    </Text>
+    <Text><b>Examples:</b></Text>
+    <Text>
+        To change the color of the text, you can set the
+        <Code>Console.ForegroundColor</Code> property:
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/ForegroundColor">
+Console.ForegroundColor = ConsoleColor.Red;
+Console.WriteLine("The text is red!");
+Console.ForegroundColor = ConsoleColor.Yellow;
+Console.WriteLine("The text is yellow!");
+    </CodeBlock>
+    <Text>
+        To change the background color of
+        the terminal for a single charcter, you can set the
+        <Code>Console.BackgroundColor</Code> property:
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/BackgroundColor">
+Console.BackgroundColor = ConsoleColor.Red;
+Console.WriteLine("The background is red!");
+Console.BackgroundColor = ConsoleColor.Yellow;
+Console.WriteLine("The background is yellow!");
+    </CodeBlock>
+    <Note>
+        Once you change the foreground or background color,
+        it will remain that color until changed again.
+    </Note>
+    <ConsoleColorTable/>
+</Section>
+<Section Title="Using Console.Write">
+    <Text>
+        As you have seen, the <Code>Console.WriteLine</Code> method displays
+        text to the terminal on a single line. When you change the color and
+        call the <Code>Console.WriteLine</Code> method, the entire line will
+        have the specified colors. What if you want to change colors within
+        the same line?
+    </Text>
+    <Text>
+        To do this, we can use the <Code>Console.Write</Code> method which
+        works almost identically to the <Code>Console.WriteLine</Code> method
+        except that it does not cause the terminal to go to a new line when
+        it has finished displaying.
+    </Text>
+    <Text><b>Examples:</b></Text>
+    <Text>
+        The code below displays <Code>Hello</Code> on a single line in the
+        terminal.
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/Write-Example">
+Console.Write("H");
+Console.Write("e");
+Console.Write("l");
+Console.Write("l");
+Console.WriteLine("o");
+    </CodeBlock>
+    <Note>
+        The last line uses <Code>Console.WriteLine</Code> to make sure there
+        the word is on its own line.
+    </Note>
+    <Text>
+        The code below changes the color of each letter in the word "Hello"
+    </Text>
+        <CodeBlock ReplIt="JosephCollard/Rainbow-Write-Example">
+Console.ForegroundColor = ConsoleColor.Red;
+Console.Write("H");
+Console.ForegroundColor = ConsoleColor.DarkYellow;
+Console.Write("e");
+Console.ForegroundColor = ConsoleColor.Yellow;
+Console.Write("l");
+Console.ForegroundColor = ConsoleColor.Green;
+Console.Write("l");
+Console.ForegroundColor = ConsoleColor.Blue;
+Console.WriteLine("o");
+    </CodeBlock>
+    <Text>
+        Changing the background color and using spaces allows you to color
+        an entire "cell" in the terminal without having any text.
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/MushroomPart1">
+Console.BackgroundColor = ConsoleColor.White;
+Console.Write("    ");
+Console.BackgroundColor = ConsoleColor.Black;
+Console.Write("        ");
+Console.BackgroundColor = ConsoleColor.White;
+Console.Write("    ");
+Console.WriteLine();
+Console.Write("   ");
+Console.BackgroundColor = ConsoleColor.Black;
+Console.Write("          ");
+Console.BackgroundColor = ConsoleColor.White;
+Console.Write("   ");
+Console.WriteLine();
+    </CodeBlock>
+
+</Section>
+<Section Title="Challenge: Create ASCII Art">
+    <Challenge Title="Create ASCII Art">
+        <Text>
+            Using everything you learned above, create an original
+            work of art! For inspiration, you can check out the
+            <MudLink Href="https://www.asciiart.eu/" Target="_blank">ASCII Art Archive</MudLink>.
+        </Text>
+        <TaskList Name="Challenge Create ASCII Art">
+            <TaskItem Name="Create a New Project">Create a new Console Project</TaskItem>
+            <TaskItem Name="Create a Art">Write a program to display a colorful original piece of art in the terminal</TaskItem>
+            <TaskItem Name="Share your art">Take a screenshot and share your art with a friend</TaskItem>
+        </TaskList>
+    </Challenge>
+</Section>
+
+<Section Title="Challenge: Escape Sequence Bull">
+    <Challenge Title="Escape Sequences Bull">
+        <Text>
+            <Keyword Word="Escape sequences"/> allow you to put
+            otherwise illegal characters inside of <Keyword Word="string literal"/>.
+            Can you write a program that displays the following ASCII Art using only
+            <Code>Console.WriteLine</Code> statements?
+        </Text>
+        <Output>
+   /                       \
+ /X/                       \X\
+|XX\         _____         /XX|
+|XXX\     _/       \_     /XXX|
+ \XXXXXXX             XXXXXXX/
+   \XXXX    /     \    XXXXX/
+        |   0     0   |
+         |           |
+          \         /
+           \       /
+     Moo -  | O_O |
+             \ _ /
+        </Output>
+        <TaskList Name="Escape Sequence Bull">
+            <TaskItem Name="Create a New Project">Create a new Console Project</TaskItem>
+            <TaskItem Name="Create a Bull">Using only <Code>Console.WriteLine</Code> statements draw the bull above</TaskItem>
+            <TaskItem Name="Share your Code">Share your code with a friend</TaskItem>
+        </TaskList>
+    </Challenge>
+</Section>
+<Section Title="What's Next?">
+    <Adventure Portrait="@Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+                <Text>
+                    You're really starting to come along! At this point, I bet
+                    you feel quite comfortable displaying content to the terminal.
+                    At this point, I think you're ready to work with <b>variables</b>.
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="@MadTakes.PageRef">
+                <Text>
+                    If you want to dive right into creating a program that uses
+                    <b>string</b> variables, you should head over to the
+                    <b>@MadTakes.PageRef.Name</b> activity.
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="@Variables.PageRef">
+                <Text>
+                    If you would rather learn more about what a <b>variable</b>
+                    is before diving into a project, you should take a look at the
+                    <b>@Variables.PageRef.Name</b> lesson.
+                </Text>
+            </AdventureDialog>
+        </Item>
+    </Adventure>
+</Section>
 
 @code {
     public static readonly PageRef PageRef = new PageRef("Ascii Art", "/activites/ascii-art", 0, "Activities");
