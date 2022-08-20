@@ -1,4 +1,4 @@
-<MudStack Row=true Class="@($"my-2 mr-5 {ReverseClass}")">
+<MudStack Row=true Class="@($"my-2 {ReverseClass}")">
     <MudImage Class="rounded-lg pt-2" Style="border: 2px solid var(--mud-palette-dark); background-image: url('/imgs/portraits/background.png');" Width=200 Height=200 Src="@($"/imgs/portraits/{Portrait.Src}")" />
 
     <MudStack>
@@ -41,7 +41,7 @@
     public Portrait Portrait { get; set; }
     [Parameter]
     public bool RightPortrait { get; set; } = false;
-    [Parameter]
+    [Parameter, EditorRequired]
     public RenderFragment Item { set => _fragments.Add(value); }
 
     private OrderedSet<AdventureDialog> _dialogs = new ();
