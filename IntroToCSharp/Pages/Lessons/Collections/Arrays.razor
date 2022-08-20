@@ -5,69 +5,56 @@
 
 
 <Section Title="Introduction">
-    <MudText>
+    <Text>
         An array is a data structure that stores a pre-defined number of variables of the same data type within its bounds.
          The important part of this definition to take note of is that an array is predefined, meaning that you have to know 
          how many variables are going to be within the array before you create it.
          This is because arrays are immutable data structures which means after they are created their <b>length</b> can't be changed.
-    </MudText>
+    </Text>
 
-    <Section IsSubSection="true" Title="The Rules">
-        <MudText>When dealing with an array there are four main things to keep in mind:</MudText>
-        <InfoGrid>
-            <GridSquare>Arrays have a <b>pre-defined</b> length. You must give an array a length before you are able to implement it.
-            </GridSquare>
-            <GridSquare>Arrays are <b>immutable</b>. Once the length an array is set, you cannot change it.
-            </GridSquare>
-            <GridSquare>Arrays <b>cannot</b> mix variables types.
-            </GridSquare>
-            <GridSquare>An array's index always begins at 0.
-            </GridSquare>
-        </InfoGrid>
-    </Section>
 </Section>
 
 <Section Title="Our First Array">
-    <MudText>
+    <Text>
         Let's start by making our first array! To do this we are going to start with a string of heroes.
         To make an array we have to start by declaring what data type that the array will be using followed by
         a pair of brackets (<Code>[]</Code>) and finally the array's name.
-    </MudText>
-    <MudText>
+    </Text>
+    <Text>
         When we set an array's value we "wrap" the value within a pair of curly brackets (<Code>[]</Code>) and seperate
         each variable with a comma, like so:
-    </MudText>
+    </Text>
 
     <CodeBlock>
         string[] justiceLeague = {"Superman", "Batman", "Aquaman", "Green Lanter", "Flash", "Wonder Woman", "Martian Manhunter"};
     </CodeBlock>
 
-    <MudText>
+    <Text>
         As you can see we have a string of 7 superheroes within our array that make up the original Justice League! Each variable
         within the array is wrapped within the curly brackets and seperate by a comma! Without the comma, the data will either return an error
         or the data will be read as a single variable!
-    </MudText>
-    <MudText>
+    </Text>
+    <Text>
         Another important aspect to understand an Array is how their index works. An array's index is the position a variable is after
         within an array. Rather than starting at 1 and counting up, arrays always start and 0 and count up. For our justiceLeague array
         this means that "Superman" is at the 0 index of the array or in coding terms:
-    </MudText>
+    </Text>
 
     <CodeBlock>
         string[] justiceLeague = {"Superman", "Batman", "Aquaman", "Green Lanter", "Flash", "Wonder Woman", "Martian Manhunter"};
         Console.WriteLine("The first superhero in our array is " + justiceLeague[0]);
     </CodeBlock>
 
-    <MudText></MudText>
+    <Text></Text>
 </Section>
 
 <Section Title="Using Arrays">
     <CodeBlock>
         string[] avengers = {"Captian America", "Iron Man", "Hulk", "Black Panther", "Doctor Strange", "Scarlet Widow", "Hawkeye"};
     </CodeBlock>
-    <MudText>
+    <Text>
         Answer some questions about the example above!
-    </MudText>
+    </Text>
 
     <MultipleChoiceQuestion 
       IsMultiSelect="false" 
@@ -84,7 +71,7 @@
 
     <MultipleChoiceQuestion 
       IsMultiSelect="false" 
-      Question="True or False: The values in array cannot be changed after the array is created."
+      Question="True or False The values in array cannot be changed after the array is created"
       XP=30
       GoldAward=0
       Explanation="">
@@ -108,23 +95,23 @@
 </Section>
 
 <Section Title="Arrays without values">
-    <MudText>
+    <Text>
         So far in this section we've only discussed arrays whose values we know ahead of time. The issue however
         is sometimes we don't know what is going to be inside of an array but we do know how long the array is going to be.
         In that case we may want to set the array to the length of the array <b>before</b> we know the values!
-    </MudText>
+    </Text>
 
     <CodeBlock>
         string[] threeFavoriteSuperheroes = new string[3];
     </CodeBlock>
 
-    <MudText>
+    <Text>
         In the code above we create a <b>new</b> array object with the length of 3. This means that it has 3 items in the array with indexes
         <b> 0 through 2</b>. Remeber that every array's index starts with a 0!
-    </MudText>
+    </Text>
 
     <Explore Title="Mystery values">
-        <MudText>Don't run the code below just yet. Read it and answer the question.</MudText>
+        <Text>Don't run the code below just yet. Read it and answer the question.</Text>
         <CodeBlock>
         string[] threeFavoriteSuperheroes = new string[3];
         Console.WriteLine(threeFavoriteSuperheroes[0]);
@@ -138,26 +125,26 @@
         <Question Text="What do you think the code below will display for the string array?"/>
         <Question Text="What do you think the code below will display for the int array?"/>
         <Question Text="What do you think the code below will display for the bool array?"/>
-        <MudText>
+        <Text>
             <b>What happened?</b> <br/>
             An array that is initizalized without any values with revert to the data types
             <b>default value</b>. For strings, this means an empty string. For ints, this means a 0.
             And finally, for bools this means false!
-        </MudText>
+        </Text>
     </Explore>
 </Section>
 
     <Section Title="Working With Arrays">
         <Section IsSubSection="true" Title="Changing Values in an Array">
-        <MudText>
+        <Text>
             Now that we are starting to get comfortable with creating arrays we can begin to learn about
             working with them.
-        </MudText>
-        <MudText>
+        </Text>
+        <Text>
             While an array's length may be immutable, the values within the array are <b>not</b>. This means
             that the values within the arrays <b>can be changed</b> if we need them to be. Let's try this now on
             our threeFavoriteSuperheroes array!
-        </MudText>
+        </Text>
         <CodeBlock>
         string[] threeFavoriteSuperheroes = new string[3];
         threeFavoriteSuperheroes[0] = "Batman";
@@ -165,11 +152,11 @@
         threeFavoriteSuperheroes[2] = "Wolverine";
         Console.WriteLine(threeFavoriteSuperheroes[2]);
         </CodeBlock>
-        <MudText>
+        <Text>
             As you can see, the new value for our threeFavoriteSuperheroes has changed to the values
             that we set each index to. This can be used to update values over time as they change or
             as they need to be removed.
-        </MudText>
+        </Text>
         </Section>
 
         <Section IsSubSection="true" Title="Exploring the Contents of an Array">
@@ -180,15 +167,15 @@
             string[] avengers = {"Captian America", "Iron Man", "Hulk", "Black Panther", "Doctor Strange", "Scarlet Widow", "Hawkeye"};
             Console.WriteLine(avengers.Length);
         </CodeBlock>
-        <MudText>
+        <Text>
             Take note that .Length <b>is not a method or a function</b>. What it actually is, is a property which means that every array
             knows its own length. The .Length property is often paired with different types of functions such as for loops to perform
             some sort of action. An example would be printing out all the members of the justiceLeague.
-        </MudText>
+        </Text>
 
         <Explore Title="What went wrong?">
-            <MudText>Oh no! It seems that the code gave us an error when trying to print out the length of the array!
-                     Can you figure out what went wrong?</MudText>
+            <Text>Oh no! It seems that the code gave us an error when trying to print out the length of the array!
+                     Can you figure out what went wrong?</Text>
             <CodeBlock>
                 string[] justiceLeague = {"Superman", "Batman", "Aquaman", "Green Lanter", "Flash", "Wonder Woman", "Martian Manhunter"};
                 Console.WriteLine("The length of the list is " +  justiceLeague.Length());
@@ -199,18 +186,18 @@
                 } *@
             </CodeBlock>
             <Question Text="What do you think went wrong with the code?"/>
-            <MudText>
+            <Text>
             <b>What happened?</b> <br/>
             When trying to print length of the array we used .Length() instead of .Length.
             Remember .Length is a <b>property</b> and not a method.
-        </MudText>
+        </Text>
         </Explore>
 
-        <MudText>
+        <Text>
             Another handy feature when working with arrays is being able to grab a range of elements within an array.
             Maybe we want to see who the top 5 heroes are within a list and make a top five list of heroes from that set.
             To do this we must create a new array that takes in the range from the original array like so:
-        </MudText>
+        </Text>
         <CodeBlock>
             //Here we have a string array of topSuperheroes
             string[] topSuperheroes = {"Spiderman", "Superman", "Batman", "Phoenix", "Wolverine", "Captain America", "Thor",
@@ -223,17 +210,31 @@
                 Console.WriteLine(topFiveHeroes[i]);
             } *@
         </CodeBlock>
-        <MudText>
+        <Text>
             You might have noticed that when we used the range [0..5] we printed 5 names rather than 6. This is because
             the range operator does not include the last element of the given range. That means that topFiveHeroes only contains
             the first 5 elements of topSuperheroes. In other words it only has topSuperheroes index from 0 to 4.
-        </MudText>
+        </Text>
         </Section>
+
+        <Section IsSubSection="true" Title="The Rules">
+        <Text>When dealing with an array there are four main things to keep in mind:</Text>
+        <InfoGrid>
+            <GridSquare>Arrays have a <b>pre-defined</b> length. You must give an array a length before you are able to implement it.
+            </GridSquare>
+            <GridSquare>Arrays are <b>immutable</b>. Once the length an array is set, you cannot change it.
+            </GridSquare>
+            <GridSquare>Arrays <b>cannot</b> mix variables types.
+            </GridSquare>
+            <GridSquare>An array's index always begins at 0.
+            </GridSquare>
+        </InfoGrid>
+    </Section>
     </Section>
 
     <Section Title="Multidimensional Arrays & Jagged Arrays">
         <Section IsSubSection="true" Title="Multidimensional Arrays">
-        <MudText>
+        <Text>
             Currently when we've been talking about arrays we've only really been discussing arrays in a single dimension. What
             this means is that the array has essential been on a straight line that we can follow from the beginning to the end.
             As we move forward however we may want to explore <b>Multidimensional Arrays</b> which form a table of values.
@@ -242,21 +243,21 @@
             to be our rows. The second dimension of our array is going to be our columns. To create this Multidimensional array we create a normal array
             but use a comma <Code>,</Code> to seperate the dimensions within the array. For our multidimensional array we are going to make a table with
             <b>four rows</b> and <b>five columns</b>  It will look like this:
-        </MudText>
+        </Text>
         <CodeBlock>
             //Here we create a new array called tableArray with [4 rows, and 5 columns]
             int [,] tableArray = new int[4,5];
         </CodeBlock>
-        <MudText>
+        <Text>
             Here is a more visual view of what we have just created with this code.
-        </MudText>
+        </Text>
         <DataTable Headers="@intHeaders" Rows="@intRows"></DataTable>
-        <MudText>
+        <Text>
             As you can see, we've created a large table that is comprised of 4 rows and 5 columns. Currently the
             contents of the array is empty, in other words all the integer values in table are set to 0. If we wanted to
             initialize the array when we create it we would have to implement the array using a series of semi-colons to 
             declare the values.
-        </MudText>
+        </Text>
         <CodeBlock>
             //Each inner pair of semicolons {} represets a row. We have 4 rows so we need 4 pairs of semicolons {}
             //Each pair of semicolons {} must be as long as the column length. We have 5 columns so we need 5 values within each pair of {}
@@ -269,17 +270,17 @@
     </Section>
 
     <Section IsSubSection="true" Title="Jagged Arrays">
-        <MudText>
+        <Text>
             Multidimensional Arrays are great for square or rectangle tables with a consistent, flat shape but what about
             tables with odd shapes such as this:
-        </MudText>
+        </Text>
         <DataTable Headers="@intJaggedHeaders" Rows="@intJaggedRows"></DataTable>
-        <MudText>
+        <Text>
             With multidimensional arrays we are not able to create one row or column longer than another. Instead we must
             use Jagged Arrays. <br>
             Jagged Arrays are created by defining either the row or column length and then filling those row or columns with new int
             array values.
-        </MudText>
+        </Text>
             <CodeBlock>
             //Here we are creating a tableArray with three rows.
             int[][] tableArray = new int[3][]
@@ -291,9 +292,9 @@
             };
         </CodeBlock>
         <DataTable Headers="@intJaggedFilledRowsHeaders" Rows="@intJaggedFilledRows"></DataTable>
-        <MudText>
+        <Text>
             If you don't know the values but you know the length of each column, you may have to instead initialize columns instead.
-        </MudText>
+        </Text>
             <CodeBlock>
             int[][] tableArray = new int[3][];
 
@@ -302,10 +303,10 @@
             tableArray = new int[3];
         </CodeBlock>
         <DataTable Headers="@intJaggedEmptyRowsHeaders" Rows="@intJaggedEmptyRows"></DataTable>
-        <MudText>
+        <Text>
             In order to change the values within a jagged array you must access the tableArray's row and set the value to a new
             int value.
-        </MudText>
+        </Text>
         <CodeBlock>
             int[][] tableArray = new int[3][]
             {
@@ -326,14 +327,14 @@
 </Section>
 
     <Section Title="What's next?">
-        <MudText>
+        <Text>
             If you are feeling confident in what you've learned it is now time to apply that to some activities! Checkout the Array Activities
             for a project that will help test your knowledge and build on the concepts that we discussed today!
-        </MudText>
-        <MudText>
+        </Text>
+        <Text>
             Now that you have an understanding of Arrays, the next place that you should begin to explore is Lists!
             Lists are similar to arrays but much more flexible and can add a lot of agility to your programs!
-        </MudText>
+        </Text>
     </Section>
 
 @code {
