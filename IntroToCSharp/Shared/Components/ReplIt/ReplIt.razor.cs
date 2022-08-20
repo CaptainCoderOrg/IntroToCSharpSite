@@ -16,6 +16,7 @@ namespace IntroToCSharp.Shared.Components.ReplIt
         public bool ShareSource { get; set; } = false;
         [Parameter]
         public string MinHeight { get; set; } = "302px";
+        private string Height => $"calc(46px + {MinHeight})";
         public string ResizeHeight { get; private set; } = "0px";
 
         [Inject]
