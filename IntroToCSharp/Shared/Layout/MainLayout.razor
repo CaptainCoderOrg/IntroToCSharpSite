@@ -19,13 +19,14 @@
         <TopContent>
             <MudPaper Elevation="0" Class="pa-4" Style="max-width:960px;">
                 @Body
-            </MudPaper>
+                <div style="min-height:50px"></div>
+            </MudPaper>            
         </TopContent>
         <BottomContent>
             <Nix MinHeight="350px" OnClose="@ToggleConsole" />
         </BottomContent>
     </SplitPane>
-
+    
 </MudDrawerContainer>
 @code
 {

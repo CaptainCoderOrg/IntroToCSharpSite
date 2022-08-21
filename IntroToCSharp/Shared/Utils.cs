@@ -64,6 +64,26 @@ public static class Utils
         return s_LocalStorage!;
     }
 
+    /// <summary>
+    /// Returns true if the browser client is a mobile device and false otherwise.
+    /// </summary>
+    public static async Task<bool> IsMobileClient()
+    {
+        IJSRuntime js = await GetJSRunTime();
+        bool isMobileClient = await js.InvokeAsync<bool>("IsMobileClient");
+        return isMobileClient;
+    }
+
+    /// <summary>
+    /// Retrieves the browser client information
+    /// </summary>
+    public static async Task<string> GetClient()
+    {
+        IJSRuntime js = await GetJSRunTime();
+        string client = await js.InvokeAsync<string>("GetClient");
+        return client;
+    }
+
     public static int RoundToNearest(this int amount, int roundAmount) => roundAmount * (amount / roundAmount);
 
     /// <summary>
@@ -79,7 +99,6 @@ public static class Utils
         }
         return name;
     }
-
     public async static void ScrollToTop() => await (await GetJSRunTime()).InvokeVoidAsync("ScrollToTop");
     public static void ScrollIntoView(string id) {
         GetJSRunTime().ContinueWith(runtime => runtime.Result.InvokeVoidAsync("ScrollIntoView", id).AndForget());

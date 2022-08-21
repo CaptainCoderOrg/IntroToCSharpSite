@@ -1,8 +1,7 @@
 ﻿
 <MudDrawer @bind-Open="@Main.IsNavMenuOpen" Elevation="25" Variant="@DrawerVariant.Persistent" Style="position:fixed">
-    <MudElement Style="height:calc(100vh - 160px); overflow:scroll; overflow-y:auto">
+    <MudElement Style="@Style">
         <MudDrawerHeader Class="pr-4">
-
             <MudElement Class="d-flex flex-row justify-space-between" Style="width:100%">
                 <MudText Typo="Typo.h6">
                     <a href="">Intro To C#</a>
@@ -37,6 +36,9 @@
 {
     [Parameter, EditorRequired]
     public MainLayout Main { get; set; } = null!;
+    private string Style => $"height:calc(100vh - {BottomMenuOffset}px); overflow:scroll; overflow-y:auto";
+    private int BottomMenuOffset => 160 + (_isMobile ? 50 : 0);
+    private bool _isMobile = false;
     private bool _isAdventureMode = true;
     private bool IsAdventureMode { get => _isAdventureMode; set => ToggleAdventureMode(value); }
     private bool _isLoggedIn = false;
@@ -54,6 +56,7 @@
 
     private IEnumerable<MenuItem> MenuItems => PageRegistry.Instance.RootElements;
     private HashSet<MenuItem> Filter => GetFilter();
+
 
     private HashSet<MenuItem> GetFilter()
     {
@@ -77,11 +80,15 @@
     {
         base.OnInitialized();
         UserService.Service.OnUserChange += OnUserChange;
+        Utils.IsMobileClient().ContinueWith(isMobileClient => {
+            _isMobile = isMobileClient.Result;
+            StateHasChanged();
+        });
     }
 
     private void OnUserChange(User? newUser)
     {
-        if (newUser == null || !newUser.IsLoggedIn || newUser.UserPagesRef == null) 
+        if (newUser == null || !newUser.IsLoggedIn || newUser.UserPagesRef == null)
         {
             _isLoggedIn = false;
             _isAdventureMode = false;
