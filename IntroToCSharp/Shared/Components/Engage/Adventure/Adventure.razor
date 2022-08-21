@@ -81,15 +81,8 @@
         StateHasChanged();
     }
     private void AddPage() {
-        if (!_isLoggedIn)
-        {
-            var options = new DialogOptions { CloseOnEscapeKey = true, CloseButton = true };
-            var parameters = new DialogParameters();
-            parameters.Add("Page", _dialogs[_ix].Page);
-            DialogService.Show<LoginDialog>("Adventure Mode", parameters, options);
-            return;
-        }
-        if (Page != null) UserService.Service.AddPage((PageRef)Page);
+        if (!_isLoggedIn) LoginDialog.Show(DialogService, _dialogs[_ix].Page);
+        else if (Page != null) UserService.Service.AddPage((PageRef)Page);
     }
 
     public void SetDialog(AdventureDialog dialog, int ix){

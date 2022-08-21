@@ -1,4 +1,4 @@
-﻿
+﻿@inject IDialogService DialogService
 <MudDrawer @bind-Open="@Main.IsNavMenuOpen" Elevation="25" Variant="@DrawerVariant.Persistent" Style="position:fixed">
     <MudElement Style="@Style">
         <MudDrawerHeader Class="pr-4">
@@ -47,7 +47,7 @@
     private void ToggleAdventureMode(bool value) {
         if (!_isLoggedIn)
         {
-            NotificationService.Service.Add("Login to enable Adventure Mode.", Severity.Info).AndForget();
+            LoginDialog.Show(DialogService);
             _isAdventureMode = false;
             return;
         }

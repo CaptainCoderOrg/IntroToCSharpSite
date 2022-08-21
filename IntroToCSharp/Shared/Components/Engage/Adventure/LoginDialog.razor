@@ -14,16 +14,19 @@
                     <MudMenuItem OnClick="@UserService.Service.GitHubLogin">GitHub</MudMenuItem>
                 </ChildContent>
             </MudMenu>
-            <HorizontalDivider/>
-            <MudText Style="max-width:350px">You may continue to the page without adding it to your book.</MudText>
-            <MudButton Class="mb-4" StartIcon="@Icons.Filled.Hiking" Variant="Variant.Filled" Color="Color.Primary" Href="@Page.Href">Go to "@Page.Name"</MudButton>
+            @if (Page != null)
+            {
+                <HorizontalDivider/>
+                <MudText Style="max-width:350px">You may continue to the page without adding it to your book.</MudText>
+                <MudButton Class="mb-4" StartIcon="@Icons.Filled.Hiking" Variant="Variant.Filled" Color="Color.Primary" Href="@Page?.Href">Go to "@Page?.Name"</MudButton>
+            }
         </MudStack>
     </DialogContent>
 </MudDialog>
 @code {
     [CascadingParameter] MudDialogInstance? MudDialog { get; set; }
     [Parameter, EditorRequired]
-    public PageRef Page { get; set; }
+    public PageRef? Page { get; set; }
     protected override void OnInitialized()
     {
         UserService.Service.OnUserChange += this.UpdateUser;
@@ -34,5 +37,11 @@
         {
             MudDialog?.Close(DialogResult.Ok(true));
         }
+    }
+    public static void Show(IDialogService DialogService, PageRef? page = null) {
+        var options = new DialogOptions { CloseOnEscapeKey = true, CloseButton = true };
+        var parameters = new DialogParameters();
+        parameters.Add("Page", page);
+        DialogService.Show<LoginDialog>("Adventure Mode", parameters, options);
     }
 }
