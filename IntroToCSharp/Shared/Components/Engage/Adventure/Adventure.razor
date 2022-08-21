@@ -1,39 +1,39 @@
-<MudStack Row=true Class="@($"my-2 {ReverseClass}")">
-    <MudImage Class="rounded-lg pt-2" Style="border: 2px solid var(--mud-palette-dark); background-image: url('/imgs/portraits/background.png');" Width=200 Height=200 Src="@($"/imgs/portraits/{Portrait.Src}")" />
-
-    <MudStack>
-        <MudPaper Class="pa-2" Style="background: var(--mud-palette-background-grey); color: var(--mud-palette-grey-default);">
-            <CascadingValue Value="@this">
-                <CascadingValue Value="@_ix">
-                        @CurrentFragment
+<MudGrid Spacing=2 Justify="Justify.Center" Class="@($"my-2 {ReverseClass}")">
+    <MudItem xs=4 sm=3>
+            <MudImage Class="rounded-lg pt-2" Style="width:100%; max-width:200px; border: 2px solid var(--mud-palette-dark); background-image: url('/imgs/portraits/background.png');" Src="@($"/imgs/portraits/{Portrait.Src}")" />
+    </MudItem>
+    <MudItem xs=12 sm=9>
+        <MudStack>
+            <MudPaper Class="pa-2" Style="background: var(--mud-palette-background-grey); color: var(--mud-palette-grey-default);">
+                <CascadingValue Value="@this">
+                    <CascadingValue Value="@_ix">
+                            @CurrentFragment
+                    </CascadingValue>
                 </CascadingValue>
-            </CascadingValue>
-        </MudPaper>
-        @if (Page != null) {
-            @if (!IsAdded) {
-                <MudButton Class="fade-in" StartIcon="@Icons.Filled.Hiking" Variant="Variant.Filled" Color="Color.Secondary" OnClick="AddPage">
-                    Add "@Page?.Name" to Book
-                </MudButton>
-            } else {
-                <MudButton Class="fade-in" StartIcon="@Icons.Filled.Hiking" Variant="Variant.Filled" Color="Color.Primary" Href="@Page?.Href">
-                    Go to "@Page?.Name"
-                </MudButton>
+            </MudPaper>
+            @if (Page != null) {
+                @if (!IsAdded) {
+                    <MudButton Class="fade-in" StartIcon="@Icons.Filled.Hiking" Variant="Variant.Filled" Color="Color.Secondary" OnClick="AddPage">
+                        Add "@Page?.Name" to Book
+                    </MudButton>
+                } else {
+                    <MudButton Class="fade-in" StartIcon="@Icons.Filled.Hiking" Variant="Variant.Filled" Color="Color.Primary" Href="@Page?.Href">
+                        Go to "@Page?.Name"
+                    </MudButton>
+                }
             }
-        }
-        <MudSpacer />
             @if (_fragments.Count > 1)
             {
-                <MudStack Row=true>
-                    <MudButton Disabled="@IsFirst" Class="flex-1" Color="Color.Primary" Variant="Variant.Filled" OnClick="@Back">Back</MudButton>
-                    <MudButton Disabled="@IsLast" Class="flex-1" Color="Color.Secondary" Variant="Variant.Filled" OnClick="@Next">Next</MudButton>
-                </MudStack>
+                <MudItem>
+                    <MudStack Row=true>
+                        <MudButton Disabled="@IsFirst" Class="flex-1" Color="Color.Primary" Variant="Variant.Filled" OnClick="@Back">Back</MudButton>
+                        <MudButton Disabled="@IsLast" Class="flex-1" Color="Color.Secondary" Variant="Variant.Filled" OnClick="@Next">Next</MudButton>
+                    </MudStack>
+                </MudItem>
             }
-
-
-        
-    </MudStack>
- 
-</MudStack>
+        </MudStack>
+    </MudItem>
+</MudGrid>
 
 
 @code {
@@ -63,7 +63,7 @@
 
     private void OnUserChange(User? newUser)
     {
-        if (newUser == null || !newUser.IsLoggedIn || newUser.UserPagesRef == null) 
+        if (newUser == null || !newUser.IsLoggedIn || newUser.UserPagesRef == null)
         {
             _isLoggedIn = false;
             UpdatePages(UserPages.Default);
@@ -80,7 +80,7 @@
         StateHasChanged();
     }
     private void AddPage() {
-        if (!_isLoggedIn) 
+        if (!_isLoggedIn)
         {
             _dialogs[_ix].IsAdded = true;
             NotificationService.Service.Add("Login to enable Adventure Mode.", Severity.Info).AndForget();
@@ -89,7 +89,7 @@
         if (Page != null) UserService.Service.AddPage((PageRef)Page);
     }
 
-    public void SetDialog(AdventureDialog dialog, int ix){ 
+    public void SetDialog(AdventureDialog dialog, int ix){
         if (this._dialogs.Count > ix) return;
         this._dialogs.Add(dialog);
         StateHasChanged();
@@ -98,8 +98,8 @@
     private void SetIX(int ix) {
         this._ix = Math.Clamp(ix, 0, _fragments.Count-1);
         StateHasChanged();
-    } 
-    
+    }
+
     public void Next() => SetIX(this._ix + 1);
     public void Back() => SetIX(this._ix - 1);
 
