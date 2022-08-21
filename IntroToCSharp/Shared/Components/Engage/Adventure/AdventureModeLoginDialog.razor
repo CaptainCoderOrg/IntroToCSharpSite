@@ -42,6 +42,6 @@
         var options = new DialogOptions { CloseOnEscapeKey = true, CloseButton = true };
         var parameters = new DialogParameters();
         parameters.Add("Page", page);
-        DialogService.Show<LoginDialog>("Adventure Mode", parameters, options);
+        DialogService.Show<AdventureModeLoginDialog>("Adventure Mode", parameters, options);
     }
 }

@@ -47,7 +47,7 @@
     private void ToggleAdventureMode(bool value) {
         if (!_isLoggedIn)
         {
-            LoginDialog.Show(DialogService);
+            AdventureModeLoginDialog.Show(DialogService);
             _isAdventureMode = false;
             return;
         }
