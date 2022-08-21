@@ -81,7 +81,7 @@
         StateHasChanged();
     }
     private void AddPage() {
-        if (!_isLoggedIn) LoginDialog.Show(DialogService, _dialogs[_ix].Page);
+        if (!_isLoggedIn) AdventureModeLoginDialog.Show(DialogService, _dialogs[_ix].Page);
         else if (Page != null) UserService.Service.AddPage((PageRef)Page);
     }
 

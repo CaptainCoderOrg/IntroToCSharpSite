@@ -1,19 +1,13 @@
+@inject IDialogService DialogService;
 <MudDialog>
     <DialogContent>
         <MudStack Spacing=4 Justify="Justify.Center">
             <MudText>This feature is only available with <b>Adventure Mode</b>.</MudText>
-            <MudMenu
-                AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopLeft"
-                FullWidth="true"
-                StartIcon="@Icons.Filled.Login"
-                Label="Login to Enable Adventure Mode"
-                Variant="Variant.Filled"
-                Color="Color.Tertiary">
-                <ChildContent>
-                    <MudMenuItem OnClick="@UserService.Service.GoogleLogin">Google</MudMenuItem>
-                    <MudMenuItem OnClick="@UserService.Service.GitHubLogin">GitHub</MudMenuItem>
-                </ChildContent>
-            </MudMenu>
+            <MudButton
+              Variant="Variant.Filled"
+              Color="Color.Tertiary"
+              StartIcon="@Icons.Filled.Login"
+              OnClick="@Login">Login to Enable Adventure Mode</MudButton>
             @if (Page != null)
             {
                 <HorizontalDivider/>
@@ -27,21 +21,17 @@
     [CascadingParameter] MudDialogInstance? MudDialog { get; set; }
     [Parameter, EditorRequired]
     public PageRef? Page { get; set; }
-    protected override void OnInitialized()
+
+    private void Login()
     {
-        UserService.Service.OnUserChange += this.UpdateUser;
+        LoginDialog.Show(DialogService);
+        MudDialog?.Close(DialogResult.Ok(true));
     }
-    private void UpdateUser(User newUser)
-    {
-        if (newUser.IsLoggedIn)
-        {
-            MudDialog?.Close(DialogResult.Ok(true));
-        }
-    }
+
     public static void Show(IDialogService DialogService, PageRef? page = null) {
         var options = new DialogOptions { CloseOnEscapeKey = true, CloseButton = true };
         var parameters = new DialogParameters();
         parameters.Add("Page", page);
-        DialogService.Show<LoginDialog>("Adventure Mode", parameters, options);
+        DialogService.Show<AdventureModeLoginDialog>("Adventure Mode", parameters, options);
     }
 }

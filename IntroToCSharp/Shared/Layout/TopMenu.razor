@@ -1,3 +1,4 @@
+@inject IDialogService DialogService
 <MudAppBar Elevation="25">
     <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" OnClick="@Main.ToggleNavMenu"
         Edge="Edge.Start" />
@@ -23,15 +24,7 @@
     }
     else
     {
-        <MudMenu
-            Label="Login" Variant="Variant.Filled" Color="Color.Tertiary"
-            class="ml-md-auto"
-            AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopLeft"
-            FullWidth="true"
-            StartIcon="@Icons.Filled.Login">
-            <MudMenuItem OnClick="@UserService.Service.GoogleLogin">Google</MudMenuItem>
-            <MudMenuItem OnClick="@UserService.Service.GitHubLogin">GitHub</MudMenuItem>
-        </MudMenu>
+        <MudButton StartIcon="@Icons.Filled.Login" Variant="Variant.Filled" Color="Color.Tertiary" OnClick="@(() => LoginDialog.Show(DialogService))">Login</MudButton>
     }
     </MudAppBar>
 
