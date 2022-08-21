@@ -22,6 +22,7 @@ public class PageRegistry
         AddSection("Lessons", order++);
         AddSection("Basics", "Lessons", order++);
         AddSection("Variables", "Lessons", order++);
+        AddSection("Collections", "Lessons", order++);
         AddSection("Challenges", order++);
         AddSection("Journal", order++);
         AddSection("Social", order++);

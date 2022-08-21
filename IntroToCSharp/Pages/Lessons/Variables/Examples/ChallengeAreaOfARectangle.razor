@@ -1,0 +1,68 @@
+<CodeStepper>
+    <Block>
+        <CodeBlock>
+            //To start we need to make display an output!
+            Console.WriteLine("I can calculate the Area of a Rectangle!");
+        </CodeBlock>
+        <FadeText>
+        To do this we need to use the <Keyword Word="Console"/> to Write a Line for us.
+        </FadeText>
+    </Block>
+    <Block>
+        <CodeBlock>
+            //Just like the section above we have to Write a Line to the User!
+            Console.WriteLine("I can calculate the Area of a Rectangle!");
+            Console.WriteLine("Enter the Rectangle's Width");
+        </CodeBlock>
+        <FadeText>
+        To do this we can use the same code as before to Write a Line for the user!
+        </FadeText>
+    </Block>
+    <Block>
+        <CodeBlock>
+            //Next we need to ask the user for a value!
+            Console.WriteLine("I can calculate the Area of a Rectangle!");
+            Console.WriteLine("Enter the Rectangle's Width");
+            int widthInput = int.Parse(Console.ReadLine());
+        </CodeBlock>
+        <FadeText>
+        To get a value from a user we need to "Read the Line" that they input. We also have to
+        <Keyword Word="Parse"/> that value as an int so that we can turn it into an int.
+        <br> On the last line we are saving the value that is entered as an integer variable
+        called "widthInput".
+        </FadeText>
+    </Block>
+    <Block>
+        <CodeBlock>
+            //Now we have to calculate the area of the rectangle!
+            //The area of a triangle is width * height
+            Console.WriteLine("I can calculate the Area of a Rectangle!");
+            Console.WriteLine("Enter the Rectangle's Width");
+            int widthInput = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter the Rectangle's Height");
+            int heightInput = int.Parse(Console.ReadLine());
+            int area = widthInput * heightInput;
+        </CodeBlock>
+        <FadeText>
+            To calculate the area of the rectangle we multiply the width * the height and
+            save that result in an int variable called area.
+        </FadeText>
+    </Block>
+     <Block>
+        <CodeBlock>
+            //Now we have to calculate the area of the rectangle!
+            //The area of a triangle is width * height
+            Console.WriteLine("I can calculate the Area of a Rectangle!");
+            Console.WriteLine("Enter the Rectangle's Width");
+            int widthInput = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter the Rectangle's Height");
+            int heightInput = int.Parse(Console.ReadLine());
+            int area = widthInput * heightInput;
+            Console.WriteLine($"The total area of the rectangle is {area}");
+        </CodeBlock>
+        <FadeText>
+            Finally, we display the results of the area! We can do this by using the "$" sign
+            before our string and wrapping our variable (area) in a pair of curly brackets {area}.
+        </FadeText>
+    </Block>
+</CodeStepper>

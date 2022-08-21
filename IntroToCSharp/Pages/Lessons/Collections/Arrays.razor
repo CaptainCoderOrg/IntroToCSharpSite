@@ -338,7 +338,7 @@
     </Section>
 
 @code {
-    public static string Href { get; } = "/lessons/collections/arrays";
+        public static readonly PageRef PageRef = new PageRef("Arrays", "/lessons/collections/arrays", 0, "Collections");
 
         private string[] intHeaders = { "Name", "Column 1","Column 2","Column 3","Column 4","Column 5" };
         private string[][] intRows = {
