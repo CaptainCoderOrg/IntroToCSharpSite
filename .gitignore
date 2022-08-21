@@ -4,3 +4,4 @@ node_modules
 .vscode
 NPM
 release
+.DS_Store*
