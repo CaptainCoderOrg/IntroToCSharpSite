@@ -1,3 +1,4 @@
+@inject IDialogService DialogService
 <MudGrid Spacing=2 Justify="Justify.Center" Class="@($"my-2 {ReverseClass}")">
     <MudItem xs=4 sm=3>
             <MudImage Class="rounded-lg pt-2" Style="width:100%; max-width:200px; border: 2px solid var(--mud-palette-dark); background-image: url('/imgs/portraits/background.png');" Src="@($"/imgs/portraits/{Portrait.Src}")" />
@@ -82,8 +83,10 @@
     private void AddPage() {
         if (!_isLoggedIn)
         {
-            _dialogs[_ix].IsAdded = true;
-            NotificationService.Service.Add("Login to enable Adventure Mode.", Severity.Info).AndForget();
+            var options = new DialogOptions { CloseOnEscapeKey = true, CloseButton = true };
+            var parameters = new DialogParameters();
+            parameters.Add("Page", _dialogs[_ix].Page);
+            DialogService.Show<LoginDialog>("Adventure Mode", parameters, options);
             return;
         }
         if (Page != null) UserService.Service.AddPage((PageRef)Page);

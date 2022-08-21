@@ -23,8 +23,12 @@
     }
     else
     {
-        <MudMenu Label="Login" Variant="Variant.Filled" Color="Color.Tertiary" class="ml-md-auto"
-        ActivationEvent="@MouseEvent.MouseOver">
+        <MudMenu
+            Label="Login" Variant="Variant.Filled" Color="Color.Tertiary"
+            class="ml-md-auto"
+            AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopLeft"
+            FullWidth="true"
+            StartIcon="@Icons.Filled.Login">
             <MudMenuItem OnClick="@UserService.Service.GoogleLogin">Google</MudMenuItem>
             <MudMenuItem OnClick="@UserService.Service.GitHubLogin">GitHub</MudMenuItem>
         </MudMenu>
