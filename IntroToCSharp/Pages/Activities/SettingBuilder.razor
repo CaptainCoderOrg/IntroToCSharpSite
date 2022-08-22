@@ -1,0 +1,148 @@
+@inherits CaptainCoder.Page
+@page "/activities/setting-builder"
+
+<Section Title ="Setting Builder">
+    <Text>
+    Any good game or story needs to have a setting that it takes place at. Today we are going to make a program to help up make a setting when we need one!
+
+    To start, we need to think about the kind of genre that we want to make. Is it a fantasy genre filled with dragons and goblins that need slaying like dungeons and dragons? Or maybe it is a futuristic cyber-punk genre with flying cars and awesome spaceships like No Man’s Sky or Deep Rock Galatic! There are so many different options to pick from! 
+    So let’s start by listing them out for the user to help them get an idea of what to do:
+    </Text>
+
+    <Section Title="Learning Objectives">
+    <MudList Clickable="true">
+        <MudListItem Icon="@Icons.Filled.Circle">Practice creating a new C# project using the console</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Practice using the Console.WriteLine method to display output to the user</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Practice using Console.WriteLine, Console.ReadLine, & strings</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Practice using if-else statements to make decisions in a program</MudListItem>
+    </MudList>
+    </Section>
+</Section>
+
+    <TaskList Name="Starting Out Project">
+        <TaskItem Name="Create a New Project">
+            Create a new project and call it "Setting-Builder".
+        </TaskItem>
+        <TaskItem Name="Ask the user for setting genre">
+            Give the user some input to follow: "What kind of genre do you want your setting to be?"
+        </TaskItem>
+        <TaskItem Name="Store User Input">
+            Store the users response in a variable called "genre"
+        </TaskItem>
+    </TaskList>
+
+    <Text>
+        Now that we know the genre for our world, let’s build our first city, town or village! 
+        When we think about any place that we’ve been before we know that it has to have a name! 
+        We also need to know different details about the town like how big it is and how many people are in the town. 
+        For reference, here are some general numbers you can follow for an idea of how big each is.
+    </Text>
+    <Note>
+        When handling these numbers you should capture them as integers!
+         People are moving in and out of cities and towns constantly!
+    </Note>
+
+    <TaskList Name="City or Town Builder">
+        <TaskItem Name="Prompt User for Name">
+            Prompt the user the for their city or town's name.
+        </TaskItem>
+        <TaskItem Name="Capture User Response">
+            Store the users response as "cityName".
+        </TaskItem>
+        <TaskItem Name="Prompt User for size of City">
+            Ask the user if their {cityName} is a village, town or city!
+        </TaskItem>
+        <TaskItem Name="Capture User Response">
+            Store the users response as "citySize.
+        </TaskItem>
+        <TaskItem Name="Prompt user for population fo the City">
+            Ask the user for the population number of {cityName}!
+        </TaskItem>
+        <TaskItem Name="Capture User Response">
+            Store the users response as "cityPopulation".
+        </TaskItem>
+        <TaskItem Name="Prompt User for age of the City">
+            Ask the user how old the city is!
+        </TaskItem>
+        <TaskItem Name="Capture User Response">
+            Store the users response as "cityAge".
+        </TaskItem>
+    </TaskList>
+
+
+    <Text>
+        Our setting is looking pretty good already! But what kind of geography is our setting in? 
+        There are an awful lot of places that our setting could take place. Is the area around our city/town an overgrown forest?
+         Perhaps our town is a city surrounded by deserts? Your town could even be an island on the back of a giant turtle out in the middle of the ocean!
+    </Text>
+
+    <TaskList Name ="Geography">
+        <TaskItem Name="Prompt User for geography of the City">
+            Ask the user about the geography of the city!
+        </TaskItem>
+        <TaskItem Name="Capture User Response">
+            Store the users response as "geography".
+        </TaskItem>
+        <TaskItem Name="Prompt User for nature around the City">
+            Ask the user what natural resources are near the city!
+        </TaskItem>
+        <TaskItem Name="Capture User Response">
+            Store the users response as "naturalResources".
+        </TaskItem>
+    </TaskList>
+
+    <Text>
+        Wow! We’ve got a lot of details already but there is something… different about your place! 
+        It needs something to make it special… to make it stand out! An example might 
+    </Text>
+
+    <TaskList Name="Special">
+        <TaskItem Name="Special Feature">
+            Ask the user what is special about the area!
+        </TaskItem>
+        <TaskItem Name="Capture User Response">
+            Store the users response as "specialFeature".
+        </TaskItem>
+    </TaskList>
+
+    <Text>
+        It seems like we are filling our city up with all sorts of details and ideas!
+         Let’s do one final part to this project by printing it in a nice, clean format for our user like this:
+    </Text>
+
+
+    <Text>
+        We have run into a problem though! What if the user doesn't know the information that we are asking them or they haven't figured 
+    </Text>
+
+    <Section Title ="Extra Credit">
+        <Text>
+            	When it comes to develop a setting there are so many more details that we can add to our setting! 
+                If you want to get some more practice, try adding in options for these details:
+        </Text>
+        <TaskList Name="Extra Details">
+            <TaskItem Name="Major Events & Date">
+                Two Major Events & the Year of the Events
+            </TaskItem>
+            <TaskItem Name="Economic Item">
+                What is the major economic item in the city/town?.
+            </TaskItem>
+            <TaskItem Name="Ruling Class">
+                Who rules the city?
+            </TaskItem>
+            <TaskItem Name="Major Faction">
+                Who is the major faction in the city?
+            </TaskItem>
+        </TaskList>
+    </Section>
+
+
+    <Text>
+        Our program looks pretty good! But when we print out the different parts of the program it can look a little plain! 
+        Let’s spicy things up by adding some color to our work to make it more fun to read! 
+        For this activity make it so that the colors of the lines flip back and forth.
+    </Text>
+@code
+{
+   public static readonly PageRef PageRef = new PageRef("Setting Builder", "/activities/setting-builder", 3, "Activities");
+}

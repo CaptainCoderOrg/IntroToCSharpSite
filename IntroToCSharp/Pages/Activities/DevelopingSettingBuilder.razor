@@ -1,0 +1,83 @@
+@inherits CaptainCoder.Page
+@page "/activities/developing-setting-builder"
+
+<Section Title="Last Time on Setting Builder...">
+    <Text>
+        In "Setting Builder" we developed code that would help someone create a setting for their world by taking
+        user inputs to questions about a city or town. If you haven't seen that, please go checkout "Setting Builder"
+        for a fun activity or checkout our save file if you want to hop right into the action!
+    </Text>
+
+    <Text>
+        Now that we've got our Setting Builder program we need something to help control our inputs from our users.
+    </Text>
+
+    <Section Title="Learning Objectives">
+    <MudList Clickable="true">
+        <MudListItem Icon="@Icons.Filled.Circle">Practice creating a new C# project using the console</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Practice using the Console.WriteLine method to display output to the user</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Practice input handling</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Practice if-else statements</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Practice while statements</MudListItem>
+    </MudList>
+    </Section>
+</Section>
+
+<Section Title="What to control">
+    <Text>
+        Before we begin, we need to decide what options we want to control from our user. If we run the "Setting Builder"
+        program as it is right everything should run through perfectly fine. But let's say that when we get to "city age"
+        we accidently enter in a letter instead of a number. What happens? What does the error say?
+    </Text>
+    <Text>
+        When we input the wrong data type into the program it crashes! That's not what we want to happen at all! Instead it would
+        be really helpful to tell the user that they made a mistake or entered in something that wasn't allowed and ask them to try again.
+        The question is how can we do that?
+    </Text>
+</Section>
+
+<Section Title="While Statements">
+    <Text>
+        A while statement allows programmers to set a rule that basically says "unless this condition is met, keep doing a thing". An example
+        of this might look something like this:
+    </Text>
+    <CodeBlock>
+        bool PandaIsHungry = true;
+        while(PandaIsHungry == true)
+        {
+            Console.WriteLine("Panda is hungry!");
+        }
+    </CodeBlock>
+
+    <Text>
+        You have to be careful with while statements however! If you ran the code above you might have noticed that your computer started to inifitely print
+        "Panda is hungry!" (What a noisy Panda!). What we need to remember is that for every while loop, unless we create a way for our program to get out of
+        the while loop, it will continously execute. Instead of the code above we might need something like:
+    </Text>
+    <CodeBlock>
+        bool PandaIsHungry = true;
+        while(PandaIsHungry == true)
+        {
+            Console.WriteLine("Panda is hungry!");
+            Console.WriteLine("Feed Panda?");
+            string userInput = Console.ReadLine();
+            if(userInput == "yes")
+            {
+              PandaIsHungry = false;  
+            }
+        }
+    </CodeBlock>
+    <Question Text="What do you think will happen if you type something other than yes?"/>
+
+    <Text>
+        When we type anything other than yes, the program access the string and determines that it isn't what it is looking for. The program
+        then restarts the while statement from the top and print "Panda is hungry!" once again. This will continue to happen until the programmer
+        types in "yes". Take note that the input <b>must match</b> the use case of the if statement; "Yes", "yEs", "yeS" or any other combination other
+        that "yes will not work!"
+    </Text>
+</Section>
+
+@code
+{
+   public static readonly PageRef PageRef = new PageRef("Developing Setting Builder", "/activities/developing-setting-builder", 4, "Activities");
+}

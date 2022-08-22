@@ -1,0 +1,125 @@
+@inherits CaptainCoder.Page
+@page "/activities/switch-game"
+
+    <TaskList Name="Create Game">
+        <TaskItem Name="Create Project">Create a project</TaskItem>
+        <TaskItem Name="Open Program">Create 6 switches and set them to false</TaskItem>
+        <TaskItem Name="Create Project">Create a Is Game Over boolean set to false</TaskItem>
+        <TaskItem Name="Create Project">Print out starting condition of each switch</TaskItem>
+        <TaskItem Name="Create Project">Create a method for each switch that changes the starting values of the switch according the the chart</TaskItem>
+        <TaskItem Name="Create Project">Create a GameOverCheck that checks to see if the switches are all on. If they are, change Is Game Over to true.</TaskItem>
+        <TaskItem Name="Create Project">Create a while statement that continually asks the user to enter in which switch they want to flip.</TaskItem>
+        <TaskItem Name="Create Project">Create a switch with cases for each switch</TaskItem>
+        <TaskItem Name="Create Project">After user input has been entered, make sure to check or game over</TaskItem>
+        <TaskItem Name="Create Project">Print the conditions of the switches</TaskItem>
+        <TaskItem Name="Create Project">When the game is over, print "You win!" and end the program</TaskItem>
+    </TaskList>
+
+<CodeBlock>
+    bool OneSwitch = false;
+bool TwoSwitch = false;
+bool ThreeSwitch = false;
+bool FourSwitch = false;
+bool FiveSwitch = false;
+bool SixSwitch = false;
+
+bool IsGameOver = false;
+
+
+Console.WriteLine(OneSwitch);
+Console.WriteLine(TwoSwitch);
+Console.WriteLine(ThreeSwitch);
+Console.WriteLine(FourSwitch);
+Console.WriteLine(FiveSwitch);
+Console.WriteLine(SixSwitch);
+
+void FlipOne()
+{
+    OneSwitch = !OneSwitch;
+}
+
+void FlipTwo()
+{
+    OneSwitch = !OneSwitch;
+    TwoSwitch = !TwoSwitch;
+    ThreeSwitch = !ThreeSwitch;
+}
+
+void FlipThree()
+{
+    TwoSwitch = !TwoSwitch;
+    ThreeSwitch = !ThreeSwitch;
+    FourSwitch = !FourSwitch;
+}
+
+void FlipFour()
+{
+    FourSwitch = !FourSwitch;
+    FiveSwitch = !FiveSwitch;
+}
+void FlipFive()
+{
+    OneSwitch = !OneSwitch;
+    ThreeSwitch = !ThreeSwitch;
+    FiveSwitch = !FiveSwitch;
+}
+
+void FlipSix()
+{
+    OneSwitch = !OneSwitch;
+    SixSwitch = !SixSwitch;
+}
+
+void GameOverCheck()
+{
+    if (OneSwitch == true && TwoSwitch == true && ThreeSwitch == true && FourSwitch == true && FiveSwitch == true && SixSwitch == true)
+    {
+        IsGameOver = true;
+    }
+}
+
+while(IsGameOver == false)
+{
+    Console.WriteLine("What switch would you like to flip?");
+    Console.WriteLine("1:Switch One, 2: Switch Two, 3: Switch Three, 4: Switch 4, 5: Switch 5, 6: Switch 6");
+    int userInput = int.Parse(Console.ReadLine());
+
+    switch (userInput)
+    {
+        case 1:
+            FlipOne();
+            break;
+        case 2:
+            FlipTwo();
+            break;
+        case 3:
+            FlipThree();
+            break;
+        case 4:
+            FlipFour();
+            break;
+        case 5:
+            FlipFive();
+            break;
+        case 6:
+            FlipSix();
+            break;
+    }
+
+    GameOverCheck();
+
+
+    Console.WriteLine($"One: {OneSwitch}");
+    Console.WriteLine($"Two: {TwoSwitch}");
+    Console.WriteLine($"Three: {ThreeSwitch}");
+    Console.WriteLine($"Four: {FourSwitch}");
+    Console.WriteLine($"Five: {FiveSwitch}");
+    Console.WriteLine($"Six: {SixSwitch}");
+}
+
+Console.WriteLine("You Win!");
+</CodeBlock>
+
+@code {
+    public static readonly PageRef PageRef = new PageRef("Switch Game", "/activities/switch-game", 4, "Activities");
+}
