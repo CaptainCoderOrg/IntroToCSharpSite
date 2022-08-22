@@ -1,0 +1,9 @@
+<pre id="@ID" class="output my-4 pa-2">@ChildContent</pre>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent {get; set;} = null!;
+    private static int s_NextID = 0;
+    private int _id = s_NextID++;
+    private string ID => $"Terminal-{_id}";
+}
