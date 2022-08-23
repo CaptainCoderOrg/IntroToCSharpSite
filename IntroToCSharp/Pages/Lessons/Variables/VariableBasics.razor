@@ -1,0 +1,295 @@
+@inherits CaptainCoder.Page
+@page "/lessons/variables/the-basics"
+
+<Title>Variables</Title>
+<Section Title="Introduction">
+    <Text>
+        An essential part of programming is being able to track values. For
+        example, in a video game you might track the amount of experience a
+        player has gained throughout their adventure. To do this, programmers
+        utilize the computer's <b>Random Access Memory</b> (RAM). Throughout
+        this book we will simply refer to a computer's RAM as <b>memory</b>.
+    </Text>
+    <Text>
+        When programming, we need to be able to store, update, and read values in
+        the computer's memory to keep track of information. To help manage this
+        complexity, we use variables to give a label to those parts of
+        memory. 
+    </Text>
+    <Note>
+        RAM is volatile. That is, when a program starts it has no "memories".
+        Throughout the execution of the program, it can gain "memories".
+        Finally, when the program finishes, it forgets all of its "memories".
+    </Note>
+    <Text>
+        After completing this section, you should know the basics of:
+    </Text>
+    <MudList Clickable="true">
+        <MudListItem Icon="@Icons.Filled.Circle">Declaring a variable</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Using the <Keyword Word="assignment operator"/> to initialize and update the value stored in a variable</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Evaluating variables in Code</MudListItem>
+    </MudList>
+</Section>
+<Section Title="Declaring a Variable">
+    <Text>
+         A <b>variable</b> is a named location in the computer's
+        memory where you can store data. This location is called a
+        <Keyword Word="memory address"/>. Before you can store
+        data in that location, you must first create the location
+        by declaring a variable.
+    </Text>
+    <Text>
+        To declare a variable in C#, specify a type and name together. 
+    </Text>
+    <MudPaper Class="rounded pt-3 pl-4 pr-4" Elevation=3>
+        <DeclareRecipe/>
+    </MudPaper>
+    
+    <Text><b>Examples:</b></Text>
+    <CodeBlock AllowCopy>int playerScore;</CodeBlock>
+    <Text>
+        The code above <b>declares</b> a variable named <Code>playerScore</Code>
+        that can store an <Keyword Word="int"/>.
+    </Text>
+    <CodeBlock AllowCopy>string playerName;</CodeBlock>
+    <Text>
+        The code above <b>declares</b> a variable named <Code>playerName</Code>
+        that can store a <Keyword Word="string"/>.
+    </Text>
+    <Note>
+        Don't worry too much about the specifics of the data types above for
+        now. All you need to know for now is that an <Code>int</Code> is a
+        number and a <Code>string</Code> is text.
+    </Note>
+    
+    <SimpleCodeQuestion Question="What is the name of the variable?">
+        <Block><CodeBlock AllowCopy>int hitPoints;</CodeBlock></Block>
+        <Answer><CheckBoxOption Text="int" IsCorrect="false" /></Answer>
+        <Answer><CheckBoxOption Text="Hit Points" IsCorrect="false" /></Answer>
+        <Answer><CheckBoxOption Text="hitPoints" IsCorrect="true" /></Answer>
+        <Answer><CheckBoxOption Text="integer" IsCorrect="false" /></Answer>
+    </SimpleCodeQuestion>
+
+    <SimpleCodeQuestion Question="What is the type of the variable?">
+        <Block><CodeBlock AllowCopy>string monsterName;</CodeBlock></Block>
+        <Answer><CheckBoxOption Text="string" IsCorrect="true" /></Answer>
+        <Answer><CheckBoxOption Text="monster" IsCorrect="false" /></Answer>
+        <Answer><CheckBoxOption Text="Name" IsCorrect="false" /></Answer>
+        <Answer><CheckBoxOption Text="monserName" IsCorrect="false" /></Answer>
+    </SimpleCodeQuestion>
+</Section>
+
+<Section Title="The Assignment Operator">
+    <Text>
+        Once a variable has been declared, it is possible to store a value in
+        the labeled memory address. To do this, we use the <Keyword
+        Word="assignment operator"/> (<Code>=</Code>).
+    </Text>
+    
+    <MudPaper Class="rounded pt-3 pl-4 pr-4" Elevation=3>
+        <AssignmentOperatorRecipe />
+    </MudPaper>
+
+    <Text><b>Examples</b></Text>
+    <CodeBlock>
+        int playerScore;
+playerScore = 0;
+    </CodeBlock>
+    <Text>
+        The above example assigns <Code>playerScore</Code> to store the value
+        <Code>0</Code>. Because this is the first time we are assigning a value
+        to <Code>playerScore</Code> we say that we are <b>initializing</b> it.
+    </Text>
+
+    <Note>
+        Initializing a variable immediately after declaring it happens so often there is special
+        syntax:
+        <CodeBlock>int playerScore = 0;</CodeBlock>
+    </Note>
+    <Text>
+        After a variable has been assigned a value, it can be updated to a new value:
+    </Text>
+    <CodeBlock>
+        int playerScore = 0;
+playerScore = 4;
+    </CodeBlock>
+    <Text>
+        In the example above, the <Code>playerScore</Code> variable is first initialized
+        to <Code>0</Code>. Then, it is re-assigned to store the value <Code>4</Code>.
+    </Text>
+    <SimpleCodeQuestion Question="What value is monsterHealth initialized to?">
+        <Block><CodeBlock>int monsterHealth = 42;</CodeBlock></Block>
+        <Answer><CheckBoxOption Text="int" IsCorrect="false" /></Answer>
+        <Answer><CheckBoxOption Text="42" IsCorrect="true" /></Answer>
+        <Answer><CheckBoxOption Text="health" IsCorrect="false" /></Answer>
+        <Answer><CheckBoxOption Text="integer" IsCorrect="false" /></Answer>
+    </SimpleCodeQuestion>
+    <SimpleCodeQuestion Question="What value is stored in dragonHealth?">
+        <Block>
+            <CodeBlock>
+int dragonHealth = 420;
+dragonHealth = 401;
+            </CodeBlock>
+        </Block>
+        <Answer><CheckBoxOption Text="int" IsCorrect="false" /></Answer>
+        <Answer><CheckBoxOption Text="420" IsCorrect="false" /></Answer>
+        <Answer><CheckBoxOption Text="dragonHealth" IsCorrect="false" /></Answer>
+        <Answer><CheckBoxOption Text="401" IsCorrect="true" /></Answer>
+    </SimpleCodeQuestion>
+    <SimpleCodeQuestion Question="What value is the playerHealth variable initialized to?">
+        <Block>
+            <CodeBlock>
+int playerHealth = 20;
+playerHealth = 15;
+            </CodeBlock>
+        </Block>
+        <Answer><CheckBoxOption Text="integer" IsCorrect="false" /></Answer>
+        <Answer><CheckBoxOption Text="15" IsCorrect="false" /></Answer>
+        <Answer><CheckBoxOption Text="20" IsCorrect="true" /></Answer>
+        <Answer><CheckBoxOption Text="health" IsCorrect="false" /></Answer>
+    </SimpleCodeQuestion>
+</Section>
+
+<Section Title="Reading Data">
+    <Text>
+        After a variable has been assigned a value, you can read the value by using the
+        variable's name in an expression:
+    </Text>
+    <CodeBlock ReplIt="JoshuaJoshJosh1/VariablesExample">
+string name = "Bob";
+Console.WriteLine(name + " is learning C#!");
+    </CodeBlock>
+    <Text>
+        In the above example, the computer reads the data stored in the
+        <Code>name</Code> variable and substitutes it into the expression. It
+        then uses the value to produce the message "Bob is learning C#!"
+    </Text>
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="What are the 3 components of a variable?"
+        XP=10
+        GoldAward=25>
+        <CheckBoxOption Text="Data" IsCorrect="true" />
+        <CheckBoxOption Text="List" IsCorrect="false" />
+        <CheckBoxOption Text="Name" IsCorrect="true" />
+        <CheckBoxOption Text="Data Type" IsCorrect="true" />
+    </MultipleChoiceQuestion>
+</Section>
+<Section Title="Evaluating Variables">
+    <CodeBlock>
+        int z = x + y;
+    </CodeBlock>
+    <Text>
+        When the computer encounters the code above, it must first
+        <b>evaluate</b> <Code>x</Code> and <Code>y</Code> before it can
+        determine what value should be stored in <Code>z</Code>. To <b>evaluate</b>
+        a variable, the computer <b>reads</b> the value stored in memory and
+        substitutes it into the <b>expression</b>.
+    </Text>
+    <Text>
+        Let's assume that <Code>x</Code> stores the value <Code>5</Code> and
+        <Code>y</Code> stores the value <Code>7</Code>. During evaluation, the
+        computer will substitute the values in like this:
+    </Text>
+    <CodeBlock>
+        int z = 5 + 7;
+    </CodeBlock>
+    <Text>
+        It will then add them together:
+    </Text>
+    <CodeBlock>
+        int z = 12;
+    </CodeBlock>
+    <Text>
+        And finally, it assigns the variable <Code>z</Code> to store the value <Code>12</Code>.
+    </Text>
+</Section>
+<Section Title="A Complex Example">
+        <IntroToCSharp.Pages.Lessons.Variables.Examples.ComplexAssignmentExample/>
+</Section>
+
+<Section Title="Challenge: Evaluating Variables">
+        <Text>Study the code below:</Text>
+        <CodeBlock>
+int x = 5;
+int y = x + 1;
+x = x - 1;
+y = x + y;
+int z = x + y - 5;
+x = 6;
+        </CodeBlock>
+        <SimpleCodeQuestion Question="What is stored in x?">
+            <Block><CodeBlock>Console.WriteLine(x);</CodeBlock></Block>
+            <Answer><CheckBoxOption Text="10" IsCorrect="false"/></Answer>
+            <Answer><CheckBoxOption Text="6" IsCorrect="true"/></Answer>
+            <Answer><CheckBoxOption Text="1" IsCorrect="false"/></Answer>
+            <Answer><CheckBoxOption Text="9" IsCorrect="false"/></Answer>
+        </SimpleCodeQuestion>
+        <SimpleCodeQuestion Question="What is stored in y?">
+            <Block><CodeBlock>Console.WriteLine(y);</CodeBlock></Block>
+            <Answer><CheckBoxOption Text="10" IsCorrect="true"/></Answer>
+            <Answer><CheckBoxOption Text="6" IsCorrect="false"/></Answer>
+            <Answer><CheckBoxOption Text="1" IsCorrect="false"/></Answer>
+            <Answer><CheckBoxOption Text="9" IsCorrect="false"/></Answer>
+        </SimpleCodeQuestion>
+        <SimpleCodeQuestion Question="What is stored in z?">
+            <Block><CodeBlock>Console.WriteLine(z);</CodeBlock></Block>
+            <Answer><CheckBoxOption Text="10" IsCorrect="false"/></Answer>
+            <Answer><CheckBoxOption Text="6" IsCorrect="false"/></Answer>
+            <Answer><CheckBoxOption Text="1" IsCorrect="false"/></Answer>
+            <Answer><CheckBoxOption Text="9" IsCorrect="true"/></Answer>
+        </SimpleCodeQuestion>
+</Section>
+<Section Title="What's Next?">
+    <Adventure Portrait="@Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+                <Text>
+                    Variables are an essential part of programming. Now that
+                    you have the basics down, you should practice using them in a
+                    project.
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="@UserInput.PageRef">
+                <Text>
+                    If you have not done so yet, you should try the 
+                    <b>@UserInput.PageRef.Name</b> lesson where you will
+                    learn how to use the <Code>Console.ReadLine</Code> method
+                    to read user input and store the result in a <b>string variable</b>.
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="MadTakes.PageRef">
+                <Text>
+                    If you're already comfortable with the <Code>Console.ReadLine</Code> method,
+                    then you should take on the <b>@MadTakes.PageRef.Name</b> activity where 
+                    you will practice using <b>string variables</b> to create a colorful
+                    program to entertain your friends and family.
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="BasicDataTypes.PageRef">
+                <Text>
+                    If you're not feeling like programming right now, you could
+                    start the <b>@BasicDataTypes.PageRef.Name</b> lesson where
+                    you will learn about the 4 most common data types in C#.
+                </Text>
+            </AdventureDialog>
+        </Item>
+    </Adventure>
+</Section>
+@code {
+    public static string Href { get; } = "/lessons/variables/the-basics";
+    public bool _isOpen = true;
+    public static readonly PageRef PageRef = new PageRef("Variable Basics", "/lessons/variables/the-basics", 0, "Variables");
+
+    public void ToggleOpen()
+    {
+        if (_isOpen)
+            _isOpen = false;
+        else
+            _isOpen = true;
+    }
+}

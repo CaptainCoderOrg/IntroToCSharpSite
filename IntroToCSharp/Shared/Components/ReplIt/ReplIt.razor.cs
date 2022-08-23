@@ -15,13 +15,14 @@ namespace IntroToCSharp.Shared.Components.ReplIt
         [Parameter]
         public bool ShareSource { get; set; } = false;
         [Parameter]
-        public string MinHeight { get; set; } = "250px";
+        public string MinHeight { get; set; } = "302px";
+        private string Height => $"calc(46px + {MinHeight})";
         public string ResizeHeight { get; private set; } = "0px";
 
         [Inject]
         private IJSRuntime JS { get; set; } = null!;
         public string Url => $"https://replit.com/@{Path}?{Options}";
-        private string Options => "lite=true" + (OutputOnly ? "&outputonly=true" : "");
+        private string Options => "embed=true" + (OutputOnly ? "&outputonly=1" : "");
         public async Task ReloadIFrame()
         {
             ResizeHeight = "0px";

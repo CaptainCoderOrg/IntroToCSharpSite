@@ -1,0 +1,117 @@
+@inherits CaptainCoder.Page
+@page "/getting-started/vs-code"
+<Title>Visual Studio Code</Title>
+<Section Title="Overview">
+    <Text>
+        Modern software is incredibly complex. In fact, I believe that 
+        modern software is the most intricate and complex thing humans
+        have ever created. A typical software engineer must know a large
+        number of tools that help them. To help manage this complexity, 
+        programmers utilize a development environment.
+    </Text>
+    <Text>
+        In this section, we will discuss how to set up a C# development
+        environment using Visual Studio Code as well as discuss the reasons
+        this book uses Visual Studio Code over other options.
+    </Text>
+    <Note>
+        There is nothing stopping you from using any development tools
+        that you want. If you're already up and running with Visual Studio,
+        Rider, or any other tool chain, feel free to skip this section.
+    </Note>
+</Section>
+<Section Title="Why Visual Studio Code?">
+    <Text>
+        Visual Studio Code is a lightweight editor that runs on Windows, Mac OS,
+        and Linux. It is free, has a large active development community, and
+        provides an easy tool chain to allow developers to write custom extensions.
+        Because it runs well on all three of the major operating systems, it makes
+        a great general choice for developers.
+    </Text>
+    <Text><b>Why not Visual Studio or Rider?</b></Text>
+    <Text>
+        I am often asked why I don't use Visual Studio (Windows) or Rider (Mac)
+        to develop C# code. The short answer is that both of those tools hide
+        some of the nitty gritty details that I feel are important to learn and
+        understand as a developer.
+    </Text>
+    <Text>       
+        The real answer is that I <b>DO</b> use Visual Studio on Windows when
+        I'm developing a large intricate program (like this book which is
+        written using .NET's Blazor framework). However, for small programs, I
+        find that Visual Studio Code is much faster and simpler to work with.
+    </Text>
+</Section>
+<Section Title="Installing and Configuring Visual Studio Code">
+    <Text>
+        This section assumes you already have .NET 6 installed. If you
+        have not done so already, install .NET 6 and then continue.
+    </Text>
+    <TaskItem Name="VerifyNET6">Verify .NET 6 is Installed</TaskItem>
+    <TaskItem Name="InstallVSCode">
+        First, download and install Visual Studio Code for your operating
+        system: <MudLink Href="https://code.visualstudio.com/Download"
+        Target="_blank">LINK</MudLink>.
+    </TaskItem>
+    <TaskItem Name="Open VSCode">
+        After the installation is complete, Open VS Code
+    </TaskItem>
+    <Image Src="open-vs-code.png" />
+    <HorizontalDivider/>
+    <Text>
+        Next, we will install the C# extension for Visual Studio Code. This provides
+        productivity tools for developing C# programs.
+    </Text>
+    <TaskItem Name="Open Extensions Bar">Click the Extensions tab on the Left Bar</TaskItem>
+    <Image Src="extensions-button.png" />
+    <TaskItem Name="Search CSharp">In the search bar at the top, search for "C#"</TaskItem>
+    <TaskItem Name="Select CSharp">Select the "C#" option, this will likely be the first option</TaskItem>
+    <TaskItem Name="Install CSharp">Ensure it is the C# extension by Microsoft, then click Install</TaskItem>
+    <Image Src="csharp-extension.png" />
+    <HorizontalDivider/>
+    <Text>
+        Last, we will install the .NET Interactive Notebooks extension. This extension allows you to
+        quickly write and test code without creating an entire C# project. This can be incredibly useful
+        for testing out small snippets of code like the ones scattered throughout this book.
+    </Text>
+    <Note>This extension is not necessary but I highly recommend it.</Note>
+    <TaskItem Name="Search .NET Interactive">Search for the ".NET Interactive Notebook" extension</TaskItem>
+    <TaskItem Name="Select .NET Interactive">Select it from the options</TaskItem>
+    <TaskItem Name="Install .NET Interactive">Verify it is the version from Microsoft and click Install</TaskItem>
+    <Image Src="interactive-extension.png"/>
+</Section>
+
+<Section Title="What's Next?">
+    <Adventure Portrait="@Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+                <Text>
+                    Now that you have a programming environment, you're
+                    ready to start programming with C#.
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="@ConsoleProject.PageRef">
+                <Text>
+                    If you want to learn how to create a project from
+                    scratch, you should check out the <b>@ConsoleProject.PageRef.Name</b>
+                    lesson.
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="@AsciiArt.PageRef">
+                <Text>
+                    If you already know how to create a project and open it in VS Code,
+                    you might enjoy the <b>@AsciiArt.PageRef.Name</b> activity.
+                </Text>
+            </AdventureDialog>
+        </Item>
+    </Adventure>
+</Section>
+
+@code {
+    public const string Href = "/getting-started/vs-code";
+    public static readonly PageRef PageRef = new PageRef("Visual Studio Code", "/getting-started/vs-code", 1, "Getting Started");
+}

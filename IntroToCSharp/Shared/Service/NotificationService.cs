@@ -1,6 +1,8 @@
 using IntroToCSharp.Shared.Layout;
 using MudBlazor;
 
+namespace CaptainCoder;
+
 /// <summary>
 /// The NotificationService is a singleton that is used throughout
 /// the application to display Snackbar messages to the user.
@@ -24,9 +26,8 @@ public class NotificationService
     /// <param name="snackbar">The Snackbar to use for displaying messages.</param>
     private static void Init(ISnackbar snackbar)
     {
-        if (snackbar == null) throw new ArgumentNullException("Snackbar must not be null.");
         if (Service._snackbar != null) throw new InvalidOperationException("Cannot initialize NotificationService multiple times.");
-        Service._snackbar = snackbar;
+        Service._snackbar = snackbar ?? throw new ArgumentNullException(nameof(snackbar), "Snackbar must not be null.");
     }
 
     static NotificationService()

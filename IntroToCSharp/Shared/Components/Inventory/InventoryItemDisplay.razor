@@ -1,0 +1,32 @@
+@inject IDialogService DialogService
+
+<MudCard Class="ma-2" Outlined="true" Style="width: 450px">
+    <MudCardMedia Image="@Item.Image" Height="200" />
+    <MudCardContent Class="pa-2">
+        <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center">
+            <MudText Class="mr-4" Typo="Typo.h5">@Item.Name</MudText>
+        </MudStack>
+        <MudText Typo="Typo.body2">@Item.Description</MudText>
+        <MudButton OnClick="@Sell" Variant="Variant.Filled" Color="Color.Info" Class="pl-8 pr-8"
+            FullWidth="true">Sell</MudButton>
+    </MudCardContent>
+</MudCard>
+@code {
+    /// <summary>
+    /// The item displayed in the store or inventory.
+    /// </summary>
+    /// <value>The item to be displayed.</value>
+    [Parameter]
+    public StoreItem Item { get; set; } = StoreItem.Default;
+    /// <summary>
+    /// The contents of the users inventory.
+    /// </summary>
+    /// <value>Store items are kept in the inventory data.</value>
+    public UserInventory InventoryData { get; set; } = UserInventory.Default;
+    private void Sell() {
+        var options = new DialogOptions { CloseOnEscapeKey = true };
+        var parameters = new DialogParameters();
+        parameters.Add("Item", Item);
+        DialogService.Show<Selling>("", parameters, options);
+    }
+}

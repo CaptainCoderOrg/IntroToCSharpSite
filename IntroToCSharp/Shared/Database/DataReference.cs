@@ -11,7 +11,7 @@ public static class DataReference
 {
     public static DataReference<bool> Bool(string path, bool defaultValue = false, string? niceName = null) => BoolDataReference.GetRef(path, defaultValue, niceName);
     public static DataReference<string> String(string path, string defaultValue = "", string? niceName = null) => StringDataReference.GetRef(path, defaultValue, niceName);
-    public static DataReference<T> Json<T>(string path, T defaultValue, string? niceName = null) => new JsonDataReference<T>(path, defaultValue, niceName);
+    public static DataReference<T> Json<T>(string path, T? defaultValue = default, string? niceName = null) => new JsonDataReference<T>(path, defaultValue, niceName);
 }
 
 /// <summary>
@@ -138,7 +138,7 @@ internal class JsonDataReference<T> : DataReference<T>
         string jsonData = JsonSerializer.Serialize(data);
         await DatabaseService.Service.Set<string>(Path, jsonData, handler);
     }
-
+    /// <inheritdoc/>
     protected override void HandleChange(string data)
     {
         try
@@ -146,20 +146,22 @@ internal class JsonDataReference<T> : DataReference<T>
             string jsonString = JsonDocument.Parse(data).RootElement.GetString()!;
             Val = JsonSerializer.Deserialize<T>(jsonString);
         }
-        catch (JsonException)
+        catch (JsonException jse)
         {
             NotificationService.Service.Add($"Error loading {NiceName}. Expected UserData but found: {data}", Severity.Error).AndForget();
+            Console.Error.WriteLine(jse);
         }
-        catch
+        catch (Exception e)
         {
             NotificationService.Service.Add($"Error loading {NiceName}.", Severity.Error).AndForget();
+            Console.Error.WriteLine(e);
         }
     }
 }
 
 internal class BoolDataReference : DataReference<bool>
 {
-    private static readonly Dictionary<string, BoolDataReference> DataRefs = new ();
+    private static readonly Dictionary<string, BoolDataReference> DataRefs = new();
     internal static DataReference<bool> GetRef(string path, bool defaultValue = false, string? niceName = null)
     {
         if (!DataRefs.TryGetValue(path, out BoolDataReference? value))
@@ -170,6 +172,7 @@ internal class BoolDataReference : DataReference<bool>
     }
     private BoolDataReference(string path, bool defaultValue = false, string? niceName = null) : base(path, defaultValue, niceName) { }
 
+    /// <inheritdoc/>
     protected override void HandleChange(string data)
     {
         try
@@ -185,7 +188,7 @@ internal class BoolDataReference : DataReference<bool>
             NotificationService.Service.Add($"Error loading {NiceName}.", Severity.Error).AndForget();
         }
     }
-
+    /// <inheritdoc/>
     public override async void Set(bool data, bool notifyOnSuccess = true)
     {
         IResultHandler handler = notifyOnSuccess ? this : IResultHandler.Default;
@@ -195,7 +198,7 @@ internal class BoolDataReference : DataReference<bool>
 
 internal class StringDataReference : DataReference<string>
 {
-    private static readonly Dictionary<string, StringDataReference> DataRefs = new ();
+    private static readonly Dictionary<string, StringDataReference> DataRefs = new();
     internal static DataReference<string> GetRef(string path, string defaultValue = "", string? niceName = null)
     {
         if (!DataRefs.TryGetValue(path, out StringDataReference? value))
@@ -205,7 +208,7 @@ internal class StringDataReference : DataReference<string>
         return value;
     }
     private StringDataReference(string path, string defaultValue = "", string? niceName = null) : base(path, defaultValue, niceName) { }
-
+    /// <inheritdoc/>
     protected override void HandleChange(string data)
     {
         try
@@ -221,7 +224,7 @@ internal class StringDataReference : DataReference<string>
             NotificationService.Service.Add($"Error loading {NiceName}.", Severity.Error).AndForget();
         }
     }
-
+    /// <inheritdoc/>
     public override async void Set(string data, bool notifyOnSuccess = true)
     {
         IResultHandler handler = notifyOnSuccess ? this : IResultHandler.Default;

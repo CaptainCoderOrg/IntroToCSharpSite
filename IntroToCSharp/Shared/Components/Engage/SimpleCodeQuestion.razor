@@ -1,0 +1,21 @@
+<MultipleChoiceQuestion IsMultiSelect="false" Question="@Question" Explanation="" XP=5 GoldAward=25>
+    @Block
+    <MudGrid>
+        @foreach (RenderFragment answer in this._answers)
+        {
+            <MudItem sm="3">
+                @answer
+            </MudItem>
+        }
+    </MudGrid>
+</MultipleChoiceQuestion>
+
+@code {
+    [Parameter, EditorRequired]
+    public string Question { get; set; } = String.Empty;
+    [Parameter, EditorRequired]
+    public RenderFragment Block { get; set; } = null!;
+    [Parameter, EditorRequired]
+    public RenderFragment Answer { set => this._answers.Add(value); }
+    private HashSet<RenderFragment> _answers = new ();
+}

@@ -1,0 +1,58 @@
+<MudDialog>
+    <DialogContent>
+        <MudImage Src="@GameShopLogo" />
+        <MudStack>
+            <MudText>
+                <span style="font-weight:bold"><span style="color:@GameShopColor">Game</span><span
+                        style="color:red">Shop</span></span>
+                can offer you <MudImage Style="display:inline; top:2px; position:relative;" Class="ma-0 pa-0"
+                    Src="/imgs/top-menu/coin.png" Width="15" Height="15"></MudImage>
+                <b>@StoreOffer</b> for your used <b>@Item.Name</b>.<br />
+                Are you sure you want to trade it in?
+            </MudText>
+        </MudStack>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Error" OnClick="@Exit" Variant="Variant.Filled">No</MudButton>
+        <MudButton Color="Color.Success" OnClick="@Confirm" Variant="Variant.Filled">Yes</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance? MudDialog { get; set; }
+    /// <summary>
+    /// The item displayed in the store or inventory.
+    /// </summary>
+    /// <value>The item to be displayed.</value>
+    [Parameter]
+    public StoreItem Item { get; set; } = StoreItem.Default;
+    private int StoreOffer => ((int)((double)Item.Cost * 0.0875)).RoundToNearest(5);
+    private bool darkMode = false;
+    private UserStats _userData { get; set; } = UserStats.Default;
+    private string GameShopLogo => darkMode ? "/imgs/store/gameshopDarkMode.png" : "/imgs/store/gameshoplight.png";
+    private string GameShopColor => darkMode ? "white" : "black";
+    private void Exit() => MudDialog?.Close(DialogResult.Ok(true));
+    private void Confirm()
+    {
+        MudDialog?.Close(DialogResult.Ok(true));
+        UserService.Service.SellItem(Item, StoreOffer);
+    }
+    protected override void OnInitialized()
+    {
+        UserService.Service.OnUserChange += this.UpdateUser;
+    }
+    private void UpdateUser(User newUser)
+    {
+        if (newUser.IsLoggedIn)
+        {
+            if (newUser.DarkMode != null) newUser.DarkMode.DataChangedEvent += (darkMode) => this.darkMode = darkMode;
+            if (newUser.UserStatsRef != null) newUser.UserStatsRef.DataChangedEvent += UpdateUserData;
+        }
+    }
+    private void UpdateUserData(UserStats? newUserData)
+    {
+        if (newUserData == null) return;
+        this._userData = newUserData;
+        this.StateHasChanged();
+    }
+}

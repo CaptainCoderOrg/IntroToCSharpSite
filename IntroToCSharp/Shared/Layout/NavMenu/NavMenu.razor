@@ -1,0 +1,110 @@
+﻿@inject IDialogService DialogService
+<MudDrawer @bind-Open="@Main.IsNavMenuOpen" Elevation="25" Variant="@DrawerVariant.Persistent" Style="position:fixed">
+    <MudElement Style="@Style">
+        <MudDrawerHeader Class="pr-4">
+            <MudElement Class="d-flex flex-row justify-space-between" Style="width:100%">
+                <MudText Typo="Typo.h6">
+                    <a href="">Intro To C#</a>
+                </MudText>
+                <MudIconButton Class="pa-0" Icon="@Icons.Material.Outlined.ArrowCircleLeft" Color="Color.Inherit" OnClick="@Main.ToggleNavMenu"/>
+            </MudElement>
+        </MudDrawerHeader>
+        <MudNavMenu Bordered="true">
+            @foreach (MenuItem item in MenuItems) {
+                if (!Filter.Contains(item)) continue;
+                <NavMenuItem Item="@item" Filter="@Filter"/>
+            }
+        </MudNavMenu>
+    </MudElement>
+
+    <!-- Inventory Button -->
+    <MudElement Style="flex: 0 1" Class="mx-2">
+        <MudStack>
+            <MudButton StartIcon="@Icons.Filled.Hiking" Color="Color.Primary" Variant="Variant.Filled" Class="pl-4 pr-0 pt-0 pb-0" OnClick="@(() => ToggleAdventureMode(!_isAdventureMode))">
+                <MudStack Row=true Class="pa-0 align-center rounded" Style="gap: 0">
+                    <MudText Typo="Typo.button" Style="font-size:0.8rem">Adventure Mode</MudText>
+                    <MudSwitch Disabled="@(!_isLoggedIn)" @bind-Checked="@IsAdventureMode" Class="ma-0 pa-0" Color="Color.Tertiary"/>
+                </MudStack>
+            </MudButton>
+            <MudButton Style="margin-top:auto" Class="object-bottom" Variant="Variant.Filled"
+                StartIcon="@Icons.Filled.Inventory" Color="Color.Primary" Href="/inventory">Inventory</MudButton>
+        </MudStack>
+    </MudElement>
+</MudDrawer>
+
+@code
+{
+    [Parameter, EditorRequired]
+    public MainLayout Main { get; set; } = null!;
+    private string Style => $"height:calc(100vh - {BottomMenuOffset}px); overflow:scroll; overflow-y:auto";
+    private int BottomMenuOffset => 160 + (_isMobile ? 50 : 0);
+    private bool _isMobile = false;
+    private bool _isAdventureMode = true;
+    private bool IsAdventureMode { get => _isAdventureMode; set => ToggleAdventureMode(value); }
+    private bool _isLoggedIn = false;
+    private UserPages _userPages = UserPages.Default;
+
+    private void ToggleAdventureMode(bool value) {
+        if (!_isLoggedIn)
+        {
+            AdventureModeLoginDialog.Show(DialogService);
+            _isAdventureMode = false;
+            return;
+        }
+        _isAdventureMode = value;
+    }
+
+    private IEnumerable<MenuItem> MenuItems => PageRegistry.Instance.RootElements;
+    private HashSet<MenuItem> Filter => GetFilter();
+
+
+    private HashSet<MenuItem> GetFilter()
+    {
+        HashSet<MenuItem> result = new ();
+        foreach (MenuItem item in MenuItems)
+            TraverseMenu(item, result);
+        return result;
+    }
+
+    private bool TraverseMenu(MenuItem current, HashSet<MenuItem> accumulator)
+    {
+        // If we are not in adventure mode, we always mark the page as found
+        bool found = !_isAdventureMode || !current.IsAdventure || _userPages.Contains(current);
+        foreach (MenuItem child in current.Children)
+            found = TraverseMenu(child, accumulator) || found;
+        if (found) accumulator.Add(current);
+        return found;
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        UserService.Service.OnUserChange += OnUserChange;
+        Utils.IsMobileClient().ContinueWith(isMobileClient => {
+            _isMobile = isMobileClient.Result;
+            StateHasChanged();
+        });
+    }
+
+    private void OnUserChange(User? newUser)
+    {
+        if (newUser == null || !newUser.IsLoggedIn || newUser.UserPagesRef == null)
+        {
+            _isLoggedIn = false;
+            _isAdventureMode = false;
+            UpdatePages(UserPages.Default);
+            return;
+        }
+        _isLoggedIn = true;
+        _isAdventureMode = true;
+        newUser.UserPagesRef.DataChangedEvent += OnPagesChanged;
+    }
+
+    private void OnPagesChanged(UserPages? newPages) => UpdatePages(newPages ?? UserPages.Default);
+
+    private void UpdatePages(UserPages newPages)
+    {
+        this._userPages = newPages;
+        StateHasChanged();
+    }
+}

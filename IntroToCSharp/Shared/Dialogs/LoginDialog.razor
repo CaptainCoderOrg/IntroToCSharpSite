@@ -1,0 +1,35 @@
+<MudDialog>
+    <DialogContent>
+        <MudStack Class="mb-4" Spacing=4 Justify="Justify.Center">
+            <MudButton Class="rounded" Variant="Variant.Filled" OnClick="@UserService.Service.GoogleLogin">
+                <MudImage Class="mr-4" Width="16" Src="/imgs/login/google-logo.png"/>
+                Login with Google
+            </MudButton>
+            <MudButton Class="rounded" Variant="Variant.Filled" OnClick="@UserService.Service.GitHubLogin">
+                <MudImage Class="mr-4" Width="16" Src="/imgs/login/github-logo.png"/>
+                Login with GitHub
+            </MudButton>
+        </MudStack>
+    </DialogContent>
+</MudDialog>
+@code {
+    [CascadingParameter] MudDialogInstance? MudDialog { get; set; }
+    [Parameter, EditorRequired]
+    public PageRef? Page { get; set; }
+    protected override void OnInitialized()
+    {
+        UserService.Service.OnUserChange += this.UpdateUser;
+    }
+    private void UpdateUser(User newUser)
+    {
+        if (newUser.IsLoggedIn)
+        {
+            MudDialog?.Close(DialogResult.Ok(true));
+        }
+    }
+
+    public static void Show(IDialogService DialogService) {
+        var options = new DialogOptions { CloseOnEscapeKey = true, CloseButton = true };
+        DialogService.Show<LoginDialog>("Login", options);
+    }
+}

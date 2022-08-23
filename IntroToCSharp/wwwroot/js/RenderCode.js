@@ -22,3 +22,37 @@ function HighlightCode(id) {
     el.innerHTML = raw.innerHTML.replace("<!--!-->", "").trim();
     hljs.highlightElement(el);
 }
+
+function get_shortest_prefix(lines) {
+    let shortest_prefix = Infinity;
+    let ix;
+    for (let line of lines) {
+        if (line.trim().length == 0) continue;
+        for (ix = 0; ix < line.length; ix++) {
+            if (line[ix] == ' ') continue;
+            break;
+        }
+        if (ix < shortest_prefix) {
+            shortest_prefix = ix;
+        }
+    }
+    return shortest_prefix;
+}
+
+function format_code_block(lines) {
+    const shortestPrefix = get_shortest_prefix(lines);
+    return lines.map(s => s.substring(shortestPrefix)).join("\n");
+}
+
+/**
+ * Given an id to an <Output> element trims it and makes it look nice
+ */
+function RenderOutput(id) {
+    const el = document.getElementById(id);
+    const raw = document.getElementById(`${id}-raw`);
+    // Blazor adds in a <!--!--> to the begining of the element 
+    // so trim wasn't working properly. We remove it first then trim.
+    const text = raw.innerHTML.replace("<!--!-->", "");
+    if (!text) return;
+    el.innerHTML = format_code_block(text.split("\n").slice(1));
+}

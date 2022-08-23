@@ -1,0 +1,16 @@
+<MudExpansionPanel Class="my-2">
+    <TitleContent>
+            <h3 class="explanation pa-2">Explanation</h3>
+    </TitleContent>
+    <ChildContent>
+        <MudStack Class="px-4">
+            @ChildContent
+        </MudStack>
+    </ChildContent>
+</MudExpansionPanel>
+@code
+{
+    [Parameter, EditorRequired]
+    public RenderFragment ChildContent {get; set;} = null!;
+    
+}

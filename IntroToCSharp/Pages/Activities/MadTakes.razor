@@ -1,252 +1,277 @@
 @inherits CaptainCoder.Page
 @page "/activities/mad-takes"
-<h1>Mad Takes</h1>
-<Section Title="Overview">
-    <p>
-        Mad Takes is a silly word game in which the players are asked to 
-        provide words that will be used to fill in missing words from a story (or other document).
-        Here's the catch: The players are not allowed to see the story before providing words
-        to fill in the blank! This can often result in a non-sensicle outcome.
-        I've written a simple Mad Take program in C#, you can play a Mad Take in the console below:
-    </p>
-    <ReplIt Path="JosephCollard/MadTakes"/>
+<Title>Mad Takes</Title>
+<Section Title="Introduction">
+    <Adventure Portrait="@Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+                <Text>
+                    A Mad Take is a silly word game in which the players are
+                    asked to provide words that will be used to fill in blanks
+                    from a story (or other document). Here's the catch: The
+                    players are not allowed to see the story before providing
+                    the words to fill in the blanks! This often result in a
+                    fun non-sensicle outcome.
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog>
+                <Text>Below is a simple Mad Take program I've written in C# that you can play:</Text>
+                <ReplIt Path="JosephCollard/MadTakes"/>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="UserInput.PageRef">
+                <Text>
+                    In this activity, you will design a colorful, interactive
+                    Mad Take program to wow your friends and family! Before
+                    starting, you should be familiar with using the
+                    <Code>Console.ReadLine</Code> method to get user input from
+                    the terminal. If you need a refresher, head over to the
+                    <b>@UserInput.PageRef.Name</b> lesson.
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="AsciiArt.PageRef">
+                <Text>
+                    You will also need to change the color of
+                    text in the terminal using the <Code>Console.ForegroundColor</Code>
+                    property. If you would like to practice this, the <b>@AsciiArt.PageRef.Name</b>
+                    is a great place to start.
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="VariableBasics.PageRef">
+                <Text>
+                    Lastly, this activity uses <b>variables</b>. It is okay if you
+                    don't feel 100% comfortable with them yet. But, if you would
+                    like to learn more about <b>variables</b> before starting,
+                    I would recommend checking out the <b>@VariableBasics.PageRef.Name</b>
+                    lesson.
+                </Text>
+            </AdventureDialog>
+        </Item>
+    </Adventure>
+
 </Section>
-<Section Title="Learning Objectives">
-    <MudList Clickable="true">
-        <MudListItem Icon="@Icons.Filled.Circle">Practice creating a new C# project using the console</MudListItem>
-        <MudListItem Icon="@Icons.Filled.Circle">Practice using the Console.WriteLine method to display output to the user</MudListItem>
-        <MudListItem Icon="@Icons.Filled.Circle">Learn about the string data type</MudListItem>
-        <MudListItem Icon="@Icons.Filled.Circle">Learn how to declate a string variable</MudListItem>
-        <MudListItem Icon="@Icons.Filled.Circle">Learn how to use the assignment operator to store data in a variable</MudListItem>
-        <MudListItem Icon="@Icons.Filled.Circle">Learn how to use the Console.ReadLine method to read user input from the console</MudListItem>
-    </MudList>
-</Section>
-<Section Title="Before Starting">
-    <p>
-        Before starting this activity, you should be familiar with creating
-        a C# project using the .NET CLI and feel comfortable using the 
-        Console.WriteLine method to display message to the console.
-    </p>
-    <p>
-        If you need a refresher, check out the 
-        <MudLink Href="/activities/two-truths-and-a-lie">
-            Two Truths and a Lie
-        </MudLink> 
-        activity which covers these topics.
-    </p>
-</Section>
 
-<Questions Title="Pre-Knowledge Check">
-    <Message>
-        Next, let's do a quick knowledge check to see what we already know and
-        where we have room to learn and grow. Don't be tempted to peek ahead at
-        the answers. It is okay if you don't know the answer yet. The goal here
-        is to see what knowledge we already have.
-    </Message>
-    <ChildContent>
-        <Question Text="What is a method?" />
-        <Question Text="What is a variable?" />
-        <Question Text="What does it mean to declare a variable?"/>
-        <Question Text="In C#, what is required to declare a variable?"/>
-        <Question Text="What is a string?" />
-    </ChildContent>
-</Questions>
-
-<Section Title="Getting Started">
-    <p>
-        Before starting this activity, you should have access to a Linux based
-        console that has the .NET 6 CLI available. 
-        If you have a Replit account, you can fork this 
-        <ReplitLink Path="JosephCollard/C-Project">C# Project</ReplitLink>
-        which is configured specifically for this activity. If you need
-        a refresher for forking / connecting a Replit project to this book,
-        you can follow the instruction here: 
-        <MudLink Href="getting-started/replit-console">LINK</MudLink>.
-    </p>
-
-    <TaskList Name="GettingStarted">
-        <TaskItem Name="Create Project">Next, we need to make a C# project. To do this, run <Code>dotnet new console</Code> in the console.</TaskItem>
-        <TaskItem Name="Open Program">Open Program.cs</TaskItem>
-    </TaskList>
-
-    <p>
-        If all went well, your workspace should look similar to this:
-         <Image Src="init-project.png" Alt="An image showing the project initialized" />
-    </p>
-    
-</Section>
-<Section Title="Basic User Input">
-    <p>
-        In the <MudLink Href="/activities/two-truths-and-a-lie">Two Truths and a Lie</MudLink>
-        activity, you created a program that, when executed, will always produce the same output.
-        In many ways, this isn't particularly useful or interesting. Most programs expect a 
-        user to provide input, perform a task with that input, and produce an output. For
-        example, the Mad Take above accepted 4 inputs from the user and, using that input,
-        produced a silly song.
-    </p>
-    <p>
-        A <Keyword Word="method"/> is a reusable piece of code that can be used to perform a task. C# provides 
-        many built in <Keyword Word="method"/>s that can be used to accomplish a variet of tasks. When we
-        use a method, we say that we are "calling" the method.
-        In C#, we can write text output to the console by calling the <Keyword Word="Console.WriteLine"/> method.
-        Similarly, we can read text input from the console by calling the <Keyword Word="Console.ReadLine" /> method.
-        The code example below demonstrates a simple C# program which prompts the user to enter their name.
-    </p>
-    <TaskList Name="AskName">
-        <TaskItem Name="copy-code">Update your Program.cs file to match the code below</TaskItem>
-        <TaskItem Name="run">Run your program</TaskItem>
-        <TaskItem Name="name">Enter your name and press enter</TaskItem>
-    </TaskList>
-    <CodeBlock Filename="MadTakes/AskName1.cs" />
-
-    <p>
-        If all went well, your output should look similar to this:
-         <Image Src="proj-run.png" Alt="An image showing the programs output" />
-    </p>
-    <p>
-        When you run your program, it executes each statement in order from top to bottom. When it encounters the 
-        <Keyword Word="Console.ReadLine"/> method, it will suspend execution and wait for the user
-        to type something into the console before continuing to execute.
-    </p>
+<Section Title="Designing a Mad Take">
+    <Text>
+        Before writing any code, you should think about what
+        your user inputs will be, which variables you will need,
+        and what output you your program will display.
+    </Text>
+    <Text>
+        First, write (or find) at least 5 sentences to use as the base for your Mad Take.
+        This could be a short story, a recipe, a fun limerick, a phrase from a
+        song, a famous quote, or anything else. For example, you might use the
+        following recipe:
+    </Text>
+    <Output>
+        To make pancakes you first need to gather your ingredients.
+        You will need 2 eggs, a cup of milk, flour, sugar, and melted butter.
+        Start by mixing together the dry ingredients in a bowl.
+        Then, add the milk, eggs, and melted butter and stir until the batter is smooth.
+        Scoop the batter onto a hot pan and cook for about a minute on each side.
+        Serve your pancakes with your favorite topping and dig in!
+    </Output>
+    <TaskItem Name="Create a Base">Write (or fine) at least 5 sentences to use as a base for your Mad Take</TaskItem>
+    <Text>
+        Next, replace words you would like to use as user inputs with labels. Be sure that
+        the labels you use are unique to each word you want to replace. For example,
+        you might replace the word "pancakes" with the label "foodItem".
+    </Text>
+    <Output>
+        To make <b>{foodItem}</b> you first need to gather your ingredients.
+        You will need 2 eggs, a cup of milk, flour, sugar, and melted butter.
+        Start by mixing together the dry ingredients in a bowl.
+        Then, add the milk, eggs, and melted butter and stir until the batter is smooth.
+        Scoop the batter onto a hot pan and cook for about a minute on each side.
+        Serve your <b>{foodItem}</b> with your favorite topping and dig in!
+    </Output>
     <Note>
-        You will notice that when you run your program, the user's input appears below the "Enter your name:" message. 
-        If you would like to have the user's input appear at the end of the line, after the colon, you can use the <Keyword Word="Console.Write" />
-        method instead of the <Keyword Word="Console.WriteLine" /> method. The code example below shows this change.
+        The word "pancakes" appeard twice in the recipe and was replaced with the same
+        label.
     </Note>
-    <CodeBlock Filename="MadTakes/AskName2.cs" />
+    <Text>
+        Create at least 10 labels. When you're finished, you should have a template for your Mad Take:
+    </Text>
+    <Output>
+        To make <b>{foodItem}</b> you first need to gather your ingredients.
+        You will need <b>{number}</b> eggs, a <b>{measurement}</b> of milk, flour, sugar, and <b>{adjective1}</b> butter.
+        Start by <b>{verbWithIng}</b> together the dry ingredients in a bowl.
+        Then, <b>{verb1}</b> the milk, eggs, and <b>{adjective1}</b> butter and <b>{verb2}</b> until the batter is <b>{adjective2}</b>.
+        Scoop the batter onto a hot <b>{noun}</b> and cook for about a minute on each side.
+        Serve your <b>{foodItem}</b> with your favorite topping and dig in!
+    </Output>
+    <Note>
+        If you have multiple words of the same type (e.g. multiple verbs), you
+        will need to give each one a unique name. In the example above, this happens twice:
+        <b>adjective1</b> and <b>adjective2</b> as well as <b>verb1</b> and
+        <b>verb2</b>.
+    </Note>
+    <TaskItem Name="Create Labels">Create at least 10 labels</TaskItem>
 </Section>
 <Section Title="Declaring Variables">
-    <p>
-        Currently, your program displays, "Enter your name: ". It waits for the user to enter text and 
-        press enter. Then, it exits. This isn't particularly useful because we are not able to use the
-        user's input to do anything.
-    </p>
-    <p>
-        To save the user's input, we first need to create space to store the input. To do this, we will
-        <Keyword Word="declare" /> a <Keyword Word="variable"/>. A <Keyword Word="variable"/> is a 
-        named location in memory where we can store data.
-    </p>
-    <TaskList Name="Declare Variable">
-        <TaskItem Name="declare-string">
-            Update your program to declare a string variable named <Code>userName</Code>
-        </TaskItem>
-    </TaskList>
+    <Text>
+        Now that you have a template for your Mad Take, you can start writing your program.
+    </Text>
+    <ConsoleProjectTask Name="Create Project">Create a new project called "Mad Takes"</ConsoleProjectTask>
+    <Text>
+        In your <Code>Program.cs</Code> file <b>declare</b> a <b>variable</b> for each of the
+        labels in your Mad Take.
+    </Text>
+    <MudPaper Elevation=5 Class="pa-2">
+        <DeclareRecipe/>
+    </MudPaper>
+    <Text><b>Example:</b></Text>
+    <CodeBlock>
+string foodName;
+string number;
+string measurement;
+    </CodeBlock>
 
-    <CodeBlock Filename="MadTakes/AskName3.cs" />
+    <FunFact>
+        Sometimes you need to declare several variables all at once. There is special syntax that allows
+        you to do this on a single line by separating variable names with commas:
+        <CodeBlock>string foodName, number, measurement;</CodeBlock>
+    </FunFact>
 
-    <p>
-        To make space to store data in C#, we must <Keyword Word="declare"/> two things: 
-        <MudList Clickable="true">
-            <MudListItem Icon="@Icons.Filled.Circle">1. The type of data to store (in this case a string)</MudListItem>
-            <MudListItem Icon="@Icons.Filled.Circle">2. The name of the <Keyword Word="variable" /> (in this case userName)</MudListItem>
-        </MudList>
-        In the example above, we declare a 
-        <Keyword Word="string"/> <Keyword Word="variable"/> named <Code>userName</Code>. A <Keyword Word="string"/> is a data
-        type which stores text.
-    </p>
+    <TaskItem Name="Declare variables"><b>Declare</b> a <b>string variable</b> for each of your labels</TaskItem>
+
+    <Note>
+        If you are getting an error that says: "<b>error CS0128: A
+        local variable or function named '{VARIABLE-NAME}' is already defined
+        in this scope</b>", you likely declared two or more <b>variables</b>
+        with the same name.
+    </Note>
 </Section>
-<Section Title="Storing Data in a Variable">
-    <p>
-        Now that we have space to store the users input, we can use the <Keyword Word="assignment operator"/> (=)
-        to set the data that is stored in the <Code>userName</Code> variable.
-    </p>
-    <TaskList Name="Assignment">
-        <TaskItem Name="assign-value">
-            Update your program to assign the users response to be stored in the <Code>userName</Code> variable
-        </TaskItem>
-    </TaskList>
+<Section Title="Read User Input">
+    <Text>
+        Next, you need to prompt the user to enter a value for each of your
+        <b>variables</b>. First, call the <Code>Console.Write</Code> method to
+        display a prompt to the user. Then, can call the
+        <Code>Console.ReadLine</Code> method to read their input and store it in
+        a <b>variable</b> using the <b>assignment operator</b> (<Code>=</Code>).
+        For example:
+    </Text>
+    <CodeBlock>
+Console.Write("Enter a food name: ");
+foodName = Console.ReadLine()!;
+    </CodeBlock>
+    <Note>
+        The example above uses a <Code>!</Code> after calling
+        <Code>Console.ReadLine()</Code> to ignore the warning about
+        a possible <b>null</b> value.
+    </Note>
+    <TaskItem Name="PromptUser">Prompt the user for each of your labels. (<Code>Console.Write</Code>)</TaskItem>
+    <TaskItem Name="Get Input">After each prompt, read the user's response. (<Code>Console.ReadLine</Code>) </TaskItem>
+    <TaskItem Name="Store Input">Store each response in the appropriate <b>variable</b> using the <b>assignment operator</b>. (<Code>=</Code>)</TaskItem>
 
-    <CodeBlock Filename="MadTakes/AskName4.cs" />
-    <p>
-        The code <Keyword Word="Console.ReadLine()"/> is an expression that, when evaluated, suspends
-        the program and waits until the user enters text and presses enter. Then, the entered text is
-        substituted into the program and the program continues to execute. 
-        When the <Keyword Word="statement"/> <Code>userName = Console.ReadLine();</Code> is executed 
-        the <Keyword Word="expression"/> on the right side of the assignment operator is <Keyword Word="evaluated"/> 
-        then that value is stored in the location of the <Code>userName</Code> variable.
-    </p>
+    <HorizontalDivider/>
+    <Text><b>Copy and Pasting Bug</b></Text>
+    <Text>
+        A common error that occurs when working on this activity comes from
+        copying and pasting your prompts and <b>variable</b> assignments. For example:
+    </Text>
+    <CodeBlock>
+Console.Write("Enter a food name: ");
+foodName = Console.ReadLine()!;
+Console.Write("Enter a number: ");
+foodName = Console.ReadLine()!; // Bug on this line!
+    </CodeBlock>
+    <Text>
+        Notice in the example above the programmer forgot to change the variable
+        name on 4th line to <Code>number</Code>. I would recommend typing out
+        each line of code to practice and build muscle memory in your fingers.
+        If you decide to copy and paste, be extra careful!
+    </Text>
 </Section>
-<Section Title="Retrieving Data From a Variable">
-    <p>
-        After data has been stored in a variable, you can access it by using the variables name.
-    </p>
+<Section Title="Display the Result">
+    <Text>
+        With a <b>value</b> in each of your <b>variables</b>, you are ready to
+        display the result to the user. Use the (<Code>+</Code>) <Keyword Word="operator"/>
+        to combine your <b>variables</b> and the <b>text</b> of your Mad Take. Then,
+        call the <Code>Console.WriteLine</Code> method for each of your sentences.
+        For example:
+    </Text>
+    <CodeBlock>
+Console.WriteLine("To make " + foodItem + " you first need to gather your ingredients.");
+    </CodeBlock>
+    <TaskItem Name="Display Mad Take">Use the <Code>Console.WriteLine</Code> method to display your Mad Take.</TaskItem>
+    <TaskItem Name="Save and Run">Save and run your program to verify the output. (<Code>dotnet run</Code>)</TaskItem>
 
-    <TaskList Name="Retrieve">
-        <TaskItem Name="retrieve-value">
-            Update your program to display "Nice to meet you," + userName + "!"
-        </TaskItem>
-        <TaskItem Name="run-code">
-            Run your updated program.
-        </TaskItem>
-    </TaskList>
+</Section>
+<Section Title="Spice it up with Colors">
+    <Text>
+        Now that you have a working Mad Take. Select a color for each of your
+        labels and add it to both the user input and the output.
+    </Text>
+    <Text><b>Input Example:</b></Text>
+    <CodeBlock ReplIt="JosephCollard/MadeTakeInputColors">
+Console.ForegroundColor = ConsoleColor.White;
+Console.Write("Enter a food name: ");
+Console.ForegroundColor = ConsoleColor.Yellow;
+foodName = Console.ReadLine()!;
+Console.ForegroundColor = ConsoleColor.White;
+Console.Write("Enter a number: ");
+Console.ForegroundColor = ConsoleColor.Blue;
+number = Console.ReadLine()!;
+    </CodeBlock>
 
-    <CodeBlock Filename="MadTakes/AskName5.cs" />
-    <p>
-        If all went well, your output should look like this:
-        <Image Src="output.png" />
+    <Text><b>Output Example:</b></Text>
+    <CodeBlock ReplIt="JosephCollard/MadeTakeOutputColors">
+Console.ForegroundColor = ConsoleColor.White;
+Console.Write("To make ");
+Console.ForegroundColor = ConsoleColor.Yellow;
+Console.Write(foodName);
+Console.ForegroundColor = ConsoleColor.White;
+Console.WriteLine(" you first need to gather your ingredients.");
+    </CodeBlock>
 
-    </p>
-    <ThinkAboutIt>
-        <p>
-            Answer this question without updating or running the code.
-        </p>
-        <Question Text="@NiceToMeetYou" />
-    </ThinkAboutIt>
-    <p>
-        Now, try updating your code to add a space: <Code>"Nice to meet you, "</Code>.
-        </p>
-        <TaskList Name="TryIt">
-            <TaskItem Name="nospace">
-                Update your program to display "Nice to meet you, " + userName + "!"
-            </TaskItem>
-            <TaskItem Name="run-code">
-                Run your updated program.
-            </TaskItem>
-        </TaskList>
+    <ConsoleColorTable/>
+
+    <TaskItem Name="Spice it up">Update your program to use a different color for each <b>variable</b>.</TaskItem>
+    <TaskItem Name="Test Program">Be sure to save and run your program frequently to test it.</TaskItem>
+    <TaskItem Name="Share Mad Take">When you're finished, entertain your friends and family by sharing your Mad Take with them.</TaskItem>
+
 </Section>
 
-<Questions Title="Post-Knowledge Check">
-    <Message>
-        Now that you've completed the activity, let's do a quick knowledge check
-        to see what you learned and identify areas where you should review
-        (feel free to look back and find the answers).
-    </Message>
-    <ChildContent>
-        <Question Text="What is a method?" />
-        <Question Text="What is a variable?" />
-        <Question Text="What does it mean to declare a variable?"/>
-        <Question Text="In C#, what is required to declare a variable?"/>
-        <Question Text="What is a string?" />
-    </ChildContent>
-</Questions>
-
-<Section Title="Challenge 1: Short Mad Take">
-    <p>
-        Now that you know the basics for reading user input and storing it in a variable,
-        you will write a short Mad Take program which accepts two inputs from the user: a noun
-        and an adjective. Then, it displays the output to the user. Below is a simple program
-        you can use to help get started:
-    </p>
-    <CodeBlock Filename="MadTakes/Starter.cs" />
+<Section Title="What's Next?">
+    <Adventure Portrait="@Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+                <Text>
+                    You're doing great! I hope you're having fun with your Mad Take!
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="VariableBasics.PageRef">
+                <Text>
+                    If you have not done so yet, now would be a good time to
+                    take a dive into the <b>@VariableBasics.PageRef.Name</b> lesson.
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="BasicDataTypes.PageRef">
+                <Text>
+                    If you already feel comfortable with
+                    <b>@VariableBasics.PageRef.Name</b>, I would recommend
+                    learning about the 4 most commonly used data types in the
+                    <b>@BasicDataTypes.PageRef.Name</b> lesson.
+                </Text>
+            </AdventureDialog>
+        </Item>
+    </Adventure>
 </Section>
 
-<Section Title="Challenge 2: Full Mad Take">
-    <p>
-        In this challenge you will create a longer Mad Take program. Come up with your own
-        Mad Take or find one here: <MudLink Href="https://www.madtakes.com/" Target="_blank">https://www.madtakes.com/</MudLink>.
-    </p>
-    <TaskList Name="Mad Take">
-        <TaskItem Name="Fork">Create a **NEW** C Sharp project. You may need to fork a new Replit.</TaskItem>
-        <TaskItem Name="RunNewConsole">Run <Code>dotnet new console</Code></TaskItem>
-        <TaskItem Name="Display Welcome">Display "Welcome to Mad Takes!"</TaskItem>
-        <TaskItem Name="Declare 8 variables">Declare at least 8 variables</TaskItem>
-        <TaskItem Name="Read Input">For each variable, prompt the user to enter a value and use <Code>Console.ReadLine()</Code> to get input.</TaskItem>
-        <TaskItem Name="Output">Output each sentence in your Mad Take on a separate line using <Code>Console.WriteLine</Code>.</TaskItem>
-        <TaskItem Name="Share">Share your Mad Take with a friend!</TaskItem>
-    </TaskList>
-</Section>
 
 @code
 {
-    private string NiceToMeetYou = "Why does the userName appear directly after the comma?";
+    public static readonly PageRef PageRef = new PageRef("Mad Takes", "/activities/mad-takes", 2, "Activities");
 }
