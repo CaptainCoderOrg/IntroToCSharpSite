@@ -6,10 +6,12 @@
         <Item>
             <AdventureDialog>
                 <Text>
-                    A Mad Take is a silly word game in which the players are asked to
-                    provide words that will be used to fill in missing words from a story (or other document).
-                    Here's the catch: The players are not allowed to see the story before providing words
-                    to fill in the blank! This can often result in a non-sensicle outcome.
+                    A Mad Take is a silly word game in which the players are
+                    asked to provide words that will be used to fill in blanks
+                    from a story (or other document). Here's the catch: The
+                    players are not allowed to see the story before providing
+                    the words to fill in the blanks! This often result in a
+                    fun non-sensicle outcome.
                 </Text>
             </AdventureDialog>
         </Item>
@@ -22,11 +24,12 @@
         <Item>
             <AdventureDialog Page="UserInput.PageRef">
                 <Text>
-                    In this activity, you will design a colorful Mad Take program
-                    to wow your friends and family! Before starting, you should be comfortable
-                    with using the <Code>Console.ReadLine</Code> method to
-                    get user input from the terminal. If you need a refresher,
-                    head over to the <b>@UserInput.PageRef.Name</b> lesson.
+                    In this activity, you will design a colorful, interactive
+                    Mad Take program to wow your friends and family! Before
+                    starting, you should be familiar with using the
+                    <Code>Console.ReadLine</Code> method to get user input from
+                    the terminal. If you need a refresher, head over to the
+                    <b>@UserInput.PageRef.Name</b> lesson.
                 </Text>
             </AdventureDialog>
         </Item>
@@ -57,14 +60,15 @@
 
 <Section Title="Designing a Mad Take">
     <Text>
-        Before starting to write any code, you will need to know what
-        your user will need to input, which variables you will need,
-        and what output you will need to display to the user.
+        Before writing any code, you should think about what
+        your user inputs will be, which variables you will need,
+        and what output you your program will display.
     </Text>
     <Text>
-        You write or find at least 5 sentences you will use. This could be a short 5
-        sentence story, a recipe, a fun limerick, a famous quote, or anything else you
-        might like to use. For example, you use the following recipe:
+        First, write (or find) at least 5 sentences to use as the base for your Mad Take.
+        This could be a short story, a recipe, a fun limerick, a phrase from a
+        song, a famous quote, or anything else. For example, you might use the
+        following recipe:
     </Text>
     <Output>
         To make pancakes you first need to gather your ingredients.
@@ -74,9 +78,9 @@
         Scoop the batter onto a hot pan and cook for about a minute on each side.
         Serve your pancakes with your favorite topping and dig in!
     </Output>
-    <TaskItem Name="Create a Base">Write at least 5 sentences to use as a base for your Mad Take</TaskItem>
+    <TaskItem Name="Create a Base">Write (or fine) at least 5 sentences to use as a base for your Mad Take</TaskItem>
     <Text>
-        Next, replace words you would like to use with labels. Be sure that
+        Next, replace words you would like to use as user inputs with labels. Be sure that
         the labels you use are unique to each word you want to replace. For example,
         you might replace the word "pancakes" with the label "foodItem".
     </Text>
@@ -105,7 +109,7 @@
     </Output>
     <Note>
         If you have multiple words of the same type (e.g. multiple verbs), you
-        will need to give each one a unique name. In the example above, there are two examples of this
+        will need to give each one a unique name. In the example above, this happens twice:
         <b>adjective1</b> and <b>adjective2</b> as well as <b>verb1</b> and
         <b>verb2</b>.
     </Note>
@@ -117,7 +121,7 @@
     </Text>
     <ConsoleProjectTask Name="Create Project">Create a new project called "Mad Takes"</ConsoleProjectTask>
     <Text>
-        Next, you need to <b>declare</b> a <b>variable</b> for each of the
+        In your <Code>Program.cs</Code> file <b>declare</b> a <b>variable</b> for each of the
         labels in your Mad Take.
     </Text>
     <MudPaper Elevation=5 Class="pa-2">
@@ -132,14 +136,14 @@ string measurement;
 
     <FunFact>
         Sometimes you need to declare several variables all at once. There is special syntax that allows
-        you to do this on a single line by separating variable names with a comma:
+        you to do this on a single line by separating variable names with commas:
         <CodeBlock>string foodName, number, measurement;</CodeBlock>
     </FunFact>
 
     <TaskItem Name="Declare variables"><b>Declare</b> a <b>string variable</b> for each of your labels</TaskItem>
 
     <Note>
-        If you are getting an error that looks like this: "<b>error CS0128: A
+        If you are getting an error that says: "<b>error CS0128: A
         local variable or function named '{VARIABLE-NAME}' is already defined
         in this scope</b>", you likely declared two or more <b>variables</b>
         with the same name.
@@ -148,9 +152,11 @@ string measurement;
 <Section Title="Read User Input">
     <Text>
         Next, you need to prompt the user to enter a value for each of your
-        variables. You can call the <Code>Console.Write</Code> method to
-        display a prompt to the user. Then, you can call the <Code>Console.ReadLine</Code>
-        method to read their input. For example:
+        <b>variables</b>. First, call the <Code>Console.Write</Code> method to
+        display a prompt to the user. Then, can call the
+        <Code>Console.ReadLine</Code> method to read their input and store it in
+        a <b>variable</b> using the <b>assignment operator</b> (<Code>=</Code>).
+        For example:
     </Text>
     <CodeBlock>
 Console.Write("Enter a food name: ");
@@ -158,17 +164,18 @@ foodName = Console.ReadLine()!;
     </CodeBlock>
     <Note>
         The example above uses a <Code>!</Code> after calling
-        <Code>Console.ReadLine</Code> to ignore the warning about
+        <Code>Console.ReadLine()</Code> to ignore the warning about
         a possible <b>null</b> value.
     </Note>
-    <TaskItem Name="PromptUser">Prompt the User for each of your labels</TaskItem>
-    <TaskItem Name="Get Input">After each prompt, read the users response and store it in the appropriate variable</TaskItem>
+    <TaskItem Name="PromptUser">Prompt the user for each of your labels. (<Code>Console.Write</Code>)</TaskItem>
+    <TaskItem Name="Get Input">After each prompt, read the user's response. (<Code>Console.ReadLine</Code>) </TaskItem>
+    <TaskItem Name="Store Input">Store each response in the appropriate <b>variable</b> using the <b>assignment operator</b>. (<Code>=</Code>)</TaskItem>
 
     <HorizontalDivider/>
     <Text><b>Copy and Pasting Bug</b></Text>
     <Text>
-        The most common error with this activity comes from copying and pasting
-        your prompts and <b>variable</b> assignments. For example:
+        A common error that occurs when working on this activity comes from
+        copying and pasting your prompts and <b>variable</b> assignments. For example:
     </Text>
     <CodeBlock>
 Console.Write("Enter a food name: ");
@@ -178,8 +185,9 @@ foodName = Console.ReadLine()!; // Bug on this line!
     </CodeBlock>
     <Text>
         Notice in the example above the programmer forgot to change the variable
-        name on 4th line to <Code>number</Code>. This will cause a bug in the
-        output of the final program.
+        name on 4th line to <Code>number</Code>. I would recommend typing out
+        each line of code to practice and build muscle memory in your fingers.
+        If you decide to copy and paste, be extra careful!
     </Text>
 </Section>
 <Section Title="Display the Result">
@@ -226,7 +234,7 @@ Console.WriteLine(" you first need to gather your ingredients.");
 
     <ConsoleColorTable/>
 
-    <TaskItem Name="Spice it up">Update your program to use a different color for each variable.</TaskItem>
+    <TaskItem Name="Spice it up">Update your program to use a different color for each <b>variable</b>.</TaskItem>
     <TaskItem Name="Test Program">Be sure to save and run your program frequently to test it.</TaskItem>
     <TaskItem Name="Share Mad Take">When you're finished, entertain your friends and family by sharing your Mad Take with them.</TaskItem>
 
@@ -252,9 +260,10 @@ Console.WriteLine(" you first need to gather your ingredients.");
         <Item>
             <AdventureDialog Page="BasicDataTypes.PageRef">
                 <Text>
-                    If you already feel comfortable with variable basics,
-                    I would recommend learning about the 4 most commonly used
-                    data types in the <b>@BasicDataTypes.PageRef.Name</b> lesson.
+                    If you already feel comfortable with
+                    <b>@VariableBasics.PageRef.Name</b>, I would recommend
+                    learning about the 4 most commonly used data types in the
+                    <b>@BasicDataTypes.PageRef.Name</b> lesson.
                 </Text>
             </AdventureDialog>
         </Item>
