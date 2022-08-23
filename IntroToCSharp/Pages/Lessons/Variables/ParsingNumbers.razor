@@ -1,0 +1,57 @@
+@inherits CaptainCoder.Page
+@page "/lessons/variables/parsing-numbers"
+
+<Title>Parsing Numbers</Title>
+
+<Section Title="Introduction">
+    <Adventure Portrait="Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+                <Text>
+                    There are times when you will need to convert a
+                    <b>string</b> into another data type. For example, you may
+                    have the <b>string</b> <Code>"42"</Code> and you need to
+                    convert it to an <b>integer</b> <Code>42</Code> or a
+                    <b>double</b> <Code>42.0</Code>. This conversion
+                    process is called <b>parsing</b>.
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog>
+                <Text>
+                    In this lesson, you will learn how to use the 
+                    parsing <b>methods</b> provided by C# to convert
+                    <b>strings</b> into numbers.
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="UserInput.PageRef">
+                <Text>
+                    Before starting, you should be comfortable calling
+                    the <Code>Console.ReadLine</Code> method to read
+                    user input from the terminal. If you need
+                    a refresher, check out the <b>@UserInput.PageRef.Name</b>
+                    lesson.
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="BasicDataTypes.PageRef">
+                <Text>
+                    You should also be familiar with the basic data types:
+                    <Code>int</Code>, <Code>double</Code>, and
+                    <Code>string</Code>. If you have not yet completed the
+                    <b>@BasicDataTypes.PageRef.Name</b> lesson, you might find
+                    parts of this lesson confusing.
+                </Text>
+            </AdventureDialog>
+        </Item>
+    </Adventure>
+</Section>
+
+@code
+{
+    public static readonly PageRef PageRef = new PageRef("Parsing Numbers", "/lessons/variables/parsing-numbers", 2, "Variables");
+}
