@@ -1,0 +1,260 @@
+@inherits CaptainCoder.Page
+@page "/lessons/variables/type-conversions"
+
+<Title>Type Conversions</Title>
+
+<Section Title="Introduction">
+    <Adventure Portrait="Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+                <Text>
+                    There are times when you need to convert a <b>value</b>
+                    of one type into another. For example, you may have the
+                    <b>string</b> <Code>"42"</Code> and you need to convert it
+                    to an <b>integer</b> <Code>42</Code> or you may
+                    have an <b>integer</b> that you need to convert to
+                    a <b>double</b> <Code>42.0</Code>. In this lesson, you will 
+                    learn how to use <b>methods</b> provided by C# to convert
+                    between the common data types.
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="BasicDataTypes.PageRef">
+                <Text>
+                    Before starting, you should also be with the basic data types:
+                    <Code>int</Code>, <Code>double</Code>, and
+                    <Code>string</Code>. If you have not yet completed the
+                    <b>@BasicDataTypes.PageRef.Name</b> lesson, you might find
+                    parts of this lesson confusing.
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="UserInput.PageRef">
+                <Text>
+                    You should also be comfortable calling the
+                    <Code>Console.ReadLine</Code> method to read user input from
+                    the terminal. If you need a refresher, check out the
+                    <b>@UserInput.PageRef.Name</b> lesson.
+                </Text>
+            </AdventureDialog>
+        </Item>
+    </Adventure>
+</Section>
+<Section Title="Casting Values">
+    <Text>
+        The simplest way to convert a <b>value</b> of one <Keyword Word="data
+        type"/> into another is to <b>type cast</b> it.
+    </Text>
+    <RecipeBox>
+        <CastRecipe/>
+    </RecipeBox>
+    <Text><b>Examples:</b></Text>
+    <Text>You can <b>cast</b> an <b>int</b> to a <b>double</b>:</Text>
+    <CodeBlock ReplIt="JosephCollard/Int-to-Double">
+double x = (int) 42;
+Console.WriteLine(x);
+    </CodeBlock>
+    <Text>You can <b>cast</b> a <b>double</b> to an <b>int</b></Text>
+    <CodeBlock ReplIt="JosephCollard/Double-to-Int">
+int x = (int) 42.8;
+Console.WriteLine(x);        
+    </CodeBlock>
+    <Note>
+        When you cast the <b>double</b> <Code>42.5</Code> to an <b>int</b>
+        you lose information. Because an <b>int</b> can only store whole numbers,
+        everything after the decimal point is "chopped off".
+    </Note>
+    <Text>
+        You can <b>cast</b> a <b>double variable</b> to an <b>int</b>.
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/Double-Variable-to-Int">
+double y = 75.9;
+int x = (int) y;
+Console.WriteLine(y + " => " + x); 
+    </CodeBlock>
+    <Explore Title="Illegal Casting">
+        <Text>
+            When you use <b>cast</b> between types, you are telling the computer
+            to treat the <b>value</b> as though it were the specified
+            <b>type</b>. This only works if the <b>value</b> is compatible with
+            the new <b>type</b>. For numeric types, this works well. But, what
+            happens if we try to <b>cast</b> with non-numeric types?
+        </Text>
+        <CodeBlock>int x = (int) "42";</CodeBlock>
+        <TaskItem Name="String to Int">Add the above line of code to a C# program.</TaskItem>
+        <Question Text="What is the error message that occurs when you try to cast a string to an int?"/>
+        <CodeBlock>string x = (string) 42;</CodeBlock>
+        <TaskItem Name="Int to String">Add the above line of code to a C# program.</TaskItem>
+        <Question Text="What is the error message that occurs when you try to cast an int to a string?"/>
+        <CodeBlock>bool x = (bool) 0;</CodeBlock>
+        <TaskItem Name="Int to Bool">Add the above line of code to a C# program.</TaskItem>
+        <Question Text="What is the error message that occurs when you try to cast a bool to an int?"/>
+    </Explore>
+</Section>
+<Section Title="Parsing Strings">
+    <Text>
+        Unfortunately, casting <b>values</b> can only get you so far. In the
+        exploration above, you see that the compiler produces an error message
+        if you attempt to <b>cast</b> between <b>types</b> that are not
+        compatible. This is because the conversion between the two types is 
+        complex enough that the computer cannot easily do it. However, C# 
+        provides several <b>methods</b> for easily converting from <b>strings</b>
+        to the common <b>data types</b>. When you convert a <b>string</b> to another
+        data type, it is called <b>parsing</b>.
+    </Text>
+    <Text><b>Examples:</b></Text>
+    <Text>Parsing an <b>int</b> from a <b>string</b>:</Text>
+    <CodeBlock ReplIt="JosephCollard/Parsing-an-Int">
+int x = int.Parse("42");
+Console.WriteLine(x);
+    </CodeBlock>
+    <Text>Parsing a <b>double</b> from a <b>string</b>:</Text>
+    <CodeBlock ReplIt="JosephCollard/Parsing-a-Double">
+double x = double.Parse("42.8");
+Console.WriteLine(x);
+    </CodeBlock>
+    <Text>Parsing a <b>bool</b> from a <b>string</b>:</Text>
+    <CodeBlock ReplIt="JosephCollard/Parsing-a-Bool">
+bool x = bool.Parse("true");
+Console.WriteLine(x);
+    </CodeBlock>
+    <Note>
+        Each of the common data types come with a built in <Code>Parse</Code> method
+        that is capable of parsing a <b>string value</b> to that <b>data type</b>.
+    </Note>
+    <Explore Title="Parsing Bad Input">
+        <Text>
+            What happens if you try to parse a <b>int</b> from a <b>string</b>
+            that does is not an int value?
+        </Text>
+        <CodeBlock>int x = int.Parse("Hello World!");</CodeBlock>
+        <TaskItem Name="Try Parse Bad Int">Add the code above to a C# Program</TaskItem>
+        <TaskItem Name="Run Bad Parse Int">Try to run the program</TaskItem>
+        <Question Text="@("What happens when the computer executes int.Parse(\"Hello World\")?")"/>
+        <Explanation>
+            <Text>
+               When you write the code above, the compiler does not know that
+               the <b>string</b> <Code>"Hello World"</Code> cannot be parsed as
+               an <b>int</b>. When the computer attempts to <b>evaluate</b> the
+               <b>expression</b> <Code>int.Parse("Hello World!")</Code> it
+               fails. This causes a <b>runtime error</b> to occur. That is, the
+               program <b>crashes</b> and an error message is displayed in the
+               terminal.
+            </Text>
+            <Note>
+                Later, you will learn how to handle bad inputs using the
+                <Code>TryParse</Code> <b>methods</b>. For now, you can
+                assume that all inputs to your programs will be valid.
+            </Note>
+        </Explanation>
+    </Explore>
+</Section>
+<Section Title="Values to Strings">
+    <Text>
+        Pretty much all <b>values</b> in C# come with a <Code>ToString</Code>
+        method which will convert the <b>value</b> to a <b>string</b>.
+    </Text>
+    <Text><b>Examples:</b></Text>
+    <Text>Calling <Code>ToString</Code> on <b>literal values</b>:</Text>
+    <CodeBlock ReplIt="JosephCollard/Int-to-String">
+string x = 5.ToString();
+Console.WriteLine(x);
+string y = 42.7.ToString();
+Console.WriteLine(y);
+string z = true.ToString();
+Console.WriteLine(z);
+    </CodeBlock>
+    <Text>Calling <Code>ToString</Code> on <b>variables</b>:</Text>
+    <CodeBlock>
+int x = 17;
+string xs = x.ToString();
+Console.WriteLine(xs);
+double y = 0.7;
+string ys = y.ToString();
+Console.WriteLine(ys);
+bool z = false;
+string zs = z.ToString();
+Console.WriteLine(zs);
+    </CodeBlock>
+</Section>
+<Section Title="String Interpolation">
+    <Text>
+        Calling the <Code>ToString</Code> method can be cumbersome if you are
+        converting several <b>values</b> to a single <b>string</b>. C# provides
+        a special type of <b>string</b> called an <b>interpolated string</b>
+        which allows you to create nicely formatted strings using variables.
+        An <b>interpolated string</b> begins with a <Code>$</Code> in front
+        of the first double quote.
+    </Text>
+    <Text>Examples:</Text>
+    <Text>
+        Within an <b>interpolated string</b> you can specify <b>variables</b>
+        between curly brackets (<Code>{var-name}</Code>). When executed,
+        this calls the <Code>ToString</Code> method on the <b>variables</b>
+        and substitutes them into the <b>string</b>.
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/Interpolation-Example-1">
+int x = 5;
+double y = 0.4;
+bool z = true;
+Console.WriteLine($"int: {x}, double: {y}, bool: {z}");
+    </CodeBlock>
+    <Text>
+        Because the curly brackets are used to indicate a <b>variable</b> within
+        an <b>interpolated string</b>, if you would like to include a
+        <Code>{</Code> or a <Code>}</Code> in the <b>string</b>, you use two in
+        a row.
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/Interpolation-Example-2">
+int x = 5;
+int y = 7;
+Console.WriteLine($"Position: {{ {x}, {y} }}");
+    </CodeBlock>
+</Section>
+<Section Title="What's Next?">
+    <Adventure Portrait="Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+                <Text>
+                    It is exciting to watch your programming tool belt continue
+                    to grow! With the ability to <b>parse</b> user input into
+                    <b>numeric types</b>, you can start to create some
+                    interesting and useful programs.
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog>
+                <Text>
+                    With the ability to <b>parse strings</b>, I think you're
+                    ready to try the <b>Shape Analysis</b> activity. In it,
+                    you'll practice everything you've learned so far to write a program
+                    to help you calculate how fast The Flash can circumnavigate the Earth!
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog>
+                <Text>
+                    Another activity where you can practice <b>parsing strings</b> is the
+                    <b>Character Creator</b>.
+                </Text>
+            </AdventureDialog>
+        </Item>        
+        <Item>
+            <AdventureDialog>
+                <Text>
+                    If you don't feel like writing a full project just yet, now
+                    might be a good time to check out the <b>All About
+                    Numbers</b> lesson.
+                </Text>
+            </AdventureDialog>
+        </Item>
+    </Adventure>
+</Section>
+@code
+{
+    public static readonly PageRef PageRef = new PageRef("Type Conversions", "/lessons/variables/type-conversions", 2, "Variables");
+}
