@@ -6,22 +6,28 @@
         <Item>
             <AdventureDialog Page="@AsciiArt.PageRef">
                 <Text>
-                    In the <b>@AsciiArt.PageRef.Name</b> activity, you write programs
-                    that always produce the same output when they are executed.
-                    This can be really fun! However, this type of program isn't
-                    particularly useful because it doesn't allow the user to interact
-                    with it.
+                    In the <b>@AsciiArt.PageRef.Name</b> activity, you write
+                    programs that always produce the same output when they are
+                    executed. This can be really fun! However, this type of
+                    program doesn't allow for any user interactions.
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog>
+                <Text>
+                    In this lesson, you learn to use the
+                    <Code>Console.ReadLine</Code> <b>method</b> to allow the
+                    user to interact with your program by providing text input.
                 </Text>
             </AdventureDialog>
         </Item>
         <Item>
             <AdventureDialog Page="@ConsoleProject.PageRef">
                 <Text>
-                    In this lesson, you will learn how to use the <Code>Console.ReadLine</Code>
-                    <b>method</b> to allow the user to provide text input in the terminal that you
-                    can use within your program. Before starting, make sure you know how
-                    to create a new Console Project. If you need a refresher, I can show
-                    you how in the <b>@ConsoleProject.PageRef.Name</b>
+                    Before starting, make sure you know how to
+                    create a new Console Project. If you need a refresher, I can
+                    show you how in the <b>@ConsoleProject.PageRef.Name</b>
                     section.
                 </Text>
             </AdventureDialog>
@@ -29,11 +35,11 @@
         <Item>
             <AdventureDialog Page="@VariableBasics.PageRef">
                 <Text>
-                    In this lesson you will be using <b>string variables</b>. For
-                    this lesson, it okay if you're do not know what a
-                    <b>string</b> or a <b>variable</b> is. However, if you would
-                    like to learn more about them before completing this lesson,
-                    you should check out the <b>@VariableBasics.PageRef.Name</b>
+                    Throughout the lesson you will be using <b>string
+                    variables</b>. It is okay if you do not know what a
+                    <b>string</b> or a <b>variable</b> is yet. However, if
+                    you would like to learn more about <b>variables</b> you
+                    should checkout out the <b>@VariableBasics.PageRef.Name</b>
                     lesson.
                 </Text>
             </AdventureDialog>
@@ -49,16 +55,16 @@
 </Section>
 <Questions Title="Pre-Knowledge Check">
     <Message>
-        Start by trying to answer the questions below to see what you know and where
-        you have room to grow and learn. Don't be tempted to peek ahead to find
-        the answers. It is okay if you don't know the answer yet. The goal here
-        is to see where you have room to grow and learn.
+        Try to answer the questions below. Don't be tempted to peek
+        ahead to find the answers. It is okay if you don't know the answer yet.
+        The goal is to see what you already know and where you have room to
+        learn and grow.
     </Message>
     <ChildContent>
-        <Question Text="What is a method?" />
         <Question Text="What is a variable?" />
-        <Question Text="What does it mean to declare a variable?"/>
         <Question Text="What is a string?" />
+        <Question Text="What does it mean to declare a variable?"/>
+        <Question Text="What is a method?" />
     </ChildContent>
 </Questions>
 <Section Title="A Simple Example">
@@ -80,9 +86,10 @@
     <ConsoleProjectTask Name="Create Project">If you have not done so, create a new console project named "User Input"</ConsoleProjectTask>
     <Text>
         C# provides many built in <Keyword Word="methods"/> that can be used to
-        accomplish a variety of tasks. When you use a <b>method</b>, you say that
-        you are "calling" the method. So far, you have called the
-        <Code>Console.WriteLine</Code> <b>method</b> to write text to the terminal.
+        accomplish a variety of tasks. A <b>method</b> is a reusable piece of code.
+        When you use a <b>method</b>, you say that
+        you are "calling" the <b>method</b>. So far, you have called the
+        <Code>Console.WriteLine</Code> <b>method</b> to display text in the terminal.
         Similarily, you can read text that is typed into the terminal by calling
         the <Code>Console.ReadLine</Code> method.
     </Text>
@@ -102,14 +109,14 @@ Console.WriteLine("Nice to meet you!");
         to bottom. When it encounters the <Code>Console.ReadLine</Code> method, it will
         suspend execution and wait for the user to type something into the
         console before continuing to execute.
-    </Text>    
+    </Text>
 </Section>
 
 <Section Title="Declaring a Variables">
     <Text>
         A <b>variable</b> is a named location in the computer's memory where
         you can store a <b>value</b>. This location is called a <b>memory address</b>.
-        Before you can store a <b>value</b> in a memory, you must first create
+        Before you can store a <b>value</b> in a <b>memory address</b>, you must first create
         a label by <b>declaring</b> a <b>variable</b>.
     </Text>
     <Text>To declare a <b>variable</b> in C#, you specify a <b>type</b> and <b>variable name</b> together:</Text>
@@ -123,9 +130,8 @@ Console.WriteLine("Nice to meet you!");
 </Section>
 <Section Title="Add a userName to your program">
     <Text>
-        Currently, your program displays, <Code>Enter your name: </Code>. It waits for the
-        user to enter text and press enter. Then, it exits. Because you are
-        not doing anything with the user's input, this isn't particularly interesting.
+        Currently, your program displays, <Code>Enter your name: </Code>. It then waits for the
+        user to enter text and press enter. Then, it exits.
     </Text>
 
     <TaskList Name="Declare Variable">
@@ -155,12 +161,12 @@ Console.WriteLine("Nice to meet you!");
 <Section Title="Storing User Input">
     <Text>
         Now that you have a space to store text, you can use the <Keyword
-        Word="assignment operator"/> (<Code>=</Code>) to assign the user's input
-        to be stored in the <Code>userName</Code> variable.
+        Word="assignment operator"/> (<Code>=</Code>) to assign the <b>value</b>
+        entered by the user to be stored in the <Code>userName</Code> variable.
     </Text>
     <TaskList Name="Assignment">
         <TaskItem Name="assign-value">
-            Update your program to assign the users response to be stored in the <Code>userName</Code> variable
+            Update your program to assign the user's response to be stored in the <Code>userName</Code> variable
         </TaskItem>
     </TaskList>
 
@@ -179,14 +185,12 @@ Console.WriteLine("Nice to meet you!");
     </Note>
 
     <Text>
-        The code <Keyword Word="Console.ReadLine()"/> is an expression that, when evaluated, suspends
-        the program and waits until the user enters text and presses enter. Then, the entered text is
-        substituted into the program and the program continues to execute. 
-        When the <Keyword Word="statement"/> <Code>userName = Console.ReadLine();</Code> is executed 
-        the <Keyword Word="expression"/> on the right side of the assignment operator is <Keyword Word="evaluated"/>. 
-        Then that <b>value</b> is stored in the location of the <Code>userName</Code> <b>variable</b>.
+        When the <Keyword Word="statement"/> <Code>userName = Console.ReadLine();</Code> is executed
+        the <Keyword Word="expression"/> on the right side of the assignment operator is <Keyword Word="evaluated"/>.
+        In this case, the <b>expression</b> is <Code>Console.ReadLine()</Code>. When <Code>Console.ReadLine()</Code>
+        is <b>evaluated</b>, the program waits for the user to enter text. Then, it <b>evaluates</b> to the
+        <b>value</b> the user entered.
     </Text>
-
 </Section>
 <Section Title="Reading a value from a Variable">
     <Text>
@@ -215,8 +219,9 @@ Console.WriteLine("Nice to meet you, " + userName + "!");
 
     <Text>
         When the computer encounters a <b>variable</b> name while executing
-        a program, it looks up the <b>value</b> and substitutes it into the program.
-        Then, it continues executing the program. 
+        a program, it <b>evaluates</b> the <b>variable</b> by looking up the <b>value</b>
+        stored in memory and substituting that <b>value</b> into the program.
+        After <b>evaluation</b>, the computer continues to execute the program.
     </Text>
     <IntroToCSharp.Pages.Lessons.Variables.Examples.BasicInputExampleStepper/>
 </Section>
@@ -228,12 +233,11 @@ Console.WriteLine("Nice to meet you, " + userName + "!");
     </Text>
     <Text>
         A <b>warning</b> is a way for the compiler to say, "This code will run but
-        I think you have made a mistake.". In this particular case the 
-        compiler is warning us that the <Code>Console.ReadLine</Code> method can
+        I think you have made a mistake." In this particular case the
+        compiler is warning you that the <Code>Console.ReadLine</Code> method can
         technically return a "<b>null</b>" value. A <b>null</b> value is a "lack"
         of a value. The compiler is warning you that you have declared a <b>string</b>
-        that should not be <b>null</b>. There are two fixes things you can do to 
-        make this warning go away.
+        that should not be <b>null</b>. There are two possible fixes for this warning:
     </Text>
     <HorizontalDivider/>
     <Text>
@@ -244,7 +248,7 @@ Console.WriteLine("Nice to meet you, " + userName + "!");
     <Text>
         This tells the compiler that the variable <b>noun</b> is allowed to
         store nothing (<b>null</b>).
-    </Text>   
+    </Text>
     <HorizontalDivider/>
     <Text>
         The second option is to add an exclamation point (<Code>!</Code>) to the
@@ -254,7 +258,7 @@ Console.WriteLine("Nice to meet you, " + userName + "!");
     <Text>
         This tells the compiler that you <b>PROMISE</b> that the expression
         preceding the <Code>!</Code> will not be <b>null</b>.
-    </Text>  
+    </Text>
     <Note>
         One thing to note here is that using the <Code>!</Code> doesn't actually
         prevent the code from evaluating to <b>null</b>. Instead, you are making
@@ -264,7 +268,8 @@ Console.WriteLine("Nice to meet you, " + userName + "!");
     <HorizontalDivider/>
     <Text>
         When writing a program that you expect there to be a user typing in a
-        response, you can safely use the second option (<Code>!</Code>).
+        response, you can safely use the second option (<Code>!</Code>) when
+        calling <Code>Console.ReadLine()</Code>.
     </Text>
 
     <TaskItem Name="Remove Warning">Update your code to use <Code>userInput = Console.ReadLine()!;</Code></TaskItem>
@@ -274,26 +279,26 @@ Console.WriteLine("Nice to meet you, " + userName + "!");
 <Questions Title="Post-Knowledge Check">
     <Message>
         Now that you've completed the activity, try to answer the questions below
-        to see what you learned and identify areas where you should review. If 
+        to see what you learned and identify areas where you should review. If
         you're not sure of an answer, you should look back and see if you can find it.
     </Message>
     <ChildContent>
-        <Question Text="What is a method?" />
         <Question Text="What is a variable?" />
-        <Question Text="What does it mean to declare a variable?"/>
         <Question Text="What is a string?" />
+        <Question Text="What does it mean to declare a variable?"/>
+        <Question Text="What is a method?" />
     </ChildContent>
 </Questions>
 
 <Section Title="Challenge: A Short Mad Take">
     <Challenge Title="A Short Mad Take">
         <Text>
-            Now that you know the basics for reading user input and storing it in a variable,
+            Now that you know the basics for reading user input and storing it in a <b>variable</b>,
             write a short Mad Take program which accepts two inputs from the user: a noun
-            and an adjective. Then, it should display the output to the user. 
+            and an adjective. Then, it should display the output to the user.
             If you need help getting started, you can use the code below:
         </Text>
-        
+
     <CodeBlock>
 Console.WriteLine("Welcome to Mad Takes!");
 string noun;
@@ -339,8 +344,8 @@ Console.WriteLine("The " + noun + " is ...");
                 <Text>
                     With the knowledge you've learned here, you're definitely
                     ready to take on the <b>@MadTakes.PageRef.Name</b>
-                    activity. In that activity, you will design a colorful 
-                    interactive program that will impress your friends!
+                    activity. In that activity, you will design a colorful
+                    interactive program that will entertain your friends and family!
                 </Text>
             </AdventureDialog>
         </Item>
