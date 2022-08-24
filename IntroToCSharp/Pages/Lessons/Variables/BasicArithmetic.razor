@@ -172,36 +172,30 @@ Console.WriteLine(x);
     <Adventure Portrait="Portraits.CaptainCoder">
         <Item>
             <AdventureDialog>
-                <Text>With everything you're learning, you will be a computational wizard in no time!</Text>
+                With everything you're learning, you will be a computational wizard in no time!
             </AdventureDialog>
         </Item>
         <Item>
             <AdventureDialog Page="ConvertingTypes.PageRef">
-                <Text>
                     Now that you know how to use the <b>arithmetic operators</b>, you will
                     want to be able to read numeric <b>values</b> from the user.
                     If you have not done so yet, now might be a
                     good time to complete the <b>@ConvertingTypes.PageRef.Name</b> lesson.
-                </Text>
             </AdventureDialog>
         </Item>
         <Item>
-            <AdventureDialog>
-                <Text>
-                    If you're already comfortable with type conversions, you're
-                    ready to practice using <b>arithmetic operators</b> in the
-                    <b>Shape Analysis</b> activity.
-                </Text>
+            <AdventureDialog Page="ShapeAnalyzer.PageRef">
+                If you're already comfortable with type conversions, you
+                might be ready to take on the first <b>Gauntlet: @ShapeAnalyzer.PageRef.Name</b>.
+                This <b>Gauntlet</b> is comprised of 4 challenges to test your
+                programming prowess.
             </AdventureDialog>
         </Item>
         <Item>
             <AdventureDialog Page="MathClass.PageRef">
-                <Text>
-                    You might also be interested in learning about the
-                    <b>methods</b> provided by C# for performing
-                    useful mathematical operations in the
-                    <b>@MathClass.PageRef.Name</b> lesson.
-                </Text>
+                You might also be interested in learning about the
+                <b>methods</b> provided by C# for performing useful mathematical
+                operations in the <b>@MathClass.PageRef.Name</b> lesson.
             </AdventureDialog>
         </Item>
     </Adventure>

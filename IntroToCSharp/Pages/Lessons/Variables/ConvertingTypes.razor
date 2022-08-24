@@ -222,38 +222,36 @@ Console.WriteLine($"Position: {{ {x}, {y} }}");
     <Adventure Portrait="Portraits.CaptainCoder">
         <Item>
             <AdventureDialog>
-                <Text>
                     It is exciting to watch your programming tool belt continue
                     to grow! With the ability to <b>parse</b> user input into
                     <b>numeric types</b>, you can start to create some
                     interesting and useful programs.
-                </Text>
-            </AdventureDialog>
-        </Item>
-        <Item>
-            <AdventureDialog>
-                <Text>
-                    With the ability to <b>parse strings</b>, I think you're
-                    ready to try the <b>Shape Analysis</b> activity. In it,
-                    you'll practice everything you've learned so far to write a program
-                    to help you calculate how fast The Flash can circumnavigate the Earth!
-                </Text>
-            </AdventureDialog>
-        </Item>
-        <Item>
-            <AdventureDialog>
-                <Text>
-                    Another activity where you can practice <b>parsing strings</b> is the
-                    <b>Character Creator</b>.
-                </Text>
             </AdventureDialog>
         </Item>
         <Item>
             <AdventureDialog Page="BasicArithmetic.PageRef">
-                <Text>
-                    If you don't feel like writing a full project just yet, now
-                    might be a good time to check out the <b>@BasicArithmetic.PageRef.Name</b> lesson.
-                </Text>
+                    Performing arithmetic on <b>values</b> and <b>variables</b>
+                    in <b>C#</b> is quite similar to arithmetic on paper. However,
+                    there are some interesting differences you should be aware of.
+                    If you're interested in learning about these differences,
+                    you should check out the <b>@BasicArithmetic.PageRef.Name</b> lesson.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="MathClass.PageRef">
+                    You might also be interested in learning about the
+                    <b>methods</b> provided by <b>C#</b> for performing useful
+                    mathematical operations in the
+                    <b>@MathClass.PageRef.Name</b> lesson.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="ShapeAnalyzer.PageRef">
+                    If you're already feeling comfortable with <b>arithmetic operators</b>
+                    and the <Code>Math</Code> class, you might be ready for
+                    the first <b>Gauntlet: @ShapeAnalyzer.PageRef.Name</b>.
+                    This <b>Gauntlet</b> includes 4 challenges to test
+                    everything you have learned so far.
             </AdventureDialog>
         </Item>
     </Adventure>
