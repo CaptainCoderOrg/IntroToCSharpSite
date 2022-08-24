@@ -43,9 +43,9 @@
     </Text>
     <CodeBlock>5 + 8 * (10 - 8) / 4;</CodeBlock>
     <Text>
-        An <b>binary arithmetic operator</b> performs arithmetic on two numbers.
+        A <b>binary arithmetic operator</b> performs arithmetic on two numbers.
         The <b>expression</b> above, uses the <b>addition operator</b>
-        (<Code>+</Code>), <b>subtraction operator</b>, <b>multiplication
+        (<Code>+</Code>), <b>subtraction operator</b> (<Code>-</Code>), <b>multiplication
         operator</b> (<Code>*</Code>), and <b>division operator</b>
         (<Code>/</Code>). For the most part, these <b>arithmetic operators</b>
         behave the way you would expect in traditional mathematics and follow
@@ -107,7 +107,7 @@ Console.WriteLine(result);
 <Section Title="Division by Zero">
     <Explore Title="Division by Zero with Integers">
         <Text>
-            In mathematics, division by <Code>0</Code> is not defind. So, what
+            In mathematics, division by <Code>0</Code> is not defined. So, what
             happens when you divide by <Code>0</Code> in a C# program?
         </Text>
         <Text>Study the code below but don't run it yet.</Text>
@@ -137,11 +137,11 @@ Console.WriteLine(x);
         <Question Text="What was the result of running the code above?"/>
         <Explanation>
             <Text>
-                Unlike the previous section of code, the compiler is not smart
-                enough to know that the <b>variable</b> <Code>a</Code> is
-                storing the <b>value</b> <Code>0</Code>. The program above
-                compiles and runs. However, during execution, the program
-                crashes and a <b>run time error</b> occurs: "<b>Error:
+                Unlike the previous section of code, the compiler doesn't know
+                that the <b>variable</b> <Code>a</Code> is storing the
+                <b>value</b> <Code>0</Code>. The program above compiles and
+                runs. However, during execution, the program crashes and a
+                <b>run time error</b> occurs: "<b>Error:
                 System.DivideByZeroException: Attempted to divide by zero.</b>"
             </Text>
         </Explanation>
@@ -159,7 +159,7 @@ Console.WriteLine(x);
             <Text>If all went well, the program displayed the symbol for infinity.</Text>
             <Text>
                 When you divide by zero with a <b>floating-point</b> number, the
-                program is does not crash. Instead, the division results in the
+                program does not crash. Instead, the division results in the
                 value <Code>double.PositiveInfinity</Code> or
                 <Code>double.NegativeInfinity</Code>. This behaviour might seem
                 odd but it is a result of the computer attempting to divide by
