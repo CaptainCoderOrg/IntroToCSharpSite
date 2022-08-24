@@ -62,7 +62,7 @@ Console.WriteLine("The cat says, \"Meow!\"");
 <Section Title="Integer">
     <Text>
         An <b>integer</b> is a whole number (no decimals allowed).
-        In C#, we declare <b>integers</b> using the <Code>int</Code> data type. 
+        In C#, we declare <b>integers</b> using the <Code>int</Code> data type.
         For example:
     </Text>
     <CodeBlock AllowCopy>
@@ -71,7 +71,7 @@ int price = 42;
 int y = -17;
     </CodeBlock>
     <Text>
-        It may become difficult to read an <Code>int</Code> literal that has many digits. 
+        It may become difficult to read an <Code>int</Code> literal that has many digits.
         To help with this, C# allows you to use underscores (<Code>_</Code>)
         within an <Code>int</Code> literal. For example:
     </Text>
@@ -80,7 +80,7 @@ int y = -17;
         The underscores may be placed anywhere in the number so you still need to
         take care that you have the correct number of digits.
     </Note>
-    
+
     <Explore Title="Gravity as an Integer">
         <Text>
             If you try to create an integer that has a decimal value, the compiler will complain.
@@ -120,7 +120,7 @@ int y = -17;
                 What you are observing is called an <Keyword Word="overflow
                 error"/>. When you attempt to increase the value stored in
                 <Code>num</Code> beyond the maximum value, it "rolls over" and
-                becomes the largest negative number. A similar thing happens when 
+                becomes the largest negative number. A similar thing happens when
                 you decrease an <Code>int</Code> below the minimum value it becomes
                 the largest positive number.
             </Text>
@@ -133,7 +133,7 @@ int y = -17;
             <Text>
                 For an in depth explanation, check out the <MudLink
                 Href="https://en.wikipedia.org/wiki/Integer_overflow"
-                Target="_blank">Wikipedia article</MudLink>. 
+                Target="_blank">Wikipedia article</MudLink>.
             </Text>
         </Explanation>
     </Explore>
@@ -153,7 +153,7 @@ double ice = 32;
         A <Code>double</Code> uses 8 <Keyword Word="byte"/>s of memory and is
         capable of approximating incredibly large and incredibly small values.
         The smallest value is approximately ±10<sup>-324</sup> and the largest
-        value is approximately ±10<sup>308</sup>. To achieve this incredible 
+        value is approximately ±10<sup>308</sup>. To achieve this incredible
         range of values using only 64 <Keyword Word="bit"/>s of memory we must
         sacrifice a small amount of precision. That is, <Code>double</Code> values
         are only approximations.
@@ -171,9 +171,9 @@ Console.WriteLine(error);
             <Text>
                 The code above demonstrates a <Keyword Word="rounding error"/>. This is
                 an error that occurs when a decimal value cannot be precisely represented
-                by the number of <Keyword Word="bits"/> being used. When writing a 
-                program that uses <Code>doubles</Code>, it is important to consider if 
-                it is okay for the precision to be approximated. For example, 
+                by the number of <Keyword Word="bits"/> being used. When writing a
+                program that uses <Code>doubles</Code>, it is important to consider if
+                it is okay for the precision to be approximated. For example,
                 an approximation of a race cars speed in a video game is probably okay.
                 However, approximating the amount of money a person earns in banking
                 software could cause problems.
@@ -198,7 +198,7 @@ Console.WriteLine(error);
     <Note>
         In the example above the <Code>e</Code> is short for "exponent".
     </Note>
-    
+
 </Section>
 
 <Section Title="Boolean">
@@ -245,6 +245,40 @@ bool isGameOver = false;
         <CheckBoxOption Text="0" IsCorrect="false" />
     </MultipleChoiceQuestion>
 
+</Section>
+<Section Title="What's Next?">
+    <Adventure Portrait="Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+                Congratulations! If you've made it this far, you're well on your
+                way to mastering <b>variables</b>.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="MadTakes.PageRef">
+                A great way to practice using <b>string variables</b>
+                is the <b>@MadTakes.PageRef.Name</b> activity. If you have
+                not yet completed it, I highly recommend checking it out.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="BasicArithmetic.PageRef">
+                When you're ready to continue expanding your programming
+                arsenal, there are two great options. The first is
+                the <b>@BasicArithmetic.PageRef.Name</b> lesson where you
+                will learn how the computer <b>evaluates</b> mathematical
+                <b>expressions</b>.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="ConvertingTypes.PageRef">
+                The second option is the <b>@ConvertingTypes.PageRef.Name</b>
+                lesson. In that lesson, you learn how to convert between the
+                common data types. This is useful for reading numbers from the
+                user.
+            </AdventureDialog>
+        </Item>
+    </Adventure>
 </Section>
 
 @code {

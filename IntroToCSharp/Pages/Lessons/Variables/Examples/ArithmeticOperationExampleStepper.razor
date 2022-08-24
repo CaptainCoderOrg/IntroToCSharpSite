@@ -1,0 +1,167 @@
+
+<Text>
+    Use the <b>Next</b> and <b>Back</b> buttons to step through
+    the <b>evaluation</b> of the program below.
+</Text>
+<CodeStepper>
+    <Block>
+        <CodeBlock>
+int result = 5 + 8 * (10 - 8) / 4; // &lt;--
+Console.WriteLine($"The result is {result}");
+        </CodeBlock>
+        <Text><b>Explanation</b></Text>
+        <FadeText>
+            Before the computer can initialize <Code>result</Code>, it must
+            <b>evaluate</b> the <b>expression</b> on the right side of the
+            <b>assignment operator</b> (<Code>=</Code>).
+        </FadeText>
+        <Text><b>Terminal:</b></Text>
+        <Terminal>&nbsp;</Terminal>
+    </Block>
+    <Block>
+        <CodeBlock>
+int result = 5 + 8 * (10 - 8) / 4; // &lt;--
+Console.WriteLine($"The result is {result}");
+        </CodeBlock>
+        <Text><b>Explanation</b></Text>
+        <FadeText>
+            Following order of operations, the computer <b>evaluates</b>
+            the <b>subexpression</b> <Code>(10 - 8)</Code> because it is
+            within parentheses.
+        </FadeText>
+        <Text><b>Terminal:</b></Text>
+        <Terminal>&nbsp;</Terminal>
+    </Block>
+    <Block>
+        <CodeBlock>
+int result = 5 + 8 * 2 / 4; // &lt;--
+Console.WriteLine($"The result is {result}");
+        </CodeBlock>
+        <Text><b>Explanation</b></Text>
+        <FadeText>
+            The resulting <b>value</b> is then subsituted back into
+            the original <b>expression</b> and <b>evaluation</b>
+            continues.
+        </FadeText>
+        <Text><b>Terminal:</b></Text>
+        <Terminal>&nbsp;</Terminal>
+    </Block>
+    <Block>
+        <CodeBlock>
+int result = 5 + 8 * 2 / 4; // &lt;--
+Console.WriteLine($"The result is {result}");
+        </CodeBlock>
+        <Text><b>Explanation</b></Text>
+        <FadeText>
+            Following order of operations, the computer will <b>evaluate</b> all
+            <Code>*</Code> and <Code>/</Code> <b>operators</b> from left to
+            right. In this case, the <b>subexpression</b> <Code>8 * 2</Code> is
+            <b>evaluated</b> and the result is substituted back into the
+            <b>expression</b>.
+        </FadeText>
+        <Text><b>Terminal:</b></Text>
+        <Terminal>&nbsp;</Terminal>
+    </Block>
+    <Block>
+        <CodeBlock>
+int result = 5 + 16 / 4; // &lt;--
+Console.WriteLine($"The result is {result}");
+        </CodeBlock>
+        <Text><b>Explanation</b></Text>
+        <FadeText>
+            Next, the <b>division operator</b> (<Code>/</Code>) is
+            <b>evaluated</b> because it has a higher order of operation than the
+            <b>addition operator</b> (<Code>+</Code>). The <b>subexpression</b>
+            <Code>16 / 4</Code> is <b>evaluated</b> and the result is
+            substituted back into the <b>expression</b>.
+        </FadeText>
+        <Text><b>Terminal:</b></Text>
+        <Terminal>&nbsp;</Terminal>
+    </Block>
+    <Block>
+        <CodeBlock>
+int result = 5 + 4; // &lt;--
+Console.WriteLine($"The result is {result}");
+        </CodeBlock>
+        <Text><b>Explanation</b></Text>
+        <FadeText>
+            Next, the <b>addition operator</b> (<Code>+</Code>) is
+            <b>evaluated</b>. The <b>expression</b> <Code>5 + 4</Code>
+            is <b>evaluated</b> and substituted back into the <b>expression</b>.
+        </FadeText>
+        <Text><b>Terminal:</b></Text>
+        <Terminal>&nbsp;</Terminal>
+    </Block>
+    <Block>
+        <CodeBlock>
+int result = 9; // &lt;--
+Console.WriteLine($"The result is {result}");
+        </CodeBlock>
+        <Text><b>Explanation</b></Text>
+        <FadeText>
+            Now that there is a single <b>literal value</b> on the right
+            side of the <b>assignment operator</b> (<Code>=</Code>), the
+            computer is able to <b>initialize</b> the <Code>result</Code>
+            <b>variable</b> by <b>assigning</b> the <b>value</b> <Code>9</Code>
+            to be stored in the <b>memory address</b> labeled <b>result</b>.
+        </FadeText>
+        <Text><b>Terminal:</b></Text>
+        <Terminal>&nbsp;</Terminal>
+    </Block>
+    <Block>
+        <CodeBlock>
+int result = 9;
+Console.WriteLine($"The result is {result}"); // &lt;--
+        </CodeBlock>
+        <Text><b>Explanation</b></Text>
+        <FadeText>
+            Before the computer can call the <Code>Console.WriteLine</Code>
+            <b>method</b>. It must first <b>evaluate</b> the <b>expression</b>
+            <Code>$"The result is {result}"</Code>.
+        </FadeText>
+        <Text><b>Terminal:</b></Text>
+        <Terminal>&nbsp;</Terminal>
+    </Block>
+        <Block>
+        <CodeBlock>
+int result = 9;
+Console.WriteLine($"The result is {result}"); // &lt;--
+        </CodeBlock>
+        <Text><b>Explanation</b></Text>
+        <FadeText>
+            To <b>evaluate</b> the <b>expression</b>
+            <Code>$"The result is {result}"</Code>. The computer
+            reads the <b>value</b> stored in the <b>memory address</b>
+            labeled by the <Code>result</Code> <b>variable</b> (<Code>9</Code>)
+            and substitutes it into the <b>expression</b>.
+        </FadeText>
+        <Text><b>Terminal:</b></Text>
+        <Terminal>&nbsp;</Terminal>
+    </Block>
+    <Block>
+        <CodeBlock>
+int result = 9;
+Console.WriteLine("The result is 9"); // &lt;--
+        </CodeBlock>
+        <Text><b>Explanation</b></Text>
+        <FadeText>
+            This line of code displays <Code>The result is 9</Code> in the terminal.
+        </FadeText>
+        <Text><b>Terminal:</b></Text>
+        <Terminal>&nbsp;</Terminal>
+    </Block>
+    <Block>
+        <CodeBlock>
+int result = 9;
+Console.WriteLine("The result is 9");
+        </CodeBlock>
+        <Text><b>Explanation</b></Text>
+        <FadeText>
+            The program exists because there are no more instructions for the computer
+            to execute.
+        </FadeText>
+        <Text><b>Terminal:</b></Text>
+        <Terminal>The result is 9
+        </Terminal>
+    </Block>
+</CodeStepper>
