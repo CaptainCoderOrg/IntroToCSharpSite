@@ -1,5 +1,5 @@
 @inherits CaptainCoder.Page
-@page "/activities/shape-analyzers"
+@page "/gauntlets/shape-analyzers"
 
 <Title>@((MarkupString)Title)</Title>
 
@@ -91,64 +91,78 @@
     </Adventure>
 </Section>
 
-<Section Title="Perimeter of a Rectangle">
+<Section Title="First Challenge: Perimeter of a Rectangle">
     <Text>
-        In this challenge you will calculate the perimeter of a rectangle. Calculating the perimeter of a rectangle
-        comes in handy in all walks of life. From building a castle to finding out how many christams lights would need
-        to wrap your around your entire house, understanding the perimeter of an object is important. The perimeter tells
-        you the distance around an entire object.
+        In this challenge you will write a program that calculate the perimeter
+        of a rectangle for a user. This comes in handy in all walks of life.
+        From building a castle to finding out how many christmas lights are
+        needed to decorate the outside of your house, understanding the
+        perimeter of an object is important.
     </Text>
-    <Text>
-        To calculate the perimeter of a rectangle you add the <b>width</b> of a rectangle to its <b>height</b> and then
-        multiply that by two. The formula is: <Code>2 * (Width + Height)</Code>. By the end of this challenge you will have a program
-        capable of figuring out the perimeter of a given rectangle! In the end, you will have something that looks like this:
-    </Text>
-    <Text>
-        Before starting the project you should look at the problem and consider what variables you might need and what data types
-        that you'd like to use and why. We can see that we are going to be working with numbers when using these data types as well
-        as needing prompts to tell the user what they need to enter. What data types would be most useful to do this?
-    </Text>
-    <PerimeterOfARectangle />
+    <Note>
+        The perimeter of a rectangle is twice the <b>width</b> and <b>height</b>
+        of the rectangle.
+    </Note>
+    <PerimeterOfARectangleChallenge />
 </Section>
-<Section Title="Area of a Rectangle">
+<Section Title="Second Challenge: Area of a Rectangle">
     <Text>
         In this challenge you will calculate the area of a rectangle. Like calculating the area of a perimeter, the area of a
         rectangle will call on many of the same skills. The area of a rectangle tells us how big the inside of the rectangle is.
-        It is useful for when you want to figure out how much you can fit into a rectangle!
+        This is useful when you want to know how many items you can fit in your castle's treasury!
     </Text>
-    <Text>
-        To calculate the area of a rectangle you need to multiply the <b>width</b> of the rectangle by its <b>height</b>! The
-        formula is: <Code>(Width * Height)</Code>. That's it! By the end of your program you should have something that looks like this:
-    </Text>
-    <Text>
-        Before starting the project you should look at the problem and consider what variables you might need and what data types
-        that you'd like to use and why. We can see that we are going to be working with numbers when using these data types as well
-        as needing prompts to tell the user what they need to enter. What data types would be most useful to do this?
-    </Text>
-    <AreaOfARectangle />
+    <Note>
+        The area of a rectangle is the product of multiplying its <b>width</b> by its <b>height</b>.
+    </Note>
+
+    <AreaOfARectangleChallenge />
 </Section>
-<Section Title="Area of a Circle">
+<Section Title="Third Challenge: Area of a Circle">
     <Text>
-        In this challenge you will calculate the area of a circle. The area of the circle tells us how much room there is
-        within the circle.
+        In this challenge you will write a program that will calculate the area of a circle.
     </Text>
+    <Note>
+        The area of a circle is <b>π</b> multiplied by the circle's radius squared. (πr<sup>2</sup>)
+    </Note>
     <Text>
-        To calculate the area of a circle you need to multiply pi by the circle's radius squared. Don't let this scare you though,
-        what this means is that you have to multiply the distance from one side of the circle to the middle of the circle by
-        itself and then multiply by pi. The equation looks like this: <Code>3.14159265359 * radius * radius</Code>.
+        Take note that in this section the numbers you are working with will
+        have decimal values. Be sure to use the right <b>data type</b> when
+        declaring your <b>variables</b> and <b>methods</b> when <b>parsing</b>
+        user input.
     </Text>
-    <Text>
-        Take note that in this section we are using <Code>floats</Code> rather than integers! So you'll need to be sure to use the
-        right data type and format it correctly when you are creating a float!
-    </Text>
-    <AreaOfACircle />
+    <AreaOfACircleChallenge />
 </Section>
+
+<Section Title="Final Challenge: How Fast is the Flash?">
     <Text>
         In this challenge, you will update your Circle Analyzer program to calculate how fast the Flash can run around the Earth.
         To do this, you will need to determine the circumference of the Earth and the speed at which the Flash can run.
     </Text>
-<Section Title="How Fast is the Flash">
-    <HowFastIsTheFlash />
+    <Note>
+        The circumference of a circle is twice the produce of multiplying <b>π</b> and the radius of the circle. (2πr)
+    </Note>
+    <HowFastIsTheFlashChallenge />
+</Section>
+
+<Section Title="What's Next?">
+    <Adventure Portrait="Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+                Great work on making it this far! Don't worry if you were not
+                able to complete all of the challenges in this <b>Gauntlet</b>.
+                You can always come back to finish them when you've leveled
+                up more.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog>
+                I think you're ready for the <b>Branching Logic</b> lesson.
+                In it you will learn how to write <Code>if</Code>
+                and <Code>else</Code> statements to create programs
+                that let the user make decisions.
+            </AdventureDialog>
+        </Item>
+    </Adventure>
 </Section>
 
 
@@ -165,5 +179,5 @@
         StateHasChanged();
     }
 
-    public static readonly PageRef PageRef = new PageRef("Gauntlet: Shape Analyzers", "/activities/shape-analyzers", 3, "Activities");
+    public static readonly PageRef PageRef = new PageRef("Shape Analyzers", "/gauntlets/shape-analyzers", 3, "Gauntlets");
 }
