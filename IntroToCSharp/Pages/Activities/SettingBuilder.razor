@@ -1,0 +1,150 @@
+@inherits CaptainCoder.Page
+@page "/activities/setting-builder"
+
+<Section Title="Setting Builder">
+    <Text>
+        When we thinking about making a game a lot of things can come to mind. From 
+        gameplay, to story, to characters we have a whole lot of ideas about what our game could
+        look like. One thing that every game needs though is somewhere that it takes place! This
+        is referred to as the "setting" for the game.
+    </Text>
+    <Text>
+        In the following activity we are going to create a program that will help us create a
+        a city or town for our first game to take place. Through this program we will work on
+        working with the <Keyword Word="Console"/> to both prompt the user to enter in an input
+        and to store the input that the user input as a string or an integer.
+    </Text>
+</Section>
+    <Section Title="Learning Objectives">
+    <MudList Clickable="true">
+        <MudListItem Icon="@Icons.Filled.Circle">Practice using <Code>Console.WriteLine</Code> method.</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Practice Working with <Code>strings</Code>.</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Practice Working with <Code>integers</Code>.</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Learn how to change the color of the terminal.</MudListItem>
+    </MudList>
+</Section>
+
+<Section Title="Where to start?">
+    <Text>
+        When we think of many of our favorite games what comes to mind? Perhaps you think of an astronaut
+        flying through an astreroid field in space like in No Man's Sky. Or maybe you think of a plumber jumping
+        on evil turtles to Store a princess like Mario. Maybe it is even something scarier where you are trapped
+        in a Kid's Pizza store with animatronics trying to come to life and get you!
+    </Text>
+    <Text>
+        There are so many different places that a game might take place but the first thing we should figure out
+        is what kind of "genre" the game is in. Genre is a term that generally means the particular "style" and
+        "world" of the game. By knowing our genre we know what places <i>could</i> be possible and what places 
+        wouldn't be possible. We wouldn't expect to see a space level in a fantasy game like Skyrim!
+    </Text>
+    <Text>
+        To help the user figure out what genre the game is in, let's give them a list of options that they can pick from.
+        You can use the following list as a base but feel free to add more if you want!
+    </Text>
+    <Note>
+        <b>Extra Challenge!</b><br>
+        Can you figure out how to add bullet points to your list as well? Hint: You should check out the ASCII lesson
+        for a possible value that might work!
+    </Note>
+    <MudList>
+        <MudListItem Avatar="@Icons.Filled.MenuBook">Fantasy</MudListItem>
+        <MudListItem Avatar="@Icons.Filled.MenuBook">Horror</MudListItem>
+        <MudListItem Avatar="@Icons.Filled.MenuBook">Adventure</MudListItem>
+        <MudListItem Avatar="@Icons.Filled.MenuBook">Sci-fi</MudListItem>
+        <MudListItem Avatar="@Icons.Filled.MenuBook">Post-Apocalyptic</MudListItem>
+        <MudListItem Avatar="@Icons.Filled.MenuBook">Mystery</MudListItem>
+    </MudList>
+</Section>
+    <TaskItem Name="Create Project"><Code>Create a project called "Setting Builder"</Code></TaskItem>
+    <TaskItem Name="Create Introduction"><Code>Create an introduction to tell the user what your program is.</Code></TaskItem>
+    <TaskItem Name="Ask for Genre"><Code>Ask the user for a genre input and then Display a list of genres to help them out.</Code></TaskItem>
+    <TaskItem Name="Store user Input"><Code>Store the users input as "genreInput".</Code></TaskItem>
+
+    <Text>
+        After you've completed the assignment above you should have a result that looks something like this. Don't worry
+        if yours doesn't match the example exactly.
+    </Text>
+
+
+<Section Title="Somewhere to call home.">
+    <Text>
+        Great job! We have a start to our setting builder! Now we can get into some fun by building our first place.
+        Every game has to start somewhere whether it is a huge spralling cyberpunk metropolis or a medevial town beset by
+        a dragon, we need a place for our characters to start.
+    </Text>
+    <Text>
+        To get the user going for building their first city or town let's ask them how big their city or town is going to be.
+        Some games can get away with having their setting in a single city with a lot of action like Cyberpunk 2077 or perhaps on
+        a single island like Animal Crossing, but other games will see our hero travelling from city to city and town to town like Pokemon!
+    </Text>
+    <Text>
+        Below is a list of different city sizes that might help the user decided if their place is a city, town or something different.
+    </Text>
+
+    <CitySizes/>
+
+    <TaskItem Name="Ask for city or town size"><Code>Create a prompt to the user for the city or town size.</Code></TaskItem>
+    <TaskItem Name="Display Location Sizes"><Code>Display a list of possible sizes to help user pick the size of their location.</Code></TaskItem>
+    <TaskItem Name="Store location size"><Code>Store the users input as "locationSize".</Code></TaskItem>
+
+    <Text>
+        It might also be helpful at this point to capture just how many people are in this town or area! The population of a particular
+        location in a game might increase or decrease over the course of the game but for now we are just going to get a starting population.
+    </Text>
+
+    <TaskItem Name="Ask for population"><Code>Create a prompt to the user for the location population.</Code></TaskItem>
+    <TaskItem Name="Store location population"><Code>Store the location population as an <b>integer</b></Code></TaskItem>
+
+    <Text>
+        We are well on our way to make our first location in a game! What we need now is to build the area or "geography" around our
+        location. When we think of the location what kind of natural reasources surround it? Is it a small village in the center of a forest?
+        A colony in space surrounded by asteroid fields? An underground civilization built within a mine filled with enormous crystals?
+    </Text>
+    <Text>
+        We also might want to know what natural resources surround the location! Is is close to the ocean? Are there a lot of animals in the area
+        for hunting? Perhaps it is in a metropolis surrounded by nothing but desert?
+    </Text>
+
+    <TaskItem Name="Ask for geography"><Code>Create a prompt to the user for the geography.</Code></TaskItem>
+    <TaskItem Name="Store geography"><Code>Store the geography of the location as "geography".</Code></TaskItem>
+    <TaskItem Name="Ask for geography"><Code>Create a prompt to the user for the natural resources around the location.</Code></TaskItem>
+    <TaskItem Name="Store natural resources"><Code>Store the natural resources as "naturalResources".</Code></TaskItem>
+
+    <Section Title="Displaying the information">
+    <Text>
+        Wow! We've got a lot of information going now! I think it is about time to start looking at how to Display the information
+        in a way that looks good for our user. While we could just Display the information out as "information: ", "user input" format,
+        it might be a little hard to read the information. Especially if we want to add more information.
+    </Text>
+    <Text>
+        What we should do instead is change the color of the information in each row to make it a little easier to read!
+    </Text>
+
+    <TaskItem Name="Display Information"><Code>Display the information out to the user.</Code></TaskItem>
+    <TaskItem Name="Alternate Colors"><Code>Alternate the colors displayed on each line to the user to make it easier to read.</Code></TaskItem>
+
+    <Section Title="Going Beyond">
+        <Text>
+            Add additionals sections
+        </Text>
+    </Section>
+    </Section>
+    <Section Title="Wrapping Up">
+    <Text>
+        By the end of this project your Display out should look something like this!
+    </Text>
+
+    <Text>
+        Now that you have a basis for creating a setting you can do all sorts of things to improve it. Feel free to add new questions to your setting
+        builder or add improvements to your formatting!
+    </Text>
+    <Text>
+        In this lesson we practiced using WriteLine to prompt the user for information and ReadLine to capture that information. We then
+        used our Console colors to change the colors when the information was Displayed out to make it easier for our user to read.
+    </Text>
+    </Section>
+</Section>
+@code
+{
+    public static readonly PageRef PageRef = new PageRef("Setting Builder", "/activities/setting-builder", 3, "Activities");
+}

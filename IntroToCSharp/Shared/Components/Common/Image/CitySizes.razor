@@ -1,0 +1,15 @@
+<DataTable Headers=@Headers Rows=@Rows/>
+
+@code {
+    private string[] Headers = { "Place Size", "Population" };
+    private string[][] Rows = new string[][]{
+        new string[]{"Metropolis","25,000+"},
+        new string[]{"Large City","12,000 - 25,000"},
+        new string[]{"Small City","5,000 - 12,000"},
+        new string[]{"Large Town","2,000 - 5,000"},
+        new string[]{"Small Town","900 - 2,000"},
+        new string[]{"Village","400 - 900"},
+        new string[]{"Hamlet","80 - 400"},
+        new string[]{"Thorp","20 - 80"},
+    };
+}
