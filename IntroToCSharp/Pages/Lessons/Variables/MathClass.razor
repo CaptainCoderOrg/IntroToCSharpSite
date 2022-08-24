@@ -1,0 +1,165 @@
+@inherits CaptainCoder.Page
+@page "/lessons/variables/math-class"
+
+<Title>The Math Class</Title>
+
+<Section Title="Introduction">
+    <Adventure Portrait="Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+                As you continue to learn about <b>C#</b>, you will discover that
+                it comes equipped with hundreds of built in utilities to make
+                your life as a programmer easier. In this section, you will learn
+                about the <Code>Math</Code> <b>class</b> which provides many
+                useful <b>methods</b> and built in <b>values</b> for performing
+                common mathematical calculations.
+            </AdventureDialog>
+        </Item>
+    </Adventure>
+</Section>
+
+<Section Title="Math.Min, Math.Max, and Math.Clamp">
+    <Text>
+        The <Code>Math</Code> class provides 2 <b>methods</b> for determining
+        the minimum and maximum of two numbers.
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/Min-and-Max-Example">
+int firstNum = 3;
+int secondNum = 7;
+int minimum = Math.Min(firstNum, secondNum);
+int maximum = Math.Max(firstNum, secondNum);
+Console.WriteLine($"{maximum} is greater than or equal to {minimum}");
+    </CodeBlock>
+    <Text>
+        These <b>methods</b> are useful when you need to limit a value. For
+        example, in an RPG, you might write the code that prevents a player's
+        health from going above their maximum hit points.
+    </Text>
+    <CodeBlock>
+playerHealth = Math.Min(maxHealth, playerHealth + healingPotion);
+    </CodeBlock>
+    <Text>
+        You might also write code that prevents a player's health from going
+        below 0.
+    </Text>
+    <CodeBlock>
+playerHealth = Math.Max(0, playerHealth - damage);
+    </CodeBlock>
+    <Text>
+        There is another related <b>method</b> that is convenient when you would
+        like to keep a <b>value</b> within a range: <Code>Math.Clamp</Code>.
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/Clamp-Example">
+int playerHealth = 10;
+int maxHealth = 15;
+int healingPotion = 7;
+int fireball = 25;
+playerHealth = Math.Clamp(playerHealth + healingPotion, 0, maxHealth);
+Console.WriteLine($"Health: {playerHealth} / {maxHealth}");
+playerHealth = Math.Clamp(playerHealth - fireball, 0, maxHealth);
+Console.WriteLine($"Health: {playerHealth} / {maxHealth}");
+    </CodeBlock>
+    <Text>
+        The <Code>Math.Clamp</Code> method expects 3 <b>arguments</b>:
+        <b>value</b>, <b>min</b>, <b>max</b> and <b>evaluates</b> to
+        <b>value</b> if it is between <b>min</b> and <b>max</b> otherwise, it
+        "clamps" to the <b>max</b> or <b>min</b> of the specified range.
+    </Text>
+</Section>
+
+<Section Title="Mathematical Constants">
+    <Text>
+        The mathematical constants <b>e</b> (Euler's constant), <b>π</b> (pi) and
+        the lesser known <b>τ</b> (tau) are made available by the
+        <Code>Math</Code> <b>class</b>.
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/Math-Constants">
+Console.WriteLine($"The value of e is approximately: {Math.E}");
+Console.WriteLine($"The value of π is approximately: {Math.PI}");
+Console.WriteLine($"The value of τ is approximately: {Math.Tau}");
+    </CodeBlock>
+</Section>
+
+<Section Title="Math.Pow and Math.Sqrt">
+    <Text>
+        There is no <b>arithmetic operator</b> in <b>C#</b> that allows you to
+        calculate the power of a number (e.g. 2<sup>3</sup>). However, the
+        <Code>Math.Pow</Code> <b>method</b> can be used if you need to find
+        the power.
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/MathPow-Example">
+double squared = Math.Pow(12, 2);
+double cubed = Math.Pow(1.7, 3.0);
+Console.WriteLine($"12 squared is {squared}.");
+Console.WriteLine($"1.7 cubed is approximately {cubed}");
+    </CodeBlock>
+    <Note>
+        The <Code>Math.Pow</Code> <b>method</b> produces a <b>double</b>. If you
+        attempt to assign the result to an <b>int</b> the compiler will complain
+        with the compilation error: "<b>error CS0266: Cannot implicitly convert
+        type 'double' to 'int'</b>".
+    </Note>
+</Section>
+
+<Section Title="Read the Friendly Manual">
+    <Text>
+        These are just a few of the most common <b>methods</b> provided by the
+        <Code>Math</Code> class. Other <b>methods</b> include finding the
+        absolute value <Code>Math.Abs</Code>, rounding numbers
+        <Code>Math.Round</Code>, and trigonometry <Code>Math.Sin</Code>,
+        <Code>Math.Cos</Code>, <Code>Math.Tan</Code>.
+        It would be exhausting (and incredibly boring) to go over all of the
+        <b>methods</b> provided by the <Code>Math</Code> <b>class</b>. You
+        likely will not need all of them but it is important to know where
+        to look when you are trying to perform a calculation.
+    </Text>
+    <Explore Title="Read the Friendly Manual">
+        <Text>
+            Even the most experienced software developers use online search engines
+            and documentation to help them when they're programming. You should never
+            be afraid of asking questions, searching the web, and most importantly
+            learning to read documenation. Take some time now to peruse the official
+            documentation for the <Code>Math</Code> class.
+        </Text>
+        <TaskItem Name="Read the Friendly Manual">Scan through the documentation for the <Code>Math</Code> class:
+            <MudButton Color="Color.Primary" Variant="Variant.Filled" Href="https://docs.microsoft.com/en-us/dotnet/api/system.math?view=net-6.0" Target="_blank">Math Class Documentation</MudButton>
+        </TaskItem>
+        <Question Text="What is the name of a method that was not discussed in this lesson?"/>
+        <Question Text="What does that method do?"/>
+        <Question Text="When might you use that method?"/>
+    </Explore>
+</Section>
+
+<Section Title="What's Next?">
+    <Adventure Portrait="Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+                The world of programming is ever growing and as programmers we
+                are truly standing on the shoulders of giants. The
+                <Code>Math</Code> <b>class</b> is just one example of the tools
+                that the programmers that came before us have created so that
+                our journey might be easier.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog>
+                The <b>Character Creator</b> activity is a great place to
+                practice using the <Code>Math</Code> <b>class</b>. If
+                you have not completed it yet, you should give it a try!
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog>
+                The <b>Shape Analysis</b> challenge tests your skills using
+                <b>arithmetic operators</b>. In the final challenge you will use
+                the program you create to calculate how fast the Flash can
+                circumnavigate the Earth!
+            </AdventureDialog>
+        </Item>
+    </Adventure>
+</Section>
+
+
+@code {
+    public static readonly PageRef PageRef = new PageRef("Math Class", "/lessons/variables/math-class", 4, "Variables");
+}
