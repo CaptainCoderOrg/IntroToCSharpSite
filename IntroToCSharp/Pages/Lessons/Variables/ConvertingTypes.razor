@@ -13,7 +13,7 @@
                     <b>string</b> <Code>"42"</Code> and you need to convert it
                     to an <b>integer</b> <Code>42</Code> or you may
                     have an <b>integer</b> that you need to convert to
-                    a <b>double</b> <Code>42.0</Code>. In this lesson, you will 
+                    a <b>double</b> <Code>42.0</Code>. In this lesson, you will
                     learn how to use <b>methods</b> provided by C# to convert
                     between the common data types.
                 </Text>
@@ -59,7 +59,7 @@ Console.WriteLine(x);
     <Text>You can <b>cast</b> a <b>double</b> to an <b>int</b></Text>
     <CodeBlock ReplIt="JosephCollard/Double-to-Int">
 int x = (int) 42.8;
-Console.WriteLine(x);        
+Console.WriteLine(x);
     </CodeBlock>
     <Note>
         When you cast the <b>double</b> <Code>42.5</Code> to an <b>int</b>
@@ -72,7 +72,7 @@ Console.WriteLine(x);
     <CodeBlock ReplIt="JosephCollard/Double-Variable-to-Int">
 double y = 75.9;
 int x = (int) y;
-Console.WriteLine(y + " => " + x); 
+Console.WriteLine(y + " => " + x);
     </CodeBlock>
     <Explore Title="Illegal Casting">
         <Text>
@@ -98,8 +98,8 @@ Console.WriteLine(y + " => " + x);
         Unfortunately, casting <b>values</b> can only get you so far. In the
         exploration above, you see that the compiler produces an error message
         if you attempt to <b>cast</b> between <b>types</b> that are not
-        compatible. This is because the conversion between the two types is 
-        complex enough that the computer cannot easily do it. However, C# 
+        compatible. This is because the conversion between the two types is
+        complex enough that the computer cannot easily do it. However, C#
         provides several <b>methods</b> for easily converting from <b>strings</b>
         to the common <b>data types</b>. When you convert a <b>string</b> to another
         data type, it is called <b>parsing</b>.
@@ -242,13 +242,12 @@ Console.WriteLine($"Position: {{ {x}, {y} }}");
                     <b>Character Creator</b>.
                 </Text>
             </AdventureDialog>
-        </Item>        
+        </Item>
         <Item>
-            <AdventureDialog>
+            <AdventureDialog Page="BasicArithmetic.PageRef">
                 <Text>
                     If you don't feel like writing a full project just yet, now
-                    might be a good time to check out the <b>All About
-                    Numbers</b> lesson.
+                    might be a good time to check out the <b>@BasicArithmetic.PageRef.Name</b> lesson.
                 </Text>
             </AdventureDialog>
         </Item>
