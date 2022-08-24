@@ -3,16 +3,18 @@
 <Title>Visual Studio Code</Title>
 <Section Title="Overview">
     <Text>
-        Modern software is incredibly complex. In fact, I believe that 
-        modern software is the most intricate and complex thing humans
-        have ever created. A typical software engineer must know a large
-        number of tools that help them. To help manage this complexity, 
-        programmers utilize a development environment.
+        Modern software is incredibly complex. In fact, it could be argued that
+        modern software is one of the most intricate and complex thing humans
+        have ever created. A typical software engineer must know a large number
+        of tools that help them. In order to manage this complexity, programmers
+        utilize a development environment.
     </Text>
     <Text>
-        In this section, we will discuss how to set up a C# development
-        environment using Visual Studio Code as well as discuss the reasons
-        this book uses Visual Studio Code over other options.
+        In this section, we will discuss how to set up a <b>C#</b> development
+        environment using <b>Visual Studio Code</b> as well as discuss the reasons
+        this book uses it over other options. For most of this book, it will be
+        referred to as <b>VS Code</b> to avoid confusion with another tool
+        called <b>Visual Studio</b>.
     </Text>
     <Note>
         There is nothing stopping you from using any development tools
@@ -20,36 +22,38 @@
         Rider, or any other tool chain, feel free to skip this section.
     </Note>
 </Section>
-<Section Title="Why Visual Studio Code?">
+<Section Title="Why VS Code?">
     <Text>
-        Visual Studio Code is a lightweight editor that runs on Windows, Mac OS,
-        and Linux. It is free, has a large active development community, and
-        provides an easy tool chain to allow developers to write custom extensions.
-        Because it runs well on all three of the major operating systems, it makes
-        a great general choice for developers.
+        <b>VS Code</b> is a lightweight but powerful source code editor editor
+        that runs on Windows, Mac OS, and Linux. It is free, has a large active
+        development community, and provides an easy tool chain to allow
+        developers to write custom extensions.
     </Text>
     <Text><b>Why not Visual Studio or Rider?</b></Text>
     <Text>
-        I am often asked why I don't use Visual Studio (Windows) or Rider (Mac)
-        to develop C# code. The short answer is that both of those tools hide
-        some of the nitty gritty details that I feel are important to learn and
-        understand as a developer.
+        I am often asked why I don't use <b>Visual Studio</b> (Windows) or
+        <b>Rider</b> (Mac) to develop <b>C#</b> code. The short answer is that
+        I have and I do use <b>Visual Studio</b> when I am developing large
+        projects. It is a very powerful tool designed specifically for working
+        with the <b>.NET Framework</b> and is excellent for productivity. However,
+        because it is so well designed, these tools hide many of the nitty
+        gritty details that I feel are important to learn and understand
+        when you're starting out as a developer.
     </Text>
-    <Text>       
-        The real answer is that I <b>DO</b> use Visual Studio on Windows when
-        I'm developing a large intricate program (like this book which is
-        written using .NET's Blazor framework). However, for small programs, I
-        find that Visual Studio Code is much faster and simpler to work with.
+    <Text>
+        With <b>VS Code</b> you will not only learn how to code in <b>C#</b>
+        but you will also learn and practice the soft skills associated
+        with being a software developer.
     </Text>
 </Section>
-<Section Title="Installing and Configuring Visual Studio Code">
+<Section Title="Installing and Configuring VS Code">
     <Text>
         This section assumes you already have .NET 6 installed. If you
         have not done so already, install .NET 6 and then continue.
     </Text>
     <TaskItem Name="VerifyNET6">Verify .NET 6 is Installed</TaskItem>
     <TaskItem Name="InstallVSCode">
-        First, download and install Visual Studio Code for your operating
+        First, download and install VS Code for your operating
         system: <MudLink Href="https://code.visualstudio.com/Download"
         Target="_blank">LINK</MudLink>.
     </TaskItem>
@@ -59,8 +63,8 @@
     <Image Src="open-vs-code.png" />
     <HorizontalDivider/>
     <Text>
-        Next, we will install the C# extension for Visual Studio Code. This provides
-        productivity tools for developing C# programs.
+        Next, we will install the <b>C#</b> extension for <b>VS Code</b>. This provides
+        productivity tools for developing <b>C#</b> programs.
     </Text>
     <TaskItem Name="Open Extensions Bar">Click the Extensions tab on the Left Bar</TaskItem>
     <Image Src="extensions-button.png" />
@@ -71,7 +75,7 @@
     <HorizontalDivider/>
     <Text>
         Last, we will install the .NET Interactive Notebooks extension. This extension allows you to
-        quickly write and test code without creating an entire C# project. This can be incredibly useful
+        quickly write and test code without creating an entire <b>C#</b> project. This can be incredibly useful
         for testing out small snippets of code like the ones scattered throughout this book.
     </Text>
     <Note>This extension is not necessary but I highly recommend it.</Note>
