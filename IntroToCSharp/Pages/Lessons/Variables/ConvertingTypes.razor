@@ -9,24 +9,23 @@
             <AdventureDialog>
                 <Text>
                     There are times when you need to convert a <b>value</b>
-                    of one type into another. For example, you may have the
+                    of one <b>type</b> to another. For example, you may have the
                     <b>string</b> <Code>"42"</Code> and you need to convert it
                     to an <b>integer</b> <Code>42</Code> or you may
-                    have an <b>integer</b> that you need to convert to
-                    a <b>double</b> <Code>42.0</Code>. In this lesson, you will
-                    learn how to use <b>methods</b> provided by C# to convert
-                    between the common data types.
+                    have an <b>integer</b> that you need to convert to a
+                    <b>double</b> <Code>42.0</Code>. In this lesson, you will
+                    learn how to convert between the common data types.
                 </Text>
             </AdventureDialog>
         </Item>
         <Item>
             <AdventureDialog Page="BasicDataTypes.PageRef">
                 <Text>
-                    Before starting, you should also be with the basic data types:
-                    <Code>int</Code>, <Code>double</Code>, and
-                    <Code>string</Code>. If you have not yet completed the
-                    <b>@BasicDataTypes.PageRef.Name</b> lesson, you might find
-                    parts of this lesson confusing.
+                    Before starting, you should be familiar with the common data
+                    types: <Code>int</Code>, <Code>double</Code>,
+                    <Code>string</Code>, and <Code>bool</Code>. If you have not
+                    yet completed the <b>@BasicDataTypes.PageRef.Name</b>
+                    lesson, you might find parts of this lesson confusing.
                 </Text>
             </AdventureDialog>
         </Item>
@@ -45,7 +44,7 @@
 <Section Title="Casting Values">
     <Text>
         The simplest way to convert a <b>value</b> of one <Keyword Word="data
-        type"/> into another is to <b>type cast</b> it.
+        type"/> into another is to <b>cast</b> it.
     </Text>
     <RecipeBox>
         <CastRecipe/>
@@ -62,7 +61,7 @@ int x = (int) 42.8;
 Console.WriteLine(x);
     </CodeBlock>
     <Note>
-        When you cast the <b>double</b> <Code>42.5</Code> to an <b>int</b>
+        When you cast the <b>double</b> <Code>42.8</Code> to an <b>int</b>
         you lose information. Because an <b>int</b> can only store whole numbers,
         everything after the decimal point is "chopped off".
     </Note>
@@ -80,7 +79,7 @@ Console.WriteLine(y + " => " + x);
             to treat the <b>value</b> as though it were the specified
             <b>type</b>. This only works if the <b>value</b> is compatible with
             the new <b>type</b>. For numeric types, this works well. But, what
-            happens if we try to <b>cast</b> with non-numeric types?
+            happens if you try to <b>cast</b> with non-numeric types?
         </Text>
         <CodeBlock>int x = (int) "42";</CodeBlock>
         <TaskItem Name="String to Int">Add the above line of code to a C# program.</TaskItem>
@@ -95,14 +94,14 @@ Console.WriteLine(y + " => " + x);
 </Section>
 <Section Title="Parsing Strings">
     <Text>
-        Unfortunately, casting <b>values</b> can only get you so far. In the
-        exploration above, you see that the compiler produces an error message
-        if you attempt to <b>cast</b> between <b>types</b> that are not
-        compatible. This is because the conversion between the two types is
-        complex enough that the computer cannot easily do it. However, C#
-        provides several <b>methods</b> for easily converting from <b>strings</b>
-        to the common <b>data types</b>. When you convert a <b>string</b> to another
-        data type, it is called <b>parsing</b>.
+        Unfortunately, casting <b>values</b> only works with compatible types.
+        In the exploration above, the compiler produced an error message when
+        you attempted to <b>cast</b> between <b>types</b> that were not
+        compatible. This is because the conversion between the two <b>types</b>
+        is non-trivial. Luckily, C# provides several <b>methods</b> for
+        converting from <b>strings</b> to the common <b>data types</b>. When you
+        convert a <b>string</b> to another data type, it is called
+        <b>parsing</b>.
     </Text>
     <Text><b>Examples:</b></Text>
     <Text>Parsing an <b>int</b> from a <b>string</b>:</Text>
@@ -126,10 +125,12 @@ Console.WriteLine(x);
     </Note>
     <Explore Title="Parsing Bad Input">
         <Text>
-            What happens if you try to parse a <b>int</b> from a <b>string</b>
-            that does is not an int value?
+            What happens if you try to parse an <b>int</b> from a <b>string</b>
+            that does not contain an <b>int value</b>? Study the code below
+            but do not run it yet.
         </Text>
         <CodeBlock>int x = int.Parse("Hello World!");</CodeBlock>
+        <Question Text="What do you think the program will do?"/>
         <TaskItem Name="Try Parse Bad Int">Add the code above to a C# Program</TaskItem>
         <TaskItem Name="Run Bad Parse Int">Try to run the program</TaskItem>
         <Question Text="@("What happens when the computer executes int.Parse(\"Hello World\")?")"/>
@@ -139,22 +140,22 @@ Console.WriteLine(x);
                the <b>string</b> <Code>"Hello World"</Code> cannot be parsed as
                an <b>int</b>. When the computer attempts to <b>evaluate</b> the
                <b>expression</b> <Code>int.Parse("Hello World!")</Code> it
-               fails. This causes a <b>runtime error</b> to occur. That is, the
+               fails. This causes a <b>run time error</b> to occur. That is, the
                program <b>crashes</b> and an error message is displayed in the
                terminal.
             </Text>
             <Note>
                 Later, you will learn how to handle bad inputs using the
-                <Code>TryParse</Code> <b>methods</b>. For now, you can
+                <Code>TryParse</Code> <b>method</b>. For now, you can
                 assume that all inputs to your programs will be valid.
             </Note>
         </Explanation>
     </Explore>
 </Section>
-<Section Title="Values to Strings">
+<Section Title="Values and the ToString method">
     <Text>
-        Pretty much all <b>values</b> in C# come with a <Code>ToString</Code>
-        method which will convert the <b>value</b> to a <b>string</b>.
+        Most <b>values</b> in C# come with a <Code>ToString</Code>
+        <b>method</b> which converts the <b>value</b> to a <b>string</b>.
     </Text>
     <Text><b>Examples:</b></Text>
     <Text>Calling <Code>ToString</Code> on <b>literal values</b>:</Text>
@@ -184,11 +185,11 @@ Console.WriteLine(zs);
         Calling the <Code>ToString</Code> method can be cumbersome if you are
         converting several <b>values</b> to a single <b>string</b>. C# provides
         a special type of <b>string</b> called an <b>interpolated string</b>
-        which allows you to create nicely formatted strings using variables.
+        which allows you to create nicely formatted strings using <b>variables</b>.
         An <b>interpolated string</b> begins with a <Code>$</Code> in front
         of the first double quote.
     </Text>
-    <Text>Examples:</Text>
+    <Text><b>Examples:</b></Text>
     <Text>
         Within an <b>interpolated string</b> you can specify <b>variables</b>
         between curly brackets (<Code>{var-name}</Code>). When executed,
@@ -203,15 +204,19 @@ Console.WriteLine($"int: {x}, double: {y}, bool: {z}");
     </CodeBlock>
     <Text>
         Because the curly brackets are used to indicate a <b>variable</b> within
-        an <b>interpolated string</b>, if you would like to include a
-        <Code>{</Code> or a <Code>}</Code> in the <b>string</b>, you use two in
-        a row.
+        an <b>interpolated string</b>, there is a special <b>escape sequence</b>
+        that allows you to include curly brackets: <Code>{{</Code> and
+        <Code>}}</Code>.
     </Text>
     <CodeBlock ReplIt="JosephCollard/Interpolation-Example-2">
 int x = 5;
 int y = 7;
 Console.WriteLine($"Position: {{ {x}, {y} }}");
     </CodeBlock>
+    <Note> The above <b>escape sequences</b> are only valid within an
+        <b>interpolated string</b>. If used in a regular <b>string</b>, the
+        curly brackets will be read normally.
+    </Note>
 </Section>
 <Section Title="What's Next?">
     <Adventure Portrait="Portraits.CaptainCoder">
