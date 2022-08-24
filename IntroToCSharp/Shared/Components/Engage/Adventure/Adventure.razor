@@ -1,7 +1,15 @@
 @inject IDialogService DialogService
 <MudGrid Spacing=2 Justify="Justify.Center" Class="@($"my-2 {ReverseClass}")">
     <MudItem xs=4 sm=3>
-            <MudImage Class="rounded-lg pt-2" Style="width:100%; max-width:200px; border: 2px solid var(--mud-palette-dark); background-image: url('/imgs/portraits/background.png');" Src="@($"/imgs/portraits/{Portrait.Src}")" />
+        @if (SubPortrait == null) {
+            <FadeIn>
+                <MudImage Class="rounded-lg pt-2" Style="width:100%; max-width:200px; border: 2px solid var(--mud-palette-dark); background-image: url('/imgs/portraits/background.png');" Src="@($"/imgs/portraits/{Portrait.Src}")" />
+            </FadeIn>
+        } else {
+            <FadeIn>
+                <MudImage Class="rounded-lg pt-2" Style="width:100%; max-width:200px; border: 2px solid var(--mud-palette-dark); background-image: url('/imgs/portraits/background.png');" Src="@($"/imgs/portraits/{SubPortrait?.Src}")" />
+            </FadeIn>
+        }
     </MudItem>
     <MudItem xs=12 sm=9>
         <MudStack>
@@ -49,6 +57,7 @@
     private OrderedSet<RenderFragment> _fragments = new ();
     private RenderFragment CurrentFragment => _fragments[_ix];
     private PageRef? Page => _ix < _dialogs.Count ? _dialogs[_ix].Page : null;
+    private Portrait? SubPortrait => _ix < _dialogs.Count ? _dialogs[_ix].Portrait : null;
     private UserPages _userPages = UserPages.Default;
     private string ReverseClass => RightPortrait ? "flex-row-reverse" : "";
     private bool _isLoggedIn = false;

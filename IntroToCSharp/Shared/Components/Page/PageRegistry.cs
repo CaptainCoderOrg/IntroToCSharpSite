@@ -5,7 +5,7 @@ namespace CaptainCoder;
 /// <summary>
 /// The PageRegistry is a singleton object that maintains the items that
 /// appear in the NavMenu component. To add a page to the registry
-/// add a static PageRef field to a Page. The simplest way to 
+/// add a static PageRef field to a Page. The simplest way to
 /// add sections is to modify the constructor.
 /// </summary>
 public class PageRegistry
@@ -22,9 +22,10 @@ public class PageRegistry
         AddSection("Lessons", order++);
         AddSection("Basics", "Lessons", order++);
         AddSection("Variables", "Lessons", order++);
-        AddSection("Challenges", order++);
-        AddSection("Journal", order++);
-        AddSection("Social", order++);
+        // AddSection("Challenges", order++);
+        AddSection("Gauntlets", order++);
+        // AddSection("Journal", order++);
+        // AddSection("Social", order++);
     }
 
     private PageRegistry Init()
@@ -100,7 +101,7 @@ public class PageRegistry
 }
 
 /// <summary>
-/// A MenuItem represents the data necessary for an item to 
+/// A MenuItem represents the data necessary for an item to
 /// be rendered on the NavMenu.
 /// </summary>
 public class MenuItem : IComparable<MenuItem>
