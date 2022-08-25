@@ -1,0 +1,117 @@
+@using System.Text;
+
+<div style="display:none"><CascadingValue Value="@this">@LoadingFragment</CascadingValue></div>
+
+<MudPaper Class="pa-4">
+    <MudStack>
+        <MudElement>
+            <CodeBlock>@RenderSourceCode()</CodeBlock>
+            <MudStack Row=true>
+                <MudButton Class="flex-1" Disabled="@(!HasBack)" Color="Color.Primary" Variant="Variant.Filled" OnClick="Back">Back</MudButton>
+                <MudButton Class="flex-1" Disabled="@(!HasNext)" Color="Color.Secondary" Variant="Variant.Filled" OnClick="Next">Next</MudButton>
+            </MudStack>
+            <Text><b>Explanation</b></Text>
+            @if (ForceRedraw) {
+                <FadeIn>
+                    @CurrentExplanation
+                </FadeIn>
+            } else {
+                <FadeIn>
+                    @CurrentExplanation
+                </FadeIn>
+            }
+            <Text><b>Terminal:</b></Text>
+            <Terminal>@CurrentOutput @if(CurrentState.ReadLine) { 
+                <input 
+                  type="text" 
+                  style="border: 1px solid black; border-radius:2; padding:0.2rem .3rem;"
+                  value="@CurrentState.Value" @onchange="@((ChangeEventArgs e) => CurrentState.UpdateValue(e))" />
+            } </Terminal>
+            
+        </MudElement>
+        
+    </MudStack>
+</MudPaper>
+
+@code {
+    private string[] _sourceCode = {};
+    private string RenderSourceCode() {
+        string[] copy = new string[_sourceCode.Length];
+        
+        for (int i = 0; i < _sourceCode.Length; i++)
+        {
+            copy[i] = _sourceCode[i].TrimEnd();
+            
+        }
+        History.Skip(1).Reverse().ToList().ForEach(step => step.DoUpdateCode(copy));
+        if (CurrentState.Line >= 0) copy[CurrentState.Line-1] += " // <--";
+        return string.Join("\n", copy);
+    }
+
+    [Parameter, EditorRequired]
+    public string SourceCode { set => _sourceCode = value.Split("\n"); }
+
+    [Parameter]
+    public string InitialOutput { get; set; } = string.Empty;
+    private int _forceRedraw = 0;
+    private bool ForceRedraw => _forceRedraw++ % 2 == 0;
+    private RenderFragment LoadingFragment = null!;
+    private string _lastId = string.Empty;
+    private Stack<ICodeStep> History = new();
+    private string CurrentOutput => InitialOutput + History.Skip(1).Select(state => state.Output).Aggregate("", (a, b) => b + a);
+    private Dictionary<string, ICodeStep> _states = new ();
+    private int _loadIx = 0;
+    private ICodeStep CurrentState => History.Peek();
+    private RenderFragment CurrentExplanation => CurrentState.Explanation;
+    private bool IsLoading => _loadIx < _states.Count;
+    private List<RenderFragment> _fragments = new ();
+    [Parameter, EditorRequired]
+    public RenderFragment ChildContent { set => _fragments.Add(value); }
+    private bool HasNext => CurrentState.HasNext;
+    private bool HasBack => History.Count > 1;
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Load();
+    }
+    private void Load()
+    {
+        if (_fragments.Count > _loadIx) {
+            LoadingFragment = _fragments[_loadIx++];
+            StateHasChanged();
+        }
+    }
+
+    private void Back() {
+        if (!HasBack) return;
+        History.Pop();
+        StateHasChanged();
+    }
+    private void Next() {
+        if (CurrentState.NextId == null) return;
+        CurrentState.OnNext();
+        this.PushState(CurrentState.NextId);        
+        StateHasChanged();
+    }
+
+    public void AddCodeStep(ICodeStep state) {
+        if (History.Count == 0) {
+            History.Push(state);
+        }
+        _states[state.ID] = state;
+        state.Fragment = LoadingFragment;
+        ICodeStep? prevState = _lastId == string.Empty ? null : _states[_lastId];
+        if (prevState != null && prevState.NextId == null) {
+            prevState.NextId = state.ID;
+        }
+        _lastId = state.ID;
+        Load();
+    }
+
+    public void PushState(string ID)
+    {
+        History.Push(_states[ID]);
+        StateHasChanged();
+    }
+}
+
