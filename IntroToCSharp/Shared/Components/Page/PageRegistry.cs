@@ -22,7 +22,7 @@ public class PageRegistry
         AddSection("Lessons", order++);
         AddSection("Basics", "Lessons", order++);
         AddSection("Variables", "Lessons", order++);
-        // AddSection("Challenges", order++);
+        AddSection("Branching Logic", "Lessons", order++);
         AddSection("Gauntlets", order++);
         // AddSection("Journal", order++);
         // AddSection("Social", order++);

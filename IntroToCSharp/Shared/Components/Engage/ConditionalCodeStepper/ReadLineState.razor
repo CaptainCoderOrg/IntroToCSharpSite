@@ -1,0 +1,57 @@
+@using System.Text.RegularExpressions;
+@implements ICodeStep
+
+When the computer <b>evaluates</b> <Code>Console.ReadLine()</Code>
+it waits for the user to enter a <b>string</b> in the terminal. Enter a
+<b>value</b> in the <b>terminal</b> below and click <b>Next</b> to continue.
+
+
+@code 
+{
+    
+    [CascadingParameter]
+    public ConditionalCodeStepper CodeStepper { get; set; } = null!;
+    public Action<string[]>? UpdateCode { get; set; }
+    [Parameter, EditorRequired]
+    public string ID { get; set; } = null!;
+    [Parameter, EditorRequired]
+    public int Line { get; set; }
+    private string _value = string.Empty;
+    public bool ReadLine => true;
+    public string Output => Value + "\n";
+    
+    public RenderFragment Explanation => Fragment;
+    private string ValueExpr => "\"" + Value.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\"";
+
+    public bool HasNext => NextId != null;
+    public string? NextId {get; set;} = null;
+    public RenderFragment Fragment {get; set;} = null!;
+
+    public async void UpdateValue(ChangeEventArgs e){
+        string? value = e?.Value?.ToString();
+        this.Value = value ?? this.Value;
+        await ValueChanged.InvokeAsync(this.Value);
+    }
+
+    [Parameter]
+    public string Value { get; set; } = string.Empty;
+
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+    public void OnNext() {
+        if (Value == string.Empty) {
+            NotificationService.Service.Add("You did not enter a value in the terminal.", Severity.Warning);
+        }
+    }
+
+    public void DoUpdateCode(string[] code) {
+        code[Line-1] = Regex.Replace(code[Line-1], "Console.ReadLine\\(\\)[!]?", ValueExpr);
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        CodeStepper?.AddCodeStep(this);
+    }
+
+}
