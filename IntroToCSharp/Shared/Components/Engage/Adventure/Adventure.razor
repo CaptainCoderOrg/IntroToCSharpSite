@@ -3,11 +3,11 @@
     <MudItem xs=4 sm=3>
         @if (SubPortrait == null) {
             <FadeIn>
-                <MudImage Class="rounded-lg pt-2" Style="width:100%; max-width:200px; border: 2px solid var(--mud-palette-dark); background-image: url('/imgs/portraits/background.png');" Src="@($"/imgs/portraits/{Portrait.Src}")" />
+                <MudImage Class="rounded-lg" Style="width:100%; max-width:200px; border: 3px solid var(--mud-palette-dark); background-image: url('/imgs/portraits/background.png');" Src="@($"/imgs/portraits/{Portrait.Src}")" />
             </FadeIn>
         } else {
             <FadeIn>
-                <MudImage Class="rounded-lg pt-2" Style="width:100%; max-width:200px; border: 2px solid var(--mud-palette-dark); background-image: url('/imgs/portraits/background.png');" Src="@($"/imgs/portraits/{SubPortrait?.Src}")" />
+                <MudImage Class="rounded-lg" Style="width:100%; max-width:200px; border: 3px solid var(--mud-palette-dark); background-image: url('/imgs/portraits/background.png');" Src="@($"/imgs/portraits/{SubPortrait?.Src}")" />
             </FadeIn>
         }
     </MudItem>
