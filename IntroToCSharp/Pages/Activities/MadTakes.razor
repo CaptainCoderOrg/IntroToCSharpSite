@@ -6,7 +6,7 @@
         <Item>
             <AdventureDialog>
                 <Text>
-                    A Mad Take is a silly word game in which the players are
+                    A <b>Mad Take</b> is a silly word game in which the players are
                     asked to provide words that will be used to fill in blanks
                     from a story (or other document). Here's the catch: The
                     players are not allowed to see the story before providing
@@ -17,7 +17,7 @@
         </Item>
         <Item>
             <AdventureDialog>
-                <Text>Below is a simple Mad Take program I've written in C# that you can play:</Text>
+                <Text>Below is a simple <b>Mad Take</b> program I've written in C# that you can play:</Text>
                 <ReplIt Path="JosephCollard/MadTakes"/>
             </AdventureDialog>
         </Item>
@@ -25,7 +25,7 @@
             <AdventureDialog Page="UserInput.PageRef">
                 <Text>
                     In this activity, you will design a colorful, interactive
-                    Mad Take program to wow your friends and family! Before
+                    <b>Mad Take</b> program to wow your friends and family! Before
                     starting, you should be familiar with using the
                     <Code>Console.ReadLine</Code> method to get user input from
                     the terminal. If you need a refresher, head over to the
@@ -65,7 +65,7 @@
         and what output you your program will display.
     </Text>
     <Text>
-        First, write (or find) at least 5 sentences to use as the base for your Mad Take.
+        First, write (or find) at least 5 sentences to use as the base for your <b>Mad Take</b>.
         This could be a short story, a recipe, a fun limerick, a phrase from a
         song, a famous quote, or anything else. For example, you might use the
         following recipe:
@@ -78,11 +78,11 @@
         Scoop the batter onto a hot pan and cook for about a minute on each side.
         Serve your pancakes with your favorite topping and dig in!
     </Output>
-    <TaskItem Name="Create a Base">Write (or fine) at least 5 sentences to use as a base for your Mad Take</TaskItem>
+    <TaskItem Name="Create a Base">Write (or fine) at least 5 sentences to use as a base for your <b>Mad Take</b></TaskItem>
     <Text>
         Next, replace words you would like to use as user inputs with labels. Be sure that
         the labels you use are unique to each word you want to replace. For example,
-        you might replace the word "pancakes" with the label "foodItem".
+        you might replace the word "pancakes" with the label "<b>foodItem</b>".
     </Text>
     <Output>
         To make <b>{foodItem}</b> you first need to gather your ingredients.
@@ -97,7 +97,7 @@
         label.
     </Note>
     <Text>
-        Create at least 10 labels. When you're finished, you should have a template for your Mad Take:
+        Create at least 10 labels. When you're finished, you should have a template for your <b>Mad Take</b>:
     </Text>
     <Output>
         To make <b>{foodItem}</b> you first need to gather your ingredients.
@@ -117,12 +117,12 @@
 </Section>
 <Section Title="Declaring Variables">
     <Text>
-        Now that you have a template for your Mad Take, you can start writing your program.
+        Now that you have a template for your <b>Mad Take</b>, you can start writing your program.
     </Text>
-    <ConsoleProjectTask Name="Create Project">Create a new project called "Mad Takes"</ConsoleProjectTask>
+    <ConsoleProjectTask Name="Create Project">Create a new project called "<b>Mad Take</b>s"</ConsoleProjectTask>
     <Text>
         In your <Code>Program.cs</Code> file <b>declare</b> a <b>variable</b> for each of the
-        labels in your Mad Take.
+        labels in your <b>Mad Take</b>.
     </Text>
     <MudPaper Elevation=5 Class="pa-2">
         <DeclareRecipe/>
@@ -194,20 +194,20 @@ foodName = Console.ReadLine()!; // Bug on this line!
     <Text>
         With a <b>value</b> in each of your <b>variables</b>, you are ready to
         display the result to the user. Use the (<Code>+</Code>) <Keyword Word="operator"/>
-        to combine your <b>variables</b> and the <b>text</b> of your Mad Take. Then,
+        to combine your <b>variables</b> and the <b>text</b> of your <b>Mad Take</b>. Then,
         call the <Code>Console.WriteLine</Code> method for each of your sentences.
         For example:
     </Text>
     <CodeBlock>
 Console.WriteLine("To make " + foodItem + " you first need to gather your ingredients.");
     </CodeBlock>
-    <TaskItem Name="Display Mad Take">Use the <Code>Console.WriteLine</Code> method to display your Mad Take.</TaskItem>
+    <TaskItem Name="Display Mad Take">Use the <Code>Console.WriteLine</Code> method to display your <b>Mad Take</b>.</TaskItem>
     <TaskItem Name="Save and Run">Save and run your program to verify the output. (<Code>dotnet run</Code>)</TaskItem>
 
 </Section>
 <Section Title="Spice it up with Colors">
     <Text>
-        Now that you have a working Mad Take. Select a color for each of your
+        Now that you have a working <b>Mad Take</b>. Select a color for each of your
         labels and add it to both the user input and the output.
     </Text>
     <Text><b>Input Example:</b></Text>
@@ -236,7 +236,7 @@ Console.WriteLine(" you first need to gather your ingredients.");
 
     <TaskItem Name="Spice it up">Update your program to use a different color for each <b>variable</b>.</TaskItem>
     <TaskItem Name="Test Program">Be sure to save and run your program frequently to test it.</TaskItem>
-    <TaskItem Name="Share Mad Take">When you're finished, entertain your friends and family by sharing your Mad Take with them.</TaskItem>
+    <TaskItem Name="Share Mad Take">When you're finished, entertain your friends and family by sharing your <b>Mad Take</b> with them.</TaskItem>
 
 </Section>
 
@@ -245,7 +245,7 @@ Console.WriteLine(" you first need to gather your ingredients.");
         <Item>
             <AdventureDialog>
                 <Text>
-                    You're doing great! I hope you're having fun with your Mad Take!
+                    You're doing great! I hope you're having fun with your <b>Mad Take</b>!
                 </Text>
             </AdventureDialog>
         </Item>
