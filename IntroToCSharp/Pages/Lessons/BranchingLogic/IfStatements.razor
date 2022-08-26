@@ -161,6 +161,12 @@ else
     Console.WriteLine("I'm sorry Dave, I cannot let you do that.");
 }
     </CodeBlock>
+    <Note>
+        When you add an <b>else statement</b> to the end of an <b>if
+        statement</b> you create a <b>decision tree</b> with two "branches".
+        When the program reaches the <b>if statement</b> it is going to choose
+        to execute exactly one "branch" of code.
+    </Note>
 </Section>
 <Section Title="The Else-If Statement">
     <Text>
@@ -185,10 +191,10 @@ else if (userInput == "p@@$$w0rd")
     Console.WriteLine("Leet User Detected!");
 }
     </CodeBlock>
-    <Note>
+    <Text>
         Because an <b>else-if statement</b> is an <b>if statement</b>, you can
         add an <b>else statement</b> statement to the end of it.
-    </Note>
+    </Text>
     <CodeBlock ReplIt="JosephCollard/Else-If-Else-Example">
 Console.Write("Enter the password: ");
 string userInput = Console.ReadLine()!;
@@ -228,19 +234,42 @@ else
     </CodeBlock>
 </Section>
 
-<Section Title="Stepping Through an Example">
-    <IntroToCSharp.Pages.Lessons.BranchingLogic.Examples.ComplexIfExample/>
+<Section Title="Decision Trees">
+    <Text>
+        Each <b>if</b>, <b>else if</b>, and <b>else statement</b> inside of a
+        <b>decision tree</b> is called a <b>branch</b>. It is important to note
+        that the computer will execute at <b>MOST</b> one of the "branches" on
+        the <b>decision tree</b>. From top to bottom, the computer
+        <b>evaluates</b> the <b>condition</b> of each <b>branch</b> until it
+        finds the <b>FIRST</b> <Code>true</Code> <b>condition</b>. When this
+        happens, it executes the <b>body</b> of that <b>branch</b> and then
+        skips to the end of the <b>decision tree</b>.
+    </Text>
+    <Note>
+        An <b>else statement</b> is always optional when writing a <b>decision tree</b>.
+        If present, the <b>else statement</b> acts as a "fail safe" that executes
+        if none of the <b>conditionals</b> were <Code>true</Code>.
+    </Note>
+</Section>
+
+<Section Title="A Step by Step Example">
+  <IntroToCSharp.Pages.Lessons.BranchingLogic.Examples.ComplexIfExample/>  
 </Section>
 
 <Section Title="A Word of Caution">
     <Text>
         With the power of <b>if statements</b>, you can begin to create programs
-        that allow users to make interesting decisions. Be aware that with the
-        power of <b>if statements</b> you also gain the power to add complexity
-        to your programs. As a programmer, it is important to manage the
-        complexity of your program so that it is easy for you to understand and
-        debug them.
+        that allow users to make interesting decisions. Be aware that with this
+        power you also gain the ability to add complexity to your programs. You
+        will be tempted to write very complex <b>decision trees</b> using deeply
+        nested <b>if statements</b>. Do <b>NOT</b> fall into this trap.
+        <b>RESIST</b> this temptation. 
     </Text>
+    <Note>
+        If you find yourself writing an <b>if statement</b> that is inside of
+        two other <b>if statements</b>, your program is almost certainly too
+        complex. This is often referred to as "spaghetti code".
+    </Note>
 </Section>
 
 
@@ -249,7 +278,27 @@ else
     <Adventure Portrait="Portraits.CaptainCoder">
         <Item>
             <AdventureDialog>
-                Something something decisions
+                Being a good programmer does not mean you know how to create complex programs.
+                A more important skill to hone is the ability to <b>MANAGE</b> complex
+                programs. As your programming tool belt continues to grow, you will learn 
+                more ways to manage complexity; <b>if statements</b> are just the beginning.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog>
+                Mastering <b>if</b>, <b>else-if</b>, and <b>else statements</b>
+                takes a lot of practice. Why not head over to the <b>INSERT
+                ACTIVITY HERE</b> to practice using them to create <b>INSERT
+                RESULT HERE</b>.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog>
+                You may have noticed that the programs you've written so far
+                require your user to enter very precise text into the terminal. 
+                To create a better user experience, programmers will often write
+                code to "sanitize" the user's inputs. You can learn the basics
+                in the <b>Input Validation</b> lesson.
             </AdventureDialog>
         </Item>
     </Adventure>
