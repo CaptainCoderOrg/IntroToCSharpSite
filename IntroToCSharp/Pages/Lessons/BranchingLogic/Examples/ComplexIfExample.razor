@@ -3,159 +3,163 @@
     Study the code below.
 </Text>
 <ConditionalCodeStepper InitialOutput="" SourceCode="@ComplexIfExampleSource.Code">
-    <CodeStep ID="BeforeStart" Line=-1 Output="@InitialOutput">
+    <CodeStep ID="BeforeStart" Line=-1>
         <Explanation>
-            There are several lines of code prior to this section of the program.
-            Click <b>Next</b> to execute until the computer reaches this section of code.
+            Use the <b>Next</b> and <b>Back</b> buttons below to explore how the
+            computer executes the code above.
         </Explanation>
     </CodeStep>
-    <CodeStep ID="Pre" Line=-1>
+    <CodeStep ID="Pre" Line=1 OutputLine="@InitialOutput">
         <Explanation>
-            The computer has stopped execution prior to executing the first line
-            of code in this section. Notice the output in the <b>terminal</b>
-            below. Use the <b>Next</b> and <b>Back</b> buttons to step through
-            the program and study how the computer <b>executes</b> this
-            <b>decision tree</b>.
+            This line of code reads the <b>value</b> stored in the
+            <Code>dialog</Code> <b>variable</b> and displays it in
+            the <b>terminal</b>.
         </Explanation>
     </CodeStep>
-    <CodeStep ID="Init" Line=1>
+    <CodeStep ID="Enter Choice" Line=2 Output="Enter a choice: ">
+        <Explanation>
+            This line of code displays <Code>"Enter a choice: "</Code>
+            in the <b>terminal</b>.
+        </Explanation>
+    </CodeStep>
+    <CodeStep ID="Init" Line=3>
         <Explanation>
             <BeforeInitialize VarName="userInput" Expr="Console.ReadLine()!"/>
         </Explanation>
     </CodeStep>
 
-    <ReadLineState ID="Foo" @bind-Value="UserInput" Line=1/>
+    <ReadLineState ID="Foo" @bind-Value="UserInput" Line=3/>
 
-    <CodeStep ID="Step2" Line=1>
+    <CodeStep ID="Step2" Line=3>
         <Explanation>
             <EvalReadLineExplanation/>
         </Explanation>
     </CodeStep>
 
-    <CodeStep ID="Step3" Line=1>
+    <CodeStep ID="Step3" Line=3>
         <Explanation>
             <InitializeExplanation Value="@UserInputExpr" VarName="userInput"/>
         </Explanation>
     </CodeStep>
 
-    <CodeStep ID="Step4" Line=2>
+    <CodeStep ID="Step4" Line=4>
         <Explanation>
             <EvalExpressionExplanation Expr="@("userInput == \"1\"")" />
         </Explanation>
     </CodeStep>
 
-    <CodeStep ID="Step5" Line=2 SubVarName="userInput" SubValue="@UserInputExpr">
+    <CodeStep ID="Step5" Line=4 SubVarName="userInput" SubValue="@UserInputExpr">
         <Explanation>
             <ReadVariableExplanation Name="userInput" />
         </Explanation>
     </CodeStep>
 
-    <CodeStep ID="Step6" Line=2 SubVarName="@GetCompare(1)" SubValue="@GetComparResult(1)">
+    <CodeStep ID="Step6" Line=4 SubVarName="@GetCompare(1)" SubValue="@GetComparResult(1)">
         <Explanation>
             <EqualityEvalExplanation LeftValue="@UserInputExpr" RightValue="@("\"1\"")" />
         </Explanation>
     </CodeStep>
 
-    <CodeStep ID="Check1" Line=2 NextId="@GetNextId(1)">
+    <CodeStep ID="Check1" Line=4 NextId="@GetNextId(1)">
         <Explanation>
             <IfStatementExplanation Conditional="@GetCondition(1)" />
         </Explanation>
     </CodeStep>
 
-    <CodeStep ID="Check2" Line=6>
+    <CodeStep ID="Check2" Line=8>
         <Explanation>
             <EvalExpressionExplanation Expr="@("userInput == \"2\"")" />
         </Explanation>
     </CodeStep>
 
-    <CodeStep ID="Check2-1" Line=6 SubVarName="userInput" SubValue="@UserInputExpr">
+    <CodeStep ID="Check2-1" Line=8 SubVarName="userInput" SubValue="@UserInputExpr">
         <Explanation>
             <ReadVariableExplanation Name="userInput" />
         </Explanation>
     </CodeStep>
 
-    <CodeStep ID="Check2-2" Line=6 SubVarName="@GetCompare(2)" SubValue="@GetComparResult(2)">
+    <CodeStep ID="Check2-2" Line=8 SubVarName="@GetCompare(2)" SubValue="@GetComparResult(2)">
         <Explanation>
             <EqualityEvalExplanation LeftValue="@UserInputExpr" RightValue="@("\"2\"")" />
         </Explanation>
     </CodeStep>
 
-    <CodeStep ID="Check2-3" Line=6 NextId="@GetNextId(2)">
+    <CodeStep ID="Check2-3" Line=8 NextId="@GetNextId(2)">
         <Explanation>
             <IfStatementExplanation Conditional="@GetCondition(2)" />
         </Explanation>
     </CodeStep>
 
-    <CodeStep ID="Check3" Line=10>
+    <CodeStep ID="Check3" Line=12>
         <Explanation>
             <EvalExpressionExplanation Expr="@("userInput == \"3\"")" />
         </Explanation>
     </CodeStep>
 
-    <CodeStep ID="Check3-1" Line=10 SubVarName="userInput" SubValue="@UserInputExpr">
+    <CodeStep ID="Check3-1" Line=12 SubVarName="userInput" SubValue="@UserInputExpr">
         <Explanation>
             <ReadVariableExplanation Name="userInput" />
         </Explanation>
     </CodeStep>
 
-    <CodeStep ID="Check3-2" Line=10 SubVarName="@GetCompare(3)" SubValue="@GetComparResult(3)">
+    <CodeStep ID="Check3-2" Line=12 SubVarName="@GetCompare(3)" SubValue="@GetComparResult(3)">
         <Explanation>
             <EqualityEvalExplanation LeftValue="@UserInputExpr" RightValue="@("\"3\"")" />
         </Explanation>
     </CodeStep>
 
-    <CodeStep ID="Check3-3" Line=10 NextId="@GetNextId(3)">
+    <CodeStep ID="Check3-3" Line=12 NextId="@GetNextId(3)">
         <Explanation>
             <IfStatementExplanation Conditional="@GetCondition(3)" />
         </Explanation>
     </CodeStep>
 
-    <CodeStep ID="DoElse" Line=14>
+    <CodeStep ID="DoElse" Line=16>
         <Explanation>
             <ElseExplanation/>
         </Explanation>
     </CodeStep>
 
-    <CodeStep ID="DoElse-2" Line=16 OutputLine="Invalid Choice!" NextId="Last">
+    <CodeStep ID="DoElse-2" Line=18 OutputLine="Invalid Choice!" NextId="Last">
         <Explanation>
             <DisplayExplanation Output="Invalid Choice!" />
         </Explanation>
     </CodeStep>
 
-    <CodeStep ID="UserInputIs1" Line=4 OutputLine="You enter the cave and prepare to face the dragon!">
+    <CodeStep ID="UserInputIs1" Line=6 OutputLine="You enter the cave and prepare to face the dragon!">
         <Explanation>
             <DisplayExplanation Output="You enter the cave and prepare to face the dragon!" />
         </Explanation>
     </CodeStep>
-    <CodeStep ID="EndOfIf1" Line=5 NextId="Last">
+    <CodeStep ID="EndOfIf1" Line=7 NextId="Last">
         <Explanation>
             <EndOfIfExplanation />
         </Explanation>
     </CodeStep>
 
-    <CodeStep ID="UserInputIs2" Line=8 OutputLine="You return to town to buy supplies.">
+    <CodeStep ID="UserInputIs2" Line=10 OutputLine="You return to town to buy supplies.">
         <Explanation>
             <DisplayExplanation Output="You return to town to buy supplies." />
         </Explanation>
     </CodeStep>
-    <CodeStep ID="EndOfIf2" Line=9 NextId="Last">
+    <CodeStep ID="EndOfIf2" Line=11 NextId="Last">
         <Explanation>
             <EndOfIfExplanation />
         </Explanation>
     </CodeStep>
 
-    <CodeStep ID="UserInputIs3" Line=12 OutputLine="You run home to the safety of your warm bed.">
+    <CodeStep ID="UserInputIs3" Line=14 OutputLine="You run home to the safety of your warm bed.">
         <Explanation>
             <DisplayExplanation Output="You run home to the safety of your warm bed." />
         </Explanation>
     </CodeStep>
-    <CodeStep ID="EndOfIf3" Line=13 NextId="Last">
+    <CodeStep ID="EndOfIf3" Line=15 NextId="Last">
         <Explanation>
             <EndOfIfExplanation />
         </Explanation>
     </CodeStep>
 
-    <CodeStep ID="Last" Line=17 >
+    <CodeStep ID="Last" Line=19 >
         <Explanation>
             There is no more code to execute and the program exits.
         </Explanation>
@@ -191,14 +195,13 @@
     }
     private string GetCompare(int n) => $"{UserInputExpr} == \"{n}\"";
     private string GetComparResult(int n) => (UserInput == $"{n}").ToString().ToLower();
-    private string InitialOutput = @"
+    private string InitialOutput = @" 
 You stand at the entrance to the dragon's lair. Dare you enter?
 
 1. Enter the Cave
 2. Return to Town
 3. Run home and go to sleep
-
-Enter a choice: ".TrimStart();
+".TrimStart();
     private string UserInput { get; set; } = string.Empty;
     private string UserInputExpr => "\"" + UserInput.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\"";
 }

@@ -1,5 +1,7 @@
 public static class ComplexIfExampleSource {
     public static readonly string Code = @"
+Console.WriteLine(dialog);
+Console.Write(""Enter a choice: "");
 string userInput = Console.ReadLine()!;
 if (userInput == ""1"")
 {
