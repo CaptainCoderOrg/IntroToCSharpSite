@@ -12,11 +12,18 @@ public readonly record struct PageRef(string Name, string Href, int Order, strin
 
 public class Page : ComponentBase
 {
+    [Inject]
+    protected NavigationManager NavigationManager { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
         Utils.ScrollToTop();
+        await CheckPage();
+    }
+
+    protected async Task CheckPage() {
+        
     }
 
 }
