@@ -1,13 +1,26 @@
 
 <Text>
-    The code block below is part of a program that has already 
-    displayed a message to the user. Use the <b>Next</b> and <b>Back</b> buttons to step through
-    the execution of the code block.
+    Study the code below.
 </Text>
-<ConditionalCodeStepper InitialOutput="@InitialOutput" SourceCode="@ComplexIfExampleSource.Code">
+<ConditionalCodeStepper InitialOutput="" SourceCode="@ComplexIfExampleSource.Code">
+    <CodeStep ID="BeforeStart" Line=-1 Output="@InitialOutput">
+        <Explanation>
+            There are several lines of code prior to this section of the program.
+            Click <b>Next</b> to execute until the computer reaches this section of code.
+        </Explanation>
+    </CodeStep>
+    <CodeStep ID="Pre" Line=-1>
+        <Explanation>
+            The computer has stopped execution prior to executing the first line
+            of code in this section. Notice the output in the <b>terminal</b>
+            below. Use the <b>Next</b> and <b>Back</b> buttons to step through
+            the program and study how the computer <b>executes</b> this
+            <b>decision tree</b>.
+        </Explanation>
+    </CodeStep>
     <CodeStep ID="Init" Line=1>
         <Explanation>
-            <BeforeInitialize VarName="userName" Expr="Console.ReadLine()!"/>
+            <BeforeInitialize VarName="userInput" Expr="Console.ReadLine()!"/>
         </Explanation>
     </CodeStep>
 
