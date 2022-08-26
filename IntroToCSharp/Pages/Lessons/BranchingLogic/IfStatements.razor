@@ -53,6 +53,9 @@
 
         Enter a choice: 
     </Output>
+
+    <Question Text="What other uses can you think of that might need a menu"/>
+    <Question Text="Can you think of any functions that you already know that could help create a menu"/>
 </Section>
 <Section Title="The If Statement">
     <RecipeBox>
@@ -133,6 +136,23 @@ if (userInput == "password")
     }
 }
     </CodeBlock>
+
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="What other data types could be part of a boolean expression"
+        XP=10
+        GoldAward=25>
+        <CheckBoxOption Text="int" IsCorrect="true" />
+        <CheckBoxOption Text="string" IsCorrect="true" />
+        <CheckBoxOption Text="boolean" IsCorrect="true" />
+        <CheckBoxOption Text="none" IsCorrect="false" />
+    </MultipleChoiceQuestion>
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="An if statements require"
+        XP=10
+        GoldAward=25>
+        <CheckBoxOption Text="A boolean expression" IsCorrect="true" />
+        <CheckBoxOption Text="Instructions within the brackets" IsCorrect="false" />
+        <CheckBoxOption Text="A semi colon after the brackets" IsCorrect="false" />
+        <CheckBoxOption Text="Instructions after the brackets" IsCorrect="false" />
+    </MultipleChoiceQuestion>
 </Section>
 <Section Title="The Else Statement">
     <Text>
@@ -167,6 +187,25 @@ else
         When the program reaches the <b>if statement</b> it is going to choose
         to execute exactly one "branch" of code.
     </Note>
+
+    <Explore Title="Pokemon">
+        <Text>
+            In the popular game Pokemon, one of the first questions that you are asked
+            is for your name and whether you are a boy or a girl. After you answer the question the Professor
+            greets you based on your chosen gender. Why don't we try this out for ourselves?
+        </Text>
+        <TaskList Name="Creating Pokemon!">
+            <TaskItem Name="Prompt User Name">Start out by asking the user for their name</TaskItem>
+            <TaskItem Name="Store User Name">Store the user's name as userName</TaskItem>
+            <TaskItem Name="Prompt User Gender">Ask the user for their gender ("boy" or "girl")</TaskItem>
+            <TaskItem Name="Store User Gender">Store the user gender as a string</TaskItem>
+            <TaskItem Name="Create If-Else">Create an If-Else Statement</TaskItem>
+            <TaskItem Name="Set If">Set the if statement to one gender</TaskItem>
+            <TaskItem Name="Create Response">Set the response to be "$Ah yes, {userName}. How could I miss that you are a ${gender}" </TaskItem>
+            <TaskItem Name="Set Boy Color">If the user said they were a boy, set the Console Color to Blue</TaskItem>
+            <TaskItem Name="Set Girl Color">If the user said they were a girl, set the Console Color to Pink</TaskItem>
+        </TaskList>
+    </Explore>
 </Section>
 <Section Title="The Else-If Statement">
     <Text>
@@ -232,6 +271,15 @@ else
     Console.WriteLine("Invalid Choice!");
 }
     </CodeBlock>
+
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="Else statements"
+        XP=10
+        GoldAward=25>
+        <CheckBoxOption Text="Must have an if statement" IsCorrect="true" />
+        <CheckBoxOption Text="Can be combined with an if statement to create an else if statement" IsCorrect="true" />
+        <CheckBoxOption Text="Will execute if the if statement doesn't execute" IsCorrect="true" />
+        <CheckBoxOption Text="Requires a boolean expression" IsCorrect="false" />
+    </MultipleChoiceQuestion>
 </Section>
 
 <Section Title="Decision Trees">
@@ -250,6 +298,62 @@ else
         If present, the <b>else statement</b> acts as a "fail safe" that executes
         if none of the <b>conditionals</b> were <Code>true</Code>.
     </Note>
+
+    <Explore Title="Explore: Exploring Error Codes">
+        <Text>
+            Copy these incorrect if else statements into a C# program. What error Codes
+            can you see? Can you fix them?
+        </Text>
+
+<CodeBlock AllowCopy=true>
+bool imInDanger = true;
+if ()
+{
+}
+Console.WriteLine("Im in danger :(  ");
+        </CodeBlock>
+<Question Text="What is the error message that occurs when you write the code above?" />
+<Question Text="How did you fix it?" />
+
+<CodeBlock AllowCopy=true>
+bool ruhRohRaggy = true;
+else ()
+{
+}
+Console.WriteLine("Like zoinks Scoob!");
+        </CodeBlock>
+<Question Text="What is the error message that occurs when you write the code above?" />
+<Question Text="How did you fix it?" />
+
+<CodeBlock AllowCopy=true>
+bool imInDanger = true;
+if ()
+{
+}
+Console.WriteLine("Im in danger :(  ");
+</CodeBlock>
+
+<Question Text="What is the error message that occurs when you write the code above?" />
+<Question Text="How did you fix it?" />
+
+<CodeBlock AllowCopy=true>
+
+bool imInDanger = true;
+
+if(imInDanger == true)
+{
+    Console.WriteLine("I think we are safe!");
+}
+else(imInDanger == false){
+    Console.WriteLine("Or am I?");
+}
+
+</CodeBlock>
+
+<Question Text="What is the error message that occurs when you write the code above?" />
+<Question Text="How did you fix it?" />
+<Question Text="Were the error messages helpful for figuring out what was wrong? Why or why not?"/>
+    </Explore>
 </Section>
 
 <Section Title="A Step by Step Example">
