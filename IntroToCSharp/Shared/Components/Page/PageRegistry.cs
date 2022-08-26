@@ -13,6 +13,15 @@ public class PageRegistry
 
     public static readonly PageRegistry Instance = new PageRegistry().Init();
     private readonly Dictionary<string, MenuItem> _items = new ();
+    private readonly Dictionary<string, PageRef> _routes = new (); 
+
+    public static PageRef? FromRoute(string route)
+    {
+        if (Instance._routes.TryGetValue(route, out PageRef page)) {
+            return page;
+        }
+        return null;
+    }
 
     private PageRegistry()
     {
@@ -94,6 +103,7 @@ public class PageRegistry
         page.Parent = parent;
         parent.Children.Add(page);
         _items[p.Name] = page;
+        _routes[p.Href] = p;
     }
 
     public IEnumerable<MenuItem> RootElements => _items.Values.Where(item => item.Parent == null).OrderBy(item => item.Order);
