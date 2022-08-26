@@ -13,7 +13,7 @@ public class PageRegistry
 
     public static readonly PageRegistry Instance = new PageRegistry().Init();
     private readonly Dictionary<string, MenuItem> _items = new ();
-    private readonly Dictionary<string, PageRef> _routes = new (); 
+    private readonly Dictionary<string, PageRef> _routes = new ();
 
     public static PageRef? FromRoute(string route)
     {
@@ -119,7 +119,6 @@ public class MenuItem : IComparable<MenuItem>
     private readonly string _name;
     private readonly string? _href;
     private readonly bool _isAdventure;
-
     private readonly List<MenuItem> _children = new ();
 
     public MenuItem(string name, string? href, int order, bool isAdventure, MenuItem? parent = null)
@@ -130,7 +129,6 @@ public class MenuItem : IComparable<MenuItem>
         this.Parent = parent;
         this._isAdventure = isAdventure;
     }
-
     public MenuItem? Parent { get; set; } = null;
     public List<MenuItem> Children {
         get {
