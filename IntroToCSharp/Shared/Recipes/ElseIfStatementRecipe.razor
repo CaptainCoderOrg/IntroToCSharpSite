@@ -6,11 +6,11 @@
     <Output>
         if (<MudText Class="d-inline" Color="Color.Secondary">{Bool-Expression-0}</MudText>)
         {
-            // ...
+            <MudText Class="d-inline" Color="Color.Primary">{Body-0}</MudText>
         }
-        else if (<MudText Class="d-inline" Color="Color.Info">{Bool-Expression-1}</MudText>)
+        else if (<MudText Class="d-inline" Color="Color.Warning">{Bool-Expression-1}</MudText>)
         {
-            <MudText Class="d-inline" Color="Color.Primary">{Body}</MudText>
+            <MudText Class="d-inline" Color="Color.Info">{Body-1}</MudText>
         }
     </Output>
     </MudItem>
@@ -22,19 +22,29 @@
             <MudText>An <b>expression</b> that <b>evaluates</b> to <Code>true</Code> or <Code>false</Code>.</MudText>
         </MudStack>
     </MudListItem>
-    <MudListItem Icon="@Icons.Material.Filled.Help" IconColor="Color.Info">
-        <MudStack Row=true AlignItems="AlignItems.Center">
-            <MudText Class="flex-none" Color="Color.Info">{Bool-Expression-1}</MudText>
-            <MudText>An <b>expression</b> that <b>evaluates</b> to <Code>true</Code> or <Code>false</Code>.</MudText>
-        </MudStack>
-    </MudListItem>
     <MudListItem Icon="@Icons.Material.Filled.DataObject" IconColor="Color.Primary">
         <MudStack Row=true AlignItems="AlignItems.Center">
-            <MudText Class="flex-none" Color="Color.Primary">{Body}</MudText>
+            <MudText Class="flex-none" Color="Color.Primary">{Body-0}</MudText>
             <MudText>
-                The code to execute if the <b>bool-expression-0</b> <b>evaluates</b> to <Code>false</Code> and
-                <b>bool-expression-1</b> <b>evaluates</b> to <Code>true</Code>.
+                The <b>body</b> to execute if <MudText Style="display:inline" Color="Color.Secondary">{Bool-Expression-0}</MudText> <b>evaluates</b> to <Code>true</Code>.
             </MudText>
         </MudStack>
     </MudListItem>
+    <MudListItem Icon="@Icons.Material.Filled.Help" IconColor="Color.Warning">
+        <MudStack Row=true AlignItems="AlignItems.Center">
+            <MudText Class="flex-none" Color="Color.Warning">{Bool-Expression-1}</MudText>
+            <MudText>An <b>expression</b> that <b>evaluates</b> to <Code>true</Code> or <Code>false</Code>.</MudText>
+        </MudStack>
+    </MudListItem>
+    <MudListItem Icon="@Icons.Material.Filled.DataObject" IconColor="Color.Info">
+        <MudStack Row=true AlignItems="AlignItems.Center">
+            <MudText Class="flex-none" Color="Color.Info">{Body-1}</MudText>
+            <MudText>
+                The <b>body</b> to execute if <MudText Style="display:inline" Color="Color.Secondary">{Bool-Expression-0}</MudText>
+                <b>evaluates</b> to <Code>false</Code> <b>AND</b> <MudText Style="display:inline" Color="Color.Warning">{Bool-Expression-1}</MudText> <b>evaluates</b> to <Code>true</Code>.
+                <b></b>.
+            </MudText>
+        </MudStack>
+    </MudListItem>
+
 </MudList>

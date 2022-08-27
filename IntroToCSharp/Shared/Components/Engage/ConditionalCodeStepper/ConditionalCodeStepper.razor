@@ -1,4 +1,5 @@
 @using System.Text;
+@inject IDialogService DialogService;
 
 <div style="display:none"><CascadingValue Value="@this">@LoadingFragment</CascadingValue></div>
 
@@ -17,18 +18,19 @@
                 </FadeIn>
             }
             <Text><b>Terminal:</b></Text>
-            <Terminal>@CurrentOutput @if(CurrentState.ReadLine) { 
-                <input 
-                  type="text" 
+            <Terminal>@CurrentOutput @if(CurrentState.ReadLine) {
+                <input
+                  type="text"
                   style="border: 1px solid black; border-radius:2; padding:0.2rem .3rem;"
                   value="@CurrentState.Value" @onchange="@((ChangeEventArgs e) => CurrentState.UpdateValue(e))" />
             } </Terminal>
-            
+
         </MudElement>
         <MudStack Row=true>
                 <MudButton Class="flex-1" Disabled="@(!HasBack)" Color="Color.Primary" Variant="Variant.Filled" OnClick="Back">Back</MudButton>
                 <MudButton Class="flex-1" Disabled="@(!HasNext)" Color="Color.Secondary" Variant="Variant.Filled" OnClick="Next">Next</MudButton>
         </MudStack>
+        <MudButton Class="flex-1" Disabled="@(!HasBack)" Color="Color.Tertiary" Variant="Variant.Filled" OnClick="Reset">Restart</MudButton>
     </MudStack>
 </MudPaper>
 
@@ -36,11 +38,11 @@
     private string[] _sourceCode = {};
     private string RenderSourceCode() {
         string[] copy = new string[_sourceCode.Length];
-        
+
         for (int i = 0; i < _sourceCode.Length; i++)
         {
             copy[i] = _sourceCode[i].TrimEnd();
-            
+
         }
         History.Skip(1).Reverse().ToList().ForEach(step => step.DoUpdateCode(copy));
         if (CurrentState.Line >= 0) copy[CurrentState.Line-1] += " // <--";
@@ -81,6 +83,13 @@
         }
     }
 
+    private void Reset() {
+        ConfirmationDialog.Show(DialogService, "Are you sure you would like to restart?", () => DoReset());
+    }
+    private void DoReset() {
+        while (History.Count > 1) History.Pop();
+        StateHasChanged();
+    }
     private void Back() {
         if (!HasBack) return;
         History.Pop();
@@ -89,7 +98,7 @@
     private void Next() {
         if (CurrentState.NextId == null) return;
         CurrentState.OnNext();
-        this.PushState(CurrentState.NextId);        
+        this.PushState(CurrentState.NextId);
         StateHasChanged();
     }
 
