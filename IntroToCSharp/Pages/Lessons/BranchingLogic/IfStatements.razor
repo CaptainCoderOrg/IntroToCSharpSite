@@ -181,6 +181,29 @@ else
         statement</b>. This means that when you use an <b>if-else statement</b>,
         the computer <b>MUST</b> pick exactly one of the two <b>branches</b>.
     </Note>
+    <SimpleCodeQuestion DBName="ElseStatementPractice" Question="What is the output?">
+        <QuestionStatement>Study the code below then determine what the program will display.</QuestionStatement>
+        <Block>
+            <CodeBlock>
+string direction = "left";
+if (direction == "right")
+{
+    Console.WriteLine("You take the path to the right.");
+}
+else
+{
+    Console.WriteLine("You take the path to the wrong.");
+}
+            </CodeBlock>
+        </Block>
+        <Answer><CheckBoxOption Text="right" IsCorrect="false" /></Answer>
+        <Answer><CheckBoxOption Text="You take the path to the wrong." IsCorrect="true" /></Answer>
+        <Answer><CheckBoxOption Text="You take the path to the left." IsCorrect="false" /></Answer>
+        <Answer><CheckBoxOption Text="left" IsCorrect="false" /></Answer>
+        <Explanation>
+            <IntroToCSharp.Pages.Lessons.BranchingLogic.Examples.SimpleElseExample />
+        </Explanation>
+    </SimpleCodeQuestion>
 </Section>
 <Section Title="The Else-If Statement">
     <Text>
