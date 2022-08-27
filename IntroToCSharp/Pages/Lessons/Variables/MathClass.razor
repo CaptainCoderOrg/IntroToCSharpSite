@@ -45,6 +45,34 @@ playerHealth = Math.Min(maxHealth, playerHealth + healingPotion);
     <CodeBlock>
 playerHealth = Math.Max(0, playerHealth - damage);
     </CodeBlock>
+
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="Which of the following are true?" XP=5 GoldAward=100>
+        <Text>Study the code below, then select each answer that is a correct statement.</Text>
+        <CodeBlock>
+int firstNum = 11;
+int secondNum = 10;
+int minimum = Math.Min(firstNum, secondNum);
+int maximum = Math.Max(firstNum, secondNum);
+Console.WriteLine($"{maximum} is greater than or equal to {minimum}");
+    </CodeBlock>
+        <CheckBoxOption Text="After executing, firstNum and maximum will store the same value." IsCorrect="true" />
+        <CheckBoxOption Text="The program doesn't compile because the first two lines should be swapped." IsCorrect="false" />
+        <CheckBoxOption Text="After executing, secondNum and firstNum will swap values." IsCorrect="false" />
+        <CheckBoxOption Text="After executing, the program display '10 is greater than or equal to 11'" IsCorrect="false" />
+        <Explanation>
+            <Text>
+                The <Code>Math.Min</Code> and <Code>Math.Max</Code>
+                <b>methods</b> find the larger or smaller of two numbers. The
+                order the numbers are specified does not change the result. You
+                could write <Code>Math.Min(smallerNumber, largerNumber)</Code> or
+                <Code>Math.Min(largerNumber, smallerNumber)</Code>. In both cases
+                the <b>evaluation</b> will always result in the smaller number.
+                The same is true for <Code>Math.Max</Code> with the larger
+                of the two numbers.
+            </Text>
+        </Explanation>
+    </MultipleChoiceQuestion>
+
     <Text>
         There is another related <b>method</b> that is convenient when you would
         like to keep a <b>value</b> within a range: <Code>Math.Clamp</Code>.
@@ -65,6 +93,19 @@ Console.WriteLine($"Health: {playerHealth} / {maxHealth}");
         <b>value</b> if it is between <b>min</b> and <b>max</b> otherwise, it
         "clamps" to the <b>max</b> or <b>min</b> of the specified range.
     </Text>
+    <MultipleChoiceQuestion IsMultiSelect="false" Question="Practice Clamping" XP=5 GoldAward=100>
+        <Text>Study the code below, then select the best answer.</Text>
+        <CodeBlock>
+int playerHealth = 7;
+int maxHealth = 15;
+playerHealth = Math.Clamp(playerHealth + 7, 0, maxHealth);
+Console.WriteLine($"{playerHealth}");
+        </CodeBlock>
+        <CheckBoxOption Text="The program displays, '7'" IsCorrect="false" />
+        <CheckBoxOption Text="The program displays, '15'" IsCorrect="false" />
+        <CheckBoxOption Text="The program displays, '0'" IsCorrect="false" />
+        <CheckBoxOption Text="The program displays, '14'" IsCorrect="true" />
+    </MultipleChoiceQuestion>
 </Section>
 
 <Section Title="Mathematical Constants">
@@ -99,6 +140,24 @@ Console.WriteLine($"1.7 cubed is approximately {cubed}");
         with the compilation error: "<b>error CS0266: Cannot implicitly convert
         type 'double' to 'int'</b>".
     </Note>
+
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="Find the Error" XP=5 GoldAward=100>
+        <Text>The code below does not work as intended, select all answers that correctly identify an error.</Text>
+        <CodeBlock>
+int number = 9;
+int squareRoot = Math.Sqrt(number);
+Console.WriteLine($"The square root of {number} results in a whole number: {squareRoot}");
+
+number = 10;
+double anotherSquare = Math.sqrt(number);
+Console.WriteLine($"The square root of {number} results in a decimal number: {anotherSquare}");
+        </CodeBlock>
+        <CheckBoxOption Text="The variable number should be a double" IsCorrect="false" />
+        <CheckBoxOption Text="The variable squareRoot should be a double" IsCorrect="true" />
+        <CheckBoxOption Text="'Math.sqrt(number)' should be 'Math.Sqrt(number)''." IsCorrect="true" />
+        <CheckBoxOption Text="There are no errors, the code is flawless!" IsCorrect="false" />
+    </MultipleChoiceQuestion>
+
 </Section>
 
 <Section Title="Read the Friendly Manual">
