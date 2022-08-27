@@ -60,18 +60,6 @@
             <MudButton Class="mt-4" OnClick="@Reset" Variant="Variant.Filled" Color="Color.Error">Try Again</MudButton>
             <MudButton Class="mt-4" OnClick="@ShowAnswer" Variant="Variant.Filled" Color="Color.Warning">Show Answer</MudButton>
         }
-        else
-        {
-            @if (!Explanation.Equals(""))
-            {
-                <Explanation>
-                    <Text Class="px-4">
-                        @Explanation
-                    </Text>
-                </Explanation>
-            }
-
-        }
     }
 
 </MudPaper>
@@ -92,7 +80,7 @@
     public string Question { get; set; } = "Undefined";
 
     [Parameter]
-    public RenderFragment ChildContent { get; set; } = null!;
+    public RenderFragment ChildContent {get; set;} = null!;
 
     /// <summary>
     /// The max XP to be awarded.
@@ -111,13 +99,7 @@
     private string Class { get; set; } = "mt-4 pa-4";
     private int XPAward => _attempts >= 0 ? Math.Max(5, ((XP / (_attempts + 1)) / 5) * 5) : 0;
 
-    /// <summary>
-    /// This is the explanation that appears after the user submits the question.
-    /// If no explanation is given, no Explanation box appears after submission.
-    /// </summary>
-    /// <value></value>
-    [Parameter]
-    public string Explanation { get; set; } = "";
+    private Explanation? ExplanationElement;
 
     private string? SelectedOption { get; set; }
     private bool _isSubmitted = false;
@@ -173,6 +155,9 @@
             this._options.ForEach(option => option.SetIsChecked(this.SelectedOption == option.Text));
         }
         _isWrong = this._options.Where(option => !option.CheckAnswer()).Count() > 0;
+        if (this.ExplanationElement != null && !_isWrong && _isSubmitted) {
+            this.ExplanationElement.IsHidden = false;
+        }
 
     }
 
@@ -240,5 +225,10 @@
         string[] options = this._options.Where(o => o.IsChecked).Select(o => o.Text).ToArray();
         MultipleChoiceQuestionData data = new MultipleChoiceQuestionData(options, this._isSubmitted, this._attempts);
         UserService.Service.SaveJsonData<MultipleChoiceQuestionData>(Path, data);
+    }
+
+    public void AddExplanation(Explanation explanation) {
+        this.ExplanationElement = explanation;
+        this.ExplanationElement.IsHidden = true;
     }
 }

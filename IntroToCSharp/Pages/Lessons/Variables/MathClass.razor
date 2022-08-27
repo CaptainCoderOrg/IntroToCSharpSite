@@ -46,27 +46,32 @@ playerHealth = Math.Min(maxHealth, playerHealth + healingPotion);
 playerHealth = Math.Max(0, playerHealth - damage);
     </CodeBlock>
 
-    <CodeBlock>
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="Which of the following are true?" XP=5 GoldAward=100>
+        <Text>Study the code below, then select each answer that is a correct statement.</Text>
+        <CodeBlock>
 int firstNum = 11;
 int secondNum = 10;
 int minimum = Math.Min(firstNum, secondNum);
 int maximum = Math.Max(firstNum, secondNum);
 Console.WriteLine($"{maximum} is greater than or equal to {minimum}");
     </CodeBlock>
-    <MultipleChoiceQuestion IsMultiSelect="false" Question="Is there anything wrong with this statement?" XP=5 GoldAward=100>
-        <CheckBoxOption Text="Yes, firstnum has to be lower than secondNum" IsCorrect="false" />
-        <CheckBoxOption Text="No, the statement is beautiful just like that." IsCorrect="true" />
-        <CheckBoxOption Text="I have no idea." IsCorrect="false" />
-        <CheckBoxOption Text="Yes, the larger number has to be declared after the samller number." IsCorrect="false" />
+        <CheckBoxOption Text="After executing, firstNum and maximum will store the same value." IsCorrect="true" />
+        <CheckBoxOption Text="The program doesn't compile because the first two lines should be swapped." IsCorrect="false" />
+        <CheckBoxOption Text="After executing, secondNum and firstNum will swap values." IsCorrect="false" />
+        <CheckBoxOption Text="After executing, the program display '10 is greater than or equal to 11'" IsCorrect="false" />
         <Explanation>
             <Text>
-                Math.Min & Math.Max find the larger or smaller of two given numbers. That means that it doesn't matter what
-                order the numbers are given or created. You could have Math.Min access (smallerNumber, largerNumber) or
-                (largerNumber, smallerNumber) and it would still provide the smaller number. The same is true for
-                Math.Max except it will provide the larger number.
+                The <Code>Math.Min</Code> and <Code>Math.Max</Code>
+                <b>methods</b> find the larger or smaller of two numbers. The
+                order the numbers are specified does not change the result. You
+                could write <Code>Math.Min(smallerNumber, largerNumber)</Code> or
+                <Code>Math.Min(largerNumber, smallerNumber)</Code>. In both cases
+                the <b>evaluation</b> will always result in the smaller number.
+                The same is true for <Code>Math.Max</Code> with the larger
+                of the two numbers.
             </Text>
         </Explanation>
-    </MultipleChoiceQuestion>    
+    </MultipleChoiceQuestion>
 
     <Text>
         There is another related <b>method</b> that is convenient when you would
@@ -88,22 +93,20 @@ Console.WriteLine($"Health: {playerHealth} / {maxHealth}");
         <b>value</b> if it is between <b>min</b> and <b>max</b> otherwise, it
         "clamps" to the <b>max</b> or <b>min</b> of the specified range.
     </Text>
-</Section>
-
-<Explore Title="Explore">
-    <Text>
-        What do you think would happen if we created a variable that initialized outside the Clamp range. 
-        Like the code below:
-    </Text>
-    <Question Text="Do you think it would stay 25? Or do you think it would become 15?" />
-    <CodeBlock ReplIt="NobodyOdyssues/MathClampBoundsExample">
-    int playerHealth = 25;
+    <MultipleChoiceQuestion IsMultiSelect="false" Question="Practice Clamping" XP=5 GoldAward=100>
+        <Text>Study the code below, then select the best answer.</Text>
+        <CodeBlock>
+int playerHealth = 7;
 int maxHealth = 15;
-playerHealth = Math.Clamp(playerHealth, 0, maxHealth);
+playerHealth = Math.Clamp(playerHealth + 7, 0, maxHealth);
 Console.WriteLine($"{playerHealth}");
-    </CodeBlock>
-
-</Explore>
+        </CodeBlock>
+        <CheckBoxOption Text="The program displays, '7'" IsCorrect="false" />
+        <CheckBoxOption Text="The program displays, '15'" IsCorrect="false" />
+        <CheckBoxOption Text="The program displays, '0'" IsCorrect="false" />
+        <CheckBoxOption Text="The program displays, '14'" IsCorrect="true" />
+    </MultipleChoiceQuestion>
+</Section>
 
 <Section Title="Mathematical Constants">
     <Text>
@@ -116,29 +119,6 @@ Console.WriteLine($"The value of e is approximately: {Math.E}");
 Console.WriteLine($"The value of π is approximately: {Math.PI}");
 Console.WriteLine($"The value of τ is approximately: {Math.Tau}");
     </CodeBlock>
-    <Explore Title="Explore">
-        <Text>
-            Can you create a <Code>Math.Clamp</Code> program that
-            has a minimum value of 3 and a maximum value of 6?
-        </Text>
-        <Question Text="What happens when you make e the initial value?"/>
-        <Question Text="What happens when you make pi the initial value?"/>
-        <Question Text="What happens when you make tau the initial value?"/>
-        <Section IsSubSection=true Title="Answer">
-            <CodeBlock ReplIt="NobodyOdyssues/ConstantClampExample">
-    double e = Math.E;
-    double pi = Math.PI;
-    double tau = Math.Tau;
-    e = Math.Clamp(e, 3, 6);
-    pi = Math.Clamp(pi, 3, 6);
-    tau = Math.Clamp(tau, 3, 6);
-    
-    Console.WriteLine($"E Clamped is : {e}");
-    Console.WriteLine($"Pi Clampled is : {pi}");
-    Console.WriteLine($"Tau Clamped is : {tau}");
-            </CodeBlock>
-        </Section>
-    </Explore>
 </Section>
 
 <Section Title="Math.Pow and Math.Sqrt">
@@ -160,25 +140,22 @@ Console.WriteLine($"1.7 cubed is approximately {cubed}");
         with the compilation error: "<b>error CS0266: Cannot implicitly convert
         type 'double' to 'int'</b>".
     </Note>
-    <Text>
-        If you wanted to find the square root of a number, you would
-        need to use the <Code>Math.sqrt()</Code> method.
-    </Text>
-    <CodeBlock ReplIt="NobodyOdyssues/Mathsqrtexample">
-    double number = 9;
-    double squareRootNumber = Math.Sqrt(number);
-    Console.WriteLine($"The square root of {number} makes the whole number: {squareRootNumber}");
 
-    double anotherNumber = 10;
-    double anotherSquare = Math.Sqrt(anotherNumber);
-    Console.WriteLine($"The square root of {anotherNumber} does not make a whole number: {anotherSquare}");
-    </CodeBlock>
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="Find the Error" XP=5 GoldAward=100>
+        <Text>The code below does not work as intended, select all answers that correctly identify an error.</Text>
+        <CodeBlock>
+int number = 9;
+int squareRoot = Math.Sqrt(number);
+Console.WriteLine($"The square root of {number} results in a whole number: {squareRoot}");
 
-    <MultipleChoiceQuestion IsMultiSelect="false" Question="Does it matter if Math and Sqrt is capitalized?" XP=5 GoldAward=100>
-        <CheckBoxOption Text="No, it doesn't matter if they are capitalized." IsCorrect="false" />
-        <CheckBoxOption Text="Yes, but only that Math is capitalized" IsCorrect="false" />
-        <CheckBoxOption Text="Yes, but only that Sqrt is capitalized." IsCorrect="false" />
-        <CheckBoxOption Text="Yes, both Math and Sqrt should be capitalized." IsCorrect="true" />
+number = 10;
+double anotherSquare = Math.sqrt(number);
+Console.WriteLine($"The square root of {number} results in a decimal number: {anotherSquare}");
+        </CodeBlock>
+        <CheckBoxOption Text="The variable number should be a double" IsCorrect="false" />
+        <CheckBoxOption Text="The variable squareRoot should be a double" IsCorrect="true" />
+        <CheckBoxOption Text="'Math.sqrt(number)' should be 'Math.Sqrt(number)''." IsCorrect="true" />
+        <CheckBoxOption Text="There are no errors, the code is flawless!" IsCorrect="false" />
     </MultipleChoiceQuestion>
 
 </Section>
