@@ -118,6 +118,32 @@ if (userInput != "password")
     Console.WriteLine("I'm sorry Dave, I can't let you do that.");
 }
     </CodeBlock>
+    <SimpleCodeQuestion DBName="IfStatementsPractice" Question="What is the output?">
+        <QuestionStatement>Study the code below then determine what the program will display.</QuestionStatement>
+        <Block>
+            <CodeBlock>
+int x = 5;
+if (x == 5)
+{
+    Console.Write("Hello");
+}
+
+if (x != 5)
+{
+    Console.Write("Bonjour");
+}
+
+Console.WriteLine(", world!");
+            </CodeBlock>
+        </Block>
+        <Answer><CheckBoxOption Text="Hello" IsCorrect="false" /></Answer>
+        <Answer><CheckBoxOption Text="Bonjour" IsCorrect="false" /></Answer>
+        <Answer><CheckBoxOption Text="Hello, world!" IsCorrect="true" /></Answer>
+        <Answer><CheckBoxOption Text="Bonjour, world!" IsCorrect="false" /></Answer>
+        <Explanation>
+            <IntroToCSharp.Pages.Lessons.BranchingLogic.Examples.SimpleIfExample />
+        </Explanation>
+    </SimpleCodeQuestion>
 </Section>
 <Section Title="The Else Statement">
     <Text>

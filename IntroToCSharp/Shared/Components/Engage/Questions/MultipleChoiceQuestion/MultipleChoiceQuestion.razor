@@ -78,6 +78,8 @@
     /// <value>The question string.</value>
     [Parameter]
     public string Question { get; set; } = "Undefined";
+    [Parameter]
+    public string? DBName { get; set; } = null;
 
     [Parameter]
     public RenderFragment ChildContent {get; set;} = null!;
@@ -110,7 +112,8 @@
     private string _xpDisplayStyle = $"color: {Themes.s_CSharpTheme.Palette.Success.ToString()};";
 
     private List<CheckBoxOption> _options = new List<CheckBoxOption>();
-    private string Path => $"{NavigationManager.GetRoute()}/questions/{Question}";
+    private string DBPathName => DBName ?? Question;
+    private string Path => $"{NavigationManager.GetRoute()}/questions/{DBPathName}";
     private DataReference<MultipleChoiceQuestionData>? _dataReference;
 
     protected override void OnInitialized()
