@@ -1,16 +1,38 @@
-<MudExpansionPanel Class="my-2">
-    <TitleContent>
-            <h3 class="explanation pa-2">Explanation</h3>
-    </TitleContent>
-    <ChildContent>
-        <MudStack Class="px-4">
-            @ChildContent
-        </MudStack>
-    </ChildContent>
-</MudExpansionPanel>
+@if (!IsHidden){
+    <MudExpansionPanel Class="my-2">
+        <TitleContent>
+                <h3 class="explanation pa-2">Explanation</h3>
+        </TitleContent>
+        <ChildContent>
+            <MudStack Class="px-4">
+                @ChildContent
+            </MudStack>
+        </ChildContent>
+    </MudExpansionPanel>
+}
 @code
 {
+    [CascadingParameter]
+    public MultipleChoiceQuestion? MCQ {get; set;}
     [Parameter, EditorRequired]
     public RenderFragment ChildContent {get; set;} = null!;
-    
+    private bool _isHidden = false;
+    public bool IsHidden {
+        get => _isHidden;
+        set {
+            if (_isHidden == value) return;
+            _isHidden = value;
+            StateHasChanged();
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        MCQ?.AddExplanation(this);
+    }
+
+
+
 }
+
