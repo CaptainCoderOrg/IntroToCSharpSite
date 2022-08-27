@@ -12,7 +12,7 @@
         <MudNavMenu Bordered="true">
             @foreach (MenuItem item in MenuItems) {
                 if (!Filter.Contains(item)) continue;
-                <NavMenuItem Item="@item" Filter="@Filter"/>
+                <NavMenuItem Item="@item" Filter="@Filter" UserPages="_userPages"/>
             }
         </MudNavMenu>
     </MudElement>

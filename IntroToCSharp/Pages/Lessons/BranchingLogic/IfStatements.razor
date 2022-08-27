@@ -1,0 +1,311 @@
+@inherits CaptainCoder.Page
+@page "/lessons/branching-logic/if-statements"
+
+<Title>If Statements</Title>
+
+<Section Title="Introduction">
+    <Adventure Portrait="Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+                Up to this point, all of the challenges and activities in this
+                book have executed <b>statements</b> one at a time from top to
+                bottom. In the <b>Guantlet: @ShapeAnalyzer.PageRef.Name</b> you
+                were challenged to create two different programs. One program
+                analyzed <b>rectangles</b> and the other analyzed
+                <b>circles</b>. Wouldn't it be cool if you could write a single
+                program that allowed the user to select which analysis they
+                would like to perform? In this lesson, you will learn the basics
+                of using an <Code>if</Code> <b>statement</b> to decide if a
+                section of code should be executed based on a <b>condition</b>.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="ShapeAnalyzer.PageRef">
+                Before starting this section, you should feel comfortable
+                <b>declaring</b> and using <b>int</b>, <b>double</b>, and
+                <b>string</b> <b>variables</b> in your programs. A 
+                great way to test your skills would be to complete the
+                challenges in the <b>@ShapeAnalyzer.PageRef.Name Gauntlet</b>.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog>
+                If you still need to level up your skills, the <b>Character
+                Creator</b> activity is a great place to practice.
+            </AdventureDialog>
+        </Item>
+    </Adventure>
+</Section>
+
+<Section Title="Motivation">
+    <Text>
+        Imagine you are creating an adventure game and you would like your
+        player to select an option from a menu that allows them to select their
+        next destination. Depending on the item selected, you would like the 
+        program to produce different outcomes. For example:
+    </Text>
+    <Output>
+        You stand at the entrance to the dragon's lair. Dare you enter?
+
+        1. Enter the Cave
+        2. Return to Town
+        3. Run home and go to sleep
+
+        Enter a choice: 
+    </Output>
+</Section>
+<Section Title="The If Statement">
+    <RecipeBox>
+        <IfStatementRecipe/>
+    </RecipeBox>
+    <Note>
+        The <b>bool-expression</b> of an <b>if statement</b> is often called a
+        <b>conditional</b> or the <b>condition</b> of the <b>if statement</b>.
+    </Note>
+    <Text><b>Examples:</b></Text>
+    <Text>
+        When the <b>bool expression</b> of an <b>if statement</b> is
+        <Code>true</Code>, the <b>body</b> of the <b>if statement</b> executes.
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/Simple-If-Statement-Example">
+Console.WriteLine("I am before the if statement.");
+if (true)
+{
+    Console.WriteLine("I am in the if statement");
+}
+Console.WriteLine("I am after the if statement.");
+    </CodeBlock>
+    <Text>
+        When the <b>bool expression</b> of an <b>if statement</b> is
+        <Code>false</Code>, the <b>body</b> of the <b>if statement</b> 
+        is skipped.
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/Simple-If-Statement-Example-2">
+Console.WriteLine("I am before the if statement.");
+if (false)
+{
+    Console.WriteLine("I am in the if statement");
+}
+Console.WriteLine("I am after the if statement.");
+    </CodeBlock>
+    <Text>
+        Use the <b>equality operator</b> (<Code>==</Code>) to
+        check if two <b>values</b> are the equal.
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/If-Statement-User-Input">
+Console.Write("Enter the password: ");
+string userInput = Console.ReadLine()!;
+if (userInput == "password")
+{
+    Console.WriteLine("Access Granted!");
+    Console.WriteLine("We're in!");
+}
+    </CodeBlock>
+    <Text>
+        Use the <b>inequality operator</b> (<Code>!=</Code>) to
+        check if two <b>values</b> are <b>NOT</b> equal.
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/If-Statement-User-Input-2">
+Console.Write("Enter the password: ");
+string userInput = Console.ReadLine()!;
+if (userInput != "password")
+{
+    Console.WriteLine("Access Denied!");
+    Console.WriteLine("I'm sorry Dave, I can't let you do that.");
+}
+    </CodeBlock>
+    <Text>
+        You can nest an <b>if statement</b> inside of the <b>body</b> of another <b>if statement</b>:
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/If-Statement-Nested">
+Console.Write("Enter the password: ");
+string userInput = Console.ReadLine()!;
+
+if (userInput == "password")
+{
+    Console.WriteLine("Access Granted!");
+    Console.WriteLine("Welcome to the Internal System.");
+    Console.Write("Are you an admin?");
+    string isAdmin = Console.ReadLine()!;
+    if (isAdmin == "yes")
+    {
+        Console.WriteLine("Admin Powers Granted!");
+    }
+}
+    </CodeBlock>
+</Section>
+<Section Title="The Else Statement">
+    <Text>
+        The <b>body</b> of an <b>if statement</b> executes when its <b>condition</b>
+        is <Code>true</Code>. Often times, you would like to execute a different
+        <b>body</b> when the <b>condition</b> is <Code>false</Code>.
+    </Text>
+    <RecipeBox>
+        <ElseStatementRecipe/>
+    </RecipeBox>
+    <Text>
+        <b>Example:</b>
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/If-Else-Example">
+Console.Write("Enter the password: ");
+string userInput = Console.ReadLine()!;
+
+if (userInput == "password")
+{
+    Console.WriteLine("Access Granted!");
+    Console.WriteLine("Welcome to the Internal System.");
+}
+else
+{
+    Console.WriteLine("Access Denied");
+    Console.WriteLine("I'm sorry Dave, I cannot let you do that.");
+}
+    </CodeBlock>
+    <Note>
+        When you add an <b>else statement</b> to the end of an <b>if
+        statement</b> you create a <b>decision tree</b> with two "branches".
+        When the program reaches the <b>if statement</b> it is going to choose
+        to execute exactly one "branch" of code.
+    </Note>
+</Section>
+<Section Title="The Else-If Statement">
+    <Text>
+        You can add a <b>condition</b> to an <b>else statement</b> by 
+        adding an <b>if statement</b> to it:
+    </Text>
+    <RecipeBox>
+        <ElseIfStatementRecipe/>
+    </RecipeBox>
+    <Text>
+        <b>Examples:</b>
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/Else-If-Example">
+Console.Write("Enter the password: ");
+string userInput = Console.ReadLine()!;
+if (userInput == "password")
+{
+    Console.WriteLine("Access Granted!");
+}
+else if (userInput == "p@@$$w0rd")
+{
+    Console.WriteLine("Leet User Detected!");
+}
+    </CodeBlock>
+    <Text>
+        Because an <b>else-if statement</b> is an <b>if statement</b>, you can
+        add an <b>else statement</b> statement to the end of it.
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/Else-If-Else-Example">
+Console.Write("Enter the password: ");
+string userInput = Console.ReadLine()!;
+if (userInput == "password")
+{
+    Console.WriteLine("Access Granted!");
+}
+else if (userInput == "p@@$$w0rd")
+{
+    Console.WriteLine("Leet User Detected!");
+}
+else
+{
+    Console.WriteLine("Access Denied!");
+}
+    </CodeBlock>
+    <Text>You can chain together any number of <b>else if statements</b>:</Text>
+    <CodeBlock ReplIt="JosephCollard/Chain-If-Else-If-Example">
+Console.Write("Enter 1, 2, or 3: ");
+string userInput = Console.ReadLine()!;
+if (userInput == "1")
+{
+    Console.WriteLine("You enter the cave and prepare to face the dragon!");
+}
+else if (userInput == "2")
+{
+    Console.WriteLine("You return town to buy supplies.");
+}
+else if (userInput == "3")
+{
+    Console.WriteLine("You run home to the safety of your warm bed.");
+}
+else
+{
+    Console.WriteLine("Invalid Choice!");
+}
+    </CodeBlock>
+</Section>
+
+<Section Title="Decision Trees">
+    <Text>
+        Each <b>if</b>, <b>else if</b>, and <b>else statement</b> inside of a
+        <b>decision tree</b> is called a <b>branch</b>. It is important to note
+        that the computer will execute at <b>MOST</b> one of the "branches" on
+        the <b>decision tree</b>. From top to bottom, the computer
+        <b>evaluates</b> the <b>condition</b> of each <b>branch</b> until it
+        finds the <b>FIRST</b> <Code>true</Code> <b>condition</b>. When this
+        happens, it executes the <b>body</b> of that <b>branch</b> and then
+        skips to the end of the <b>decision tree</b>.
+    </Text>
+    <Note>
+        An <b>else statement</b> is always optional when writing a <b>decision tree</b>.
+        If present, the <b>else statement</b> acts as a "fail safe" that executes
+        if none of the <b>conditionals</b> were <Code>true</Code>.
+    </Note>
+</Section>
+
+<Section Title="A Step by Step Example">
+  <IntroToCSharp.Pages.Lessons.BranchingLogic.Examples.ComplexIfExample/>  
+</Section>
+
+<Section Title="A Word of Caution">
+    <Text>
+        With the power of <b>if statements</b>, you can begin to create programs
+        that allow users to make interesting decisions. Be aware that with this
+        power you also gain the ability to add complexity to your programs. You
+        will be tempted to write very complex <b>decision trees</b> using deeply
+        nested <b>if statements</b>. Do <b>NOT</b> fall into this trap.
+        <b>RESIST</b> this temptation. 
+    </Text>
+    <Note>
+        If you find yourself writing an <b>if statement</b> that is inside of
+        two other <b>if statements</b>, your program is almost certainly too
+        complex. This is often referred to as "spaghetti code".
+    </Note>
+</Section>
+
+
+    
+<Section Title="What's Next?">
+    <Adventure Portrait="Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+                Being a good programmer does not mean you know how to create complex programs.
+                A more important skill to hone is the ability to <b>MANAGE</b> complex
+                programs. As your programming tool belt continues to grow, you will learn 
+                more ways to manage complexity; <b>if statements</b> are just the beginning.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog>
+                Mastering <b>if</b>, <b>else-if</b>, and <b>else statements</b>
+                takes a lot of practice. Why not head over to the <b>INSERT
+                ACTIVITY HERE</b> to practice using them to create <b>INSERT
+                RESULT HERE</b>.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog>
+                You may have noticed that the programs you've written so far
+                require your user to enter very precise text into the terminal. 
+                To create a better user experience, programmers will often write
+                code to "sanitize" the user's inputs. You can learn the basics
+                in the <b>Input Validation</b> lesson.
+            </AdventureDialog>
+        </Item>
+    </Adventure>
+</Section>
+
+
+
+@code {
+    public static readonly PageRef PageRef = new PageRef("If Statements", "/lessons/branching-logic/if-statements", 0, "Branching Logic");
+}

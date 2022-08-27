@@ -261,9 +261,17 @@ public class UserService
     public bool AddPage(PageRef toAdd)
     {
         if (!_userData.IsLoggedIn) return false;
-        if (_userPages.Contains(toAdd)) return false;
         if (_userData.UserPagesRef == null) return false;
         _userPages.AddPage(toAdd.Name, PageStatus.New);
+        _userData.UserPagesRef.Set(_userPages);
+        return true;
+    }
+
+    public bool UpdatePage(PageRef toUpdate, PageStatus newStatus)
+    {
+        if (!_userData.IsLoggedIn) return false;
+        if (_userData.UserPagesRef == null) return false;
+        _userPages.AddPage(toUpdate.Name, newStatus);
         _userData.UserPagesRef.Set(_userPages);
         return true;
     }

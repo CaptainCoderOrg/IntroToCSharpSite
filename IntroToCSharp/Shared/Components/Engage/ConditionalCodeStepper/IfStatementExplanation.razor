@@ -1,0 +1,16 @@
+@if (Conditional) {
+    <span>
+        Because the <b>conditional</b> is <Code>true</Code>, the computer
+        executes the <b>body</b> of the <b>if statement</b>.
+    </span>
+} else {
+    <span>
+        Because the <b>conditional</b> is <Code>false</Code>, the computer
+        skips the <b>body</b> of the <b>if statement</b>.    
+    </span>
+}
+
+@code {
+    [Parameter, EditorRequired]
+    public bool Conditional {get; set;}
+}
