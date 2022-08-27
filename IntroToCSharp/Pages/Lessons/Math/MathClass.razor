@@ -201,13 +201,6 @@ Console.WriteLine($"The square root of {number} results in a decimal number: {an
             </AdventureDialog>
         </Item>
         <Item>
-            <AdventureDialog>
-                The <b>Character Creator</b> activity is a great place to
-                practice using the <Code>Math</Code> <b>class</b>. If
-                you have not completed it yet, you should give it a try!
-            </AdventureDialog>
-        </Item>
-        <Item>
             <AdventureDialog Page="ShapeAnalyzer.PageRef">
                 The <b>Gauntlet: @ShapeAnalyzer.PageRef.Name</b> will tests your
                 skills using <b>arithmetic operators</b> and the
@@ -215,6 +208,9 @@ Console.WriteLine($"The square root of {number} results in a decimal number: {an
                 program you create to calculate how fast the Flash can
                 circumnavigate the Earth!
             </AdventureDialog>
+        </Item>
+        <Item>
+            <MarkFinishedDialog Page="MathClass.PageRef"/>
         </Item>
     </Adventure>
 </Section>
