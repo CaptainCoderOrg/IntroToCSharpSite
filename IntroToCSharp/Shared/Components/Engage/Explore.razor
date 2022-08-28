@@ -71,6 +71,7 @@
         DBRef = UserService.Service.GetAdventureActivityReference(this);
         if (DBRef != null)
             DBRef.DataChangedEvent += UpdateDBRef;
+        StateHasChanged();
     }
 
     private void UpdateDBRef(bool isClaimed) => _isClaimed = isClaimed;
