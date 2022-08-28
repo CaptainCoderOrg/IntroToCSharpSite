@@ -51,19 +51,32 @@
         This section assumes you already have .NET 6 installed. If you
         have not done so already, install .NET 6 and then continue.
     </Text>
-    <TaskItem Name="VerifyNET6">Verify .NET 6 is Installed</TaskItem>
-    <TaskItem Name="InstallVSCode">
-        First, download and install VS Code for your operating
-        system: <MudLink Href="https://code.visualstudio.com/Download"
-        Target="_blank">LINK</MudLink>.
-    </TaskItem>
+    <MudGrid>
+        <MudItem>
+            <TaskItem Name="VerifyNET6">If you have not done so already, Install .NET 6</TaskItem>
+        </MudItem>
+        <MudItem>
+            <MudButton Color="Color.Tertiary" Variant="Variant.Filled" Href="https://dotnet.microsoft.com/en-us/download/dotnet/6.0" Target="_blank">Download .NET 6</MudButton>
+        </MudItem>
+    </MudGrid>
+    <MudGrid>
+        <MudItem>
+            <TaskItem Name="InstallVSCode">
+            Download and install VS Code for your operating
+            system
+            </TaskItem>
+        </MudItem>
+        <MudItem>
+            <MudButton Color="Color.Tertiary" Variant="Variant.Filled" Href="https://code.visualstudio.com/Download" Target="_blank">Download VS Code</MudButton>
+        </MudItem>
+    </MudGrid>
     <TaskItem Name="Open VSCode">
         After the installation is complete, Open VS Code
     </TaskItem>
     <Image Src="open-vs-code.png" />
     <HorizontalDivider/>
     <Text>
-        Next, we will install the <b>C#</b> extension for <b>VS Code</b>. This provides
+        Next, you will install the <b>C#</b> extension for <b>VS Code</b>. This provides
         productivity tools for developing <b>C#</b> programs.
     </Text>
     <TaskItem Name="Open Extensions Bar">Click the Extensions tab on the Left Bar</TaskItem>
@@ -74,7 +87,7 @@
     <Image Src="csharp-extension.png" />
     <HorizontalDivider/>
     <Text>
-        Last, we will install the .NET Interactive Notebooks extension. This extension allows you to
+        Last, you will install the .NET Interactive Notebooks extension. This extension allows you to
         quickly write and test code without creating an entire <b>C#</b> project. This can be incredibly useful
         for testing out small snippets of code like the ones scattered throughout this book.
     </Text>
