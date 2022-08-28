@@ -83,7 +83,7 @@ public abstract class User
         this.DefaultProject = DataReference.String($"/users/{this.UID}/prefs/DefaultProject", "", "Last Project");
         this.UserStatsRef = DataReference.Json<UserStats>($"/users/{this.UID}/users_stats", UserStats.Default, "User Stats");
         this.UserInventoryRef = DataReference.Json<UserInventory>($"/users/{this.UID}/inventory", UserInventory.Default, "User Inventory");
-        this.UserPagesRef = DataReference.Json<UserPages>($"/users/{this.UID}/pages", UserPages.Default, "User Inventory");
+        this.UserPagesRef = DataReference.Json<UserPages>($"/users/{this.UID}/pages", UserPages.Default, "Book");
 
         this.ProjectData.DataChangedEvent += data =>
         {
