@@ -6,7 +6,7 @@
                     <MudText Typo="Typo.h6">Exploration: @Title</MudText>
             </MudItem>
             <MudItem xs=6>
-                <Reward Gold="Gold" XP="XP"/>
+                <Reward Gold="Gold" XP="XP" IsComplete="@IsClaimed"/>
             </MudItem>
         </MudGrid>
         <MudElement>
@@ -67,6 +67,8 @@
         if (newUser == null || !newUser.IsLoggedIn)
         {
             DBRef = null;
+            StateHasChanged();
+            return;
         }
         DBRef = UserService.Service.GetAdventureActivityReference(this);
         if (DBRef != null)
@@ -74,5 +76,9 @@
         StateHasChanged();
     }
 
-    private void UpdateDBRef(bool isClaimed) => _isClaimed = isClaimed;
+    private void UpdateDBRef(bool isClaimed) {
+        if (_isClaimed == isClaimed) return;
+        _isClaimed = isClaimed;
+        StateHasChanged();
+    } 
 }
