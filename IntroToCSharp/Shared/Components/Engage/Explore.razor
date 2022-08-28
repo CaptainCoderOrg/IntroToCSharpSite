@@ -37,7 +37,7 @@
     [Parameter]
     public int Gold {get; set;} = 100;
     [Parameter]
-    public int XP {get; set;} = 25;
+    public int XP {get; set;} = 15;
     public bool IsComplete => AdventureTasks.Where(task => !task.IsComplete).Count() == 0;
     private bool IsClaimed => DBRef == null ? false : _isClaimed;
     private bool _isClaimed = false;
