@@ -1,19 +1,77 @@
+@implements IAdventureActivity;
 <MudPaper Class="mt-2 pa-4 mb-2" Elevation="5">
     <MudStack Justify="Justify.SpaceBetween">
+        <MudGrid>
+            <MudItem xs=6>
+                    <MudText Typo="Typo.h6">Exploration: @Title</MudText>
+            </MudItem>
+            <MudItem xs=6>
+                <Reward Gold="Gold" XP="XP"/>
+            </MudItem>
+        </MudGrid>
         <MudElement>
-            <MudPaper Elevation="0">
-                <MudText Typo="Typo.h6">Explore: @Title</MudText>
-            </MudPaper>
+            <CascadingValue Value="@this">
+                @ChildContent
+            </CascadingValue>
         </MudElement>
-        <MudElement>
-            @ChildContent
-        </MudElement>
+        @if (IsClaimed) {
+            <MudButton Disabled="true" Variant="Variant.Filled" Color="Color.Success" StartIcon="@Icons.Filled.Hiking">Reward Claimed</MudButton>
+        } else {
+            <MudButton Disabled="@(!IsComplete)" Variant="Variant.Filled" Color="Color.Success" StartIcon="@Icons.Filled.Hiking" OnClick="@Claim">@ClaimText</MudButton>
+        }
     </MudStack>
 </MudPaper>
 
 @code {
     [Parameter, EditorRequired]
     public RenderFragment ChildContent {get; set;} = null!;
+    private string? _dbName = null;
+    [Parameter]
+    public string DBName
+    {
+        get => _dbName ?? Utils.SanitizeDBName(Title);
+        set => _dbName = value;
+    }
     [Parameter, EditorRequired]
     public string Title {get; set;} = String.Empty;
+    [Parameter]
+    public int Gold {get; set;} = 100;
+    [Parameter]
+    public int XP {get; set;} = 25;
+    public bool IsComplete => AdventureTasks.Where(task => !task.IsComplete).Count() == 0;
+    private bool IsClaimed => DBRef == null ? false : _isClaimed;
+    private bool _isClaimed = false;
+    private string ClaimText => IsComplete ? "Claim Reward" : "Complete this Exploration to Claim Reward";
+    private readonly HashSet<IAdventureTask> AdventureTasks = new ();
+    private DataReference<bool>? DBRef = null;
+
+    private void Claim()
+    {
+        if (DBRef == null) return;
+        if (_isClaimed == true) return;
+        DBRef?.Set(true);
+        _isClaimed = true;
+        UserService.Service.GiveXPAndGold(XP, Gold);
+    }
+
+    public void AddTask(IAdventureTask task) => AdventureTasks.Add(task);
+    public void Notify() => StateHasChanged();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        UserService.Service.OnUserChange += UpdateUser;
+    }
+
+    private void UpdateUser(User? newUser) {
+        if (newUser == null || !newUser.IsLoggedIn)
+        {
+            DBRef = null;
+        }
+        DBRef = UserService.Service.GetAdventureActivityReference(this);
+        if (DBRef != null)
+            DBRef.DataChangedEvent += UpdateDBRef;
+    }
+
+    private void UpdateDBRef(bool isClaimed) => _isClaimed = isClaimed;
 }

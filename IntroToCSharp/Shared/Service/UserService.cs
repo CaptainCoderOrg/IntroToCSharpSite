@@ -129,6 +129,12 @@ public class UserService
         }
     }
 
+    public DataReference<bool>? GetAdventureActivityReference(IAdventureActivity activity)
+    {
+        if (!_userData.IsLoggedIn) return null;
+        return DataReference.Bool($"/users/{_userData.UID}/adventure-activity/{activity.DBName}");
+    }
+
     /// <summary>
     /// Given a relative path for the logged in user, saves the specified
     /// data as a JSON object. If the object cannot be converted to JSON,

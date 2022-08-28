@@ -1,4 +1,5 @@
 @inject NavigationManager NavigationManager
+@implements IAdventureTask;
 
 <MudCheckBox @bind-Checked="@IsChecked" >
     @if (IsChecked)
@@ -13,6 +14,8 @@
 <br/>
 @code
 {
+    [CascadingParameter]
+    public IAdventureActivity? Activity { get; set; }
     private bool _isChecked = false;
     private bool IsDisabled = true;
     private bool IsChecked
@@ -29,6 +32,7 @@
             UpdateAndSaveTask();
         }
     }
+    public bool IsComplete { get => IsChecked; }
     private string ParentName => Parent == null ? "" : Parent.Name;
     private string Path => $"{NavigationManager.GetRoute()}/tasks/{Utils.SanitizeDBName(ParentName)}/{Utils.SanitizeDBName(Name)}";
 
@@ -43,6 +47,9 @@
     protected override void OnInitialized()
     {
         UserService.Service.OnUserChange += HandleUserChange;
+        if (Activity != null) {
+            Activity.AddTask(this);
+        }
     }
 
     private void HandleUserChange(User userData)
@@ -63,6 +70,7 @@
 
     private void UpdateAndSaveTask()
     {
+        Activity?.Notify();
         UserService.Service.UpdateTaskItem(Path, _isChecked);
     }
 }
