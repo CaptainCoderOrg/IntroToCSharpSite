@@ -1,4 +1,5 @@
 @inject NavigationManager NavigationManager
+@implements IAdventureTask;
 
 <MudListItem Icon="@Icons.Filled.QuestionAnswer" OnClick="@NotifyLoggedIn">
     <MudStack Row="true" AlignItems="AlignItems.Center">
@@ -10,7 +11,7 @@
         }
         <MudTextField Label="@Text" @bind-Value="Answer" @bind-Disabled="@IsDisabled" />
     </MudStack>
-    
+
 </MudListItem>
 @code
 {
@@ -25,11 +26,14 @@
 
     [CascadingParameter]
     public Questions Parent {get; set;} = null!;
-    
+    [CascadingParameter]
+    public IAdventureActivity? Activity {get; set;}
+
     [Parameter, EditorRequired]
     public string Text {get; set;} = null!;
     public string ParentTitle => Parent == null ? "No-Parent" : Utils.SanitizeDBName(Parent.Title);
-    
+    public bool IsComplete => _answer != String.Empty;
+
     private string Answer {
         get => _answer == String.Empty ? Default : _answer;
         set
@@ -45,6 +49,7 @@
     protected override void OnInitialized()
     {
         UserService.Service.OnUserChange += HandleUserChange;
+        Activity?.AddTask(this);
     }
 
     private void HandleUserChange(User userData)
@@ -70,6 +75,7 @@
     private void UpdateAndSaveAnswer()
     {
         UserService.Service.UpdateQuestionAnswer(Path, _answer);
+        Activity?.Notify();
     }
 
     private async void NotifyLoggedIn()

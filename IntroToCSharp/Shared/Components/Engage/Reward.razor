@@ -1,0 +1,32 @@
+<MudGrid Spacing=1 Justify="Justify.FlexEnd">
+@if (Gold > 0){
+    <MudItem>
+
+    </MudItem>
+        <MudPaper Class="pt-1 pl-2 pb-1 pr-3 border-solid border-2 rounded-pill" Style="border-color: #fec426"
+    Elevation="0" MinWidth="70px" MaxHeight="44px">
+            <MudText Style="color:#fec426" Typo="Typo.body1">
+                <MudImage Src="/imgs/top-menu/coin.png" Width="20" Height="20"
+            Style="display: inline; top:5px; position:relative;"></MudImage> <b>@Gold</b>
+            </MudText>
+        </MudPaper>
+}
+@if (XP > 0)
+{
+    <MudItem>
+
+    </MudItem>
+    <MudPaper Class="pa-2 border-solid border-2 mud-border-success rounded-pill"
+Elevation="0" MinWidth="70px" MaxHeight="44px">
+        <MudText Typo="Typo.body1" Color="Color.Tertiary"><b>XP: @XP</b></MudText>
+    </MudPaper>
+}
+</MudGrid>
+@code {
+
+    [Parameter, EditorRequired]
+    public int Gold {get; set;}
+
+    [Parameter, EditorRequired]
+    public int XP {get; set;}
+}
