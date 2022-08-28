@@ -1,6 +1,6 @@
 @using CaptainCoder
-<MudImage Class="mr-0 pr-0" Src="/imgs/top-menu/coin.png" Width="25" Height="25"></MudImage>
-<MudElement Class="ml-0 mr-6" Style="width:100px">
+<MudImage Class="hidden-mobile mr-0 pr-0" Src="/imgs/top-menu/coin.png" Width="25" Height="25"></MudImage>
+<MudElement Class="hidden-mobile ml-0 mr-6" Style="width:100px">
     <MudText Class="pa-0 ma-0" Style="text-align:center;" Typo="Typo.h6">@(Utils.FormatGold(Data.Gold))</MudText>
 </MudElement>
 
@@ -10,7 +10,7 @@
     /// </summary>
     /// <value>The user's data.</value>
     public UserStats Data { get; set; } = UserStats.Default;
-    
+
     /// <inheritdoc/>
     protected override void OnInitialized()
     {
