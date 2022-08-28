@@ -130,3 +130,9 @@ pre {
         opacity: 1;
     }
 }
+
+@media (max-width: 512px) {
+    .hidden-mobile {
+        display: none;
+    }
+}
