@@ -45,10 +45,7 @@
     private bool _isClaimed = false;
     private string ClaimText => IsComplete ? "Claim Reward" : "Complete this Exploration to Claim Reward";
     private readonly HashSet<IAdventureTask> AdventureTasks = new ();
-    public void AddTask(IAdventureTask task) {
-        AdventureTasks.Add(task);
-        Console.WriteLine($"Adding Task to {Title}");
-    }
+    public void AddTask(IAdventureTask task) => AdventureTasks.Add(task);
     public void Notify() => StateHasChanged();
     private DataReference<bool>? DBRef = null;
 
