@@ -275,4 +275,13 @@ public class UserService
         _userData.UserPagesRef.Set(_userPages);
         return true;
     }
+
+    public bool ResetBook()
+    {
+        if (!_userData.IsLoggedIn) return false;
+        if (_userData.UserPagesRef == null) return false;
+        _userPages = UserPages.Default;
+        _userData.UserPagesRef.Set(_userPages);
+        return true;
+    }
 }
