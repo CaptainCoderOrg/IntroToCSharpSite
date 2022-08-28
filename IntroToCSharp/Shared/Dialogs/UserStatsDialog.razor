@@ -1,0 +1,73 @@
+@inject IDialogService DialogService;
+<MudDialog>
+    <DialogContent>
+        <MudStack Class="mb-4" style="min-width:400px" Spacing=4 Justify="Justify.Center">
+            <MudGrid Spacing=1>
+                <MudItem sm=6><MudText><b>@_user.DisplayName</b></MudText></MudItem>
+                <MudItem sm=6><Label Name="Level"><MudText>@_userStats.Level</MudText></Label></MudItem>
+                <MudItem sm=6><Label Name="XP Earned"><MudText>@_userStats.XP</MudText></Label></MudItem>
+                <MudItem sm=6><Label Name="Next Level"><MudText>@_userStats.XPTowardLevel / @_userStats.XPNeeded</MudText></Label></MudItem>
+                <MudItem sm=12><Label Name="Gold"><UserGold UserData="@_userStats"/></Label></MudItem>
+                <MudItem sm=6><Label Icon="@Icons.Filled.Hiking" Name="Pages Discovered">@PagesDiscovered / @TotalPages</Label></MudItem>
+                <MudItem sm=6><Label Icon="@Icons.Filled.CheckCircle" IconColor="Color.Success" Name="Pages Completed">@PagesComplete / @TotalPages</Label></MudItem>
+            </MudGrid>
+            <MudButton Color="Color.Tertiary" Variant="Variant.Filled" OnClick="@ResetBookData">Reset Book Data</MudButton>
+            <MudButton Color="Color.Secondary" Variant="Variant.Filled" OnClick="@Logout">Logout</MudButton>
+        </MudStack>
+    </DialogContent>
+</MudDialog>
+@code {
+    [CascadingParameter] MudDialogInstance? MudDialog { get; set; }
+    private int PagesDiscovered => _userPages.GetDiscovered();
+    private int TotalPages => PageRegistry.Instance.TotalPages;
+    private int PagesComplete => _userPages.Completed;
+
+    private User _user {get; set;} = User.NoUser;
+    private UserStats _userStats { get; set; } = UserStats.Default;
+    private UserPages _userPages { get; set; } = UserPages.Default;
+
+    protected override void OnInitialized()
+    {
+        UserService.Service.OnUserChange += this.UpdateUser;
+    }
+
+    private void Logout() => UserService.Service.Logout().AndForget();
+
+    private void UpdateUser(User? newUser)
+    {
+        if (_user == newUser) return;
+        _user = newUser ?? User.NoUser;
+        if (!_user.IsLoggedIn)
+        {
+            MudDialog?.Close(DialogResult.Ok(true));
+            return;
+        }
+        if (_user.UserStatsRef != null) _user.UserStatsRef.DataChangedEvent += UpdateUserStats;
+        if (_user.UserPagesRef != null) _user.UserPagesRef.DataChangedEvent += UpdateUserPages;
+        StateHasChanged();
+    }
+
+    private void ResetBookData()
+    {
+        ConfirmationDialog.Show(DialogService, "Are you sure? This will set all pages in the book to Undiscovered.", () => UserService.Service.ResetBook());
+    }
+
+    private void UpdateUserStats(UserStats? newUserStats)
+    {
+        if (_userStats == newUserStats) return;
+        _userStats = newUserStats ?? UserStats.Default;
+        StateHasChanged();
+    }
+
+    private void UpdateUserPages(UserPages? newUserPages)
+    {
+        if (_userPages == newUserPages) return;
+        _userPages = newUserPages ?? UserPages.Default;
+        StateHasChanged();
+    }
+
+    public static void Show(IDialogService DialogService) {
+        var options = new DialogOptions { CloseOnEscapeKey = true, CloseButton = true };
+        DialogService.Show<UserStatsDialog>("Adventure Statistics", options);
+    }
+}

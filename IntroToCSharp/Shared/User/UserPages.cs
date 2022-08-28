@@ -15,7 +15,20 @@ public class UserPages
         return pages;
     }
 
+    // Note: this field must be public to be saved.
     public Dictionary<string, PageStatus> Pages { get; set; } = new ();
+    [JsonIgnore]
+    public int Discovered => Pages.Values.Where(s => s != PageStatus.Undiscovered).Count();
+    [JsonIgnore]
+    public int Completed => Pages.Values.Where(s => s == PageStatus.Complete).Count();
+
+    public int GetDiscovered()
+    {
+        Console.WriteLine($"Discovering Pages: {Pages.Count}");
+        Console.WriteLine(string.Join(", ", Pages.Values));
+        Console.WriteLine(string.Join(", ", Pages.Keys));
+        return Discovered;
+    }
 
     public bool Contains(MenuItem item) {
         if (Pages.ContainsKey(item.Name)) return true;

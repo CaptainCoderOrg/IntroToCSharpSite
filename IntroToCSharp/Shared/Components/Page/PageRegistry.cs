@@ -12,6 +12,7 @@ public class PageRegistry
 {
 
     public static readonly PageRegistry Instance = new PageRegistry().Init();
+    public int TotalPages {get; private set;} = 0;
     private readonly Dictionary<string, MenuItem> _items = new ();
     private readonly Dictionary<string, PageRef> _routes = new ();
 
@@ -105,6 +106,7 @@ public class PageRegistry
         parent.Children.Add(page);
         _items[p.Name] = page;
         _routes[p.Href] = p;
+        if (p.IsAdventure) TotalPages++;
     }
 
     public IEnumerable<MenuItem> RootElements => _items.Values.Where(item => item.Parent == null).OrderBy(item => item.Order);

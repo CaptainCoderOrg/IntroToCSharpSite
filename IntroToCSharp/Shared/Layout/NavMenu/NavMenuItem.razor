@@ -26,9 +26,9 @@ else {
     private MudBlazor.Color GetIconColor() {
         return Status switch {
             PageStatus.New => Color.Success,
-            PageStatus.Started => Color.Dark,
+            PageStatus.Started => Color.Default,
             PageStatus.Complete => Color.Success,
-            _ => Color.Dark
+            _ => Color.Default
         };
     }
 
