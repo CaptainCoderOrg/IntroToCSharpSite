@@ -13,7 +13,7 @@
         <Gold />
         <ExperienceBar />
         <MudElement>@UserData.DisplayName </MudElement>
-        <MudButton OnClick="@(() => UserStatsDialog.Show(DialogService))">
+        <MudButton OnClick="@(() => JournalDialog.Show(DialogService))">
             <MudAvatar Color="Color.Secondary" OnClick>@UserData.AvatarLetter</MudAvatar>
         </MudButton>
     }

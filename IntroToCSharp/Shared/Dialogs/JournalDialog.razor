@@ -1,7 +1,7 @@
 @inject IDialogService DialogService;
 <MudDialog>
     <DialogContent>
-        <MudStack Class="mb-4" style="min-width:400px" Spacing=4 Justify="Justify.Center">
+        <MudStack Class="mb-4" Spacing=4 Justify="Justify.Center">
             <MudGrid Spacing=1>
                 <MudItem sm=6><MudText><b>@_user.DisplayName</b></MudText></MudItem>
                 <MudItem sm=6><Label Name="Level"><MudText>@_userStats.Level</MudText></Label></MudItem>
@@ -68,6 +68,6 @@
 
     public static void Show(IDialogService DialogService) {
         var options = new DialogOptions { CloseOnEscapeKey = true, CloseButton = true };
-        DialogService.Show<UserStatsDialog>("Adventure Statistics", options);
+        DialogService.Show<JournalDialog>("Journal", options);
     }
 }
