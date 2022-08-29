@@ -3,7 +3,7 @@
     <MudStack Justify="Justify.SpaceBetween">
         <MudGrid>
             <MudItem xs=6>
-                    <MudText Typo="Typo.h6">Exploration: @Title</MudText>
+                    <MudText Typo="Typo.h6">@Title</MudText>
             </MudItem>
             <MudItem xs=6>
                 <Reward Gold="Gold" XP="XP" IsComplete="@IsClaimed"/>
@@ -26,7 +26,8 @@
     [Parameter, EditorRequired]
     public RenderFragment ChildContent {get; set;} = null!;
     private string? _dbName = null;
-    public string ActivityType => "exploration";
+    [Parameter, EditorRequired]
+    public string ActivityType {get; set;} = "activity-step";
     [Parameter]
     public string DBName
     {
@@ -42,7 +43,9 @@
     public bool IsComplete => AdventureTasks.Where(task => !task.IsComplete).Count() == 0;
     private bool IsClaimed => DBRef == null ? false : _isClaimed;
     private bool _isClaimed = false;
-    private string ClaimText => IsComplete ? "Claim Reward" : "Complete this Exploration to Claim Reward";
+    [Parameter]
+    public string ClaimName {get; set;} = "Step";
+    private string ClaimText => IsComplete ? "Claim Reward" : "Complete this Step to Claim Reward";
     private readonly HashSet<IAdventureTask> AdventureTasks = new ();
     private DataReference<bool>? DBRef = null;
 
