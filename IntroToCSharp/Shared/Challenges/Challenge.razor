@@ -35,6 +35,7 @@
         set => _dbName = value;
     }
 
+    public string ActivityType => "challenge";
     [Parameter]
     public int Gold { get; set;} = 100;
     [Parameter]
@@ -45,7 +46,10 @@
     private bool _isClaimed = false;
     private string ClaimText => IsComplete ? "Claim Reward" : "Complete this Exploration to Claim Reward";
     private readonly HashSet<IAdventureTask> AdventureTasks = new ();
-    public void AddTask(IAdventureTask task) => AdventureTasks.Add(task);
+    public void AddTask(IAdventureTask task) {
+        AdventureTasks.Add(task);
+        StateHasChanged();
+    }
     public void Notify() => StateHasChanged();
     private DataReference<bool>? DBRef = null;
 
@@ -81,5 +85,5 @@
         if (_isClaimed == isClaimed) return;
         _isClaimed = isClaimed;
         StateHasChanged();
-    } 
+    }
 }

@@ -44,7 +44,16 @@
         }
     }
 
-    private string Path => $"{NavigationManager.GetRoute()}/questions/{ParentTitle}/{Utils.SanitizeDBName(Text)}";
+    private string? _dbName = null;
+    [Parameter]
+    public string DBName { get => _dbName ?? Utils.SanitizeDBName(Text); set => _dbName = value;}
+
+    private string Path {
+        get {
+            if (Activity == null) return $"{NavigationManager.GetRoute()}/questions/{ParentTitle}/{Utils.SanitizeDBName(DBName)}";
+            return $"{Activity.ActivityType}/{Activity.DBName}/{Utils.SanitizeDBName(DBName)}";
+        }
+    }
 
     protected override void OnInitialized()
     {

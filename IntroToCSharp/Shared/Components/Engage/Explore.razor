@@ -26,6 +26,7 @@
     [Parameter, EditorRequired]
     public RenderFragment ChildContent {get; set;} = null!;
     private string? _dbName = null;
+    public string ActivityType => "exploration";
     [Parameter]
     public string DBName
     {
@@ -54,7 +55,11 @@
         UserService.Service.GiveXPAndGold(XP, Gold);
     }
 
-    public void AddTask(IAdventureTask task) => AdventureTasks.Add(task);
+    public void AddTask(IAdventureTask task) {
+        AdventureTasks.Add(task);
+        StateHasChanged();
+    }
+
     public void Notify() => StateHasChanged();
 
     protected override void OnInitialized()
@@ -80,5 +85,5 @@
         if (_isClaimed == isClaimed) return;
         _isClaimed = isClaimed;
         StateHasChanged();
-    } 
+    }
 }

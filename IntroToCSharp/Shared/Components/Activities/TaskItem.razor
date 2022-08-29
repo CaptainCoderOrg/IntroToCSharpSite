@@ -33,11 +33,28 @@
         }
     }
     public bool IsComplete { get => IsChecked; }
-    private string ParentName => Parent == null ? "" : Parent.Name;
-    private string Path => $"{NavigationManager.GetRoute()}/tasks/{Utils.SanitizeDBName(ParentName)}/{Utils.SanitizeDBName(Name)}";
+    private string ParentName {
+        get {
+            if (Activity != null) return Activity.DBName;
+            if (Parent != null) return Parent.Name;
+            return "";
+        }
+    }
+
+    private string Path {
+        get {
+            if (Activity == null) return $"{NavigationManager.GetRoute()}/tasks/{Utils.SanitizeDBName(ParentName)}/{Utils.SanitizeDBName(DBName)}";
+            return $"{Activity.ActivityType}/{Activity.DBName}/{Utils.SanitizeDBName(DBName)}";
+        }
+    }
 
     [CascadingParameter, EditorRequired]
     public TaskList? Parent { get; set; } = null;
+    [Parameter]
+    public bool Optional { get; set; } = false;
+    private string? _dbName = null;
+    [Parameter]
+    public string DBName { get => _dbName ?? Utils.SanitizeDBName(Name); set => _dbName = value;}
     [Parameter, EditorRequired]
     public string Name { get; set; } = String.Empty;
 
@@ -47,7 +64,7 @@
     protected override void OnInitialized()
     {
         UserService.Service.OnUserChange += HandleUserChange;
-        if (Activity != null) {
+        if (Activity != null && !Optional) {
             Activity.AddTask(this);
         }
     }
