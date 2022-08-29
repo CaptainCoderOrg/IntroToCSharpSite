@@ -1,10 +1,10 @@
 <ActivityStep
-    ClaimName="Challenge"
-    Title="@($"Challenge: {Title}")"
+    ClaimName="Exploration"
+    Title="@($"Exploration: {Title}")"
     Gold="@Gold"
     XP="@XP"
     DBName="@DBName"
-    ActivityType="challenge">
+    ActivityType="exploration">
     @ChildContent
 </ActivityStep>
 
@@ -23,5 +23,5 @@
     [Parameter]
     public int Gold {get; set;} = 100;
     [Parameter]
-    public int XP {get; set;} = 25;
+    public int XP {get; set;} = 15;
 }
