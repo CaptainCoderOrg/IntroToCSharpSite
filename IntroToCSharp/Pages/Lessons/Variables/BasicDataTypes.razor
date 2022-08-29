@@ -81,62 +81,8 @@ int y = -17;
         take care that you have the correct number of digits.
     </Note>
 
-    <Explore Title="Gravity as an Integer">
-        <Text>
-            If you try to create an integer that has a decimal value, the compiler will complain.
-        </Text>
-        <CodeBlock AllowCopy>int gravity = 9.8;</CodeBlock>
-        <TaskItem Name="TryGravity">Add the above line of code to a <b>C#</b> program.</TaskItem>
-        <Question Text="What is the error message that occurs when you write the code above?" />
-    </Explore>
-    <Explore Title="Testing Integer Range">
-        <Text>
-            The <Code>int</Code> data type is represented using 4 <Keyword
-            Word="byte"/>s (32 bits) of memory. This means there are
-            2<sup>32</sup> distinct values that can be encoded as an
-            <Code>int</Code>. The smallest value is -2,147,483,648 and the
-            largest value is 2,147,483,647.
-        </Text>
-        <Text>
-            Complete the following tasks:
-        </Text>
-        <TaskList Name="Min and Max Int Tasks">
-            <TaskItem Name="Step0">Create a new <b>C#</b> <b>Console Program</b></TaskItem>
-            <TaskItem Name="Step1">Declare an <Code>int num;</Code></TaskItem>
-            <TaskItem Name="Step2">Assign <Code>num = 2_147_483_647 + 1;</Code></TaskItem>
-            <Question Text="What is the error message you receive?"/>
-            <TaskItem Name="Step3">Update your code to assign <Code>num</Code> the maximum <Code>int</Code> value: <Code>num = 2_147_483_647</Code></TaskItem>
-            <TaskItem Name="Step4">Update your code to display <Code>num + 1</Code> (Don't run your program yet)</TaskItem>
-            <Question Text="What do you think the output will be?"/>
-            <TaskItem Name="Step5">Run your program</TaskItem>
-            <Question Text="What was the output?"/>
-            <Question Text="What do you think the output will be if you display num + 2?"/>
-            <TaskItem Name="Step6">Update your code to display <Code>num + 2</Code></TaskItem>
-            <TaskItem Name="Step7">Run your program again</TaskItem>
-            <Question Text="What do you think is happening?"/>
-        </TaskList>
-        <Explanation>
-            <Text>
-                What you are observing is called an <Keyword Word="overflow
-                error"/>. When you attempt to increase the value stored in
-                <Code>num</Code> beyond the maximum value, it "rolls over" and
-                becomes the largest negative number. A similar thing happens when
-                you decrease an <Code>int</Code> below the minimum value it becomes
-                the largest positive number.
-            </Text>
-            <Text>
-                One way to think about <b>overflow errors</b> is to look at the
-                odometer in a car. When it reaches its maximum value, it literally
-                rolls over to the minimum value that it can represent:
-            </Text>
-            <Image Src="odometer.jpg"/>
-            <Text>
-                For an in depth explanation, check out the <MudLink
-                Href="https://en.wikipedia.org/wiki/Integer_overflow"
-                Target="_blank">Wikipedia article</MudLink>.
-            </Text>
-        </Explanation>
-    </Explore>
+    <GravityAsAnIntegerExploration/>
+    <TestingIntegerRangeExploration/>
 </Section>
 
 <Section Title="Double">
@@ -158,33 +104,9 @@ double ice = 32;
         sacrifice a small amount of precision. That is, <Code>double</Code> values
         are only approximations.
     </Text>
-    <Explore Title="Approximating Numbers">
-        <MudText>Don't run the code below just yet. Read it and answer the question.</MudText>
-        <Question Text="What do you think the code below will display?"/>
-        <CodeBlock AllowCopy ReplIt="JosephCollard/DoublePrecision">
-double error = 2.0 - 1.9;
-Console.WriteLine(error);
-        </CodeBlock>
-        <TaskItem Name="RunCode">Now, run the code.</TaskItem>
-        <Question Text="What did the program display?"/>
-        <Explanation>
-            <Text>
-                The code above demonstrates a <Keyword Word="rounding error"/>. This is
-                an error that occurs when a decimal value cannot be precisely represented
-                by the number of <Keyword Word="bits"/> being used. When writing a
-                program that uses <Code>doubles</Code>, it is important to consider if
-                it is okay for the precision to be approximated. For example,
-                an approximation of a race cars speed in a video game is probably okay.
-                However, approximating the amount of money a person earns in banking
-                software could cause problems.
-            </Text>
-            <Text>
-                For an in depth explanation, check out the <MudLink
-                Href="https://en.wikipedia.org/wiki/Round-off_error"
-                Target="_blank">Wikipedia article.</MudLink>
-            </Text>
-        </Explanation>
-    </Explore>
+
+    <ApproximatingNumbersExploration/>
+    
     <Text>
         Because <Code>doubles</Code> have such a massive range of values, you
         may find that you need to create a <Code>double</Code> literal that is

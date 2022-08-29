@@ -57,116 +57,12 @@
 </Section>
 
 <Section Title="Integer Division vs. Floating-Point Division">
-    <Explore Title="Integer Division">
-        <Text>Study the code below but don't run it yet.</Text>
-        <CodeBlock>
-int x = 5;
-int y = 2;
-int result = x / y;
-Console.WriteLine(result);
-        </CodeBlock>
-        <Question Text="What do you think the program will display?"/>
-        <TaskItem Name="Test Integer Division">Add the code to a C# program and run it.</TaskItem>
-        <Question Text="What did the program display?"/>
-        <Explanation>
-            <Text>
-                Recall that an <b>int</b> is a whole number. In mathematics, 5 ÷
-                2 is 2.5. However, when you perform division on <b>int
-                values</b> the computer performs <b>integer division</b>. During
-                <b>evaluation</b> of <b>integer division</b> the computer drops
-                the decimals from the result.
-            </Text>
-            <Note>
-                <b>Integer division</b> does not round the result, it drops
-                everything after the decimal point. For example, using
-                <b>integer division</b> <Code>9 / 10</Code> <b>evaluates</b> to
-                <Code>0</Code>.
-            </Note>
-        </Explanation>
-    </Explore>
-    <Explore Title="Floating-Point Division">
-        <Text>Study the code below but don't run it yet.</Text>
-        <CodeBlock>
-double x = 5;
-double y = 2;
-double result = x / y;
-Console.WriteLine(result);
-        </CodeBlock>
-        <Question Text="What do you think the program above will display?"/>
-        <TaskItem Name="Test Double Division">Add the code to a C# program and run it.</TaskItem>
-        <Question Text="What did the program above display?"/>
-        <Explanation>
-            <Text>
-                Unlike <b>int</b>, the <b>double</b> data type is capable of
-                representing the <b>value</b> <Code>2.5</Code>. This type of
-                number is called a <b>floating-point number</b>.
-            </Text>
-        </Explanation>
-    </Explore>
+    <IntegerDivisionExploration/>
+    <FloatingPointDivisionExploration/>
 </Section>
 <Section Title="Division by Zero">
-    <Explore Title="Division by Zero with Integers">
-        <Text>
-            In mathematics, division by <Code>0</Code> is not defined. So, what
-            happens when you divide by <Code>0</Code> in a C# program?
-        </Text>
-        <Text>Study the code below but don't run it yet.</Text>
-        <CodeBlock>
-int x = 5 / 0;
-Console.WriteLine(x);
-        </CodeBlock>
-        <Question Text="What do you think the code will display?"/>
-        <TaskItem Name="Test literal division by 0">Add the code above to a program and run it.</TaskItem>
-        <Question Text="What was the result?"/>
-        <Explanation>
-            <Text>
-                If all went well, the above complier produced the error message,
-                "<b>Division by constant zero</b>" and didn't allow you to run the
-                program. When you explicitly write division by zero, the C# compiler
-                is smart enough to stop you.
-            </Text>
-        </Explanation>
-        <Text>Study the code below but don't run it yet.</Text>
-        <CodeBlock>
-int a = 0;
-int x = 5 / a;
-Console.WriteLine(x);
-        </CodeBlock>
-        <Question Text="What do you think the code above will display?"/>
-        <TaskItem Name="Test division by 0 variable">Add the code above to a program and run it.</TaskItem>
-        <Question Text="What was the result of running the code above?"/>
-        <Explanation>
-            <Text>
-                Unlike the previous section of code, the compiler doesn't know
-                that the <b>variable</b> <Code>a</Code> is storing the
-                <b>value</b> <Code>0</Code>. The program above compiles and
-                runs. However, during execution, the program crashes and a
-                <b>run time error</b> occurs: "<b>Error:
-                System.DivideByZeroException: Attempted to divide by zero.</b>"
-            </Text>
-        </Explanation>
-    </Explore>
-    <Explore Title="Division by Zero with Doubles">
-        <Text>Study the code below but don't run it yet.</Text>
-        <CodeBlock>
-double x = 5.0 / 0.0;
-Console.WriteLine(x);
-        </CodeBlock>
-        <Question Text="What do you think will be display?"/>
-        <TaskItem Name="Test double division by 0">Add the code above to a program and run it.</TaskItem>
-        <Question Text="What was displayed?"/>
-        <Explanation>
-            <Text>If all went well, the program displayed the symbol for infinity.</Text>
-            <Text>
-                When you divide by zero with a <b>floating-point</b> number, the
-                program does not crash. Instead, the division results in the
-                value <Code>double.PositiveInfinity</Code> or
-                <Code>double.NegativeInfinity</Code>. This behaviour might seem
-                odd but it is a result of the computer attempting to divide by
-                an infinitely small number.
-            </Text>
-        </Explanation>
-    </Explore>
+    <DivisionByZeroWithIntegersExploration/>
+    <DivisionByZeroWithDoublesExploration/>
 </Section>
 <Section Title="What's Next?">
     <Adventure Portrait="Portraits.CaptainCoder">
