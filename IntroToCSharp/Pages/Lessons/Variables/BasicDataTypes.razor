@@ -6,7 +6,7 @@
     <Text>
     In <MudLink Href="@VariableBasics.Href">The Basics</MudLink> we discussed how to
     use <Keyword Word="variable"/>s to store, read, and update data in a
-    computer's memory. In C#, when you declare a <b>variable</b> you must
+    computer's memory. In <b>C#</b>, when you declare a <b>variable</b> you must
     specify the type of data that will be stored. This is called a <Keyword
     Word="data type"/>. This section provides a high level overview
     of the 4 most commonly used <b>data types</b>:
@@ -62,7 +62,7 @@ Console.WriteLine("The cat says, \"Meow!\"");
 <Section Title="Integer">
     <Text>
         An <b>integer</b> is a whole number (no decimals allowed).
-        In C#, we declare <b>integers</b> using the <Code>int</Code> data type.
+        In <b>C#</b>, we declare <b>integers</b> using the <Code>int</Code> data type.
         For example:
     </Text>
     <CodeBlock AllowCopy>
@@ -72,7 +72,7 @@ int y = -17;
     </CodeBlock>
     <Text>
         It may become difficult to read an <Code>int</Code> literal that has many digits.
-        To help with this, C# allows you to use underscores (<Code>_</Code>)
+        To help with this, <b>C#</b> allows you to use underscores (<Code>_</Code>)
         within an <Code>int</Code> literal. For example:
     </Text>
     <CodeBlock AllowCopy>int population = 329_500_000;</CodeBlock>
@@ -96,11 +96,11 @@ double pi = 3.14159;
 double ice = 32;
     </CodeBlock>
     <Text>
-        A <Code>double</Code> uses 8 <Keyword Word="byte"/>s of memory and is
+        A <Code>double</Code> uses 8 <Keyword Word="bytes"/> of memory and is
         capable of approximating incredibly large and incredibly small values.
         The smallest value is approximately ±10<sup>-324</sup> and the largest
         value is approximately ±10<sup>308</sup>. To achieve this incredible
-        range of values using only 64 <Keyword Word="bit"/>s of memory we must
+        range of values using only 64 <Keyword Word="bits"/> of memory we must
         sacrifice a small amount of precision. That is, <Code>double</Code> values
         are only approximations.
     </Text>
@@ -110,9 +110,9 @@ double ice = 32;
     <Text>
         Because <Code>doubles</Code> have such a massive range of values, you
         may find that you need to create a <Code>double</Code> literal that is
-        incredibly long. For example, the "Avogadro Constant" is
+        incredibly long. For example, the "<b>Avogadro Constant</b>" is
         602,200,000,000,000,000,000,000. This number is typically represented
-        using scientific notation as: 6.022x10<sup>23</sup>. For convenience, C#
+        using scientific notation as: 6.022x10<sup>23</sup>. For convenience, <b>C#</b>
         allows you to use scientific notation to specify a <Code>double</Code>
         literal.
     </Text>
@@ -125,8 +125,8 @@ double ice = 32;
 
 <Section Title="Boolean">
     <Text>
-        A boolean is a data type which represents a value that is one of two
-        values: <Code>true</Code> or <Code>false</Code>. In C#, we declare
+        A <b>boolean</b> is a data type which represents a value that is one of two
+        values: <Code>true</Code> or <Code>false</Code>. In <b>C#</b>, we declare
         <b>booleans</b> using the <Code>bool</Code> data type. For example:
     </Text>
     <CodeBlock>
@@ -134,7 +134,7 @@ bool hasSword = true;
 bool isGameOver = false;
     </CodeBlock>
     <FunFact>
-        The word "boolean" is named after the mathematician George Bool
+        The word "<b>boolean</b>" is named after the mathematician George Bool
         who created a branch of mathematics called "Boolean Logic" which
         is centered around the idea of combining logical statements
         that are either <Code>true</Code> or <Code>false</Code>.
