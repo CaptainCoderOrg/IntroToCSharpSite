@@ -58,160 +58,171 @@
 
 </Section>
 
-<Section Title="Designing a Mad Take">
-    <Text>
-        Before writing any code, you should think about what
-        your user inputs will be, which variables you will need,
-        and what output you your program will display.
-    </Text>
-    <Text>
-        First, write (or find) at least 5 sentences to use as the base for your <b>Mad Take</b>.
-        This could be a short story, a recipe, a fun limerick, a phrase from a
-        song, a famous quote, or anything else. For example, you might use the
-        following recipe:
-    </Text>
-    <Output>
-        To make pancakes you first need to gather your ingredients.
-        You will need 2 eggs, a cup of milk, flour, sugar, and melted butter.
-        Start by mixing together the dry ingredients in a bowl.
-        Then, add the milk, eggs, and melted butter and stir until the batter is smooth.
-        Scoop the batter onto a hot pan and cook for about a minute on each side.
-        Serve your pancakes with your favorite topping and dig in!
-    </Output>
-    <TaskItem Name="Create a Base">Write (or fine) at least 5 sentences to use as a base for your <b>Mad Take</b></TaskItem>
-    <Text>
-        Next, replace words you would like to use as user inputs with labels. Be sure that
-        the labels you use are unique to each word you want to replace. For example,
-        you might replace the word "pancakes" with the label "<b>foodItem</b>".
-    </Text>
-    <Output>
-        To make <b>{foodItem}</b> you first need to gather your ingredients.
-        You will need 2 eggs, a cup of milk, flour, sugar, and melted butter.
-        Start by mixing together the dry ingredients in a bowl.
-        Then, add the milk, eggs, and melted butter and stir until the batter is smooth.
-        Scoop the batter onto a hot pan and cook for about a minute on each side.
-        Serve your <b>{foodItem}</b> with your favorite topping and dig in!
-    </Output>
-    <Note>
-        The word "pancakes" appeard twice in the recipe and was replaced with the same
-        label.
-    </Note>
-    <Text>
-        Create at least 10 labels. When you're finished, you should have a template for your <b>Mad Take</b>:
-    </Text>
-    <Output>
-        To make <b>{foodItem}</b> you first need to gather your ingredients.
-        You will need <b>{number}</b> eggs, a <b>{measurement}</b> of milk, flour, sugar, and <b>{adjective1}</b> butter.
-        Start by <b>{verbWithIng}</b> together the dry ingredients in a bowl.
-        Then, <b>{verb1}</b> the milk, eggs, and <b>{adjective1}</b> butter and <b>{verb2}</b> until the batter is <b>{adjective2}</b>.
-        Scoop the batter onto a hot <b>{noun}</b> and cook for about a minute on each side.
-        Serve your <b>{foodItem}</b> with your favorite topping and dig in!
-    </Output>
-    <Note>
-        If you have multiple words of the same type (e.g. multiple verbs), you
-        will need to give each one a unique name. In the example above, this happens twice:
-        <b>adjective1</b> and <b>adjective2</b> as well as <b>verb1</b> and
-        <b>verb2</b>.
-    </Note>
-    <TaskItem Name="Create Labels">Create at least 10 labels</TaskItem>
+<Section Title="Step 1: Design a Mad Take">
+    <ActivityStep Title="Design a Mad Take" ActivityType="mad-takes-activity" Gold="50" XP="30">
+        <Text>
+            Before writing any code, you should think about what
+            your user inputs will be, which variables you will need,
+            and what output you your program will display.
+        </Text>
+        <Text>
+            First, write (or find) at least 5 sentences to use as the base for your <b>Mad Take</b>.
+            This could be a short story, a recipe, a fun limerick, a phrase from a
+            song, a famous quote, or anything else. For example, you might use the
+            following recipe:
+        </Text>
+        <Output>
+            To make pancakes you first need to gather your ingredients.
+            You will need 2 eggs, a cup of milk, flour, sugar, and melted butter.
+            Start by mixing together the dry ingredients in a bowl.
+            Then, add the milk, eggs, and melted butter and stir until the batter is smooth.
+            Scoop the batter onto a hot pan and cook for about a minute on each side.
+            Serve your pancakes with your favorite topping and dig in!
+        </Output>
+        <TaskItem Name="Create a Base">Write (or fine) at least 5 sentences to use as a base for your <b>Mad Take</b></TaskItem>
+        <Text>
+            Next, replace words you would like to use as user inputs with labels. Be sure that
+            the labels you use are unique to each word you want to replace. For example,
+            you might replace the word "pancakes" with the label "<b>foodItem</b>".
+        </Text>
+        <Output>
+            To make <b>{foodItem}</b> you first need to gather your ingredients.
+            You will need 2 eggs, a cup of milk, flour, sugar, and melted butter.
+            Start by mixing together the dry ingredients in a bowl.
+            Then, add the milk, eggs, and melted butter and stir until the batter is smooth.
+            Scoop the batter onto a hot pan and cook for about a minute on each side.
+            Serve your <b>{foodItem}</b> with your favorite topping and dig in!
+        </Output>
+        <Note>
+            The word "pancakes" appeard twice in the recipe and was replaced with the same
+            label.
+        </Note>
+        <Text>
+            Create at least 10 labels. When you're finished, you should have a template for your <b>Mad Take</b>:
+        </Text>
+        <Output>
+            To make <b>{foodItem}</b> you first need to gather your ingredients.
+            You will need <b>{number}</b> eggs, a <b>{measurement}</b> of milk, flour, sugar, and <b>{adjective1}</b> butter.
+            Start by <b>{verbWithIng}</b> together the dry ingredients in a bowl.
+            Then, <b>{verb1}</b> the milk, eggs, and <b>{adjective1}</b> butter and <b>{verb2}</b> until the batter is <b>{adjective2}</b>.
+            Scoop the batter onto a hot <b>{noun}</b> and cook for about a minute on each side.
+            Serve your <b>{foodItem}</b> with your favorite topping and dig in!
+        </Output>
+        <Note>
+            If you have multiple words of the same type (e.g. multiple verbs), you
+            will need to give each one a unique name. In the example above, this happens twice:
+            <b>adjective1</b> and <b>adjective2</b> as well as <b>verb1</b> and
+            <b>verb2</b>.
+        </Note>
+        <TaskItem Name="Create Labels">Create at least 10 labels</TaskItem>
+    </ActivityStep>
 </Section>
-<Section Title="Declaring Variables">
-    <Text>
-        Now that you have a template for your <b>Mad Take</b>, you can start writing your program.
-    </Text>
-    <ConsoleProjectTask Name="Create Project">Create a new project called "<b>Mad Take</b>s"</ConsoleProjectTask>
-    <Text>
-        In your <Code>Program.cs</Code> file <b>declare</b> a <b>variable</b> for each of the
-        labels in your <b>Mad Take</b>.
-    </Text>
-    <MudPaper Elevation=5 Class="pa-2">
-        <DeclareRecipe/>
-    </MudPaper>
-    <Text><b>Example:</b></Text>
-    <CodeBlock>
+<Section Title="Step 2: Declare Your Variables">
+    <ActivityStep Title="Declare Your Variables" ActivityType="mad-takes-activity" Gold="25" XP="10">
+        <Text>
+            Now that you have a template for your <b>Mad Take</b>, you can start writing your program.
+        </Text>
+        <ConsoleProjectTask Name="Create Project">Create a new project called "<b>Mad Take</b>s"</ConsoleProjectTask>
+        <Text>
+            In your <Code>Program.cs</Code> file <b>declare</b> a <b>variable</b> for each of the
+            labels in your <b>Mad Take</b>.
+        </Text>
+        <MudPaper Elevation=5 Class="pa-2">
+            <DeclareRecipe/>
+        </MudPaper>
+        <Text><b>Example:</b></Text>
+        <CodeBlock>
 string foodName;
 string number;
 string measurement;
-    </CodeBlock>
+        </CodeBlock>
 
-    <FunFact>
-        Sometimes you need to declare several variables all at once. There is special syntax that allows
-        you to do this on a single line by separating variable names with commas:
-        <CodeBlock>string foodName, number, measurement;</CodeBlock>
-    </FunFact>
+        <FunFact>
+            Sometimes you need to declare several variables all at once. There is special syntax that allows
+            you to do this on a single line by separating variable names with commas:
+            <CodeBlock>string foodName, number, measurement;</CodeBlock>
+        </FunFact>
 
-    <TaskItem Name="Declare variables"><b>Declare</b> a <b>string variable</b> for each of your labels</TaskItem>
+        <TaskItem Name="Declare variables"><b>Declare</b> a <b>string variable</b> for each of your labels</TaskItem>
 
-    <Note>
-        If you are getting an error that says: "<b>error CS0128: A
-        local variable or function named '{VARIABLE-NAME}' is already defined
-        in this scope</b>", you likely declared two or more <b>variables</b>
-        with the same name.
-    </Note>
+        <Note>
+            If you are getting an error that says: "<b>error CS0128: A
+            local variable or function named '{VARIABLE-NAME}' is already defined
+            in this scope</b>", you likely declared two or more <b>variables</b>
+            with the same name.
+        </Note>
+    </ActivityStep>
 </Section>
-<Section Title="Read User Input">
-    <Text>
-        Next, you need to prompt the user to enter a value for each of your
-        <b>variables</b>. First, call the <Code>Console.Write</Code> method to
-        display a prompt to the user. Then, can call the
-        <Code>Console.ReadLine</Code> method to read their input and store it in
-        a <b>variable</b> using the <b>assignment operator</b> (<Code>=</Code>).
-        For example:
-    </Text>
-    <CodeBlock>
+
+<Section Title="Step 3: Read User Input">
+    <ActivityStep Title="Read User Input" ActivityType="mad-takes-activity" Gold="25" XP="10">
+        <Text>
+            Next, you need to prompt the user to enter a value for each of your
+            <b>variables</b>. First, call the <Code>Console.Write</Code> method to
+            display a prompt to the user. Then, can call the
+            <Code>Console.ReadLine</Code> method to read their input and store it in
+            a <b>variable</b> using the <b>assignment operator</b> (<Code>=</Code>).
+            For example:
+        </Text>
+        <CodeBlock>
 Console.Write("Enter a food name: ");
 foodName = Console.ReadLine()!;
-    </CodeBlock>
-    <Note>
-        The example above uses a <Code>!</Code> after calling
-        <Code>Console.ReadLine()</Code> to ignore the warning about
-        a possible <b>null</b> value.
-    </Note>
-    <TaskItem Name="PromptUser">Prompt the user for each of your labels. (<Code>Console.Write</Code>)</TaskItem>
-    <TaskItem Name="Get Input">After each prompt, read the user's response. (<Code>Console.ReadLine</Code>) </TaskItem>
-    <TaskItem Name="Store Input">Store each response in the appropriate <b>variable</b> using the <b>assignment operator</b>. (<Code>=</Code>)</TaskItem>
+        </CodeBlock>
+        <Note>
+            The example above uses a <Code>!</Code> after calling
+            <Code>Console.ReadLine()</Code> to ignore the warning about
+            a possible <b>null</b> value.
+        </Note>
+        <TaskItem Name="PromptUser">Prompt the user for each of your labels. (<Code>Console.Write</Code>)</TaskItem>
+        <TaskItem Name="Get Input">After each prompt, read the user's response. (<Code>Console.ReadLine</Code>) </TaskItem>
+        <TaskItem Name="Store Input">Store each response in the appropriate <b>variable</b> using the <b>assignment operator</b>. (<Code>=</Code>)</TaskItem>
 
-    <HorizontalDivider/>
-    <Text><b>Copy and Pasting Bug</b></Text>
-    <Text>
-        A common error that occurs when working on this activity comes from
-        copying and pasting your prompts and <b>variable</b> assignments. For example:
-    </Text>
-    <CodeBlock>
+        <HorizontalDivider/>
+        <Text><b>Copy and Pasting Bug</b></Text>
+        <Text>
+            A common error that occurs when working on this activity comes from
+            copying and pasting your prompts and <b>variable</b> assignments. For example:
+        </Text>
+        <CodeBlock>
 Console.Write("Enter a food name: ");
 foodName = Console.ReadLine()!;
 Console.Write("Enter a number: ");
 foodName = Console.ReadLine()!; // Bug on this line!
-    </CodeBlock>
-    <Text>
-        Notice in the example above the programmer forgot to change the variable
-        name on 4th line to <Code>number</Code>. I would recommend typing out
-        each line of code to practice and build muscle memory in your fingers.
-        If you decide to copy and paste, be extra careful!
-    </Text>
+        </CodeBlock>
+        <Text>
+            Notice in the example above the programmer forgot to change the variable
+            name on 4th line to <Code>number</Code>. I would recommend typing out
+            each line of code to practice and build muscle memory in your fingers.
+            If you decide to copy and paste, be extra careful!
+        </Text>
+    </ActivityStep>
 </Section>
-<Section Title="Display the Result">
-    <Text>
-        With a <b>value</b> in each of your <b>variables</b>, you are ready to
-        display the result to the user. Use the (<Code>+</Code>) <Keyword Word="operator"/>
-        to combine your <b>variables</b> and the <b>text</b> of your <b>Mad Take</b>. Then,
-        call the <Code>Console.WriteLine</Code> method for each of your sentences.
-        For example:
-    </Text>
-    <CodeBlock>
-Console.WriteLine("To make " + foodItem + " you first need to gather your ingredients.");
-    </CodeBlock>
-    <TaskItem Name="Display Mad Take">Use the <Code>Console.WriteLine</Code> method to display your <b>Mad Take</b>.</TaskItem>
-    <TaskItem Name="Save and Run">Save and run your program to verify the output. (<Code>dotnet run</Code>)</TaskItem>
 
+<Section Title="Step 4: Display the Result">
+    <ActivityStep Title="Display the Result" ActivityType="mad-takes-activity" Gold="25" XP="10">
+        <Text>
+            With a <b>value</b> in each of your <b>variables</b>, you are ready to
+            display the result to the user. Use the (<Code>+</Code>) <Keyword Word="operator"/>
+            to combine your <b>variables</b> and the <b>text</b> of your <b>Mad Take</b>. Then,
+            call the <Code>Console.WriteLine</Code> method for each of your sentences.
+            For example:
+        </Text>
+        <CodeBlock>
+Console.WriteLine("To make " + foodItem + " you first need to gather your ingredients.");
+        </CodeBlock>
+        <TaskItem Name="Display Mad Take">Use the <Code>Console.WriteLine</Code> method to display your <b>Mad Take</b>.</TaskItem>
+        <TaskItem Name="Save and Run">Save and run your program to verify the output. (<Code>dotnet run</Code>)</TaskItem>
+    </ActivityStep>
 </Section>
-<Section Title="Spice it up with Colors">
-    <Text>
-        Now that you have a working <b>Mad Take</b>. Select a color for each of your
-        labels and add it to both the user input and the output.
-    </Text>
-    <Text><b>Input Example:</b></Text>
-    <CodeBlock ReplIt="JosephCollard/MadeTakeInputColors">
+
+<Section Title="Step 5: Spice it up with Colors">
+    <ActivityStep Title="Spice it up with Colors" ActivityType="mad-takes-activity" Gold="50" XP="25">
+        <Text>
+            Now that you have a working <b>Mad Take</b>. Select a color for each of your
+            labels and add it to both the user input and the output.
+        </Text>
+        <Text><b>Input Example:</b></Text>
+        <CodeBlock ReplIt="JosephCollard/MadeTakeInputColors">
 Console.ForegroundColor = ConsoleColor.White;
 Console.Write("Enter a food name: ");
 Console.ForegroundColor = ConsoleColor.Yellow;
@@ -220,24 +231,24 @@ Console.ForegroundColor = ConsoleColor.White;
 Console.Write("Enter a number: ");
 Console.ForegroundColor = ConsoleColor.Blue;
 number = Console.ReadLine()!;
-    </CodeBlock>
+        </CodeBlock>
 
-    <Text><b>Output Example:</b></Text>
-    <CodeBlock ReplIt="JosephCollard/MadeTakeOutputColors">
+        <Text><b>Output Example:</b></Text>
+        <CodeBlock ReplIt="JosephCollard/MadeTakeOutputColors">
 Console.ForegroundColor = ConsoleColor.White;
 Console.Write("To make ");
 Console.ForegroundColor = ConsoleColor.Yellow;
 Console.Write(foodName);
 Console.ForegroundColor = ConsoleColor.White;
 Console.WriteLine(" you first need to gather your ingredients.");
-    </CodeBlock>
+        </CodeBlock>
 
-    <ConsoleColorTable/>
+        <ConsoleColorTable/>
 
-    <TaskItem Name="Spice it up">Update your program to use a different color for each <b>variable</b>.</TaskItem>
-    <TaskItem Name="Test Program">Be sure to save and run your program frequently to test it.</TaskItem>
-    <TaskItem Name="Share Mad Take">When you're finished, entertain your friends and family by sharing your <b>Mad Take</b> with them.</TaskItem>
-
+        <TaskItem Name="Spice it up">Update your program to use a different color for each <b>variable</b>.</TaskItem>
+        <TaskItem Name="Test Program">Be sure to save and run your program frequently to test it.</TaskItem>
+        <TaskItem Name="Share Mad Take">When you're finished, entertain your friends and family by sharing your <b>Mad Take</b> with them.</TaskItem>
+    </ActivityStep>
 </Section>
 
 <Section Title="What's Next?">
