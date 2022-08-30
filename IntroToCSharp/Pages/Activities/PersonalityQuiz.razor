@@ -37,18 +37,18 @@
 <Section Title="Step 1: Choose Outcomes">
     <ActivityStep Title="Choose Outcomes" ActivityType="personality-quiz-activity" Gold="50" XP="10">
         <Text>
-            Before starting to program, it is important to think about the possible
-            outcomes that your user can receive. Start with 4 outcomes (you may
-            add more after completing the activity).
+            Before starting to program, it is important to think about the
+            outcomes that your user can receive. Keep it simple and
+            start with 4 outcomes.
         </Text>
         <Text>
             For example, if you were creating a quiz titled "Which Dungeons and
-            Dragon's Class Are You?", you might include these 4 outcomes: Fighter,
+            Dragon's Class Are You?", your outcomes might be: Fighter,
             Wizard, Rogue, and Bard.
         </Text>
         <Text>
             Or, if you were creating a quiz titled "Which Marvel Super Hero Are
-            You?" you might include these 4 outcomes: Thor, Black Widow, She Hulk,
+            You?" your outcomes might be: Thor, Black Widow, She Hulk,
             and Iron Man.
         </Text>
         <Question Text="What is your first outcome?"/>
@@ -61,9 +61,9 @@
 <Section Title="Step 2: Designining Your First Question">
     <ActivityStep Title="Designing Your First Question" ActivityType="personality-quiz-activity" Gold="50" XP="10">
         <Text>
-            Now that you know the possible outcomes of your quiz, you must design your questions
-            to reflect the possible choices. For now, keep it simple by having 4 possible answers
-            for each question. Each possible answer will be associated with one of your outcomes.
+            Next, design your questions to reflect your outcomes. For the first
+            question, keep it simple by asking a question with 4 choices (one
+            for each of your outcomes).
         </Text>
         <Section IsSubSection=true Title="D&D Example">
             <Text>
@@ -95,7 +95,7 @@
         </Text>
         <Note>
             The answers to your question do not need to be in the same order
-            as your possible outcomes. In fact, doing so might make your quiz
+            as your outcomes. In fact, doing so might make your quiz
             less interesting.
         </Note>
         <Question Text="What will your first question be?"/>
@@ -110,11 +110,10 @@
     <ActivityStep Title="Programming Your First Question" ActivityType="personality-quiz-activity" Gold="100" XP="25">
         <Text>
             With the first question of your activity ready, you can write the
-            beginning of your quiz program to beter understand how it will all
-            come together.
+            beginning of your quiz program.
         </Text>
         <ConsoleProjectTask Name="Create Project">Create a new <b>Console Project</b> called "Personality Quiz"</ConsoleProjectTask>
-        <TaskItem Name="Declare 4 ints">Declare 4 <b>int variables</b> and <b>initialize</b> them to <Code>0</Code></TaskItem>
+        <TaskItem Name="Declare 4 ints">Declare an <b>int variable</b> for each of your outcomes and <b>initialize</b> them to <Code>0</Code></TaskItem>
         <CodeBlock>
 int fighterScore = 0;
 int wizardScore = 0;
@@ -122,18 +121,18 @@ int rogueScore = 0;
 int bardScore = 0;
         </CodeBlock>
         <Note>
-            Throughout your program, you will use these variables to keep track
+            Throughout your program, you will use these <b>variables</b> to keep track
             of how much the user's personality matches each outcome.
         </Note>
         <TaskItem Name="Display an Introduction">Display a welcome message to your user.</TaskItem>
         <TaskItem Name="Display your first question">Display your first question.</TaskItem>
-        <TaskItem Name="Display each choice">Display each of the possible choices.</TaskItem>
+        <TaskItem Name="Display each choice">Display each of your choices.</TaskItem>
         <TaskItem Name="Prompt User">Prompt the user to select an option</TaskItem>
         <Note>
             For convenience, number your options and have your user enter a single digit as their response.
         </Note>
-        <TaskItem Name="Write a Decision Tree">Write a <b>decision tree</b> with 5 branches</TaskItem>
-        <TaskItem Name="First Branch">The first <b>branch</b> uses an <b>if statement</b>. This branch should <b>increment</b> the associated outcome by 1.</TaskItem>
+        <TaskItem Name="Write a Decision Tree">Write a <b>decision tree</b> with 5 <b>branches</b></TaskItem>
+        <TaskItem Name="First Branch">The first <b>branch</b> uses an <b>if statement</b>. This <b>branch</b> should <b>increment</b> the associated outcome by 1.</TaskItem>
         <CodeBlock>
 if (userInput == "1")
 {
@@ -165,19 +164,18 @@ else
 <Section Title="Step 4: Designining Your Second Question">
     <ActivityStep Title="Designing Your Second Question" ActivityType="personality-quiz-activity" Gold="50" XP="10">
         <Text>
-            Next, add in a question that is slightly more complex. In this
-            question, each response might be associated with more than one of the
-            outcomes. For example:
+            Next, add a question that is more sophisticated. For your second question,
+            each response should be associated with two of your outcomes. For example:
         </Text>
         <Output>
-            On the battle field, where do you stand?
+            You're on the battlefield, where are you standing?
 
             1. Up close to my enemies, I can't use a blade from away
-            2. Behind my beefy friends, my specialty is combat from afar
+            2. Behind my beefy friends, I do my best work when I have time to focus
         </Output>
         <Text>
             In the above example, the first option will increase both the
-            Figher, and Rogue score while the second option will increase
+            Figher and Rogue score while the second option will increase
             the Wizard and Bard score.
         </Text>
         <Question Text="What will your second question ask?"/>
@@ -203,9 +201,9 @@ else
 <Section Title="Step 6: Calculate the Result of the Quiz">
     <ActivityStep Title="Calculate the Result of the Quiz" ActivityType="personality-quiz-activity" Gold="250" XP="50">
         <Text>
-            At the end of the program, the user should receive a report
-            displaying the result from taking the quiz and display a message
-            describing what the result means. For example:
+            At the end of the quiz, the user should receive a report
+            displaying the quiz results as well as a message describing
+            their personality. For example:
         </Text>
         <Output>
             You've completed the quiz! Results:
@@ -220,8 +218,10 @@ else
             a kick flip when backed into a tight spot! Your quick-thinking and overall
             fearlessness make you the ideal choice for any covert mission.
         </Output>
-        <TaskItem Name="Sum scores">Sum the scores to get a total possible result (or calculate it by hand).</TaskItem>
-        <TaskItem Name="Calculate the percentage">For each score, calculate the percentage score. Hint: You'll need to use a <b>double</b>.</TaskItem>
+        <TaskItem Name="Sum scores">Create a variable to store the total number of points.</TaskItem>
+        <Note>The total number of points should be the sum of all the scores.</Note>
+        <TaskItem Name="Calculate the percentage">Using <b>doubles</b>, calculate the score for each outcome by dividing the score by the total</TaskItem>
+        <Note>This will result in a number that is between 0 and 1. To convert the result to a percentage, you will need to multiply by 100.</Note>
         <TaskItem Name="Display Percentages">Display the percentage for each outcome to the user</TaskItem>
         <TaskItem Name="Math.Max">Use <Code>Math.Max</Code> to determine the highest score</TaskItem>
         <TaskItem Name="Decision Tree">Write a <b>decision tree</b> with a <b>branch</b> for each of your outcomes</TaskItem>
@@ -243,14 +243,15 @@ if (maxScore == blackWidowScore)
             bring it to the next level.
         </Text>
         <Note>
-            Some of these tasks will require you
-            to do some research outside of what you've learned so far.
+            Some of these tasks will require you to do research beyond what
+            you've learned so far. Learning to utilize outside resources is
+            critical for software engineers.
         </Note>
-        <TaskItem Name="Add Color">Add Color to your quiz to make it visually appealing</TaskItem>
+        <TaskItem Name="Add Color">Add colors to your quiz to make it visually appealing</TaskItem>
         <TaskItem Name="Use Clear">Read about and use <Code>Console.Clear</Code> to clear out previous answers</TaskItem>
         <TaskItem Name="Add more outcomes">Add two or more outcomes to your quiz. Don't forget to update your questions!</TaskItem>
-        <TaskItem Name="Add more questions">A good personality quiz has lots of questions, increase your quiz to ask at least 10 questions</TaskItem>
-        <TaskItem Name="Round Numbers">In your result, your percentages have many of digits. Research how to limit the number of digits displayed in your result.</TaskItem>
+        <TaskItem Name="Add more questions">A good personality quiz has plenty of questions, your quiz should ask at least 10 questions</TaskItem>
+        <TaskItem Name="Round Numbers">In your result, your percentages have many of digits. Research how to limit the number of digits displayed in your result. <b>Hint</b>: Try searching the web for "How to format doubles in C#"</TaskItem>
         <TaskItem Name="User Test">Have at least 2 people test your quiz and give you feedback</TaskItem>
     </ActivityStep>
 </Section>
