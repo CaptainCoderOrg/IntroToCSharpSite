@@ -215,8 +215,9 @@ public class UserService
 
     public bool GiveXPAndGold(int xpToGive, int goldToGive)
     {
-        if (!_userData.IsLoggedIn) return false;
-        UserStats newStats = new(_userStats.XP + xpToGive, _userStats.Gold + goldToGive);
+        int goldAcquired = _userStats.GoldAcquired + Math.Max(0, goldToGive);
+        int goldSpent = _userStats.GoldAcquired + Math.Min(0, goldToGive);
+        UserStats newStats = new(_userStats.XP + xpToGive, _userStats.GoldAcquired + goldToGive, _userStats.GoldSpent);
         _userData.UserStatsRef?.Set(newStats);
         return true;
     }
