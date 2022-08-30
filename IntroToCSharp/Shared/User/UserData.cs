@@ -29,8 +29,8 @@ public class UserStats
     /// <value>Amount of gold</value>
     public int Gold { get => GoldAcquired - this.GoldSpent; }
 
-    public int GoldSpent {get; set;} //When the store 
-    public int GoldAcquired {get; private set;}
+    public int GoldSpent {get; set;}
+    public int GoldAcquired {get; set;}
     /// <summary>
     /// Constructs the user's xp and gold.
     /// </summary>
