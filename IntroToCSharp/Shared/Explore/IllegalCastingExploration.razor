@@ -1,0 +1,18 @@
+    <Explore Title="Illegal Casting">
+        <Text>
+            When you use <b>cast</b> between types, you are telling the computer
+            to treat the <b>value</b> as though it were the specified
+            <b>type</b>. This only works if the <b>value</b> is compatible with
+            the new <b>type</b>. For numeric types, this works well. But, what
+            happens if you try to <b>cast</b> with non-numeric types?
+        </Text>
+        <CodeBlock>int x = (int) "42";</CodeBlock>
+        <TaskItem Name="String to Int">Add the above line of code to a C# program.</TaskItem>
+        <Question Text="What is the error message that occurs when you try to cast a string to an int?"/>
+        <CodeBlock>string x = (string) 42;</CodeBlock>
+        <TaskItem Name="Int to String">Add the above line of code to a C# program.</TaskItem>
+        <Question Text="What is the error message that occurs when you try to cast an int to a string?"/>
+        <CodeBlock>bool x = (bool) 0;</CodeBlock>
+        <TaskItem Name="Int to Bool">Add the above line of code to a C# program.</TaskItem>
+        <Question Text="What is the error message that occurs when you try to cast a bool to an int?"/>
+    </Explore>

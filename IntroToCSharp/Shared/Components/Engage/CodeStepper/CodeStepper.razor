@@ -1,0 +1,31 @@
+<MudPaper Class="pa-4">
+    <MudStack>
+        <MudElement>
+            @CurrentFragment
+        </MudElement>
+        <MudStack Row=true>
+            <MudButton Class="flex-1" Disabled="@IsFirst" Color="Color.Primary" Variant="Variant.Filled" OnClick="Back">Back</MudButton>
+            <MudButton Class="flex-1" Disabled="@IsLast" Color="Color.Secondary" Variant="Variant.Filled" OnClick="Next">Next</MudButton>
+        </MudStack>
+    </MudStack>
+</MudPaper>
+@code {
+
+    [Parameter, EditorRequired]
+    public RenderFragment Block { set => _codeBlocks.Add(value); }
+    private bool IsFirst => _ix == 0;
+    private bool IsLast => _ix == this._codeBlocks.Count-1;
+
+    private RenderFragment CurrentFragment => this._codeBlocks[this._ix];
+    private int _ix = 0;
+    private OrderedSet<RenderFragment> _codeBlocks = new ();
+
+    private void SetIX(int ix) {
+        this._ix = Math.Clamp(ix, 0, _codeBlocks.Count-1);
+        StateHasChanged();
+    } 
+    
+    public void Next() => SetIX(this._ix + 1);
+
+    public void Back() => SetIX(this._ix - 1);
+}

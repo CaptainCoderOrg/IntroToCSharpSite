@@ -1,5 +1,5 @@
 @using CaptainCoder
-<MudElement Class="mr-6" Style="width:100px">
+<MudElement Class="mr-6 hidden-mobile" Style="width:100px">
     <MudText Class="pa-0 ma-0" Style="font-size:10px; text-align:center;">@Data.XPTowardLevel / @Data.XPNeeded</MudText>
     <MudProgressLinear Color="Color.Success" Value="@Percent" />
 </MudElement>
@@ -13,13 +13,20 @@
         UserService.Service.OnUserChange += this.UpdateUser;
     }
 
-    private void UpdateUser(User newUser) 
+    private void UpdateUser(User newUser)
     {
-        newUser.UserStatsRef.DataChangedEvent += UpdateUserData;
+        if (newUser.IsLoggedIn)
+        {
+            if (newUser.UserStatsRef != null) newUser.UserStatsRef.DataChangedEvent += UpdateUserData;
+        }
+        else
+        {
+            Data = UserStats.Default;
+        }
     }
-    private void UpdateUserData(UserStats newUserData)
+    private void UpdateUserData(UserStats? newUserData)
     {
-        Data = newUserData;
+        Data = newUserData == null ? UserStats.Default : newUserData;
         this.StateHasChanged();
     }
 

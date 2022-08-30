@@ -1,0 +1,89 @@
+<ConditionalCodeStepper  SourceCode="@Code">
+    <CodeStep ID="BeforeStart" Line=-1>
+        <Explanation>
+            Use the <b>Next</b> and <b>Back</b> buttons below to explore how the
+            computer executes the code above.
+        </Explanation>
+    </CodeStep>
+    <CodeStep ID="First Line" Line=1>
+        <Explanation>
+            <InitializeExplanation Value="5" VarName="x"/>
+        </Explanation>
+    </CodeStep>
+    <CodeStep ID="Eval x == 5" Line=2>
+        <Explanation>
+            <EvalExpressionExplanation Expr="x == 5" />
+        </Explanation>
+    </CodeStep>
+    <CodeStep ID="Read x" Line=2 SubVarName="x" SubValue="5">
+        <Explanation>
+            <ReadVariableExplanation Name="x" />
+        </Explanation>
+    </CodeStep>
+    <CodeStep ID="EqualityEval" Line=2 SubVarName="5 == 5" SubValue="true">
+        <Explanation>
+            <EqualityEvalExplanation LeftValue="5" RightValue="5" />
+        </Explanation>
+    </CodeStep>
+    <CodeStep ID="IfTrue" Line=2>
+        <Explanation>
+            <IfStatementExplanation Conditional="true" />
+        </Explanation>
+    </CodeStep>
+
+    <CodeStep ID="Display Hello" Line=4 Output="Hello">
+        <Explanation>
+            <DisplayExplanation Output="Hello" />
+        </Explanation>
+    </CodeStep>
+
+    <CodeStep ID="Eval x != 5" Line=7>
+        <Explanation>
+            <EvalExpressionExplanation Expr="x != 5" />
+        </Explanation>
+    </CodeStep>
+    <CodeStep ID="Read x2" Line=7 SubVarName="x" SubValue="5">
+        <Explanation>
+            <ReadVariableExplanation Name="x" />
+        </Explanation>
+    </CodeStep>
+    <CodeStep ID="InEqualityEval" Line=7 SubVarName="5 != 5" SubValue="false">
+        <Explanation>
+            <InEqualityEvalExplanation LeftValue="5" RightValue="5" />
+        </Explanation>
+    </CodeStep>
+    <CodeStep ID="IfFalse" Line=7>
+        <Explanation>
+            <IfStatementExplanation Conditional="false" />
+        </Explanation>
+    </CodeStep>
+
+    <CodeStep ID="Display World" Line=12 OutputLine=", world!">
+        <Explanation>
+            <DisplayExplanation Output=", world!" />
+        </Explanation>
+    </CodeStep>
+
+    <CodeStep ID="End" Line=-1>
+        <Explanation>
+            There is no more code to execute and the program exits.
+        </Explanation>
+    </CodeStep>
+</ConditionalCodeStepper>
+
+@code {
+    private string Code = @"
+int x = 5;
+if (x == 5)
+{
+    Console.Write(""Hello"");
+}
+
+if (x != 5)
+{
+    Console.Write(""Bonjour"");
+}
+
+Console.WriteLine("", world!"");
+    ".Trim();
+}

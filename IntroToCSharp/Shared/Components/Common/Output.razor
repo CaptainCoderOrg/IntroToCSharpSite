@@ -1,0 +1,18 @@
+<div id="@($"{ID}-raw")" style="display:none">@ChildContent</div>
+<pre id="@ID" class="output"></pre>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent {get; set;} = null!;
+    private static int s_NextID = 0;
+    private int _id = s_NextID++;
+    private string ID => $"Output-{_id}";
+    [Inject]
+    private IJSRuntime JS { get; set; } = null!;
+
+    protected override async void OnAfterRender(bool firstRender)
+    {
+
+            await JS.InvokeVoidAsync("RenderOutput", ID);
+    }
+}

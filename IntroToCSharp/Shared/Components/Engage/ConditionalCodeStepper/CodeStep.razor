@@ -1,0 +1,55 @@
+@implements ICodeStep;
+@code {
+    [CascadingParameter]
+    public ConditionalCodeStepper CodeStepper { get; set; } = null!;
+
+    private string _output = string.Empty;
+    [Parameter]
+    public string Output { get; set; } = string.Empty;
+    [Parameter, EditorRequired]
+    public int Line {get; set;}
+    [Parameter]
+    public string OutputLine { set => Output = $"{value}\n"; }
+
+    [Parameter]
+    public string? SubVarName {get; set;} = null;
+    
+    [Parameter]
+    public string? SubValue {get; set;} = null;
+
+    [Parameter]
+    public RenderFragment? Code {get; set;} = null;
+    [Parameter]
+    public bool ReadLine {get; set;} = false;
+    [Parameter, EditorRequired]
+    public RenderFragment Explanation {get; set;} = null!;
+
+    [Parameter, EditorRequired]
+    public string ID { get; set; } = null!;
+    public RenderFragment Fragment { get; set; } = null!;
+    [Parameter]
+    public string? NextId { get; set; } = null;
+    [Parameter]
+    public Action<string[]>? UpdateCode { get; set; } = null;
+    public bool HasNext => NextId != null;
+    public string Value => string.Empty;
+    public void UpdateValue(ChangeEventArgs e) {}
+    
+    public void DoUpdateCode(string[] code) {
+        if (UpdateCode != null) {
+            UpdateCode.Invoke(code);
+            return;
+        } else if (SubValue != null && SubVarName != null) {
+            code[Line-1] = code[Line-1].Replace(SubVarName, SubValue);
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        this.CodeStepper?.AddCodeStep(this);
+    }
+
+    public void OnNext() {}
+
+}

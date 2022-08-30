@@ -1,0 +1,16 @@
+<Text>C# provides 16 built in <Code>ConsoleColor</Code> values:</Text>
+<DataTable Headers=@Headers Rows=@Rows/>
+
+@code {
+    private string[] Headers = { "Color Code", "Dark Color Code" };
+    private string[][] Rows = new string[][]{
+        new string[]{"<Code>ConsoleColor.White</Code>", "<Code>ConsoleColor.Black</Code>"},
+        new string[]{"<Code>ConsoleColor.Gray</Code>", "<Code>ConsoleColor.DarkGray</Code>"},
+        new string[]{"<Code>ConsoleColor.Red</Code>", "<Code>ConsoleColor.DarkRed</Code>"},
+        new string[]{"<Code>ConsoleColor.Blue</Code>", "<Code>ConsoleColor.DarkBlue</Code>"},
+        new string[]{"<Code>ConsoleColor.Green</Code>", "<Code>ConsoleColor.DarkGreen</Code>"},
+        new string[]{"<Code>ConsoleColor.Cyan</Code>", "<Code>ConsoleColor.DarkCyan</Code>"},
+        new string[]{"<Code>ConsoleColor.Magenta</Code>", "<Code>ConsoleColor.DarkMagenta</Code>"},
+        new string[]{"<Code>ConsoleColor.Yellow</Code>", "<Code>ConsoleColor.DarkYellow</Code>"},
+    };
+}

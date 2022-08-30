@@ -1,0 +1,52 @@
+@inject NavigationManager NavigationManager
+
+<MudElement Class="pa-0 d-flex align-content-center rounded" Style="@Style">
+    @if(this.Parent.IsMultiSelect) {
+        <MudCheckBox Disabled="@IsSubmitted" @bind-Checked="@IsChecked"><MudText Style="@Color">@Text</MudText></MudCheckBox>
+    } else {
+        <MudRadio Disabled="@IsSubmitted" Option="@Text"><MudText Style="@Color">@Text</MudText></MudRadio>
+    }
+</MudElement>
+
+@code {
+    [Parameter]
+    public string Text { get; set; } = String.Empty;
+    [Parameter]
+    public bool IsCorrect { get; set; }
+    [Parameter]
+    public bool IsChecked { get; set; } = false;
+    [CascadingParameter]
+    public MultipleChoiceQuestion Parent { get; set; } = null!;
+    private bool IsSubmitted { get; set; } = false;
+    private bool IsSubmissionCorrect => (this.IsChecked && this.IsCorrect) || (!this.IsChecked && !this.IsCorrect);
+
+    private bool IsHighlighted => (this.IsSubmitted && this.IsChecked);
+    private string Highlight => this.IsCorrect ? "var(--mud-palette-success)" : "var(--mud-palette-error)";
+    private string HighlightColor => this.IsCorrect ? "var(--mud-palette-success-text)" : "var(--mud-palette-error-text)";
+    private string TextColor => this.IsHighlighted ? HighlightColor : "var(--mud-palette-text-primary)";
+    private string Background => this.IsHighlighted ? $"background: {Highlight};" : string.Empty;
+    private string Color => $"color: {TextColor};";
+    private string Style => $"{Background} {Color}";
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        this.Parent?.AddOption(this);
+    }
+
+    public void Reset()
+    {
+        this.IsChecked = false;
+        this.IsSubmitted = false;
+        this.StateHasChanged();
+    }
+    public bool CheckAnswer()
+    {
+        this.IsSubmitted = true;
+        return IsSubmissionCorrect;
+    }
+
+    public void SetIsChecked(bool check) {
+        this.IsChecked = check;
+    } 
+}

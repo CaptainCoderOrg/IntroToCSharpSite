@@ -17,8 +17,9 @@
 
     <SplitPane @ref="_consoleSplitPane">
         <TopContent>
-            <MudPaper Elevation="0" Class="pa-4">
+            <MudPaper Elevation="0" Class="pa-4" Style="max-width:960px;">
                 @Body
+                <div style="min-height:50px"></div>
             </MudPaper>
         </TopContent>
         <BottomContent>
@@ -35,8 +36,7 @@
     private static ILocalStorageService? s_LocalStorage;
     private static bool s_isInit = false;
     private static event Action<IJSRuntime, ISnackbar, ILocalStorageService>? s_onInit;
-    private event Action<bool>? _onDarkModeChange;
-    private MudThemeProvider? _mudThemeProvider = null!;
+    private MudThemeProvider _mudThemeProvider = null!;
     private SplitPane? _consoleSplitPane = null!;
     private bool _isDarkMode = true;
     public bool IsNavMenuOpen = true;
@@ -44,30 +44,23 @@
     private string BodyStyle => ShowConsole ? "overflow:auto; height: 45vh" : "overflow:auto; height: 92vh";
     private bool ShowConsole = false;
 
+    public static event Action<bool>? OnDarkModeChange;
+
     public void ToggleConsole() => _consoleSplitPane?.ToggleBottomPanel();
     public bool IsDarkMode
     {
         get => _isDarkMode;
         set
         {
+            OnDarkModeChange?.Invoke(value);
             if (value == _isDarkMode) return;
             _isDarkMode = value;
             UserService.Service.UpdateDarkModePreference(value);
-            _onDarkModeChange?.Invoke(value);
             localStorage.SetItemAsync<bool>("DarkMode", value);
             StateHasChanged();
         }
     }
 
-    public event Action<bool> OnDarkModeChange
-    {
-        add
-        {
-            value.Invoke(IsDarkMode);
-            _onDarkModeChange += value;
-        }
-        remove => _onDarkModeChange -= value;
-    }
 
     public static event Action<IJSRuntime, ISnackbar, ILocalStorageService> OnInit
     {

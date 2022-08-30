@@ -1,16 +1,16 @@
 @inject NavigationManager NavigationManager
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 
-<MudExpansionPanel @bind-IsExpanded="@IsExpanded" onclick="@(new Action(OnExpand))">
+<MudExpansionPanel id="@Title" @bind-IsExpanded="@IsExpanded" onclick="@(new Action(OnExpand))">
     <TitleContent>
         @if(!IsSubSection) {
-            <h2 class="@_theme pa-2">@Title</h2>
+            <h2 class="pa-2" style="@Style">@Title</h2>
         } else {
-            <h3 class="@_theme pa-2">@Title</h3>
+            <h3 class="pa-2" style="@Style">@Title</h3>
         }
     </TitleContent>
     <ChildContent>
-        <MudText Class="px-2 ma-0">@ChildContent</MudText>
+        <MudText Class="px-2 ma-0 mr-5">@ChildContent</MudText>
     </ChildContent>
 </MudExpansionPanel>
 @code
@@ -21,10 +21,13 @@
     public string Title {get; set;} = null!;
     [Parameter]
     public RenderFragment ChildContent {get; set;} = null!;
+    [Parameter]
+    public bool StartClosed {get; set;} = false;
+    private string Background = "background: var(--mud-palette-appbar-background);";
+    private string Color = "color: var(--mud-palette-appbar-text);";
+    private string Style => $"{Background} {Color}";
     private bool IsExpanded = true;
     private string Key => NavigationManager.Uri.Substring(NavigationManager.BaseUri.Length) + Title;
-    private string _theme = "mud-theme-primary";
-
     protected async override void OnInitialized()
     {
         bool contains = await localStorage.ContainKeyAsync(Key);
@@ -33,12 +36,6 @@
             IsExpanded = await localStorage.GetItemAsync<bool>(Key);
             StateHasChanged();
         }
-
-        MainLayout mainLayout = await MainLayout.GetInstance();
-        mainLayout.OnDarkModeChange += isDarkMode => {
-            _theme = isDarkMode ? "mud-theme-dark" : "mud-theme-primary";
-            StateHasChanged();
-        };
     }
 
     private async void OnExpand()

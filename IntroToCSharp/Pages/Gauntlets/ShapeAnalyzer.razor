@@ -1,0 +1,186 @@
+@inherits CaptainCoder.Page
+@page "/gauntlets/shape-analyzers"
+
+<Title>@((MarkupString)Title)</Title>
+
+<Section Title="Introduction">
+    <Adventure Portrait="Portraits.Nefaria">
+        <Item>
+            <AdventureDialog Portrait="Portraits.CaptainCoder" OnLoad="ReverseTitle">
+                    Greetings coder! Congratulations on reaching
+                    <b>Nefaria's</b> first <b>Gauntlet</b>: <b>Shape
+                    Analyzers</b>.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog OnLoad="UpdateTitle">
+                So, you're the new "coder" that the <b>Captain</b> won't stop
+                talking about... pathetic. Do you really think you're ready for
+                my <b>Shape Analyzers ... of <span style="color: red">DOOM</span></b>?
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog>
+                What is a "<b>Gauntlet</b>" you ask? Oh, ho ho! Why it is a
+                series of challenges to test all that you've learned and prove
+                to that I will always be the <b>Captain's</b> <i>BEST</i>
+                student!
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Portrait="Portraits.CaptainCoder" OnLoad="ReverseTitle">
+                Don't mind <b>Nefaria</b>... she can be a little bit competitive when it
+                comes to coding. Why don't you prove to her that you're on your
+                way to being a great programmer by completing the <b>Shape Analyzers</b>?
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog OnLoad="UpdateTitle">
+                Blah, blah, blah... You can <b>try</b> to complete the <b>Shape
+                Analyzers ... of <span style="color: red">DOOM</span></b>!
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Portrait="Portraits.CaptainCoder">
+                Don't worry if one of the challenges is too tough for you right now, you
+                can always train more and come back when you're ready. Or, you can move
+                past a challenge and try another one.
+            </AdventureDialog>
+        </Item>
+        <Item>
+        <AdventureDialog Portrait="Portraits.CaptainCoder" Page="@BasicArithmetic.PageRef">
+                I took a look at the challenges to give you some tips. Before
+                starting, you should be familiar with performing arithmetic on
+                variables. This means you need to be able to add, subtract,
+                divide, and multiply with the <b>arithmetic operators</b>.
+                Don't worry if you need a bit of a refresher, the
+                <b>@BasicArithmetic.PageRef.Name</b> lesson is a great place to
+                look.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Portrait="Portraits.CaptainCoder" Page="@ConvertingTypes.PageRef">
+                <Text>
+                    It seems that these challenges will also draw on your skill
+                    to <b>@ConvertingTypes.PageRef.Name</b>. That means you'll
+                    need to know how to <b>parse</b> <b>strings</b> into numeric
+                    types with the <Code>Parse</Code> <b>method</b>!
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Portrait="Portraits.CaptainCoder" OnLoad="ReverseTitle">
+                <Text>
+                    Once you've trained these concepts, be brave and conquer this <b>Gauntlet</b>!
+                    The <b>Shape Analyzers</b> will help
+                    you master these skills and bring you one step closer
+                    to <b>C#</b> greatness. Good luck!
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog OnLoad="UpdateTitle">
+                <Text>
+                    Yes... "Good luck" with my <b>Gauntlet: Shape Analyzers ...
+                    of <span style="color: red">DOOM</span></b>. You're going to
+                    need it!
+                </Text>
+            </AdventureDialog>
+        </Item>
+
+    </Adventure>
+</Section>
+
+<Section Title="First Challenge: Perimeter of a Rectangle">
+    <Text>
+        In this challenge you will write a program that calculate the perimeter
+        of a rectangle for a user. This comes in handy in all walks of life.
+        From building a castle to finding out how many christmas lights are
+        needed to decorate the outside of your house, understanding the
+        perimeter of an object is important.
+    </Text>
+    <Note>
+        The perimeter of a rectangle is twice the <b>width</b> and <b>height</b>
+        of the rectangle.
+    </Note>
+    <PerimeterOfARectangleChallenge />
+</Section>
+<Section Title="Second Challenge: Area of a Rectangle">
+    <Text>
+        In this challenge you will calculate the area of a rectangle. Like calculating the area of a perimeter, the area of a
+        rectangle will call on many of the same skills. The area of a rectangle tells us how big the inside of the rectangle is.
+        This is useful when you want to know how many items you can fit in your castle's treasury!
+    </Text>
+    <Note>
+        The area of a rectangle is the product of multiplying its <b>width</b> by its <b>height</b>.
+    </Note>
+
+    <AreaOfARectangleChallenge />
+</Section>
+<Section Title="Third Challenge: Area of a Circle">
+    <Text>
+        In this challenge you will write a program that will calculate the area of a circle.
+    </Text>
+    <Note>
+        The area of a circle is <b>π</b> multiplied by the circle's radius squared. (πr<sup>2</sup>)
+    </Note>
+    <Text>
+        Take note that in this section the numbers you are working with will
+        have decimal values. Be sure to use the right <b>data type</b> when
+        declaring your <b>variables</b> and <b>methods</b> when <b>parsing</b>
+        user input.
+    </Text>
+    <AreaOfACircleChallenge />
+</Section>
+
+<Section Title="Final Challenge: How Fast is the Flash?">
+    <Text>
+        In this challenge, you will update your Circle Analyzer program to calculate how fast the Flash can run around the Earth.
+        To do this, you will need to determine the circumference of the Earth and the speed at which the Flash can run.
+    </Text>
+    <Note>
+        The circumference of a circle is twice the produce of multiplying <b>π</b> and the radius of the circle. (2πr)
+    </Note>
+    <HowFastIsTheFlashChallenge />
+</Section>
+
+<Section Title="What's Next?">
+    <Adventure Portrait="Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+                Great work on making it this far! Don't worry if you were not
+                able to complete all of the challenges in this <b>Gauntlet</b>.
+                You can always come back to finish them when you've leveled
+                up more.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="IfStatements.PageRef">
+                I think you're ready for the <b>@IfStatements.PageRef.Name</b>
+                lesson. In it you will learn how to write <Code>if</Code> and
+                <Code>else statements</Code> to create programs that let the
+                user make decisions.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <MarkFinishedDialog Page="ShapeAnalyzer.PageRef"/>
+        </Item>
+    </Adventure>
+</Section>
+
+
+@code {
+    private string Title {get; set;} = "Gauntlet: Shape Analyzers";
+
+    private void UpdateTitle() {
+        Title = "Gauntlet: Shape Analyzers <span class=\"fade-in\">... of <span style=\"color: red \">DOOM</span>!</span>";
+        StateHasChanged();
+    }
+
+    private void ReverseTitle() {
+        Title = "Gauntlet: Shape Analyzers";
+        StateHasChanged();
+    }
+
+    public static readonly PageRef PageRef = new PageRef("Shape Analyzers", "/gauntlets/shape-analyzers", 3, "Gauntlets");
+}

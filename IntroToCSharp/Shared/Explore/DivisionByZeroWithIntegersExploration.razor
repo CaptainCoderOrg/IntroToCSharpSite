@@ -1,0 +1,41 @@
+<Explore Title="Division by Zero with Integers">
+        <Text>
+            In mathematics, division by <Code>0</Code> is not defined. So, what
+            happens when you divide by <Code>0</Code> in a C# program?
+        </Text>
+        <Text>Study the code below but don't run it yet.</Text>
+        <CodeBlock>
+int x = 5 / 0;
+Console.WriteLine(x);
+        </CodeBlock>
+        <Question Text="What do you think the code will display?"/>
+        <TaskItem Name="Test literal division by 0">Add the code above to a program and run it.</TaskItem>
+        <Question Text="What was the result?"/>
+        <Explanation>
+            <Text>
+                If all went well, the above complier produced the error message,
+                "<b>Division by constant zero</b>" and didn't allow you to run the
+                program. When you explicitly write division by zero, the C# compiler
+                is smart enough to stop you.
+            </Text>
+        </Explanation>
+        <Text>Study the code below but don't run it yet.</Text>
+        <CodeBlock>
+int a = 0;
+int x = 5 / a;
+Console.WriteLine(x);
+        </CodeBlock>
+        <Question Text="What do you think the code above will display?"/>
+        <TaskItem Name="Test division by 0 variable">Add the code above to a program and run it.</TaskItem>
+        <Question Text="What was the result of running the code above?"/>
+        <Explanation>
+            <Text>
+                Unlike the previous section of code, the compiler doesn't know
+                that the <b>variable</b> <Code>a</Code> is storing the
+                <b>value</b> <Code>0</Code>. The program above compiles and
+                runs. However, during execution, the program crashes and a
+                <b>run time error</b> occurs: "<b>Error:
+                System.DivideByZeroException: Attempted to divide by zero.</b>"
+            </Text>
+        </Explanation>
+    </Explore>

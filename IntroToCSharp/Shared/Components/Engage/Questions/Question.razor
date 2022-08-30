@@ -1,0 +1,94 @@
+@inject NavigationManager NavigationManager
+@implements IAdventureTask;
+
+<MudListItem Icon="@Icons.Filled.QuestionAnswer" OnClick="@NotifyLoggedIn">
+    <MudStack Row="true" AlignItems="AlignItems.Center">
+        @if (ShowSpoiler)
+        {
+        <MudTooltip Text="@SpoilerText" Placement="Placement.Right">
+            <MudIcon Icon="@Icons.Filled.Info" Color="Color.Tertiary"/>
+        </MudTooltip>
+        }
+        <MudTextField Label="@Text" @bind-Value="Answer" @bind-Disabled="@IsDisabled" />
+    </MudStack>
+
+</MudListItem>
+@code
+{
+    private bool IsDisabled = true;
+    private bool ShowSpoiler => !IsDisabled && _answer != String.Empty && Spoiler != String.Empty;
+    private string _answer = String.Empty;
+    [Parameter]
+    public string Spoiler { get; set; } = String.Empty;
+    private string SpoilerText => ShowSpoiler ? Spoiler : String.Empty;
+    [Parameter]
+    public string Default { get; set; } = null!;
+
+    [CascadingParameter]
+    public Questions Parent {get; set;} = null!;
+    [CascadingParameter]
+    public IAdventureActivity? Activity {get; set;}
+
+    [Parameter, EditorRequired]
+    public string Text {get; set;} = null!;
+    public string ParentTitle => Parent == null ? "No-Parent" : Utils.SanitizeDBName(Parent.Title);
+    public bool IsComplete => _answer != String.Empty;
+
+    private string Answer {
+        get => _answer == String.Empty ? Default : _answer;
+        set
+        {
+            if (_answer == value) return;
+            _answer = value;
+            UpdateAndSaveAnswer();
+        }
+    }
+
+    private string? _dbName = null;
+    [Parameter]
+    public string DBName { get => _dbName ?? Utils.SanitizeDBName(Text); set => _dbName = value;}
+
+    private string Path {
+        get {
+            if (Activity == null) return $"{NavigationManager.GetRoute()}/questions/{ParentTitle}/{Utils.SanitizeDBName(DBName)}";
+            return $"{Activity.ActivityType}/{Activity.DBName}/{Utils.SanitizeDBName(DBName)}";
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        UserService.Service.OnUserChange += HandleUserChange;
+        Activity?.AddTask(this);
+    }
+
+    private void HandleUserChange(User userData)
+    {
+        if (userData.IsLoggedIn)
+        {
+            IsDisabled = false;
+            if(UserService.Service.TryGetQuestionAnswer(Path, out DataReference<string> answer)){
+                answer.DataChangedEvent += val =>
+                {
+                    _answer = val!;
+                    StateHasChanged();
+                };
+            }
+        }
+        else
+        {
+            IsDisabled = true;
+        }
+        StateHasChanged();
+    }
+
+    private void UpdateAndSaveAnswer()
+    {
+        UserService.Service.UpdateQuestionAnswer(Path, _answer);
+        Activity?.Notify();
+    }
+
+    private async void NotifyLoggedIn()
+    {
+        if (IsDisabled) await NotificationService.Service.Add("Log in to save your answers.", Severity.Info);
+    }
+}

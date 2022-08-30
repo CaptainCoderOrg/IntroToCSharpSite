@@ -1,0 +1,27 @@
+<Explore Title="Approximating Numbers">
+        <MudText>Don't run the code below just yet. Read it and answer the question.</MudText>
+        <Question Text="What do you think the code below will display?"/>
+        <CodeBlock AllowCopy ReplIt="JosephCollard/DoublePrecision">
+double error = 2.0 - 1.9;
+Console.WriteLine(error);
+        </CodeBlock>
+        <TaskItem Name="RunCode">Now, run the code.</TaskItem>
+        <Question Text="What did the program display?"/>
+        <Explanation>
+            <Text>
+                The code above demonstrates a <Keyword Word="rounding error"/>. This is
+                an error that occurs when a decimal value cannot be precisely represented
+                by the number of <Keyword Word="bits"/> being used. When writing a
+                program that uses <Code>doubles</Code>, it is important to consider if
+                it is okay for the precision to be approximated. For example,
+                an approximation of a race cars speed in a video game is probably okay.
+                However, approximating the amount of money a person earns in banking
+                software could cause problems.
+            </Text>
+            <Text>
+                For an in depth explanation, check out the <MudLink
+                Href="https://en.wikipedia.org/wiki/Round-off_error"
+                Target="_blank">Wikipedia article.</MudLink>
+            </Text>
+        </Explanation>
+    </Explore>

@@ -1,0 +1,25 @@
+<MudGrid Class="ma-1" Spacing="2" Justify="Justify.FlexStart">
+    <MudItem>
+        <MudText><b>The Recipe:</b></MudText>
+    </MudItem>
+    <MudItem>
+        <Code>
+            (<MudText Class="d-inline" Color="Color.Warning">{Data-Type}</MudText>) 
+            <MudText Class="d-inline" Color="Color.Primary">{Expression}</MudText>;
+        </Code>
+    </MudItem>
+</MudGrid>
+<MudList Clickable>
+    <MudListItem Icon="@Icons.Material.Filled.Category" IconColor="Color.Warning">
+        <MudStack Row=true AlignItems="AlignItems.Center">
+            <MudText Class="flex-none" Color="Color.Warning">{Data-Type}</MudText>
+            <MudText>The type to cast to.</MudText>
+        </MudStack>
+    </MudListItem>
+    <MudListItem Icon="@Icons.Material.Filled.Code" IconColor="Color.Primary">
+        <MudStack Row=true AlignItems="AlignItems.Center">
+            <MudText Class="flex-none" Color="Color.Primary">{Expression}</MudText>
+            <MudText>The <b>expression</b> to be <b>cast</b>.</MudText>
+        </MudStack>
+    </MudListItem>
+</MudList>

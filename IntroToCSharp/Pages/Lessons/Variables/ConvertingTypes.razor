@@ -1,0 +1,222 @@
+@inherits CaptainCoder.Page
+@page "/lessons/variables/type-conversions"
+
+<Title>Type Conversions</Title>
+
+<Section Title="Introduction">
+    <Adventure Portrait="Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+                <Text>
+                    There are times when you need to convert a <b>value</b>
+                    of one <b>type</b> to another. For example, you may have the
+                    <b>string</b> <Code>"42"</Code> and you need to convert it
+                    to an <b>integer</b> <Code>42</Code> or you may
+                    have an <b>integer</b> that you need to convert to a
+                    <b>double</b> <Code>42.0</Code>. In this lesson, you will
+                    learn how to convert between the common data types.
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="BasicDataTypes.PageRef">
+                <Text>
+                    Before starting, you should be familiar with the common data
+                    types: <Code>int</Code>, <Code>double</Code>,
+                    <Code>string</Code>, and <Code>bool</Code>. If you have not
+                    yet completed the <b>@BasicDataTypes.PageRef.Name</b>
+                    lesson, you might find parts of this lesson confusing.
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="UserInput.PageRef">
+                <Text>
+                    You should also be comfortable calling the
+                    <Code>Console.ReadLine</Code> method to read user input from
+                    the terminal. If you need a refresher, check out the
+                    <b>@UserInput.PageRef.Name</b> lesson.
+                </Text>
+            </AdventureDialog>
+        </Item>
+    </Adventure>
+</Section>
+<Section Title="Casting Values">
+    <Text>
+        The simplest way to convert a <b>value</b> of one <Keyword Word="data
+        type"/> into another is to <b>cast</b> it.
+    </Text>
+    <RecipeBox>
+        <CastRecipe/>
+    </RecipeBox>
+    <Text><b>Examples:</b></Text>
+    <Text>You can <b>cast</b> an <b>int</b> to a <b>double</b>:</Text>
+    <CodeBlock ReplIt="JosephCollard/Int-to-Double">
+double x = (int) 42;
+Console.WriteLine(x);
+    </CodeBlock>
+    <Text>You can <b>cast</b> a <b>double</b> to an <b>int</b></Text>
+    <CodeBlock ReplIt="JosephCollard/Double-to-Int">
+int x = (int) 42.8;
+Console.WriteLine(x);
+    </CodeBlock>
+    <Note>
+        When you cast the <b>double</b> <Code>42.8</Code> to an <b>int</b>
+        you lose information. Because an <b>int</b> can only store whole numbers,
+        everything after the decimal point is "chopped off".
+    </Note>
+    <Text>
+        You can <b>cast</b> a <b>double variable</b> to an <b>int</b>.
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/Double-Variable-to-Int">
+double y = 75.9;
+int x = (int) y;
+Console.WriteLine(y + " => " + x);
+    </CodeBlock>
+    <IllegalCastingExploration/>
+</Section>
+<Section Title="Parsing Strings">
+    <Text>
+        Unfortunately, casting <b>values</b> only works with compatible types.
+        In the exploration above, the compiler produced an error message when
+        you attempted to <b>cast</b> between <b>types</b> that were not
+        compatible. This is because the conversion between the two <b>types</b>
+        is non-trivial. Luckily, C# provides several <b>methods</b> for
+        converting from <b>strings</b> to the common <b>data types</b>. When you
+        convert a <b>string</b> to another data type, it is called
+        <b>parsing</b>.
+    </Text>
+    <Text><b>Examples:</b></Text>
+    <Text>Parsing an <b>int</b> from a <b>string</b>:</Text>
+    <CodeBlock ReplIt="JosephCollard/Parsing-an-Int">
+int x = int.Parse("42");
+Console.WriteLine(x);
+    </CodeBlock>
+    <Text>Parsing a <b>double</b> from a <b>string</b>:</Text>
+    <CodeBlock ReplIt="JosephCollard/Parsing-a-Double">
+double x = double.Parse("42.8");
+Console.WriteLine(x);
+    </CodeBlock>
+    <Text>Parsing a <b>bool</b> from a <b>string</b>:</Text>
+    <CodeBlock ReplIt="JosephCollard/Parsing-a-Bool">
+bool x = bool.Parse("true");
+Console.WriteLine(x);
+    </CodeBlock>
+    <Note>
+        Each of the common data types come with a built in <Code>Parse</Code> method
+        that is capable of parsing a <b>string value</b> to that <b>data type</b>.
+    </Note>
+    
+    <ParsingBadInputExploration/>
+</Section>
+<Section Title="Values and the ToString method">
+    <Text>
+        Most <b>values</b> in C# come with a <Code>ToString</Code>
+        <b>method</b> which converts the <b>value</b> to a <b>string</b>.
+    </Text>
+    <Text><b>Examples:</b></Text>
+    <Text>Calling <Code>ToString</Code> on <b>literal values</b>:</Text>
+    <CodeBlock ReplIt="JosephCollard/Int-to-String">
+string x = 5.ToString();
+Console.WriteLine(x);
+string y = 42.7.ToString();
+Console.WriteLine(y);
+string z = true.ToString();
+Console.WriteLine(z);
+    </CodeBlock>
+    <Text>Calling <Code>ToString</Code> on <b>variables</b>:</Text>
+    <CodeBlock>
+int x = 17;
+string xs = x.ToString();
+Console.WriteLine(xs);
+double y = 0.7;
+string ys = y.ToString();
+Console.WriteLine(ys);
+bool z = false;
+string zs = z.ToString();
+Console.WriteLine(zs);
+    </CodeBlock>
+</Section>
+<Section Title="String Interpolation">
+    <Text>
+        Calling the <Code>ToString</Code> method can be cumbersome if you are
+        converting several <b>values</b> to a single <b>string</b>. C# provides
+        a special type of <b>string</b> called an <b>interpolated string</b>
+        which allows you to create nicely formatted strings using <b>variables</b>.
+        An <b>interpolated string</b> begins with a <Code>$</Code> in front
+        of the first double quote.
+    </Text>
+    <Text><b>Examples:</b></Text>
+    <Text>
+        Within an <b>interpolated string</b> you can specify <b>variables</b>
+        between curly brackets (<Code>{var-name}</Code>). When executed,
+        this calls the <Code>ToString</Code> method on the <b>variables</b>
+        and substitutes them into the <b>string</b>.
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/Interpolation-Example-1">
+int x = 5;
+double y = 0.4;
+bool z = true;
+Console.WriteLine($"int: {x}, double: {y}, bool: {z}");
+    </CodeBlock>
+    <Text>
+        Because the curly brackets are used to indicate a <b>variable</b> within
+        an <b>interpolated string</b>, there is a special <b>escape sequence</b>
+        that allows you to include curly brackets: <Code>{{</Code> and
+        <Code>}}</Code>.
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/Interpolation-Example-2">
+int x = 5;
+int y = 7;
+Console.WriteLine($"Position: {{ {x}, {y} }}");
+    </CodeBlock>
+    <Note> The above <b>escape sequences</b> are only valid within an
+        <b>interpolated string</b>. If used in a regular <b>string</b>, the
+        curly brackets will be read normally.
+    </Note>
+</Section>
+<Section Title="What's Next?">
+    <Adventure Portrait="Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+                    It is exciting to watch your programming tool belt continue
+                    to grow! With the ability to <b>parse</b> user input into
+                    <b>numeric types</b>, you can start to create some
+                    interesting and useful programs.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="BasicArithmetic.PageRef">
+                    Performing arithmetic on <b>values</b> and <b>variables</b>
+                    in <b>C#</b> is quite similar to arithmetic on paper. However,
+                    there are some interesting differences you should be aware of.
+                    If you're interested in learning about these differences,
+                    you should check out the <b>@BasicArithmetic.PageRef.Name</b> lesson.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="MathClass.PageRef">
+                    You might also be interested in learning about the
+                    <b>methods</b> provided by <b>C#</b> for performing useful
+                    mathematical operations in the
+                    <b>@MathClass.PageRef.Name</b> lesson.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="ShapeAnalyzer.PageRef">
+                    If you're already feeling comfortable with <b>arithmetic operators</b>
+                    and the <Code>Math</Code> class, you might be ready for
+                    the first <b>Gauntlet: @ShapeAnalyzer.PageRef.Name</b>.
+                    This <b>Gauntlet</b> includes 4 challenges to test
+                    everything you have learned so far.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <MarkFinishedDialog Page="ConvertingTypes.PageRef"/>
+        </Item>
+    </Adventure>
+</Section>
+@code
+{
+    public static readonly PageRef PageRef = new PageRef("Type Conversions", "/lessons/variables/type-conversions", 2, "Variables");
+}

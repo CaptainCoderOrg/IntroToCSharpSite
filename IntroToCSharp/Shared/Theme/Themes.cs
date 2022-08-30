@@ -1,8 +1,19 @@
 using MudBlazor;
 
+namespace CaptainCoder;
+
 public class Themes
 {
-    public static readonly MudTheme s_CSharpTheme = new MudTheme()
+
+    private static readonly DarkPalette DarkPalette = new () { 
+        //#b2d9ff
+        
+        BackgroundGrey = new ("#f5f5f5"),
+        GrayDefault = new ("#282828"),
+
+    };
+
+    public static readonly MudTheme s_CSharpTheme = new ()
     {
         // Palette = new Palette()
         // {
@@ -14,6 +25,10 @@ public class Themes
         // {
         //     Primary = Colors.Blue.Lighten1
         // },
+        PaletteDark = DarkPalette,
+        Palette = new Palette() {
+            GrayDefault = new ("#282828"),
+        },
 
         // LayoutProperties = new LayoutProperties()
         // {
