@@ -1,16 +1,13 @@
-<code class="@CurrentClass">@ChildContent</code>
+<code Style="@Style">@ChildContent</code>
 @code
 {
     [Parameter]
     public RenderFragment ChildContent { get; set; } = null!;
-    private string CurrentClass = "code-light";
-    protected override void OnInitialized()
-    {
-        MainLayout.GetInstance().ContinueWith(mainLayout => {
-            mainLayout.Result.OnDarkModeChange += isDarkMode => {
-                CurrentClass = isDarkMode ? "code-dark" : "code-light";
-                StateHasChanged();
-            };
-        });
-    }
+    private static readonly string Style = @"
+    padding: 0rem .25rem;
+    border-radius: 6px;
+    background: var(--mud-palette-background-grey);
+    color: var(--mud-palette-grey-dark);
+    border: solid 1px var(--mud-palette-grey-dark);
+    ".Trim();
 }

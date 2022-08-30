@@ -1,0 +1,26 @@
+name: Deploy to Develop Repository
+
+on:
+  push:
+    branches: 
+      - develop
+
+jobs:
+  deploy-to-develop-repo:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Push a directory to another repository
+      uses: jcollard/copy_folder_to_another_repo_action@master
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      with:
+        source_folder: '.'
+        destination_repo: 'CaptainCoderOrg/IntroToCSharpSite-dev-deploy'
+        destination_branch: main
+        user_email: 'jcollard@users.noreply.github.com'
+        user_name: 'jcollard'
+    
+    

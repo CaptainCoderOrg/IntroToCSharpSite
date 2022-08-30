@@ -1,0 +1,29 @@
+@inject NavigationManager NavigationManager
+@inject IDialogService DialogService
+
+<MudImage Src="@Path" Alt="@Alt" Class="clickable-image rounded-lg" onclick="@OpenModal"/>
+
+@code {
+    [Parameter, EditorRequired]
+    public string Src { get; set; } = null!;
+    [Parameter]
+    public string Alt { get; set; } = String.Empty;
+
+    private string Path => $"/imgs/{NavigationManager.GetRoute()}/{Src}";
+
+    private static readonly DialogOptions Options = new DialogOptions
+    {
+        CloseOnEscapeKey = true,
+        CloseButton = true,
+        NoHeader = true,
+        MaxWidth = MaxWidth.False,
+        Position = DialogPosition.Center
+    };
+
+    private void OpenModal()
+    {
+        var parameters = new DialogParameters();
+        parameters.Add("Src", Path);
+        DialogService.Show<ImageModal>("", parameters, Options);
+    }
+}

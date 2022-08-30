@@ -1,0 +1,10 @@
+This is line of code <b>declares</b> a <b>variable</b> <Code>@VarName</Code> which
+labels a <b>memory address</b>. Then, it <b>initializes</b> <Code>@VarName</Code> by
+storing the <b>value</b> <Code>@Value</Code> in the <b>memory address</b>.
+
+@code {
+    [Parameter, EditorRequired]
+    public string Value {get; set;} = string.Empty!;
+    [Parameter, EditorRequired]
+    public string VarName {get; set;} = string.Empty!;
+}

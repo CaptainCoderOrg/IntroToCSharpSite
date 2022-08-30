@@ -1,0 +1,37 @@
+@inject IDialogService DialogService;
+<MudDialog>
+    <DialogContent>
+        <MudStack Spacing=4 Justify="Justify.Center">
+            <MudText>This feature is only available with <b>Adventure Mode</b>.</MudText>
+            <MudButton
+              Variant="Variant.Filled"
+              Color="Color.Tertiary"
+              StartIcon="@Icons.Filled.Login"
+              OnClick="@Login">Login to Enable Adventure Mode</MudButton>
+            @if (Page != null)
+            {
+                <HorizontalDivider/>
+                <MudText Style="max-width:350px">You may continue to the page without adding it to your book.</MudText>
+                <MudButton Class="mb-4" StartIcon="@Icons.Filled.Hiking" Variant="Variant.Filled" Color="Color.Primary" Href="@Page?.Href">Go to "@Page?.Name"</MudButton>
+            }
+        </MudStack>
+    </DialogContent>
+</MudDialog>
+@code {
+    [CascadingParameter] MudDialogInstance? MudDialog { get; set; }
+    [Parameter, EditorRequired]
+    public PageRef? Page { get; set; }
+
+    private void Login()
+    {
+        LoginDialog.Show(DialogService);
+        MudDialog?.Close(DialogResult.Ok(true));
+    }
+
+    public static void Show(IDialogService DialogService, PageRef? page = null) {
+        var options = new DialogOptions { CloseOnEscapeKey = true, CloseButton = true };
+        var parameters = new DialogParameters();
+        parameters.Add("Page", page);
+        DialogService.Show<AdventureModeLoginDialog>("Adventure Mode", parameters, options);
+    }
+}

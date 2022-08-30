@@ -1,0 +1,42 @@
+<MudDialog>
+    <DialogContent>
+        <MudStack Class="mb-4" Spacing=4 Justify="Justify.Center">
+            <MudText>@Text</MudText>
+            <MudGrid>
+                <MudItem sm=6>
+                    <MudButton Style="width:100%" Class="rounded" Variant="Variant.Filled" Color="Color.Success" OnClick="@Confirm">
+                        Confirm
+                    </MudButton>
+                </MudItem>
+                <MudItem sm=6>
+                    <MudButton Style="width: 100%" Class="rounded" Variant="Variant.Filled" Color="Color.Error" OnClick="@Cancel">
+                        Cancel
+                    </MudButton>
+                </MudItem>
+            </MudGrid>
+        </MudStack>
+    </DialogContent>
+</MudDialog>
+@code {
+    [CascadingParameter] MudDialogInstance? MudDialog { get; set; }
+    [Parameter, EditorRequired]
+    public string Text {get; set;} = string.Empty;
+    [Parameter, EditorRequired]
+    public Action ConfirmAction {get; set;} = null!;
+
+    private void Confirm()
+    {
+        ConfirmAction.Invoke();
+        MudDialog?.Close(DialogResult.Ok(true));
+    }
+
+    private void Cancel() => MudDialog?.Close(DialogResult.Ok(false));
+
+    public static void Show(IDialogService DialogService, string message, Action confrimaAction) {
+        var options = new DialogOptions { CloseOnEscapeKey = true, CloseButton = true };
+        var parameters = new DialogParameters();
+        parameters.Add("Text", message);
+        parameters.Add("ConfirmAction", confrimaAction);
+        DialogService.Show<ConfirmationDialog>("Confirm", parameters, options);
+    }
+}

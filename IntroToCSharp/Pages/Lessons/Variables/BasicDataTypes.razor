@@ -1,0 +1,213 @@
+@inherits CaptainCoder.Page
+@page "/lessons/variables/basic-data-types"
+
+<Title>Basic Data Types</Title>
+<Section Title="Introduction">
+    <Text>
+    In <MudLink Href="@VariableBasics.Href">The Basics</MudLink> we discussed how to
+    use <Keyword Word="variable"/>s to store, read, and update data in a
+    computer's memory. In <b>C#</b>, when you declare a <b>variable</b> you must
+    specify the type of data that will be stored. This is called a <Keyword
+    Word="data type"/>. This section provides a high level overview
+    of the 4 most commonly used <b>data types</b>:
+    </Text>
+    <MudList Clickable="true">
+        <MudListItem Icon="@Icons.Filled.Circle" OnClick="@(() => Utils.ScrollIntoView("String"))">String</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle" OnClick="@(() => Utils.ScrollIntoView("Integer"))">Integer</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle" OnClick="@(() => Utils.ScrollIntoView("Double"))">Double</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle" OnClick="@(() => Utils.ScrollIntoView("Boolean"))">Boolean</MudListItem>
+    </MudList>
+</Section>
+
+<Section Title="String">
+    <Text>
+        A <Code>string</Code> stores text. To create a <Code>string</Code>
+        <Keyword Word="literal"/>, place the desired text between a pair of double
+        quotes. For example:
+    </Text>
+    <CodeBlock AllowCopy>
+string name = "Thor Odinson";
+string title = "God of Thunder";
+    </CodeBlock>
+    <Text>
+        You can combine strings together using the concatenate operator: (<Code>+</Code>).
+    </Text>
+    <CodeBlock AllowCopy ReplIt="JosephCollard/HelloWorldConcat">
+string message = "Hello" + ", world!";
+Console.WriteLine(message);
+    </CodeBlock>
+    <Text>
+        You can use the concatenate operator multiple times in a single expression:
+    </Text>
+    <CodeBlock AllowCopy ReplIt="JosephCollard/MultipleConcats">
+string firstName = "Captain";
+string lastName = "Coder";
+Console.WriteLine("Look it is " + firstName + " " + lastName + "!");
+    </CodeBlock>
+    <Text>
+        Sometimes you might want to include a double quote in a string. To do this,
+        we use the <Keyword Word="escape sequence"/> <Code>\"</Code>. For example:
+    </Text>
+    <CodeBlock AllowCopy ReplIt="JosephCollard/EscapeDoublequote">
+Console.WriteLine("The dog says, \"Woof!\"");
+Console.WriteLine("The cat says, \"Meow!\"");
+    </CodeBlock>
+    <Text>
+        Below is a list of commonly used <b>escape sequences</b> that you might find useful:
+    </Text>
+    <EscapeSequenceTable/>
+    <ThorsTitleChallenge />
+</Section>
+
+<Section Title="Integer">
+    <Text>
+        An <b>integer</b> is a whole number (no decimals allowed).
+        In <b>C#</b>, we declare <b>integers</b> using the <Code>int</Code> data type.
+        For example:
+    </Text>
+    <CodeBlock AllowCopy>
+int power = 9001;
+int price = 42;
+int y = -17;
+    </CodeBlock>
+    <Text>
+        It may become difficult to read an <Code>int</Code> literal that has many digits.
+        To help with this, <b>C#</b> allows you to use underscores (<Code>_</Code>)
+        within an <Code>int</Code> literal. For example:
+    </Text>
+    <CodeBlock AllowCopy>int population = 329_500_000;</CodeBlock>
+    <Note>
+        The underscores may be placed anywhere in the number so you still need to
+        take care that you have the correct number of digits.
+    </Note>
+
+    <GravityAsAnIntegerExploration/>
+    <TestingIntegerRangeExploration/>
+</Section>
+
+<Section Title="Double">
+    <Text>
+        Similar to an <Code>int</Code>, a <Code>double</Code> represents a number.
+        However, a <Code>double</Code> represents decimal numbers. For example:
+    </Text>
+    <CodeBlock AllowCopy>
+double gravity = 9.81;
+double pi = 3.14159;
+double ice = 32;
+    </CodeBlock>
+    <Text>
+        A <Code>double</Code> uses 8 <Keyword Word="bytes"/> of memory and is
+        capable of approximating incredibly large and incredibly small values.
+        The smallest value is approximately ±10<sup>-324</sup> and the largest
+        value is approximately ±10<sup>308</sup>. To achieve this incredible
+        range of values using only 64 <Keyword Word="bits"/> of memory we must
+        sacrifice a small amount of precision. That is, <Code>double</Code> values
+        are only approximations.
+    </Text>
+
+    <ApproximatingNumbersExploration/>
+    
+    <Text>
+        Because <Code>doubles</Code> have such a massive range of values, you
+        may find that you need to create a <Code>double</Code> literal that is
+        incredibly long. For example, the "<b>Avogadro Constant</b>" is
+        602,200,000,000,000,000,000,000. This number is typically represented
+        using scientific notation as: 6.022x10<sup>23</sup>. For convenience, <b>C#</b>
+        allows you to use scientific notation to specify a <Code>double</Code>
+        literal.
+    </Text>
+    <CodeBlock AllowCopy>double avogadrosConstant = 6.022e23;</CodeBlock>
+    <Note>
+        In the example above the <Code>e</Code> is short for "exponent".
+    </Note>
+
+</Section>
+
+<Section Title="Boolean">
+    <Text>
+        A <b>boolean</b> is a data type which represents a value that is one of two
+        values: <Code>true</Code> or <Code>false</Code>. In <b>C#</b>, we declare
+        <b>booleans</b> using the <Code>bool</Code> data type. For example:
+    </Text>
+    <CodeBlock>
+bool hasSword = true;
+bool isGameOver = false;
+    </CodeBlock>
+    <FunFact>
+        The word "<b>boolean</b>" is named after the mathematician George Bool
+        who created a branch of mathematics called "Boolean Logic" which
+        is centered around the idea of combining logical statements
+        that are either <Code>true</Code> or <Code>false</Code>.
+    </FunFact>
+</Section>
+
+<Section Title="Knowledge Check">
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="Which of the following are valid ints?" XP=5 GoldAward=100>
+        <CheckBoxOption Text="@("\"hello\"")" IsCorrect="false" />
+        <CheckBoxOption Text="8" IsCorrect="true" />
+        <CheckBoxOption Text="1.7" IsCorrect="false" />
+        <CheckBoxOption Text="-17" IsCorrect="true" />
+    </MultipleChoiceQuestion>
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="Which of the following are valid doubles?" XP=5 GoldAward=100>
+        <CheckBoxOption Text="@("\"13.1\"")" IsCorrect="false" />
+        <CheckBoxOption Text="8" IsCorrect="true" />
+        <CheckBoxOption Text="-1.7" IsCorrect="true" />
+        <CheckBoxOption Text="false" IsCorrect="false" />
+    </MultipleChoiceQuestion>
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="Which of the following are valid strings?" XP=5 GoldAward=100>
+        <CheckBoxOption Text="@("\"hello\"")" IsCorrect="true" />
+        <CheckBoxOption Text="13.1" IsCorrect="false" />
+        <CheckBoxOption Text="@("\"false\"")" IsCorrect="true" />
+        <CheckBoxOption Text="true" IsCorrect="false" />
+    </MultipleChoiceQuestion>
+    <MultipleChoiceQuestion IsMultiSelect="true" Question="Which of the following are valid bools?" XP=5 GoldAward=100>
+        <CheckBoxOption Text="@("\"true\"")" IsCorrect="false" />
+        <CheckBoxOption Text="true" IsCorrect="true" />
+        <CheckBoxOption Text="false" IsCorrect="true" />
+        <CheckBoxOption Text="0" IsCorrect="false" />
+    </MultipleChoiceQuestion>
+
+</Section>
+<Section Title="What's Next?">
+    <Adventure Portrait="Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+                Congratulations! If you've made it this far, you're well on your
+                way to mastering <b>variables</b>.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="MadTakes.PageRef">
+                A great way to practice using <b>string variables</b>
+                is the <b>@MadTakes.PageRef.Name</b> activity. If you have
+                not yet completed it, I highly recommend checking it out.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="BasicArithmetic.PageRef">
+                When you're ready to continue expanding your programming
+                arsenal, there are two great options. The first is
+                the <b>@BasicArithmetic.PageRef.Name</b> lesson where you
+                will learn how the computer <b>evaluates</b> mathematical
+                <b>expressions</b>.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="ConvertingTypes.PageRef">
+                The second option is the <b>@ConvertingTypes.PageRef.Name</b>
+                lesson. In that lesson, you learn how to convert between the
+                common data types. This is useful for reading numbers from the
+                user.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <MarkFinishedDialog Page="BasicDataTypes.PageRef"/>
+        </Item>
+    </Adventure>
+</Section>
+
+@code {
+    public const string Href = "/lessons/variables/basic-data-types";
+    public static readonly PageRef PageRef = new PageRef("Basic Data Types", "/lessons/variables/basic-data-types", 1, "Variables");
+
+}

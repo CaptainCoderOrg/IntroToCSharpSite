@@ -1,0 +1,15 @@
+<MudGrid Spacing=1>
+    <MudItem>
+        <MudImage Class="mt-1 pt-0 mr-0 pr-0" Src="/imgs/top-menu/coin.png" Width="16" Height="16"/>
+    </MudItem>
+    <MudItem>
+        <MudElement Class="ml-0 mr-6">
+            <MudText Class="pa-0 ma-0" Style="text-align:center;">@(Utils.FormatGold(UserData.Gold))</MudText>
+        </MudElement>
+    </MudItem>
+</MudGrid>
+
+@code {
+    [Parameter, EditorRequired]
+    public UserStats UserData {get; set;} = null!;
+}

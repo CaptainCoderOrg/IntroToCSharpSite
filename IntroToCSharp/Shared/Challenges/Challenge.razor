@@ -1,0 +1,27 @@
+<ActivityStep
+    ClaimName="Challenge"
+    Title="@($"Challenge: {Title}")"
+    Gold="@Gold"
+    XP="@XP"
+    DBName="@DBName"
+    ActivityType="challenge">
+    @ChildContent
+</ActivityStep>
+
+@code {
+    [Parameter, EditorRequired]
+    public RenderFragment ChildContent {get; set;} = null!;
+    private string? _dbName = null;
+    [Parameter]
+    public string DBName
+    {
+        get => _dbName ?? Utils.SanitizeDBName(Title);
+        set => _dbName = value;
+    }
+    [Parameter, EditorRequired]
+    public string Title {get; set;} = String.Empty;
+    [Parameter]
+    public int Gold {get; set;} = 100;
+    [Parameter]
+    public int XP {get; set;} = 25;
+}

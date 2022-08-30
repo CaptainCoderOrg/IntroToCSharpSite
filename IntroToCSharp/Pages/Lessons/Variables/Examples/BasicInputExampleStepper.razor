@@ -1,0 +1,202 @@
+<Text>
+    Use the <b>Next</b> and <b>Back</b> buttons to study how the computer
+    executes the program below:
+</Text>
+<CodeStepper>
+        <Block>
+            <CodeBlock>
+Console.Write("Enter your name: "); // &lt;--
+string userName;
+userName = Console.ReadLine();
+Console.WriteLine("Nice to meet you, " + userName + "!");
+            </CodeBlock>
+            <Text><b>Explanation</b></Text>
+            <FadeText>
+                This line displays "Enter your name: " in the terminal.
+            </FadeText>
+            <Text><b>Terminal:</b></Text>
+            <Terminal>&nbsp;</Terminal>
+        </Block>
+        <Block>
+            <CodeBlock>
+Console.Write("Enter your name: ");
+string userName; // &lt;--
+userName = Console.ReadLine();
+Console.WriteLine("Nice to meet you, " + userName + "!");
+            </CodeBlock>
+            <Text><b>Explanation</b></Text>
+            <FadeText>
+                This line creates a space in memory to store a <b>string</b> and 
+                labels that memory <b>userName</b>.
+            </FadeText>
+            <Text><b>Terminal:</b></Text>
+            <Terminal>Enter your name: </Terminal>
+        </Block>
+        <Block>
+            <CodeBlock>
+Console.Write("Enter your name: ");
+string userName; 
+userName = Console.ReadLine(); // &lt;--
+Console.WriteLine("Nice to meet you, " + userName + "!");
+            </CodeBlock>
+            <Text><b>Explanation</b></Text>            
+            <FadeText>
+                Before the computer can initialize <b>userName</b>, it must first
+                <b>evaluate</b> the <b>expression</b> <Code>Console.ReadLine()</Code>.
+            </FadeText>
+            <Text><b>Terminal:</b></Text>
+            <Terminal>Enter your name: </Terminal>
+        </Block>
+        <Block>
+            <CodeBlock>
+Console.Write("Enter your name: ");
+string userName; 
+userName = Console.ReadLine(); // &lt;--
+Console.WriteLine("Nice to meet you, " + userName + "!");
+            </CodeBlock>
+            <Text><b>Explanation</b></Text>
+            <FadeText>
+                <Code>Console.ReadLine()</Code> waits for text input in the terminal.
+                Enter a value in the terminal, then click next.
+            </FadeText>
+            <Text><b>Terminal:</b></Text>
+            <Terminal>Enter your name: <CodeStepperInput @bind-Value="@UserName" /></Terminal>
+        </Block>
+        <Block>
+            <CodeBlock>
+Console.Write("Enter your name: ");
+string userName; 
+userName = "@UserNameExpr"; // &lt;--
+Console.WriteLine("Nice to meet you, " + userName + "!");
+            </CodeBlock>
+            <Text><b>Explanation</b></Text>
+            <FadeText>
+                Notice, after <Code>Console.ReadLine()</Code> <b>evaluates</b>,
+                the value that was entered is substituted into the <b>expression</b>
+                replacing <Code>Console.ReadLine()</Code> with the result. 
+            </FadeText>
+            <Text><b>Terminal:</b></Text>
+            <Terminal>Enter your name: @UserName
+            </Terminal>
+        </Block>
+        <Block>
+            <CodeBlock>
+Console.Write("Enter your name: ");
+string userName; 
+userName = "@UserNameExpr"; // &lt;--
+Console.WriteLine("Nice to meet you, " + userName + "!");
+            </CodeBlock>
+            <Text><b>Explanation</b></Text>
+            <FadeText>
+                This line of code <b>assigns</b> the value <b>"@UserNameExpr"</b> to be
+                stored in the memory address labeled <b>userName</b>.
+            </FadeText>
+            <Text><b>Terminal:</b></Text>
+            <Terminal>Enter your name: @UserName
+            </Terminal>
+        </Block>
+        <Block>
+            <CodeBlock>
+Console.Write("Enter your name: ");
+string userName; 
+userName = "@UserNameExpr";
+Console.WriteLine("Nice to meet you, " + userName + "!"); // &lt;--;
+            </CodeBlock>
+            <Text><b>Explanation</b></Text>            
+            <FadeText>
+                Before the computer can execute this line of code, it needs
+                to <b>evaluate</b> the <b>expression</b>:<br/>
+                <Code>"Nice to meet you, " + @UserNameExpr + "!"</Code>.
+            </FadeText>
+            <Text><b>Terminal:</b></Text>
+            <Terminal>Enter your name: @UserName
+            </Terminal>
+        </Block>
+        <Block>
+            <CodeBlock>
+Console.Write("Enter your name: ");
+string userName; 
+userName = "@UserNameExpr";
+Console.WriteLine("Nice to meet you, " + userName + "!"); // &lt;--;
+            </CodeBlock>
+            <Text><b>Explanation</b></Text>
+            <FadeText>
+                First, the computer must read the <b>value</b> stored in 
+                the memory address labeled by <b>userName</b> and substitute
+                it into the expression.
+            </FadeText>
+            <Text><b>Terminal:</b></Text>
+            <Terminal>Enter your name: @UserName
+            </Terminal>
+        </Block>
+        <Block>
+            <CodeBlock>
+Console.Write("Enter your name: ");
+string userName; 
+userName = "@UserNameExpr";
+Console.WriteLine("Nice to meet you, " + "@UserNameExpr" + "!"); // &lt;--;
+            </CodeBlock>
+            <Text><b>Explanation</b></Text>
+            <FadeText>
+                Next, it will combine the <b>strings</b> <Code>"Nice to meet you, "</Code>
+                and <Code>"@UserNameExpr"</Code> using the (<Code>+</Code>) <Keyword Word="operator"/>.
+            </FadeText>
+            <Text><b>Terminal:</b></Text>
+            <Terminal>Enter your name: @UserName
+            </Terminal>
+        </Block>
+        <Block>
+            <CodeBlock>
+Console.Write("Enter your name: ");
+string userName; 
+userName = "@UserNameExpr";
+Console.WriteLine("Nice to meet you, @UserNameExpr" + "!"); // &lt;--
+            </CodeBlock>
+            <Text><b>Explanation</b></Text>
+            <FadeText>
+                Next, the computer will combine the <b>strings</b> <Code>"Nice to meet you, @UserNameExpr"</Code>
+                and <Code>"!"</Code> using the (<Code>+</Code>) <b>operator</b>.
+            </FadeText>
+            <Text><b>Terminal:</b></Text>
+            <Terminal>Enter your name: @UserName
+            </Terminal>
+        </Block>
+        <Block>
+            <CodeBlock>
+Console.Write("Enter your name: ");
+string userName; 
+userName = "@UserNameExpr";
+Console.WriteLine("Nice to meet you, @UserNameExpr!"); // &lt;--;
+            </CodeBlock>
+            <Text><b>Explanation</b></Text>
+            <FadeText>
+                Finally, this line of code displays <Code>Nice to meet you,
+                @UserName!</Code> in the terminal.
+            </FadeText>
+            <Text><b>Terminal:</b></Text>
+            <Terminal>Enter your name: @UserName
+            </Terminal>
+        </Block>
+        <Block>
+            <CodeBlock>
+Console.Write("Enter your name: ");
+string userName; 
+userName = "@UserNameExpr";
+Console.WriteLine("Nice to meet you, @UserNameExpr!");
+            </CodeBlock>
+            <Text><b>Explanation</b></Text>
+            <FadeText>
+                The computer has finished executing the program and exits.
+            </FadeText>
+            <Text><b>Terminal:</b></Text>
+            <Terminal>Enter your name: @UserName
+Nice to meet you, @UserName!
+            </Terminal>
+        </Block>
+</CodeStepper>
+
+@code
+{
+    private string UserName {get; set;} = string.Empty;
+    private string UserNameExpr => UserName.Replace("\\", "\\\\").Replace("\"", "\\\"");
+}
