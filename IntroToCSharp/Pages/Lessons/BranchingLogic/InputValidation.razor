@@ -1,0 +1,94 @@
+@inherits CaptainCoder.Page
+@page "/lessons/branching-logic/input-validation"
+
+<Title>Input Validation</Title>
+
+<Section Title="Introduction">
+    <Adventure Portrait="Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog Page="UserInput.PageRef">
+                In many of the programs you've written thus far, you have made
+                use of the <Code>Console.ReadLine</Code> <b>method</b> to allow
+                the user to provide input. However, as you may have already
+                experienced, it is possible for the user's input to not match
+                exactly the format that is expected. For example, if you prompt
+                the user to enter an <b>int</b> but they enter
+                <Code>"one"</Code>, the program crashes with an ugly error
+                message.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog>
+                In this lesson, you will learn how to use the
+                <Code>TryParse</Code> <b>method</b> to validate the users input
+                and report meaningful error messages when the user's input is
+                not valid. Additionally, you will learn to use several utility
+                <b>methods</b> provided by a <b>string</b> to allow for small
+                deviations in the user's input.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="IfStatements.PageRef">
+                Before starting this lesson, you should be comfortable using
+                <b>if</b> and <b>else statements</b> to create <b>decision trees</b>
+                in your programs. If you need a refresher, be sure to check out
+                the <b>@IfStatements.PageRef.Name</b> lesson.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="PersonalityQuiz.PageRef">
+                If you feel you need more practice with <b>if</b>,
+                <b>else-if</b>, and <b>else statements</b>, the
+                <b>@PersonalityQuiz.PageRef.Name</b> activity is a fun way to
+                level up your skills before starting this lesson.
+            </AdventureDialog>
+        </Item>
+    </Adventure>
+</Section>
+
+<Section Title="Exploration: A Bad Input">
+    <ABadInputExploration/>
+</Section>
+
+<Section Title="Edge Cases and the TryParse method">
+    <Text>
+        In the exploration above, you demonstrate that you have no control over
+        what the user enters and input into your program. A <b>value</b> that is
+        not expected but is technically possible is often called an <b>edge
+        case</b>.
+        
+        Whether the user is nefarious or simply makes a mistake, it is the
+        programmer's responsibility to think about the <b>edge cases</b> of
+        their program and do their best to handle them.
+    </Text>
+    <Text>
+        Lucky for you, the problem of validating user input when <b>parsing</b>
+        numbers is so common that there exists a built in <b>method</b> just 
+        for doing it: <Code>TryParse</Code>.
+    </Text>
+    <Text><b>Examples:</b></Text>
+    <Text>
+        You can try to <b>parse</b> a <b>string</b> into an <b>int</b> using
+        <Code>int.TryParse</Code>. When <b>evaluated</b>, it will result in a
+        <b>bool</b> that specifies if the <b>parse</b> was successful.
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/TryParse-Example">
+int result = 0;
+bool wasParseSuccessful = int.TryParse("1", out result);
+Console.WriteLine($"Was Successful: {wasParseSuccessful}");
+Console.WriteLine($"Result: {result}");
+    </CodeBlock>
+    <Text>
+        In the above example, the <Code>int.TryParse</Code> <b>method</b>
+        accepts 2 <b>arguments</b>: <Code>"1"</Code> and <Code>out
+        result</Code>. 
+    </Text>
+    <Text>
+
+    </Text>
+
+</Section>
+
+@code {
+    public static readonly PageRef PageRef = new PageRef("Input Validation", "/lessons/branching-logic/input-validation", 1, "Branching Logic");
+}
