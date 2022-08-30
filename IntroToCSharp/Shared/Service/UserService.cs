@@ -216,8 +216,16 @@ public class UserService
     public bool GiveXPAndGold(int xpToGive, int goldToGive)
     {
         if (!_userData.IsLoggedIn) return false;
-        UserStats newStats = new(_userStats.XP + xpToGive, _userStats.GoldAcquired + goldToGive, _userStats.GoldSpent);
-        _userData.UserStatsRef?.Set(newStats);
+        if(goldToGive > 0)
+        {
+            UserStats newStats = new(_userStats.XP + xpToGive, _userStats.GoldAcquired + goldToGive, _userStats.GoldSpent);
+            _userData.UserStatsRef?.Set(newStats);
+        }
+        else if(goldToGive < 0)
+        {
+            UserStats newStats = new(_userStats.XP + xpToGive, _userStats.GoldAcquired, _userStats.GoldSpent + (-goldToGive));
+            _userData.UserStatsRef?.Set(newStats);
+        }
         return true;
     }
 
@@ -234,26 +242,8 @@ public class UserService
     /// </summary>
     /// <param name="goldToGive">The amount of gold to give(or remove)</param>
     /// <returns>False if user is not logged in. Returns true otherwise.</returns>
-    public bool GiveGold(int goldToGive)
-    {
-        if(goldToGive > 0)
-        {
-            UserStats newStats = new(_userStats.XP, _userStats.GoldAcquired + goldToGive, _userStats.GoldSpent);
-            _userData.UserStatsRef?.Set(newStats);
-            return GiveXPAndGold(0, goldToGive);
-        }
-        else if(goldToGive < 0)
-        {
-            UserStats newStats = new(_userStats.XP, _userStats.GoldAcquired, _userStats.GoldSpent + goldToGive);
-            _userData.UserStatsRef?.Set(newStats);
-            return GiveXPAndGold(0, goldToGive);
-        }
-        else
-        {
-            Console.WriteLine("No gold transacted");
-            return GiveXPAndGold(0, goldToGive);
-        }
-    }
+    public bool GiveGold(int goldToGive) => GiveXPAndGold(0, goldToGive);
+
     /// <summary>
     /// Updates the users gold based on if the user buys the item from the store. The item is added to the user's inventory.
     /// </summary>
