@@ -20,13 +20,13 @@
             <MudPaper Elevation="0" Class="pa-4" Style="max-width:960px;">
                 @Body
                 <div style="min-height:50px"></div>
-            </MudPaper>            
+            </MudPaper>
         </TopContent>
         <BottomContent>
             <Nix MinHeight="350px" OnClose="@ToggleConsole" />
         </BottomContent>
     </SplitPane>
-    
+
 </MudDrawerContainer>
 @code
 {
@@ -44,12 +44,15 @@
     private string BodyStyle => ShowConsole ? "overflow:auto; height: 45vh" : "overflow:auto; height: 92vh";
     private bool ShowConsole = false;
 
+    public static event Action<bool>? OnDarkModeChange;
+
     public void ToggleConsole() => _consoleSplitPane?.ToggleBottomPanel();
     public bool IsDarkMode
     {
         get => _isDarkMode;
         set
         {
+            OnDarkModeChange?.Invoke(value);
             if (value == _isDarkMode) return;
             _isDarkMode = value;
             UserService.Service.UpdateDarkModePreference(value);
@@ -57,7 +60,7 @@
             StateHasChanged();
         }
     }
-    
+
 
     public static event Action<IJSRuntime, ISnackbar, ILocalStorageService> OnInit
     {
@@ -110,7 +113,7 @@
                 bool systemPref = await _mudThemeProvider!.GetSystemPreference();
                 await localStorage.SetItemAsync<bool>("DarkMode", systemPref);
             }
-            IsDarkMode = await localStorage.GetItemAsync<bool>("DarkMode");                
+            IsDarkMode = await localStorage.GetItemAsync<bool>("DarkMode");
         }
     }
     public void ToggleNavMenu() => IsNavMenuOpen = !IsNavMenuOpen;
