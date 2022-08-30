@@ -27,7 +27,7 @@ public class UserStats
     /// The user's amount of gold.
     /// </summary>
     /// <value>Amount of gold</value>
-    public int Gold { get; private set; }
+    public int Gold { get => GoldAcquired - this.GoldSpent; }
 
     public int GoldSpent {get; set;} //When the store 
     public int GoldAcquired {get; private set;}
@@ -41,7 +41,6 @@ public class UserStats
         this.XP = xp;
         this.GoldAcquired = goldAcquired;
         this.GoldSpent = goldSpent;
-        this.Gold = this.GoldAcquired - this.GoldSpent;
     }
     public static int XPToLevel(int xp)
     {

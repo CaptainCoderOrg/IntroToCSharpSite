@@ -215,17 +215,10 @@ public class UserService
 
     public bool GiveXPAndGold(int xpToGive, int goldToGive)
     {
-        if (!_userData.IsLoggedIn) return false;
-        if(goldToGive > 0)
-        {
+            int goldAcquired = _userStats.GoldAcquired + Math.Max(0, goldToGive);
+            int goldSpent = _userStats.GoldAcquired + Math.Min(0, goldToGive);
             UserStats newStats = new(_userStats.XP + xpToGive, _userStats.GoldAcquired + goldToGive, _userStats.GoldSpent);
             _userData.UserStatsRef?.Set(newStats);
-        }
-        else if(goldToGive < 0)
-        {
-            UserStats newStats = new(_userStats.XP + xpToGive, _userStats.GoldAcquired, _userStats.GoldSpent + (-goldToGive));
-            _userData.UserStatsRef?.Set(newStats);
-        }
         return true;
     }
 
