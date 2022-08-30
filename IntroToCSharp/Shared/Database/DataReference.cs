@@ -136,7 +136,6 @@ internal class JsonDataReference<T> : DataReference<T>
     {
         IResultHandler handler = notifyOnSuccess ? this : IResultHandler.Default;
         string jsonData = JsonSerializer.Serialize(data);
-        Console.WriteLine(jsonData);
         await DatabaseService.Service.Set<string>(Path, jsonData, handler);
     }
     /// <inheritdoc/>

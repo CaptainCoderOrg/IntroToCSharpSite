@@ -1,0 +1,54 @@
+<MudStack>
+@if (IsComplete) {
+    <FadeIn>
+        You've marked this page as completed. If you're not
+        yet done with it, you can mark it as incomplete. This will
+        add an adventure icon to it in the navigation menu.
+    </FadeIn>
+    <MudButton StartIcon="@Icons.Filled.Hiking" Color="Color.Primary" Variant="Variant.Filled" OnClick="@MarkAdventuring">Mark "@Page.Name" as Adventuring</MudButton>
+} else {
+    <FadeIn>
+        Would you like to mark this page as complete? This will
+        add a completed check mark next to the lesson in the navigation
+        menu.
+    </FadeIn>
+    <MudButton StartIcon="@Icons.Outlined.CheckCircle" IconColor="Color.Success" Color="Color.Primary" Variant="Variant.Filled" OnClick="@MarkComplete">Mark "@Page.Name" as Completed</MudButton>
+}
+</MudStack>
+
+
+@code
+{
+    [Parameter, EditorRequired]
+    public PageRef Page {get; set;}
+    private UserPages _userPages = UserPages.Default;
+    private bool IsComplete => _userPages.Contains(Page) && _userPages.GetStatus(Page) == PageStatus.Complete;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        UserService.Service.OnUserChange += OnUserChange;
+    }
+
+    private void OnUserChange(User? newUser)
+    {
+        if (newUser == null || !newUser.IsLoggedIn || newUser.UserPagesRef == null)
+        {
+            OnUserPagesChanged(UserPages.Default);
+            return;
+        }
+        newUser.UserPagesRef!.DataChangedEvent += OnUserPagesChanged;
+    }
+
+    private void OnUserPagesChanged(UserPages? newPages)
+    {
+        if (newPages == _userPages) return;
+        _userPages = newPages ?? UserPages.Default;
+        StateHasChanged();
+    }
+
+    private void MarkComplete() => UserService.Service.UpdatePage(Page, PageStatus.Complete);
+
+    private void MarkAdventuring() => UserService.Service.UpdatePage(Page, PageStatus.Started);
+}
+

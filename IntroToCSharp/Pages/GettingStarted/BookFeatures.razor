@@ -1,0 +1,93 @@
+@inherits CaptainCoder.Page
+@page "/book-features"
+<Title>Book Features</Title>
+<Section Title="Questions">
+    <Text>
+        In addition to tracking your progress by marking sections read, this book
+        also acts as a "work book" in which you can write answers and check off
+        tasks within an activity or project. For example, most activities in this
+        book will start with a "Pre-Knowledge Check" where I encourage you
+        to try to answer questions you may not know the answers to. At the
+        end of the activity, there will be a "Post-Knowledge Check" with the
+        same (or similar) questions. The goal here is to see what we already know,
+        what we might think we know, and what we are not sure about. Below
+        is an example of what this looks like.
+    </Text>
+</Section>
+
+<Questions Title="Pre-Knowledge Check">
+    <Message>If you're logged in, your answers to these questions will be saved.</Message>
+    <ChildContent>
+        <Question Text="What is a program?" />
+        <Question Text="What is a programming language?" />
+        <Question Text="What is a compiler?" />
+    </ChildContent>
+</Questions>
+
+<Section Title="Example Task List">
+    <Text>
+        As you check off items on Task Lists, your progess will be saved for future visits.
+    </Text>
+    <TaskList Name="Title Page">
+        <TaskItem Name="Collapse">Collapse the Overview Panel</TaskItem>
+        <TaskItem Name="Answer Pre-Knowledge Check">Answer Pre-Knowledge Check</TaskItem>
+        <TaskItem Name="First">Complete Task List</TaskItem>
+    </TaskList>
+</Section>
+
+<Section Title="Code Examples">
+    <Text>
+        Throughout this book, you will find code examples like the one below.
+    </Text>
+    <CodeBlock Filename="NewProgram.cs" />
+    <Text>
+        Often, you will find that you copy and paste has been disabled on these code examples.
+    </Text>
+    <Note>
+        This is intentional.
+    </Note>
+    <Text>
+        When you are learning to program, it is important to memorize the syntax of
+        the language.
+        Many students find this frustating because they would like to work through the
+        book quickly. However, I encourage you to embrace the idea of slowing down to learn
+        and to think through the code examples as you type them out.
+    </Text>
+    <h3>Running Code Examples</h3>
+    <Text>
+        It is often helpful to execute the code examples to see the output and to interact
+        with a program. To facilitate this, we utilize an
+        online service called <MudLink Href="https://replit.com" Target="_blank">Repl.it</MudLink>
+        which provides online tools for writing and executing programs. You'll learn more about
+        Repl.it in the Development Environment chapter of this book.
+    </Text>
+    <Text>
+        Below is a simple program that asks the user to enter their name
+        and then displays the results to the console.
+        You can test this short program by
+        clicking the <Code>Run Code</Code> button at the bottom of the example. This will launch
+        a <MudLink Href="https://replit.com" Target="_blank">Repl.it</MudLink> console below the
+        code example. After it loads, click the play button
+        to compile and run the program. You should see <Code>dotnet run</Code> displayed in the console.
+        This is the command that is used to compile and run C# programs.
+        If you are logged into Repl.it in your browser, this will run on your account.
+        Go ahead and try it now.
+    </Text>
+    <Note>
+        If you are not logged into replit or if you are using a free tier replit account, compilation may
+        take 15 - 20 seconds.
+    </Note>
+
+    <CodeBlock Filename="AskName.cs" ReplIt="JosephCollard/AskName" />
+
+    <Note>
+        Sometimes the console displays improperly. To fix this, you can click the
+        <MudIcon Color="Color.Tertiary" Icon="@Icons.Outlined.Cached"/> button to refresh the
+        console. When you're finished, you can close the console by clicking the
+        <MudIcon Color="Color.Error" Icon="@Icons.Outlined.Close" /> button.
+    </Note>
+</Section>
+
+@code {
+    @* public static readonly PageRef PageRef = new PageRef("Book Features", "/book-features", 2, "Getting Started"); *@
+}

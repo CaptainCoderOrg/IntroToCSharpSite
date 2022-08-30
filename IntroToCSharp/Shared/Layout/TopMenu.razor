@@ -1,34 +1,26 @@
+@inject IDialogService DialogService
 <MudAppBar Elevation="25">
     <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" OnClick="@Main.ToggleNavMenu"
         Edge="Edge.Start" />
     <MudSpacer />
     <MudToggleIconButton @bind-Toggled="@Main.IsDarkMode" ToggledIcon="@Icons.Material.Outlined.LightMode"
         Icon="@Icons.Material.Outlined.DarkMode" Color="Color.Inherit" />
-    <MudIconButton Icon="@Icons.Material.Outlined.Terminal" Color="Color.Inherit" OnClick="@Main.ToggleConsole" />
     <MudIconButton Icon="@Icons.Material.Filled.Storefront" Color="Color.Inherit" Href="/store" />
 
     <MudSpacer />
     @if (UserData.IsLoggedIn)
     {
+
         <Gold />
         <ExperienceBar />
-        <MudElement>@UserData.DisplayName </MudElement>
-        <MudMenu>
-            <ActivatorContent>
-                <MudAvatar Class="ml-4" Color="Color.Secondary">@UserData.AvatarLetter</MudAvatar>
-            </ActivatorContent>
-            <ChildContent>
-                <MudMenuItem OnClick="@UserService.Service.Logout">Logout</MudMenuItem>
-            </ChildContent>
-        </MudMenu>
+        <MudElement Class="hidden-mobile">@UserData.DisplayName </MudElement>
+        <MudButton OnClick="@(() => JournalDialog.Show(DialogService))">
+            <MudAvatar Color="Color.Secondary" OnClick>@UserData.AvatarLetter</MudAvatar>
+        </MudButton>
     }
     else
     {
-        <MudMenu Label="Login" Variant="Variant.Filled" Color="Color.Tertiary" class="ml-md-auto"
-        ActivationEvent="@MouseEvent.MouseOver">
-            <MudMenuItem OnClick="@UserService.Service.GoogleLogin">Google</MudMenuItem>
-            <MudMenuItem OnClick="@UserService.Service.GitHubLogin">GitHub</MudMenuItem>
-        </MudMenu>
+        <MudButton StartIcon="@Icons.Filled.Login" Variant="Variant.Filled" Color="Color.Tertiary" OnClick="@(() => LoginDialog.Show(DialogService))">Login</MudButton>
     }
     </MudAppBar>
 

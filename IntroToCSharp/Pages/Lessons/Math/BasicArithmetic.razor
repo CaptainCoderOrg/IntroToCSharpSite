@@ -1,0 +1,105 @@
+@inherits CaptainCoder.Page
+@page "/lessons/variables/basic-arithmetic"
+
+<Title>Basic Arithmetic</Title>
+
+<Section Title="Introduction">
+    <Adventure Portrait="Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+                <Text>
+                    Did you know that the word "computer" once meant "one who
+                    computes"? Before electronic computers were available, a
+                    person who was good at performing mathematical calculations
+                    might have been employed as a "computer".
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog>
+                <Text>
+                    In this lesson, you how to write <b>expressions</b>
+                    using <b>binary arithmetic operators</b> and
+                    understand how the computer <b>evaluates</b> them.
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="BasicDataTypes.PageRef">
+                <Text>
+                    Before starting this activity, you should be familiar with
+                    the <b>int</b> and <b>double</b> data types. If you have not
+                    done so already, you should complete the
+                    <b>@BasicDataTypes.PageRef.Name</b> lesson.
+                </Text>
+            </AdventureDialog>
+        </Item>
+    </Adventure>
+</Section>
+<Section Title="Addition, Subtraction, Multiplication, and Division">
+    <Text>
+        The <b>expression</b> below is an made up
+        of 4 <b>binary arithmetic operators</b> and 5 <b>integers</b>.
+    </Text>
+    <CodeBlock>5 + 8 * (10 - 8) / 4;</CodeBlock>
+    <Text>
+        A <b>binary arithmetic operator</b> performs arithmetic on two numbers.
+        The <b>expression</b> above, uses the <b>addition operator</b>
+        (<Code>+</Code>), <b>subtraction operator</b> (<Code>-</Code>), <b>multiplication
+        operator</b> (<Code>*</Code>), and <b>division operator</b>
+        (<Code>/</Code>). For the most part, these <b>arithmetic operators</b>
+        behave the way you would expect in traditional mathematics and follow
+        typical arithmetic rules for <b>evaluation</b>.
+    </Text>
+    <HorizontalDivider/>
+    <IntroToCSharp.Pages.Lessons.Variables.Examples.ArithmeticOperationExampleStepper/>
+    <HorizontalDivider/>
+</Section>
+
+<Section Title="Integer Division vs. Floating-Point Division">
+    <IntegerDivisionExploration/>
+    <FloatingPointDivisionExploration/>
+</Section>
+<Section Title="Division by Zero">
+    <DivisionByZeroWithIntegersExploration/>
+    <DivisionByZeroWithDoublesExploration/>
+</Section>
+<Section Title="What's Next?">
+    <Adventure Portrait="Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+                With everything you're learning, you will be a computational wizard in no time!
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="ConvertingTypes.PageRef">
+                    Now that you know how to use the <b>arithmetic operators</b>, you will
+                    want to be able to read numeric <b>values</b> from the user.
+                    If you have not done so yet, now might be a
+                    good time to complete the <b>@ConvertingTypes.PageRef.Name</b> lesson.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="ShapeAnalyzer.PageRef">
+                If you're already comfortable with type conversions, you
+                might be ready to take on the first <b>Gauntlet: @ShapeAnalyzer.PageRef.Name</b>.
+                This <b>Gauntlet</b> is comprised of 4 challenges to test your
+                programming prowess.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="MathClass.PageRef">
+                You might also be interested in learning about the
+                <b>methods</b> provided by C# for performing useful mathematical
+                operations in the <b>@MathClass.PageRef.Name</b> lesson.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <MarkFinishedDialog Page="BasicArithmetic.PageRef"/>
+        </Item>
+    </Adventure>
+</Section>
+
+@code {
+    public static readonly PageRef PageRef = new PageRef("Basic Arithmetic", "/lessons/variables/basic-arithmetic", 3, "Math");
+}

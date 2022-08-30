@@ -1,0 +1,22 @@
+<input 
+    value="@Value" 
+    @onchange="@((ChangeEventArgs e) => UpdateValue(e))" 
+    type="text" 
+    style="border: 1px solid black; border-radius:2; padding:0.2rem .3rem;"/>
+
+@code {
+    
+    [Parameter]
+    public string Value { get; set; } = string.Empty;
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
+    private async Task UpdateValue(ChangeEventArgs e)
+    {
+        Console.WriteLine("Updating value: ");
+        string? value = e?.Value?.ToString();
+        this.Value = value ?? this.Value;
+        await ValueChanged.InvokeAsync(this.Value);
+    }
+    // TODO: Setting up bind for Value
+}

@@ -1,0 +1,9 @@
+Before the computer can initialize <Code>@VarName</Code>, it must first
+<b>evaluate</b> the <b>expression</b> <Code>@Expr</Code>.
+
+@code {
+    [Parameter, EditorRequired]
+    public string VarName { get; set; } = string.Empty!;
+    [Parameter, EditorRequired]
+    public string Expr { get; set; } = string.Empty!;
+}

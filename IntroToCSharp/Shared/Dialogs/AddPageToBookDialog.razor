@@ -1,0 +1,33 @@
+@inject IDialogService DialogService;
+<MudDialog>
+    <DialogContent>
+        <MudStack Spacing=4 Justify="Justify.Center">
+            <MudText>This page has not yet been added to your book, would you like to add it now?</MudText>
+            <MudButton 
+              StartIcon="@Icons.Filled.Hiking" 
+              Variant="Variant.Filled" 
+              Color="Color.Secondary" 
+              OnClick="AddPage">
+                        Add "@Page.Name" to Book
+            </MudButton>
+        </MudStack>
+    </DialogContent>
+</MudDialog>
+@code {
+    [CascadingParameter] MudDialogInstance? MudDialog { get; set; }
+    [Parameter, EditorRequired]
+    public PageRef Page { get; set; }
+
+    private void AddPage()
+    {
+        UserService.Service.AddPage(Page);
+        MudDialog?.Close(DialogResult.Ok(true));
+    }
+
+    public static void Show(IDialogService DialogService, PageRef page) {
+        var options = new DialogOptions { CloseOnEscapeKey = true, CloseButton = true };
+        var parameters = new DialogParameters();
+        parameters.Add("Page", page);
+        DialogService.Show<AddPageToBookDialog>("Adventure Mode", parameters, options);
+    }
+}

@@ -1,4 +1,5 @@
 @inject NavigationManager NavigationManager
+@implements IAdventureTask;
 
 <MudCheckBox @bind-Checked="@IsChecked" >
     @if (IsChecked)
@@ -13,6 +14,8 @@
 <br/>
 @code
 {
+    [CascadingParameter]
+    public IAdventureActivity? Activity { get; set; }
     private bool _isChecked = false;
     private bool IsDisabled = true;
     private bool IsChecked
@@ -29,11 +32,29 @@
             UpdateAndSaveTask();
         }
     }
-    private string ParentName => Parent == null ? "" : Parent.Name;
-    private string Path => $"{NavigationManager.GetRoute()}/tasks/{Utils.SanitizeDBName(ParentName)}/{Utils.SanitizeDBName(Name)}";
+    public bool IsComplete { get => IsChecked; }
+    private string ParentName {
+        get {
+            if (Activity != null) return Activity.DBName;
+            if (Parent != null) return Parent.Name;
+            return "";
+        }
+    }
+
+    private string Path {
+        get {
+            if (Activity == null) return $"{NavigationManager.GetRoute()}/tasks/{Utils.SanitizeDBName(ParentName)}/{Utils.SanitizeDBName(DBName)}";
+            return $"{Activity.ActivityType}/{Activity.DBName}/{Utils.SanitizeDBName(DBName)}";
+        }
+    }
 
     [CascadingParameter, EditorRequired]
     public TaskList? Parent { get; set; } = null;
+    [Parameter]
+    public bool Optional { get; set; } = false;
+    private string? _dbName = null;
+    [Parameter]
+    public string DBName { get => _dbName ?? Utils.SanitizeDBName(Name); set => _dbName = value;}
     [Parameter, EditorRequired]
     public string Name { get; set; } = String.Empty;
 
@@ -43,6 +64,9 @@
     protected override void OnInitialized()
     {
         UserService.Service.OnUserChange += HandleUserChange;
+        if (Activity != null && !Optional) {
+            Activity.AddTask(this);
+        }
     }
 
     private void HandleUserChange(User userData)
@@ -63,6 +87,7 @@
 
     private void UpdateAndSaveTask()
     {
+        Activity?.Notify();
         UserService.Service.UpdateTaskItem(Path, _isChecked);
     }
 }

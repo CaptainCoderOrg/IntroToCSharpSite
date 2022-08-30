@@ -1,0 +1,10 @@
+<DataTable Headers="@Headers" Rows="@Rows"/>
+@code {
+    private string[] Headers = {"Escape Sequence", "Result"};
+    private string[][] Rows = {
+        new string[] {"\\\"", "Double quotation mark"},
+        new string[] {"\\\\", "Backslash"},
+        new string[] {"\\t", "Tab"},
+        new string[] {"\\n", "New Line"}
+    };
+}

@@ -1,0 +1,11 @@
+The <b>inequality operator</b> (<Code>!=</Code>) checks if
+<Code>@LeftValue</Code> is <b>NOT</b> the same <b>value</b> as
+<Code>@RightValue</Code> and substitutes the resulting <b>bool</b> into the
+<b>expression</b>.
+@code {
+    [Parameter, EditorRequired]
+    public string LeftValue {get;set;} = string.Empty;
+
+    [Parameter, EditorRequired]
+    public string RightValue {get;set;} = string.Empty;
+}

@@ -1,0 +1,300 @@
+@inherits CaptainCoder.Page
+@page "/lessons/dotnet/creating-a-console-project"
+
+<Title>Creating a Console Project</Title>
+
+<Section Title="Overview">
+    <Text>
+        There are many different types of programs that can
+        be created using C#. In this book, we focus heavily on
+        learning the basics through creating console based
+        applications.
+    </Text>
+    <Text>
+        In this section, you will learn the basics of creating
+        a <b>C# Console Project</b> using VS Code and the
+        integrated <b>terminal</b>.
+    </Text>
+</Section>
+
+<Section Title="Learning Objectives">
+    <MudList Clickable="true">
+        <MudListItem Icon="@Icons.Filled.Circle">Open an integrated <b>terminal</b>in <b>VS Code</b>.</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Create a <b>C# Console Project</b> using the <Code>dotnet</Code> command.</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Execute a <b>C# project</b> using the <Code>dotnet</Code> command.</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Open and modify the <Code>Program.cs</Code> file.</MudListItem>
+    </MudList>
+</Section>
+
+<Section Title="Before Starting">
+    <Adventure Portrait="@Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog Page="@VSCode.PageRef">
+                <Text>
+                    Hey there! Before you get started on this lesson, make sure
+                    you have completed setting up your development environment
+                    in <b>VS Code</b>. If you need help, you can
+                    check out the <b>VS Code</b> section.
+                </Text>
+            </AdventureDialog>
+        </Item>
+    </Adventure>
+</Section>
+
+<Section Title="Select a Folder for your Project">
+    <Text>
+        When developing a <b>console project</b> in <b>C#</b>, the first thing
+        you need to do is select a folder for our project. Typically, the
+        name of this folder is the name of the project. All of the files associated
+        with that project will be kept in that folder.
+    </Text>
+    <TaskItem Name="Create a Folder">Create a Folder called "Simple Project"</TaskItem>
+    <Box>
+        <MudText>If you need help creating a folder, check out these videos:</MudText>
+        <MudStack Row=true>
+            <MudButton Color="Color.Primary" Variant="Variant.Filled" Href="https://www.youtube.com/watch?v=aEAWdEO7qYY" Target="_blank">Windows</MudButton>
+            <MudButton Color="Color.Secondary" Variant="Variant.Filled" Href="https://www.youtube.com/watch?v=xPVOaFmQ7_s" Target="_blank">Mac</MudButton>
+        </MudStack>
+    </Box>
+    <Text>
+        Next, let's get our folder open in <b>VS Code</b>.
+    </Text>
+    <TaskItem Name="Open VSCode">Open <b>VS Code</b></TaskItem>
+    <TaskItem Name="File-OpenFolder">From the top menu, select <Code>File</Code> -&gt; <Code>Open Folder</Code></TaskItem>
+    <Image Src="open-folder.png"/>
+    <Note>On Mac, the "Top Menu" is at the very top of the screen rather than the window.</Note>
+    <TaskItem Name="Open Folder">Locate and open your project folder</TaskItem>
+    <Text>
+        On the left side of the interface, you should see "Simple Project" displayed.
+        This tells you the name of the folder you currently have open in <b>VS Code</b>.
+    </Text>
+    <TaskItem Name="Verify Folder">Verify you have "Simple Project" open</TaskItem>
+    <TaskItem Name="Close Get Started">Optionally, you can close the "Get Started" tab</TaskItem>
+    <Image Src="verify-folder.png"/>
+    <Text>
+        If all went well, you are now ready to create a <b>console project</b>!
+    </Text>
+</Section>
+
+<Section Title="The Integrated Terminal">
+    <Text>
+        To create a <b>console project</b>, you are going to use the <Code>dotnet</Code> command
+        line tool. To do this, you first need to access a <Keyword Word="terminal"/>
+        that will let you send commands to your operating system.
+    </Text>
+    <TaskItem Name="Open Terminal">From the top menu select <b>Terminal</b> -&gt; <b>New Terminal</b></TaskItem>
+    <Image Src="open-terminal.png"/>
+    <Text>
+        If all went well, a panel at the bottom of <b>VS Code's</b> interface will be
+        visible with the <b>Terminal</b> tab selected. Don't worry if your
+        <b>terminal</b> doesn't look exactly like mine (it almost certainly won't). On
+        Windows it likely says "Power Shell" and on Mac it likely says
+        "zsh". These are the default <b>terminals</b> for those systems. They will work
+        just fine for running <Code>dotnet</Code> commands.
+    </Text>
+    <TaskItem Name="Verify Terminal">Verify the <b>Terminal</b> panel is open</TaskItem>
+    <Image Src="verify-terminal.png"/>
+    <Text>
+        The <b>terminal</b> provides a text based interface for sending commands to
+        your computer. When you type something into the <b>terminal</b> and press enter, it
+        sends that text to your operating system which tries to make sense of it.
+        If the command is not found, it will report an error. Try it now:
+    </Text>
+    <TaskItem Name="Type Hello">Type <Code>hello</Code> into your <b>terminal</b> and press enter</TaskItem>
+    <Text>
+        When I run this command in my <b>terminal</b>, I get a message back saying,
+        <Code>bash: hello: command not found</Code>. This is the operating system
+        telling me it could not find a program called "hello" to run.
+    </Text>
+    <Image Src="hello-command.png"/>
+    <Text>
+        Each <b>terminal</b>program tends to have slightly different error messages. Make a note
+        of the error your <b>terminal</b>reports and commit it to memory. If you see that error
+        message in the future, you will now know it means that the program isn't available
+        on your system.
+    </Text>
+    <Question Text="What message did your computer return?"/>
+    <Text>
+        Next, let's run the <Code>dotnet</Code> command to verify it is
+        installed on your computer.
+    </Text>
+    <TaskItem Name="dotnet version">Type <Code>dotnet --version</Code> into your <b>terminal</b>and press enter.</TaskItem>
+    <Note>
+        It is important that you type the command exactly with spaces and casing.
+    </Note>
+    <Text>
+        My <Code>dotnet</Code> installation reports it is on version <Code>6.0.202</Code>.
+    </Text>
+    <Image Src="dotnet-version.png"/>
+    <Box>
+        <MudText Class="mb-4">
+            <b>Note</b>: If the command above reported that the command could not be found,
+            it most likely means you have not installed <b>.NET 6</b> for your operating
+            system.
+        </MudText>
+        <MudButton Color="Color.Tertiary" Variant="Variant.Filled" Href="https://dotnet.microsoft.com/en-us/download/dotnet/6.0" Target="_blank">Download .NET 6</MudButton>
+    </Box>
+    <Question Text="What version of dotnet do you have installed?"/>
+    <Note>
+        The lessons and activites in this book are written with the assumption that you
+        are using <b>.NET 6</b>. Although most things will be similar with previous (and newer)
+        versions, it is not recommended.
+    </Note>
+</Section>
+<Section Title="Creating a Console Project">
+    <Text>
+        To initialize a new <b>C#</b> <b>console project</b>, run the command <Code>dotnet
+        new console</Code>. This will create a template C# project in your
+        project folder.
+    </Text>
+    <TaskItem Name="Create Project">Run the command <Code>dotnet new console</Code> in the <b>terminal</b>.</TaskItem>
+    <TaskItem Name="Required Assets">Optional, if you are prompted to add assets to build and debug, you can safely click Yes.</TaskItem>
+    <Image Src="required-assets.png"/>
+    <Text>
+        After running this command, you should see a few lines of output in the <b>terminal</b>. In addition to
+        this output, you should also see a few new files appear in your "Simple Project" folder.
+        The two most important files are <Code>Program.cs</Code> and <Code>Simple Project.csproj</Code>
+    </Text>
+    <TaskItem Name="Verify Project">Verify that <Code>Program.cs</Code> and a <Code>Simple Project.csproj</Code> were created</TaskItem>
+    <Image Src="verify-console-command.png"/>
+    <Text>
+        The <Code>Program.cs</Code> file contains the entry point for your
+        program and the <Code>Simple Project.csproj</Code> file contains
+        configuration information for your project. For now, don't worry too
+        much about the <Code>csproj</Code> file. The main thing to know is that
+        this file is used to tell the <Code>dotnet</Code> command how to run
+        the project.
+    </Text>
+</Section>
+
+<Section Title="Running a Console Project">
+    <Text>
+        Once you have a <b>console project</b> initialized, you can run it using the
+        <Code>dotnet run</Code> command.
+    </Text>
+
+    <TaskItem Name="Run dotnet run">Run the <Code>dotnet run</Code> command in the <b>terminal</b>.</TaskItem>
+
+    <Text>
+        If all went well, you will see the text <Code>Hello, World!</Code> displayed in your <b>terminal</b>.
+    </Text>
+    <Image Src="hello-world.png"/>
+
+</Section>
+
+<Section Title="Modifying Program.cs">
+    <Text>
+        As mentioned previously, the <Code>Program.cs</Code> file is the entry point
+        for your console program. When your program is executed, it starts in this file
+        and executes from top to bottom.
+    </Text>
+    <TaskItem Name="Open Program">Open <Code>Program.cs</Code> by clicking on it in Explorer view of <b>VS Code</b></TaskItem>
+    <Image Src="open-program.png"/>
+    <Text>
+        When you open the <Code>Program.cs</Code> file you will see two lines of code:
+    </Text>
+    <CodeBlock>
+// See https://aka.ms/new-console-template for more information
+Console.WriteLine("Hello, World!");
+    </CodeBlock>
+    <Text>
+        The first line of code starts with two forward slashes (<Code>//</Code>)
+        followed by a short human readable message. This line of code is called
+        a comment. In C#, anything that comes after <Code>//</Code> is ignored
+        during execution.
+    </Text>
+    <Text>
+        The second line of code is a <Keyword Word="statement"/>. A <b>statement</b> is
+        a line of code that performs an action. In this case, you are "calling" the
+        <Code>Console.WriteLine</Code> method which is accepting the argument
+        <Code>"Hello, World!"</Code>. The action that this method performs is to
+        display the argument to the <b>terminal</b>.
+    </Text>
+    <Note>
+        Don't worry too much if there is vocabulary in that last sentence that
+        you don't understand yet. You will learn what they mean more in depth
+        later. For now it is just important to know that
+        <Code>Console.WriteLine("Hello, World!")</Code> is being used to display
+        text to the <b>terminal</b>.
+    </Note>
+    <Text>
+        To change the message that is being displayed to the <b>terminal</b>, simply
+        change the text that appears between the double quotes (<Code>"</Code>) on the second
+        line.
+    </Text>
+    <TaskItem Name="Display LetsGo">Update the code to display <Code>Let's go!</Code> in the <b>terminal</b>.</TaskItem>
+    <TaskItem Name="Save your file">Save your changes (<Code>File</Code> -&gt; <Code>Save</Code>)</TaskItem>
+    <Image Src="unsaved-changes.png"/>
+    <TaskItem Name="Run LetsGo">Run the <Code>dotnet run</Code> command in the <b>terminal</b>.</TaskItem>
+    <Text>
+        If all went well, you should see <Code>Let's Go</Code> in your <b>terminal</b>.
+    </Text>
+    <Image Src="letsgo.png"/>
+    <Note>
+        If you are still seeing <Code>Hello, world!</Code>, double check that you saved your program.
+        You may also find it useful to turn on <Code>Auto Save</Code>. From the top menu select
+        <Code>File</Code> -&gt; <Code>Auto Save</Code>.
+    </Note>
+    <Text>
+        You can repeat the <Code>Console.WriteLine</Code> method multiple times
+        to display multiple lines of text in the <b>terminal</b>.
+    </Text>
+    <TaskItem Name="to the moon">Add another line of code <Code>Console.WriteLine("To the moon!");</Code></TaskItem>
+    <TaskItem Name="Run to the moon">Run the <Code>dotnet run</Code> command in the <b>terminal</b>.</TaskItem>
+    <Text>
+        If all went well, you will see <Code>Let's go!</Code> followed by
+        <Code>To the moon!</Code> on the following line.
+    </Text>
+    <Image Src="tothemoon.png"/>
+    <Text>
+        There are three common errors you might encounter:
+    </Text>
+    <MudList Clickable="true">
+        <MudListItem Icon="@Icons.Filled.Circle"><Code>error CS1002: ; expected</Code> - This error means you forgot to put a semi-colon (<Code>;</Code>) at the end of a <b>statement</b>.</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle"><Code>error CS1003: Syntax error, ',' expected</Code> - In this exercise, this likely means you forgot to put double quotes around your text.</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle"><Code>error CS1010: Newline in constant</Code> - In this exercise, this likely means you are missing a double quote at the end of your text.</MudListItem>
+    </MudList>
+</Section>
+<Section Title="Challenge">
+    <AShortBioChallenge/>
+</Section>
+
+<Section Title="What's next?">
+    <Adventure Portrait="@Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+                <Text>
+                    Nice work! You have just taken the first steps on
+                    your coding journey to become the very best; like
+                    no one ever was!
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="@AsciiArt.PageRef">
+                <Text>
+                    With the knowledge you've learned here, you are
+                    ready for the <b>ASCII Art</b> activity where
+                    you will learn more <b>statements</b> for controlling
+                    the console including changing colors to create
+                    beautiful "ASCII" art.
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="@VariableBasics.PageRef">
+                <Text>
+                    If you're feeling ambitious, you might take on the <b>Variable Basics</b> lesson
+                    where you learn how to store values in the computer's <Keyword Word="memory"/>.
+                </Text>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <MarkFinishedDialog Page="ConsoleProject.PageRef"/>
+        </Item>
+    </Adventure>
+</Section>
+
+@code {
+    public static readonly PageRef PageRef = new PageRef("Console Project", "/lessons/dotnet/creating-a-console-project", 0, "Basics");
+}

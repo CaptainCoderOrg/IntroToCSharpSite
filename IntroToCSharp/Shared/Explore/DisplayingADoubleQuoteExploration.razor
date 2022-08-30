@@ -1,0 +1,37 @@
+<Explore Title="Displaying a Double Quote" XP="40">
+    <Text>
+        Any text placed between double quotes is called a <Keyword Word="string literal"/>.
+        What happens if we want to put a double quote inside of the <b>string</b>?
+    </Text>
+    <TaskItem Name="Add DoubleQuote">Add the statement <Code>Console.WriteLine(""");</Code> to a program.</TaskItem>
+    <TaskItem Name="Try Run">Try running your program. <Code>dotnet run</Code></TaskItem>
+    <Question Text="What is the error message you receive?"/>
+    <Explanation>
+        <Text>
+            The error message you're seeing is the computer stating that it
+            cannot find the end of a string. When it encounters the second
+            <Code>"</Code> it believes that you have end the string.
+        </Text>
+    </Explanation>
+    <Text>
+        Because the double quote is used to signify the end of a <b>string</b>, we need a way to
+        indicate that we would like to include that character within a <b>string literal</b>. To
+        do this, we use an <Keyword Word="escape sequence"/>: <Code>\"</Code>.
+    </Text>
+    <TaskItem Name="Update DoubleQuote">Update your code to <Code>Console.WriteLine("\"");</Code>.</TaskItem>
+    <TaskItem Name="Run your program">Run your program. <Code>dotnet run</Code></TaskItem>
+    <Text>
+        If all went well, you will see a <Code>"</Code> in your terminal.
+    </Text>
+    <Text>
+        An <b>escape sequence</b> is a special code used within a <b>string literal</b> to indicate
+        that we would like to use a character that would otherwise be considered illegal. In C#, <b>Escape
+        sequences</b> always start with a backslash (<Code>\</Code>). Because of this, there is an
+        <b>escape sequence</b> for the backslash character: two back slashes (<Code>\\</Code>).
+    </Text>
+    <TaskItem Name="Add Backslack">Update your code to <Code>Console.WriteLine("\\");</Code></TaskItem>
+    <TaskItem Name="Run your program again">Run your program. <Code>dotnet run</Code></TaskItem>
+    <Text>
+        If all went well, you will see <Code>\</Code> in your terminal.
+    </Text>
+</Explore>
