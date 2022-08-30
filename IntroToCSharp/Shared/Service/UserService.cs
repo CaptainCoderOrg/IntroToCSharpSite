@@ -216,7 +216,7 @@ public class UserService
     public bool GiveXPAndGold(int xpToGive, int goldToGive)
     {
         if (!_userData.IsLoggedIn) return false;
-        UserStats newStats = new(_userStats.XP + xpToGive, _userStats.Gold + goldToGive, _userStats.GoldAcquired + goldToGive, _userStats.GoldSpent);
+        UserStats newStats = new(_userStats.XP + xpToGive, _userStats.GoldAcquired + goldToGive, _userStats.GoldSpent);
         _userData.UserStatsRef?.Set(newStats);
         return true;
     }
@@ -234,7 +234,24 @@ public class UserService
     /// </summary>
     /// <param name="goldToGive">The amount of gold to give(or remove)</param>
     /// <returns>False if user is not logged in. Returns true otherwise.</returns>
-    public bool GiveGold(int goldToGive) => GiveXPAndGold(0, goldToGive);
+    public bool GiveGold(int goldToGive)
+    {
+        if(goldToGive > 0)
+        {
+            IncreaseGoldAcquired(goldToGive);
+            return GiveXPAndGold(0, goldToGive);
+        }
+        else if(goldToGive < 0)
+        {
+            IncreaseGoldSpent(goldToGive);
+            return GiveXPAndGold(0, goldToGive);
+        }
+        else
+        {
+            Console.WriteLine("No gold transacted");
+            return GiveXPAndGold(0, goldToGive);
+        }
+    }
 
     /// <summary>
     /// Increases the counter for the amount of Gold Spent.
@@ -244,7 +261,7 @@ public class UserService
     public bool IncreaseGoldSpent(int goldToGive)
     {
         if (!_userData.IsLoggedIn) return false;
-        UserStats newStats = new(_userStats.XP, _userStats.Gold, _userStats.GoldAcquired, _userStats.GoldSpent + goldToGive);
+        UserStats newStats = new(_userStats.XP, _userStats.GoldAcquired, _userStats.GoldSpent + goldToGive);
         _userData.UserStatsRef?.Set(newStats);
         return true;
     }
@@ -257,7 +274,7 @@ public class UserService
     public bool IncreaseGoldAcquired(int goldToGive)
     {
         if (!_userData.IsLoggedIn) return false;
-        UserStats newStats = new(_userStats.XP, _userStats.Gold, _userStats.GoldAcquired + goldToGive, _userStats.GoldSpent);
+        UserStats newStats = new(_userStats.XP, _userStats.GoldAcquired + goldToGive, _userStats.GoldSpent);
         _userData.UserStatsRef?.Set(newStats);
         return true;
     }
@@ -270,7 +287,6 @@ public class UserService
     {
         if (!_userData.IsLoggedIn) return false;
         this.GiveGold(-toBuy.Cost);
-        this.IncreaseGoldSpent(toBuy.Cost);
         UserInventory newInventory = _userInventory.AddItem(toBuy);
         _userData.UserInventoryRef?.Set(newInventory);
         return true;
@@ -285,7 +301,6 @@ public class UserService
     {
         if (!_userData.IsLoggedIn) return false;
         this.GiveGold(value);
-        this.IncreaseGoldSpent(value);
         UserInventory newInventory = _userInventory.RemoveItem(toSell);
         _userData.UserInventoryRef?.Set(newInventory);
         return true;

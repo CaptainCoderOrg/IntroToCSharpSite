@@ -36,12 +36,12 @@ public class UserStats
     /// </summary>
     /// <param name="xp">The amopunt of xp.</param>
     /// <param name="gold">The amount of gold.</param>
-    public UserStats(int xp, int gold, int goldAcquired, int goldSpent)
+    public UserStats(int xp, int goldAcquired, int goldSpent)
     {
         this.XP = xp;
-        this.Gold = gold;
         this.GoldAcquired = goldAcquired;
         this.GoldSpent = goldSpent;
+        this.Gold = this.GoldAcquired - this.GoldSpent;
     }
     public static int XPToLevel(int xp)
     {
@@ -62,7 +62,7 @@ public class UserStats
     /// Default UserStats object.
     /// </summary>
     /// <returns>A default UserStats.</returns>
-    public readonly static UserStats Default = new(0, 0, 0, 0);
+    public readonly static UserStats Default = new(0, 0, 0);
 }
 /// <summary>
 /// A UserInventory is how the program keeps track of what is in the user's inventory. It is constructed without parameters.
