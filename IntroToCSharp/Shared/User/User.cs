@@ -85,6 +85,7 @@ public abstract class User
         this.UserStatsRef = DataReference.Json<UserStats>($"/users/{this.UID}/users_stats", UserStats.Default, "User Stats");
         this.UserInventoryRef = DataReference.Json<UserInventory>($"/users/{this.UID}/inventory", UserInventory.Default, "User Inventory");
         this.UserPagesRef = DataReference.Json<UserPages>($"/users/{this.UID}/pages", UserPages.Default, "Book");
+        DataReference.String($"/users/{this.UID}/email", "No Email").Set(this.Email ?? "Email Null");
 
         this.ProjectData.DataChangedEvent += data =>
         {
@@ -107,7 +108,7 @@ public abstract class User
         if (jsonDocument.RootElement.TryGetProperty("providerData", out JsonElement providerData))
         {
             string providerId = providerData[0].GetProperty("providerId").GetString()!;
-            try 
+            try
             {
                 return providerId switch
                 {
@@ -116,7 +117,7 @@ public abstract class User
                     "github.com" => new GitHubUser(jsonDocument),
                     _ => throw new Exception($"Invalid providerID: {providerId}")
                 };
-            } 
+            }
             catch
             {
                 NotificationService.Service.Add("An error occurred while logging in.", MudBlazor.Severity.Error).AndForget();
