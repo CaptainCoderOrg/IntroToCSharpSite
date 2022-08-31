@@ -1,0 +1,24 @@
+<MudGrid Spacing=1>
+    @if (Icon != null) {
+        <MudIcon Icon="@Icon" Color="@IconColor"/>
+    }
+    <MudItem>
+        <MudText><b>@Name</b>:</MudText>
+    </MudItem>
+    <MudItem>
+        @ChildContent
+    </MudItem>
+</MudGrid>
+
+
+@code {
+    [Parameter, EditorRequired]
+    public string Name {get; set;} = null!;
+    [Parameter, EditorRequired]
+    public RenderFragment ChildContent {get; set;} = null!;
+    [Parameter]
+    public string? Icon {get; set;}
+    [Parameter]
+    public MudBlazor.Color IconColor {get; set;}
+
+}

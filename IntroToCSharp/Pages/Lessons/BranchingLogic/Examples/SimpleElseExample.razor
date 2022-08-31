@@ -1,0 +1,66 @@
+<ConditionalCodeStepper  SourceCode="@Code">
+    <CodeStep ID="BeforeStart" Line=-1>
+        <Explanation>
+            Use the <b>Next</b> and <b>Back</b> buttons below to explore how the
+            computer executes the code above.
+        </Explanation>
+    </CodeStep>
+    <CodeStep ID="First Line" Line=1>
+        <Explanation>
+            <InitializeExplanation Value="@("\"left\"")" VarName="direction"/>
+        </Explanation>
+    </CodeStep>
+    <CodeStep ID="Eval direction == right" Line=2>
+        <Explanation>
+            <EvalExpressionExplanation Expr="@("direction == \"right\"")" />
+        </Explanation>
+    </CodeStep>
+    <CodeStep ID="Read direction" Line=2 SubVarName="direction" SubValue="@("\"left\"")">
+        <Explanation>
+            <ReadVariableExplanation Name="direction" />
+        </Explanation>
+    </CodeStep>
+    <CodeStep ID="EqualityEval" Line=2 SubVarName="@("\"left\" == \"right\"")" SubValue="false">
+        <Explanation>
+            <EqualityEvalExplanation LeftValue="@("\"left\"")" RightValue="@("\"right\"")" />
+        </Explanation>
+    </CodeStep>
+    <CodeStep ID="IfFalse" Line=2>
+        <Explanation>
+            <IfStatementExplanation Conditional="false" />
+        </Explanation>
+    </CodeStep>
+
+    <CodeStep ID="DoElse" Line=6>
+        <Explanation>
+            <ElseExplanation/>
+        </Explanation>
+    </CodeStep>
+
+
+    <CodeStep ID="Display" Line=8 OutputLine="You take the path to the wrong.">
+        <Explanation>
+            <DisplayExplanation Output="You take the path to the wrong." />
+        </Explanation>
+    </CodeStep>
+
+    <CodeStep ID="End" Line=-1>
+        <Explanation>
+            There is no more code to execute and the program exits.
+        </Explanation>
+    </CodeStep>
+</ConditionalCodeStepper>
+
+@code {
+    private string Code = @"
+string direction = ""left"";
+if (direction == ""right"")
+{
+    Console.WriteLine(""You take the path to the right."");
+}
+else
+{
+    Console.WriteLine(""You take the path to the wrong."");
+}
+    ".Trim();
+}

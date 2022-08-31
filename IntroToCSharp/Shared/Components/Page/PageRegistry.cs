@@ -5,14 +5,24 @@ namespace CaptainCoder;
 /// <summary>
 /// The PageRegistry is a singleton object that maintains the items that
 /// appear in the NavMenu component. To add a page to the registry
-/// add a static PageRef field to a Page. The simplest way to 
+/// add a static PageRef field to a Page. The simplest way to
 /// add sections is to modify the constructor.
 /// </summary>
 public class PageRegistry
 {
 
     public static readonly PageRegistry Instance = new PageRegistry().Init();
+    public int TotalPages {get; private set;} = 0;
     private readonly Dictionary<string, MenuItem> _items = new ();
+    private readonly Dictionary<string, PageRef> _routes = new ();
+
+    public static PageRef? FromRoute(string route)
+    {
+        if (Instance._routes.TryGetValue(route, out PageRef page)) {
+            return page;
+        }
+        return null;
+    }
 
     private PageRegistry()
     {
@@ -22,9 +32,11 @@ public class PageRegistry
         AddSection("Lessons", order++);
         AddSection("Basics", "Lessons", order++);
         AddSection("Variables", "Lessons", order++);
-        AddSection("Challenges", order++);
-        AddSection("Journal", order++);
-        AddSection("Social", order++);
+        AddSection("Math", "Lessons", order++);
+        AddSection("Branching Logic", "Lessons", order++);
+        AddSection("Gauntlets", order++);
+        // AddSection("Journal", order++);
+        // AddSection("Social", order++);
     }
 
     private PageRegistry Init()
@@ -93,6 +105,8 @@ public class PageRegistry
         page.Parent = parent;
         parent.Children.Add(page);
         _items[p.Name] = page;
+        _routes[p.Href] = p;
+        if (p.IsAdventure) TotalPages++;
     }
 
     public IEnumerable<MenuItem> RootElements => _items.Values.Where(item => item.Parent == null).OrderBy(item => item.Order);
@@ -100,7 +114,7 @@ public class PageRegistry
 }
 
 /// <summary>
-/// A MenuItem represents the data necessary for an item to 
+/// A MenuItem represents the data necessary for an item to
 /// be rendered on the NavMenu.
 /// </summary>
 public class MenuItem : IComparable<MenuItem>
@@ -108,7 +122,6 @@ public class MenuItem : IComparable<MenuItem>
     private readonly string _name;
     private readonly string? _href;
     private readonly bool _isAdventure;
-
     private readonly List<MenuItem> _children = new ();
 
     public MenuItem(string name, string? href, int order, bool isAdventure, MenuItem? parent = null)
@@ -119,7 +132,6 @@ public class MenuItem : IComparable<MenuItem>
         this.Parent = parent;
         this._isAdventure = isAdventure;
     }
-
     public MenuItem? Parent { get; set; } = null;
     public List<MenuItem> Children {
         get {

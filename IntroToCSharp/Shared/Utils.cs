@@ -5,7 +5,7 @@ using MudBlazor;
 
 public static class Utils
 {
-    const string BadChars = ".#$[]";
+    const string BadChars = ".#$[]',!?";
     private static IJSRuntime? s_JS;
     private static ISnackbar? s_SnackBar;
     private static ILocalStorageService? s_LocalStorage;

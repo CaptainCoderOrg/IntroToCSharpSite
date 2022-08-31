@@ -11,11 +11,17 @@
 
     [Parameter]
     public PageRef? Page { get; set; } = null;
+    [Parameter]
+    public Action OnLoad { get; set; } = () => {return;};
+
+    [Parameter]
+    public Portrait? Portrait { get; set; } = null; 
     public bool IsAdded {get; set;} = false;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
         this.Parent.SetDialog(this, Index);
+        this.OnLoad.Invoke();
     }
 }

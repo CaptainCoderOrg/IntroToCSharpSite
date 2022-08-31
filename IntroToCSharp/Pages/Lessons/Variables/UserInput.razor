@@ -50,7 +50,7 @@
     <MudList Clickable="true">
         <MudListItem Icon="@Icons.Filled.Circle">Learn how to <b>declare</b> a <b>string variable</b></MudListItem>
         <MudListItem Icon="@Icons.Filled.Circle">Learn how to use the <b>assignment operator</b> (<Code>=</Code>) to store a <b>value</b> in a <b>variable</b></MudListItem>
-        <MudListItem Icon="@Icons.Filled.Circle">Learn how to use the <Code>Console.ReadLine</Code> <b>method</b> to read user input from the terminal</MudListItem>
+        <MudListItem Icon="@Icons.Filled.Circle">Learn how to use the <Code>Console.ReadLine</Code> <b>method</b> to read user input from the <b>terminal</b></MudListItem>
     </MudList>
 </Section>
 <Questions Title="Pre-Knowledge Check">
@@ -85,12 +85,12 @@
 <Section Title="Getting Started">
     <ConsoleProjectTask Name="Create Project">If you have not done so, create a new console project named "User Input"</ConsoleProjectTask>
     <Text>
-        C# provides many built in <Keyword Word="methods"/> that can be used to
+        <b>C#</b> provides many built in <Keyword Word="methods"/> that can be used to
         accomplish a variety of tasks. A <b>method</b> is a reusable piece of code.
         When you use a <b>method</b>, you say that
         you are "calling" the <b>method</b>. So far, you have called the
-        <Code>Console.WriteLine</Code> <b>method</b> to display text in the terminal.
-        Similarily, you can read text that is typed into the terminal by calling
+        <Code>Console.WriteLine</Code> <b>method</b> to display text in the <b>terminal</b>.
+        Similarily, you can read text that is typed into the <b>terminal</b> by calling
         the <Code>Console.ReadLine</Code> method.
     </Text>
     <TaskItem Name="FirstReadLine">Update your <Code>Program.cs</Code> with the code below:</TaskItem>
@@ -101,7 +101,7 @@ Console.WriteLine("Nice to meet you!");
     </CodeBlock>
     <TaskItem Name="RunProgram">Save and Run your program. <Code>dotnet run</Code></TaskItem>
     <Text>
-        If all went well, you will be prompted to enter your name in the terminal.
+        If all went well, you will be prompted to enter your name in the <b>terminal</b>.
     </Text>
     <Image Src="first-readline.png"/>
     <Text>
@@ -119,7 +119,7 @@ Console.WriteLine("Nice to meet you!");
         Before you can store a <b>value</b> in a <b>memory address</b>, you must first create
         a label by <b>declaring</b> a <b>variable</b>.
     </Text>
-    <Text>To declare a <b>variable</b> in C#, you specify a <b>type</b> and <b>variable name</b> together:</Text>
+    <Text>To declare a <b>variable</b> in <b>C#</b>, you specify a <b>type</b> and <b>variable name</b> together:</Text>
     <DeclareRecipe/>
     <Text><b>Example:</b></Text>
     <CodeBlock AllowCopy>string playerName;</CodeBlock>
@@ -291,41 +291,7 @@ Console.WriteLine("Nice to meet you, " + userName + "!");
 </Questions>
 
 <Section Title="Challenge: A Short Mad Take">
-    <Challenge Title="A Short Mad Take">
-        <Text>
-            Now that you know the basics for reading user input and storing it in a <b>variable</b>,
-            write a short Mad Take program which accepts two inputs from the user: a noun
-            and an adjective. Then, it should display the output to the user.
-            If you need help getting started, you can use the code below:
-        </Text>
-
-    <CodeBlock>
-Console.WriteLine("Welcome to Mad Takes!");
-string noun;
-Console.Write("Enter a noun: ");
-noun = Console.ReadLine()!;
-
-// TODO: Get an adjective
-
-Console.WriteLine("The " + noun + " is ...");
-    </CodeBlock>
-
-        <TaskList Name="AShortMadTake">
-            <TaskItem Name="Create a Console Program">Create a new Console Project</TaskItem>
-            <TaskItem Name="Display Welcome">Display a welcome message.</TaskItem>
-            <TaskItem Name="Declare noun">Declare a <b>string variable</b> to store a noun</TaskItem>
-            <TaskItem Name="Prompt noun">Prompt the user to enter a noun <Code>Console.Write("Enter a noun:");</Code></TaskItem>
-            <TaskItem Name="Read noun">Use <Code>Console.ReadLine</Code> to read user input</TaskItem>
-            <TaskItem Name="Assign noun">Use the <b>assignment operator</b> (<Code>=</Code>) to store the value entered in your <b>variable</b>.</TaskItem>
-            <TaskItem Name="Declare adjective">Declare a <b>string variable</b> to store an adjective</TaskItem>
-            <TaskItem Name="Prompt adjective">Prompt the user to enter an adjective <Code>Console.Write("Enter an adjective:");</Code></TaskItem>
-            <TaskItem Name="Read adjective">Use <Code>Console.ReadLine</Code> to read user input</TaskItem>
-            <TaskItem Name="Assign adjectie">Use the <b>assignment operator</b> (<Code>=</Code>) to store the value entered in your <b>variable</b>.</TaskItem>
-            <TaskItem Name="Display Result">Display a sentence to the user that combines the values entered.</TaskItem>
-            <TaskItem Name="Add More">(Optional) Be creative and add more user inputs</TaskItem>
-            <TaskItem Name="Share Program">Share your Mad Take with a friend</TaskItem>
-        </TaskList>
-    </Challenge>
+    <AShortMadTakeChallenge />
 </Section>
 
 <Section Title="What's Next?">
@@ -354,10 +320,13 @@ Console.WriteLine("The " + noun + " is ...");
                 <Text>
                     If you have not done so yet, now might be a good time to
                     take a deeper dive into understanding how <b>variables</b> work
-                    in C#. The <b>@VariableBasics.PageRef.Name</b> lesson should
+                    in <b>C#</b>. The <b>@VariableBasics.PageRef.Name</b> lesson should
                     help clarify some of the questions you might have about them.
                 </Text>
             </AdventureDialog>
+        </Item>
+        <Item>
+            <MarkFinishedDialog Page="UserInput.PageRef"/>
         </Item>
     </Adventure>
 </Section>

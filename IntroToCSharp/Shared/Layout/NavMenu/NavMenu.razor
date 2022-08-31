@@ -1,10 +1,10 @@
-﻿@inject IDialogService DialogService
+@inject IDialogService DialogService
 <MudDrawer @bind-Open="@Main.IsNavMenuOpen" Elevation="25" Variant="@DrawerVariant.Persistent" Style="position:fixed">
     <MudElement Style="@Style">
         <MudDrawerHeader Class="pr-4">
             <MudElement Class="d-flex flex-row justify-space-between" Style="width:100%">
                 <MudText Typo="Typo.h6">
-                    <a href="">Intro To C#</a>
+                    <a href="/">Adventures in C#</a>
                 </MudText>
                 <MudIconButton Class="pa-0" Icon="@Icons.Material.Outlined.ArrowCircleLeft" Color="Color.Inherit" OnClick="@Main.ToggleNavMenu"/>
             </MudElement>
@@ -12,7 +12,7 @@
         <MudNavMenu Bordered="true">
             @foreach (MenuItem item in MenuItems) {
                 if (!Filter.Contains(item)) continue;
-                <NavMenuItem Item="@item" Filter="@Filter"/>
+                <NavMenuItem Item="@item" Filter="@Filter" UserPages="_userPages"/>
             }
         </MudNavMenu>
     </MudElement>
@@ -20,14 +20,21 @@
     <!-- Inventory Button -->
     <MudElement Style="flex: 0 1" Class="mx-2">
         <MudStack>
+
+            @if (_isAdventureMode) {
+                <MudButton Style="margin-top:auto" Class="object-bottom" Variant="Variant.Filled"
+                    StartIcon="@Icons.Filled.LibraryBooks" Color="Color.Primary" OnClick="@(() => JournalDialog.Show(DialogService))">
+                    Journal
+                </MudButton>
+                <MudButton Style="margin-top:auto" Class="object-bottom" Variant="Variant.Filled"
+                StartIcon="@Icons.Filled.Inventory" Color="Color.Primary" Href="/inventory">Inventory</MudButton>
+            }
             <MudButton StartIcon="@Icons.Filled.Hiking" Color="Color.Primary" Variant="Variant.Filled" Class="pl-4 pr-0 pt-0 pb-0" OnClick="@(() => ToggleAdventureMode(!_isAdventureMode))">
                 <MudStack Row=true Class="pa-0 align-center rounded" Style="gap: 0">
                     <MudText Typo="Typo.button" Style="font-size:0.8rem">Adventure Mode</MudText>
                     <MudSwitch Disabled="@(!_isLoggedIn)" @bind-Checked="@IsAdventureMode" Class="ma-0 pa-0" Color="Color.Tertiary"/>
                 </MudStack>
             </MudButton>
-            <MudButton Style="margin-top:auto" Class="object-bottom" Variant="Variant.Filled"
-                StartIcon="@Icons.Filled.Inventory" Color="Color.Primary" Href="/inventory">Inventory</MudButton>
         </MudStack>
     </MudElement>
 </MudDrawer>
@@ -37,7 +44,7 @@
     [Parameter, EditorRequired]
     public MainLayout Main { get; set; } = null!;
     private string Style => $"height:calc(100vh - {BottomMenuOffset}px); overflow:scroll; overflow-y:auto";
-    private int BottomMenuOffset => 160 + (_isMobile ? 50 : 0);
+    private int BottomMenuOffset => 100 + (_isMobile ? 50 : 0) + (_isAdventureMode ? 100 : 0);
     private bool _isMobile = false;
     private bool _isAdventureMode = true;
     private bool IsAdventureMode { get => _isAdventureMode; set => ToggleAdventureMode(value); }

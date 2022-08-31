@@ -1,18 +1,30 @@
-<MultipleChoiceQuestion IsMultiSelect="false" Question="@Question" Explanation="" XP=5 GoldAward=25>
+<MultipleChoiceQuestion DBName="@DBName" IsMultiSelect="false" Question="@Question" XP=5 GoldAward=25>
+    @QuestionStatement
     @Block
     <MudGrid>
         @foreach (RenderFragment answer in this._answers)
         {
-            <MudItem sm="3">
+            <MudItem xs="6" sm="3">
                 @answer
             </MudItem>
         }
     </MudGrid>
+    @if (Explanation != null) {
+        <Explanation>
+            @Explanation
+        </Explanation>
+    }
 </MultipleChoiceQuestion>
 
 @code {
     [Parameter, EditorRequired]
     public string Question { get; set; } = String.Empty;
+    [Parameter]
+    public RenderFragment? Explanation { get; set; }
+    [Parameter]
+    public RenderFragment? QuestionStatement {get; set;}
+    [Parameter]
+    public string? DBName {get; set;}
     [Parameter, EditorRequired]
     public RenderFragment Block { get; set; } = null!;
     [Parameter, EditorRequired]

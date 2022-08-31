@@ -1,13 +1,13 @@
 @if (Item.Href == null) {
-    <MudNavGroup Title="@Item.Name">
+    <MudNavGroup Icon="@GroupIcon" IconColor="@IconColor" Title="@Item.Name" @bind-Expanded="@IsExpanded">
         @foreach(MenuItem item in Item.Children) {
             if (!Filter.Contains(item)) continue;
-            <NavMenuItem Item="@item" Filter="@Filter"/>
+            <NavMenuItem Item="@item" Filter="@Filter" UserPages="UserPages"/>
         }
     </MudNavGroup>
 }
 else {
-    <MudNavLink Href="@Item.Href">@Item.Name</MudNavLink>
+    <MudNavLink Href="@Item.Href" Icon="@Icon" IconColor="@IconColor">@Item.Name</MudNavLink>
 }
 
 @code {
@@ -15,4 +15,30 @@ else {
     public MenuItem Item { get; set; } = null!;
     [Parameter, EditorRequired]
     public HashSet<MenuItem> Filter { get; set; } = null!;
+    [Parameter, EditorRequired]
+    public UserPages UserPages { get; set; } = null!;
+    private PageStatus Status => UserPages.GetStatus(Item);
+    private bool IsExpanded { get; set; }
+    private string? Icon => GetIcon();
+    private MudBlazor.Color IconColor => GetIconColor();
+    private string? GroupIcon => IsExpanded ? null : Icon;
+
+    private MudBlazor.Color GetIconColor() {
+        return Status switch {
+            PageStatus.New => Color.Success,
+            PageStatus.Started => Color.Default,
+            PageStatus.Complete => Color.Success,
+            _ => Color.Default
+        };
+    }
+
+    private string? GetIcon() {
+        return Status switch {
+            PageStatus.New => Icons.Filled.Hiking,
+            PageStatus.Started => Icons.Filled.Hiking,
+            PageStatus.Complete => Icons.Outlined.CheckCircle,
+            _ => null
+        };
+    }
+
 }

@@ -129,6 +129,41 @@ public class UserService
         }
     }
 
+    public DataReference<bool>? GetAdventureActivityReference(IAdventureActivity activity)
+    {
+        if (!_userData.IsLoggedIn) return null;
+        return DataReference.Bool($"/users/{_userData.UID}/adventure-activity/{activity.DBName}");
+    }
+
+    /// <summary>
+    /// Given a relative path for the logged in user, saves the specified
+    /// data as a JSON object. If the object cannot be converted to JSON,
+    /// this method will fail.
+    /// </summary>
+    public void SaveJsonData<T>(string path, T data)
+    {
+        if (_userData.IsLoggedIn)
+        {
+            DataReference<T> reference = DataReference.Json<T>($"/users/{_userData.UID}/{path}");
+            reference.Set(data);
+        }
+    }
+
+    /// <summary>
+    /// Given a relative path for the logged in user, retrieves a
+    /// DataReference to an object in the database at that path.
+    /// If the user is not logged in, this method returns null.
+    /// </summary>
+    public DataReference<T>? GetJsonDataReference<T>(string path, string? niceName = null)
+    {
+        if (_userData.IsLoggedIn)
+        {
+            DataReference<T> reference = DataReference.Json<T>($"/users/{_userData.UID}/{path}", default, niceName);
+            return reference;
+        }
+        return null;
+    }
+
     /// <summary>
     /// Given a relative path for the logged in user, saves the specified
     /// data as a JSON object. If the object cannot be converted to JSON,
@@ -209,8 +244,9 @@ public class UserService
 
     public bool GiveXPAndGold(int xpToGive, int goldToGive)
     {
-        if (!_userData.IsLoggedIn) return false;
-        UserStats newStats = new(_userStats.XP + xpToGive, _userStats.Gold + goldToGive);
+        int goldAcquired = _userStats.GoldAcquired + Math.Max(0, goldToGive);
+        int goldSpent = _userStats.GoldAcquired + Math.Min(0, goldToGive);
+        UserStats newStats = new(_userStats.XP + xpToGive, _userStats.GoldAcquired + goldToGive, _userStats.GoldSpent);
         _userData.UserStatsRef?.Set(newStats);
         return true;
     }
@@ -261,9 +297,26 @@ public class UserService
     public bool AddPage(PageRef toAdd)
     {
         if (!_userData.IsLoggedIn) return false;
-        if (_userPages.Contains(toAdd)) return false;
         if (_userData.UserPagesRef == null) return false;
         _userPages.AddPage(toAdd.Name, PageStatus.New);
+        _userData.UserPagesRef.Set(_userPages);
+        return true;
+    }
+
+    public bool UpdatePage(PageRef toUpdate, PageStatus newStatus)
+    {
+        if (!_userData.IsLoggedIn) return false;
+        if (_userData.UserPagesRef == null) return false;
+        _userPages.AddPage(toUpdate.Name, newStatus);
+        _userData.UserPagesRef.Set(_userPages);
+        return true;
+    }
+
+    public bool ResetBook()
+    {
+        if (!_userData.IsLoggedIn) return false;
+        if (_userData.UserPagesRef == null) return false;
+        _userPages = UserPages.Default;
         _userData.UserPagesRef.Set(_userPages);
         return true;
     }

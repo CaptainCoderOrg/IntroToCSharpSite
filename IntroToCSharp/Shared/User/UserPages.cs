@@ -15,7 +15,20 @@ public class UserPages
         return pages;
     }
 
+    // Note: this field must be public to be saved.
     public Dictionary<string, PageStatus> Pages { get; set; } = new ();
+    [JsonIgnore]
+    public int Discovered => Pages.Values.Where(s => s != PageStatus.Undiscovered).Count();
+    [JsonIgnore]
+    public int Completed => Pages.Values.Where(s => s == PageStatus.Complete).Count();
+
+    public int GetDiscovered()
+    {
+        Console.WriteLine($"Discovering Pages: {Pages.Count}");
+        Console.WriteLine(string.Join(", ", Pages.Values));
+        Console.WriteLine(string.Join(", ", Pages.Keys));
+        return Discovered;
+    }
 
     public bool Contains(MenuItem item) {
         if (Pages.ContainsKey(item.Name)) return true;
@@ -26,6 +39,29 @@ public class UserPages
         return false;
     }
 
+    public PageStatus GetStatus(MenuItem item) {
+        if (this.Pages.TryGetValue(item.Name, out PageStatus status)) return status;
+        return FindStatus(item);
+    }
+
+    public PageStatus GetStatus(PageRef page) {
+        if (this.Pages.TryGetValue(page.Name, out PageStatus status)) return status;
+        return PageStatus.Undiscovered;
+    }
+
+    private PageStatus FindStatus(MenuItem item) {
+        HashSet<PageStatus> statuses = new ();
+        statuses.Add(PageStatus.Undiscovered);
+        foreach (MenuItem child in item.Children)
+        {
+            statuses.Add(GetStatus(child));
+        }
+        if (statuses.Contains(PageStatus.New)) return PageStatus.New;
+        if (statuses.Contains(PageStatus.Started)) return PageStatus.Started;
+        if (statuses.Contains(PageStatus.Complete)) return PageStatus.Complete;
+        return PageStatus.Undiscovered;
+    }
+
     public bool Contains(PageRef pageRef) => Pages.ContainsKey(pageRef.Name);
 
     public void AddPage(string name, PageStatus status) => this.Pages[name] = status;
@@ -33,6 +69,7 @@ public class UserPages
 
 public enum PageStatus
 {
+    Undiscovered,
     Complete,
     Started,
     New

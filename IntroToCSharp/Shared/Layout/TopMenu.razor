@@ -10,17 +10,13 @@
     <MudSpacer />
     @if (UserData.IsLoggedIn)
     {
+
         <Gold />
         <ExperienceBar />
-        <MudElement>@UserData.DisplayName </MudElement>
-        <MudMenu>
-            <ActivatorContent>
-                <MudAvatar Class="ml-4" Color="Color.Secondary">@UserData.AvatarLetter</MudAvatar>
-            </ActivatorContent>
-            <ChildContent>
-                <MudMenuItem OnClick="@UserService.Service.Logout">Logout</MudMenuItem>
-            </ChildContent>
-        </MudMenu>
+        <MudElement Class="hidden-mobile">@UserData.DisplayName </MudElement>
+        <MudButton OnClick="@(() => JournalDialog.Show(DialogService))">
+            <MudAvatar Color="Color.Secondary" OnClick>@UserData.AvatarLetter</MudAvatar>
+        </MudButton>
     }
     else
     {
