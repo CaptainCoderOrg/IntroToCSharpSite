@@ -103,68 +103,6 @@ pre {
 .mud-list-item-icon {
     min-width: 0 !important;
     padding-right: 16px !important;
-<<<<<<< .merge_file_a11516
-}
-
-.clickable-image {
-    display: block;
-    margin: auto;
-    max-width: 100%;
-    max-height: 300px;
-    box-shadow: 2px 2px 10px black;
-}
-
-.clickable-image:hover {
-    box-shadow: 3px 3px 10px black;
-    cursor: pointer;
-}
-
-.fade-in {
-    animation: fadeIn 1s;
-}
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-||||||| .merge_file_a03992
-=======
-}
-
-.clickable-image {
-    display: block;
-    margin: auto;
-    max-width: 100%;
-    max-height: 300px;
-    box-shadow: 2px 2px 10px black;
-}
-
-.clickable-image:hover {
-    box-shadow: 3px 3px 10px black;
-    cursor: pointer;
-}
-
-.fade-in {
-    animation: fadeIn 1s;
-}
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-@media (max-width: 512px) {
-    .hidden-mobile {
-        display: none;
-    }
->>>>>>> .merge_file_a08728
 }
 
 .clickable-image {

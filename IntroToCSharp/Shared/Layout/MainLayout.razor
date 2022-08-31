@@ -26,7 +26,7 @@
             <Nix MinHeight="350px" OnClose="@ToggleConsole" />
         </BottomContent>
     </SplitPane>
-    
+
 </MudDrawerContainer>
 @code
 {
@@ -113,7 +113,7 @@
                 bool systemPref = await _mudThemeProvider!.GetSystemPreference();
                 await localStorage.SetItemAsync<bool>("DarkMode", systemPref);
             }
-            IsDarkMode = await localStorage.GetItemAsync<bool>("DarkMode");                
+            IsDarkMode = await localStorage.GetItemAsync<bool>("DarkMode");
         }
     }
     public void ToggleNavMenu() => IsNavMenuOpen = !IsNavMenuOpen;
