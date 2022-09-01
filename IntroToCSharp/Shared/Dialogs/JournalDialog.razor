@@ -18,7 +18,7 @@
 </MudDialog>
 @code {
     [CascadingParameter] MudDialogInstance? MudDialog { get; set; }
-    private int PagesDiscovered => _userPages.GetDiscovered();
+    private int PagesDiscovered => _userPages.Discovered;
     private int TotalPages => PageRegistry.Instance.TotalPages;
     private int PagesComplete => _userPages.Completed;
 

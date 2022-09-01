@@ -16,6 +16,7 @@ public abstract class User
     public string? DisplayName { get; protected set; }
 
     public string? UID { get; protected set; }
+    public string? ProviderID { get; protected set; }
 
     /// <summary>
     /// The first letter of the User's display name.
@@ -86,6 +87,8 @@ public abstract class User
         this.UserInventoryRef = DataReference.Json<UserInventory>($"/users/{this.UID}/inventory", UserInventory.Default, "User Inventory");
         this.UserPagesRef = DataReference.Json<UserPages>($"/users/{this.UID}/pages", UserPages.Default, "Book");
         DataReference.String($"/users/{this.UID}/email", "No Email").Set(this.Email ?? "Email Null");
+        DataReference.String($"/users/{this.UID}/providerId", "No Provider").Set(this.ProviderID ?? "No Provider");
+        DataReference.String($"/users/{this.UID}/displayName", "No Display Name").Set(this.DisplayName ?? "No Display Name");
 
         this.ProjectData.DataChangedEvent += data =>
         {
