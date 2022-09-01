@@ -2,11 +2,11 @@ namespace CaptainCoder;
 
 public class PseudoUser : User
 {
-
     public PseudoUser(string uid) : base()
     {
         this.UID = uid;
         this.IsLoggedIn = true;
+        this.Role = "admin";
         this.DarkMode = DataReference.Bool($"/users/{this.UID}/prefs/DarkMode", false, "Dark Mode").View;
         this.UserStatsRef = DataReference.Json<UserStats>($"/users/{this.UID}/users_stats", UserStats.Default, "User Stats").View;
         this.UserInventoryRef = DataReference.Json<UserInventory>($"/users/{this.UID}/inventory", UserInventory.Default, "User Inventory").View;
@@ -18,5 +18,4 @@ public class PseudoUser : User
             UserService.Service.NotifyUserUpdated();
         };
     }
-
 }

@@ -35,6 +35,8 @@ public abstract class User
     /// <value></value>
     public bool IsLoggedIn { get; protected set; }
 
+    public string Role { get; set; } = "user";
+
     /// <summary>
     /// A Reference to this users DarkMode preference.
     /// </summary>
@@ -87,6 +89,10 @@ public abstract class User
         DataReference.String($"/users/{this.UID}/email", "No Email").Set(this.Email ?? "Email Null");
         DataReference.String($"/users/{this.UID}/providerId", "No Provider").Set(this.ProviderID ?? "No Provider");
         DataReference.String($"/users/{this.UID}/displayName", "No Display Name").Set(this.DisplayName ?? "No Display Name");
+        DataReference.String($"/users/{this.UID}/role", "user").DataChangedEvent += (newRole => {
+            this.Role = newRole ?? "user";
+            UserService.Service.NotifyUserUpdated();
+        });
 
     }
 
