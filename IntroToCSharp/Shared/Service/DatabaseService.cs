@@ -17,6 +17,7 @@ public class DatabaseService
     /// Retrieves the DatabaseService
     /// </summary>
     public static DatabaseService Service { get; } = new DatabaseService();
+    internal List<UserInfo>? _userInfo = null;
     private IJSRuntime? JS;
 
     /// <summary>
@@ -83,5 +84,54 @@ public class DatabaseService
         object[] args = { path, DotNetObjectReference.Create(handler) };
         var JS = await GetRuntime();
         await JS.InvokeVoidAsync("refDatabase", args);
+    }
+
+    /// <summary>
+    /// Queries the database specifically for ALL user info. This
+    /// happens exactly once and the data is cached. Multiple calls
+    /// to this method will not query the database a second time.
+    /// </summary>
+    public async Task GetUserInfo(Action<List<UserInfo>> callback)
+    {
+        if (_userInfo != null)
+        {
+            callback(_userInfo);
+            return;
+        }
+        IChangeHandler handler = new UserInfoHandler(callback);
+        object[] args = { "/users", DotNetObjectReference.Create(handler) };
+        var JS = await GetRuntime();
+        await JS.InvokeVoidAsync("getDatabase", args);
+    }
+}
+
+internal class UserInfoHandler : IChangeHandler
+{
+    private Action<List<UserInfo>> callback;
+
+    internal UserInfoHandler(Action<List<UserInfo>> callback)
+    {
+        this.callback = callback;
+    }
+    [JSInvokable]
+    public void OnChange(string result)
+    {
+        List<UserInfo> data = new ();
+        var jsonDocument = JsonDocument.Parse(result);
+        foreach(var el in jsonDocument.RootElement.EnumerateObject())
+        {
+            if (el.Value.TryGetProperty("email", out JsonElement email)) {
+                data.Add(new UserInfo(el.Name, email.GetString()!));
+            }
+        }
+        data.Sort((a, b) => a.Email.CompareTo(b.Email));
+        DatabaseService.Service._userInfo = data;
+        callback(DatabaseService.Service._userInfo);
+    }
+
+    [JSInvokable]
+    public void OnException(string exception)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -1,7 +1,7 @@
 ﻿@inject IDialogService DialogService
 <MudDrawer @bind-Open="@Main.IsNavMenuOpen" Elevation="25" Variant="@DrawerVariant.Persistent" Style="position:fixed">
     <MudElement Style="@Style">
-        <MudDrawerHeader Class="pr-4">
+        <MudDrawerHeader Class="pr-4" Style="@(UserData.Role == "admin" ? "margin-bottom:-40px;" : "")">
             <MudElement Class="d-flex flex-row justify-space-between" Style="width:100%">
                 <MudText Typo="Typo.h6">
                     <a href="/">Adventures in C#</a>
@@ -9,6 +9,15 @@
                 <MudIconButton Class="pa-0" Icon="@Icons.Material.Outlined.ArrowCircleLeft" Color="Color.Inherit" OnClick="@Main.ToggleNavMenu"/>
             </MudElement>
         </MudDrawerHeader>
+        @if (UserData.Role == "admin") {
+            <MudSelect @bind-Value="PseudoUserId" Style="scale:.8;" Placeholder="Change User View" >
+                <MudSelectItem Value="@(string.Empty)" >User View Off</MudSelectItem>
+                @foreach (UserInfo userInfo in UserInfo) {
+                    <MudSelectItem Value="@userInfo.UID">@userInfo.Email</MudSelectItem>
+                }
+            </MudSelect>
+            <MudSpacer/>
+        }
         <MudNavMenu Bordered="true">
             @foreach (MenuItem item in MenuItems) {
                 if (!Filter.Contains(item)) continue;
@@ -50,6 +59,21 @@
     private bool IsAdventureMode { get => _isAdventureMode; set => ToggleAdventureMode(value); }
     private bool _isLoggedIn = false;
     private UserPages _userPages = UserPages.Default;
+    private User UserData = User.NoUser;
+    private List<UserInfo>? _userInfo = null;
+    private List<UserInfo> UserInfo {
+        get {
+            if (_userInfo != null) return _userInfo;
+            DatabaseService.Service.GetUserInfo(SetUserInfo).AndForget();
+            return new ();
+        }
+    }
+
+    private void SetUserInfo(List<UserInfo> userInfo)
+    {
+        this._userInfo = userInfo;
+        StateHasChanged();
+    }
 
     private void ToggleAdventureMode(bool value) {
         if (!_isLoggedIn)
@@ -95,6 +119,7 @@
 
     private void OnUserChange(User? newUser)
     {
+        UserData = newUser ?? User.NoUser;
         if (newUser == null || !newUser.IsLoggedIn || newUser.UserPagesRef == null)
         {
             _isLoggedIn = false;
@@ -113,5 +138,26 @@
     {
         this._userPages = newPages;
         StateHasChanged();
+    }
+
+    private string? _pseudoUser = null;
+    public string? PseudoUserId {
+        get => _pseudoUser;
+        set {
+            _pseudoUser = value;
+            Pseudo();
+        }
+    }
+
+    private void Pseudo() {
+        if (_pseudoUser == null || _pseudoUser == string.Empty) UnPseudo();
+        else
+        {
+            UserService.Service.LoginAsPsuedoUser(_pseudoUser);
+        }
+    }
+
+    private void UnPseudo() {
+        UserService.Service.LogoutFromPsuedoUser();
     }
 }
