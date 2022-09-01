@@ -54,7 +54,23 @@ public class UserService
         }
     }
 
+    public void NotifyUserUpdated() => UserChangedEvent?.Invoke(UserData);
+
+    private User? _originalUser;
+
     private UserService() { }
+
+    public void LoginAsPsuedoUser(string uid)
+    {
+        _originalUser = _userData;
+        UserData = new PseudoUser(uid);
+    }
+
+    public void LogoutFromPsuedoUser()
+    {
+        if (UserData.GetType() != typeof(PseudoUser)) return;
+        UserData = _originalUser ?? User.NoUser;
+    }
 
     private void SetRuntime(IJSRuntime runtime)
     {
