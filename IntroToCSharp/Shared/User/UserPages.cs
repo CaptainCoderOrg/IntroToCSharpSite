@@ -22,14 +22,6 @@ public class UserPages
     [JsonIgnore]
     public int Completed => Pages.Values.Where(s => s == PageStatus.Complete).Count();
 
-    public int GetDiscovered()
-    {
-        Console.WriteLine($"Discovering Pages: {Pages.Count}");
-        Console.WriteLine(string.Join(", ", Pages.Values));
-        Console.WriteLine(string.Join(", ", Pages.Keys));
-        return Discovered;
-    }
-
     public bool Contains(MenuItem item) {
         if (Pages.ContainsKey(item.Name)) return true;
         foreach (MenuItem child in item.Children)
