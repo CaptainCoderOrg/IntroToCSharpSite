@@ -1,6 +1,6 @@
 <ActivityStep
     ClaimName="Challenge"
-    Title="@($"Challenge: {Title}")"
+    Title="@($"{Checker(Type)}: {Title}")"
     Gold="@Gold"
     XP="@XP"
     DBName="@DBName"
@@ -24,4 +24,19 @@
     public int Gold {get; set;} = 100;
     [Parameter]
     public int XP {get; set;} = 25;
+
+    [Parameter]
+    public string Type {get; set;} = String.Empty;
+
+    public string Checker(string Type)
+    {
+        if(Type == String.Empty)
+        {
+            return Type = "Challenge";
+        }
+        else
+        {
+            return Type;
+        }
+    }
 }
