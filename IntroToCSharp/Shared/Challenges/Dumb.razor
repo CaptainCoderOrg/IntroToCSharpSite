@@ -1,0 +1,16 @@
+@inherits ActivityStep
+
+@{
+    base.BuildRenderTree(__builder);
+}
+
+@code {
+    public override string ActivityType {get => "challenge"; set {}}
+
+        protected override void Claim()
+        {
+            base.Claim();
+            // TODO: Also give Item
+        }
+
+}

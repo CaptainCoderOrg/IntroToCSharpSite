@@ -3,6 +3,7 @@
     Title="@($"Challenge: {Title}")"
     Gold="@Gold"
     XP="@XP"
+    ChestReward ="@ChestReward"
     DBName="@DBName"
     ActivityType="challenge">
     @ChildContent
@@ -12,6 +13,7 @@
     [Parameter, EditorRequired]
     public RenderFragment ChildContent {get; set;} = null!;
     private string? _dbName = null;
+
     [Parameter]
     public string DBName
     {
@@ -24,4 +26,8 @@
     public int Gold {get; set;} = 100;
     [Parameter]
     public int XP {get; set;} = 25;
+
+    [Parameter]
+    public StoreItem? ChestReward {get; set;} = new StoreItem("Axe", "Weapons", "Axes", 1000, "A simple, but effective axe.",
+        "/imgs/store/weapons/axe.png");
 }

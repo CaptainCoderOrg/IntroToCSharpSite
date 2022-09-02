@@ -8,7 +8,29 @@
     </MudItem>
 
     } else {
-    @if (Gold > 0)
+    @if (XP > 0)
+    {
+        <MudItem>
+            <MudPaper Class="pa-2 border-solid border-2 mud-border-success rounded-pill" Elevation="0" MinWidth="70px"
+            MaxHeight="44px">
+                <MudText Typo="Typo.body1" Color="Color.Tertiary"><b>XP: @XP</b></MudText>
+            </MudPaper>
+        </MudItem>
+
+    }
+    @if (HasChest)
+    {
+        <MudItem>
+            <MudPaper Class="pt-1 pl-3 pb-1 pr-3 border-solid border-2 rounded-pill" Style="border-color: #fec426"
+            Elevation="0" MinWidth="20px" MaxHeight="44px">
+                <MudText Style="color:#fec426" Typo="Typo.body1">
+                    <MudImage Src="/imgs/store/ClosedChest.jpg" Width="20" Height="20"
+                    Style="display: inline; top:5px; position:relative;"></MudImage>
+                </MudText>
+            </MudPaper>
+        </MudItem>
+    }
+    else if(Gold > 0)
     {
         <MudItem>
             <MudPaper Class="pt-1 pl-2 pb-1 pr-3 border-solid border-2 rounded-pill" Style="border-color: #fec426"
@@ -19,17 +41,6 @@
                 </MudText>
             </MudPaper>
         </MudItem>
-
-    }
-    @if (XP > 0)
-    {
-        <MudItem>
-            <MudPaper Class="pa-2 border-solid border-2 mud-border-success rounded-pill" Elevation="0" MinWidth="70px"
-            MaxHeight="44px">
-                <MudText Typo="Typo.body1" Color="Color.Tertiary"><b>XP: @XP</b></MudText>
-            </MudPaper>
-        </MudItem>
-
     }
     }
 </MudGrid>
@@ -43,4 +54,7 @@
 
     [Parameter, EditorRequired]
     public bool IsComplete { get; set; } = false;
+
+    [Parameter]
+    public bool HasChest {get; set;} = false;
 }

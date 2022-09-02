@@ -6,7 +6,7 @@
                     <MudText Typo="Typo.h6">@Title</MudText>
             </MudItem>
             <MudItem xs=6>
-                <Reward Gold="Gold" XP="XP" IsComplete="@IsClaimed"/>
+                <Reward Gold="Gold" XP="XP" IsComplete="@IsClaimed" HasChest="@(ChestReward != null)"/>
             </MudItem>
         </MudGrid>
         <MudElement>
@@ -27,7 +27,7 @@
     public RenderFragment ChildContent {get; set;} = null!;
     private string? _dbName = null;
     [Parameter, EditorRequired]
-    public string ActivityType {get; set;} = "activity-step";
+    public virtual string ActivityType {get; set;} = "activity-step";
     [Parameter]
     public string DBName
     {
@@ -40,6 +40,9 @@
     public int Gold {get; set;} = 100;
     [Parameter]
     public int XP {get; set;} = 15;
+    [Parameter]
+    public StoreItem? ChestReward {get; set;} = null;
+
     public bool IsComplete => AdventureTasks.Where(task => !task.IsComplete).Count() == 0;
     private bool IsClaimed => DBRef == null ? false : _isClaimed;
     private bool _isClaimed = false;
@@ -49,13 +52,17 @@
     private readonly HashSet<IAdventureTask> AdventureTasks = new ();
     private DataReference<bool>? DBRef = null;
 
-    private void Claim()
+    protected virtual void Claim()
     {
         if (DBRef == null) return;
         if (_isClaimed == true) return;
         DBRef?.Set(true);
         _isClaimed = true;
         UserService.Service.GiveXPAndGold(XP, Gold);
+        if(ChestReward != null)
+        {
+            UserService.Service.GiveItem(ChestReward);
+        }
     }
 
     public void AddTask(IAdventureTask task) {
