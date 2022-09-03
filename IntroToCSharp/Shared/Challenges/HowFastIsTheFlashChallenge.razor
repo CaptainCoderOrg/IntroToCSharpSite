@@ -1,4 +1,4 @@
-<Challenge Title="How Fast is the Flash?" Gold="250" XP="50">
+<Challenge Title="How Fast is the Flash?" Gold="250" XP="50" ChestReward="@ChestReward">
     <Text>
         In this challenge you will update your Circle Analyzer program to calculate how fast the
         flash can run around the Earth. To do this you will need to determine the circumference
@@ -20,3 +20,9 @@
     <Question Spoiler="Approximately 10 hours" Text="How long would it take the Flash to circumnavigate the Earth?"/>
 
 </Challenge>
+
+@code
+{
+    StoreItem ChestReward = new StoreItem("Axe", "Weapons", "Axes", 1000, "A simple, but effective axe.",
+        "/imgs/store/weapons/axe.png");
+}

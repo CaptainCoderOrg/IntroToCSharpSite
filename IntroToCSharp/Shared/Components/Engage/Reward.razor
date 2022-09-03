@@ -1,3 +1,5 @@
+@inject IDialogService DialogService
+
 <MudGrid Spacing=1 Justify="Justify.FlexEnd">
     @if (IsComplete) {
     <MudItem>
@@ -18,15 +20,14 @@
         </MudItem>
 
     }
-    @if (HasChest)
+    @if (ChestReward != null)
     {
         <MudItem>
             <MudPaper Class="pt-1 pl-3 pb-1 pr-3 border-solid border-2 rounded-pill" Style="border-color: #fec426"
             Elevation="0" MinWidth="20px" MaxHeight="44px">
-                <MudText Style="color:#fec426" Typo="Typo.body1">
-                    <MudImage Src="/imgs/store/ClosedChest.jpg" Width="20" Height="20"
-                    Style="display: inline; top:5px; position:relative;"></MudImage>
-                </MudText>
+                <MudButton @onclick="DisplayChestReward">
+                    <MudImage Src="/imgs/store/ClosedChest.jpg" Width="20" Height="20"></MudImage>
+                </MudButton>
             </MudPaper>
         </MudItem>
     }
@@ -56,5 +57,14 @@
     public bool IsComplete { get; set; } = false;
 
     [Parameter]
-    public bool HasChest {get; set;} = false;
+    public StoreItem? ChestReward {get; set;} = null;
+    
+    public void DisplayChestReward()
+    {
+        var options = new DialogOptions { CloseOnEscapeKey = true };
+        var parameters = new DialogParameters();
+        parameters.Add("ChestReward", ChestReward);
+        parameters.Add("Gold", Gold);
+        DialogService.Show<ChestRewardDialog>("Chest Reward", parameters, options);
+    }
 }

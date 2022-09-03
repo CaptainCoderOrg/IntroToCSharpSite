@@ -1,0 +1,35 @@
+@inject IDialogService DialogService
+
+<MudDialog>
+    <DialogContent>
+        @if(@Gold >0)
+        {
+            <MudPaper>
+            <MudImage Class="pt-2 pl-2" Style="max-width: 40px;" Src=/imgs/top-menu/coin.png/> @Gold <br>
+            </MudPaper>
+        }
+        <MudPaper Class="border-style: solid border-2 mud-border-primary pa-4" Style="background-color: #f5deb3; text-align:center;">
+        <h3>@ChestReward?.Name</h3>
+        @ChestReward?.Description
+        <MudImage Src=@ChestReward?.Image />
+        </MudPaper>
+        <MudPaper>
+       </MudPaper>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Success" OnClick="@Exit" Variant="Variant.Filled">Ok</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+
+     [CascadingParameter] MudDialogInstance? MudDialog { get; set; }
+
+    [Parameter]
+    public StoreItem? ChestReward {get; set;} = null;
+    
+    [Parameter]
+    public int Gold {get; set;} = 0;
+    private void Exit() => MudDialog?.Close(DialogResult.Ok(true));
+
+}
