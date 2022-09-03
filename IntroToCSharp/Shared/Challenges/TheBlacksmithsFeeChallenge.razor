@@ -1,0 +1,28 @@
+<Challenge Title="The Blacksmith's Fee" Gold="150" XP="20">
+    <Adventure Portrait="Portraits.Guard">
+        <Item>
+            <AdventureDialog>
+                Greetings adventurer! I'm Garret the Blacksmith and I always
+                have trouble calculating how much gold to charge my customers
+                for repairs. The amount I charge is a percentage of the item's
+                value. I need to be able to enter both the item's value and the
+                percentage I will charge based on the difficulty of the work.
+                Could you help me out with one of those fancy programs? I would
+                reward you handsomely!
+            </AdventureDialog>
+        </Item>
+    </Adventure>
+    <Text>Write a program for Garret that does the following:</Text>
+    <TaskItem Name="Display Welcome">Displays a Welcome Message to Garret</TaskItem>
+    <TaskItem Name="Prompt for Value">Prompt Garret to enter the value in gold (<b>int</b>) of the item being repaired.</TaskItem>
+    <TaskItem Name="Prompt for Percentage">Prompt Garret to enter the percentage he will charge (<b>double</b>).</TaskItem>
+    <Note>
+        Garret wears blacksmith gloves which makes typing difficult. Be sure to
+        use the <Code>TryParse</Code> <b>method</b> to ensure the program doesn't
+        crash.
+    </Note>
+    <TaskItem Name="Report Errors and Default Values">If Garret enters an invalid input, display a message informing him that a default value will be used.</TaskItem>
+    <TaskItem Name="Highlight Errors">Make the error messages stand out by using console colors.</TaskItem>
+    <TaskItem Name="Calculate Cost">Calculate the cost (<b>int</b>) of the repair: (<Code>itemValue * (percent/100)</Code>)</TaskItem>
+    <TaskItem Name="Display Cost">Display the cost to Garret informing him how much he should charge</TaskItem>
+</Challenge>

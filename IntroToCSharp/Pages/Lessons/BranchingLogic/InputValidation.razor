@@ -1,0 +1,224 @@
+@inherits CaptainCoder.Page
+@page "/lessons/branching-logic/simple-input-validation"
+
+<Title>Simple Input Validation</Title>
+
+<Section Title="Introduction">
+    <Adventure Portrait="Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog Page="UserInput.PageRef">
+                In many of the programs you've written thus far, you have made
+                use of the <Code>Console.ReadLine</Code> <b>method</b> to allow
+                the user to provide input. However, as you may have already
+                experienced, it is possible for the user's input to not match
+                exactly the format that is expected. For example, if you prompt
+                the user to enter an <b>int</b> but they enter
+                <Code>"one"</Code>, the program crashes with an ugly error
+                message.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog>
+                In this lesson, you will learn how to use the
+                <Code>TryParse</Code> <b>method</b> to validate the users input
+                and report meaningful error messages when the user's input is
+                not valid. Additionally, you will learn to use several utility
+                <b>methods</b> provided by a <b>string</b> to allow for small
+                deviations in the user's input.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="IfStatements.PageRef">
+                Before starting this lesson, you should be comfortable using
+                <b>if</b> and <b>else statements</b> to create <b>decision trees</b>
+                in your programs. If you need a refresher, be sure to check out
+                the <b>@IfStatements.PageRef.Name</b> lesson.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="PersonalityQuiz.PageRef">
+                If you feel you need more practice with <b>if</b>,
+                <b>else-if</b>, and <b>else statements</b>, the
+                <b>@PersonalityQuiz.PageRef.Name</b> activity is a fun way to
+                level up your skills before starting this lesson.
+            </AdventureDialog>
+        </Item>
+    </Adventure>
+</Section>
+
+<Section Title="Exploration: A Bad Input">
+    <ABadInputExploration/>
+</Section>
+
+<Section Title="Checking for Edge Cases with the TryParse method">
+    <Text>
+        When parsing user input from the terminal, the computer has no control
+        over what the user might enter as input. A <b>value</b> that is
+        not expected but is technically possible is called an <b>edge
+        case</b>.
+
+        Whether the user is nefarious or simply makes a mistake, it is the
+        programmer's responsibility to think about how to handle
+        possible <b>edge cases</b> when reading user input.
+    </Text>
+    <Text>
+        The problem of validating user input when <b>parsing</b>
+        numbers is so common that there exists a built in <b>method</b>
+        for easily checking that a <b>string</b> can be <b>parsed</b> into
+        one of the common <b>types</b>: <Code>TryParse</Code>.
+    </Text>
+    <Text><b>A Simple Example:</b></Text>
+    <Text>
+        The <Code>TryParse</Code> <b>method</b> is an <b>expression</b> that
+        <b>evaluates</b> to a <b>bool</b> that is <Code>true</Code> if
+        <b>parsing</b> was successful:
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/TryParse-Example">
+int result = 0;
+bool wasParseSuccessful = int.TryParse("1", out result);
+Console.WriteLine($"Was Successful: {wasParseSuccessful}");
+Console.WriteLine($"Result: {result}");
+    </CodeBlock>
+    <Text>
+        If this is the first time you've seen a "<b>Try</b>" method, it might
+        look a little odd. Specifically, the second <b>argument</b>: <Code>out
+        result</Code>. The <b>out</b> keyword tells the <b>method</b> that, if
+        it is able to <b>parse</b> an <b>int value</b> it should "output" the
+        <b>value</b> and store it in the <Code>result</Code> <b>variable</b>. In
+        the above example, the output demonstrates the <Code>result</Code>
+        <b>variable</b> stores the <b>value</b> <Code>1</Code> and the
+        <Code>wasParseSuccessful</Code> <b>variable</b> stores the <b>value</b>
+        <Code>true</Code>.
+    </Text>
+    <Text><b>A Simple Example:</b></Text>
+     <Text>
+        When the first <b>argument</b> of <Code>TryParse</Code> cannot
+        be <b>parsed</b>, it <b>evaluates</b> to <Code>false</Code>:
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/TryParse-Fail-Example">
+int result = 0;
+bool wasParseSuccessful = int.TryParse("one", out result);
+Console.WriteLine($"Was Successful: {wasParseSuccessful}");
+Console.WriteLine($"Result: {result}");
+    </CodeBlock>
+    <Note>
+        In the example above, the program reports that the parse was not
+        successful and the <b>value</b> stored in the <Code>result</Code>
+        <b>variable</b> remains unchanged.
+    </Note>
+
+</Section>
+<Section Title="TryParse as a Conditional">
+    <Text>
+        Because the <Code>TryParse</Code> <b>method</b> is an <b>expression</b> that <b>evaluates</b> to
+        a <b>bool</b>, it can be used directly as the <b>conditional</b> of an <b>if statement</b>:
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/TryParse-as-a-conditional">
+int result = 0;
+Console.Write("Enter an integer: ");
+string userInput = Console.ReadLine()!;
+if(int.TryParse(userInput, out result))
+{
+  Console.WriteLine("Parsing was successful!");
+}
+else
+{
+  Console.WriteLine("Parsing was unsuccessful!");
+  Console.WriteLine($"Using default value {result}.");
+}
+Console.WriteLine($"Result is {result}");
+    </CodeBlock>
+    <Text>
+        In the above example, there is a <b>decision tree</b> with two
+        <b>branches</b>: one for a valid input and one for an invalid input.
+        When a user provides a valid <b>value</b>, it is common to not report
+        that it was successful. That is, you often would like to ignore the
+        first <b>branch</b> in the above example. One option would be to
+        write the following code:
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/TryParse-ignore-first-branch">
+int result = 0;
+Console.Write("Enter an integer: ");
+string userInput = Console.ReadLine()!;
+if(int.TryParse(userInput, out result))
+{
+}
+else
+{
+  Console.WriteLine("Parsing was unsuccessful!");
+  Console.WriteLine($"Using default value {result}.");
+}
+Console.WriteLine($"Result is {result}");
+    </CodeBlock>
+    <Text>
+        If the code above feels a bit off to you, that's because it is! When you see
+        code that ignores the <b>body</b> of an <b>if statement</b> it is an indicator
+        that you should be checking that the <b>condition</b> is <Code>false</Code>.
+        For example:
+    </Text>
+    <CodeBlock ReplIt="JosephCollard/TryParse-check-is-false">
+int result = 0;
+Console.Write("Enter an integer: ");
+string userInput = Console.ReadLine()!;
+if(int.TryParse(userInput, out result) == false)
+{
+  Console.WriteLine("Parsing was unsuccessful!");
+  Console.WriteLine($"Using default value {result}.");
+}
+Console.WriteLine($"Result is {result}");
+    </CodeBlock>
+    <Note>
+        The <b>condition</b> can be further "simplified" using the <b>not
+        operator</b> (<Code>!</Code>):
+        <CodeBlock>
+            if(!int.TryParse(userInput, out result))
+        </CodeBlock>
+        <Text>
+            Don't worry too much if you're not familiar with the <b>not
+            operator</b> yet; you will learn more about it in the <b>Comparator
+            Operators</b> lesson.
+        </Text>
+    </Note>
+</Section>
+
+<Section Title="Challenge: The Blacksmith's Fee">
+    <TheBlacksmithsFeeChallenge/>
+</Section>
+
+<Section Title="What's Next">
+    <Adventure Portrait="Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+                Using the <Code>TryParse</Code> <b>method</b> to validate the
+                user's input and report meaningful error messages allows you to
+                write programs that do not crash and continue to execute with a
+                default <b>value</b> when the user enters an invalid
+                <b>value</b>.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog>
+                Sometimes it is not enough to use the <b>equality operator</b>
+                (<Code>==</Code>) to check a <b>condition</b>. If you're looking
+                to level up your ability to write sophisticated
+                <b>conditionals</b>, you should check out the <b>Comparator
+                Operators</b> lesson.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog>
+                In the <b>While Loops</b> lesson, you learn how to write code
+                that repeats while a <b>condition</b> is <Code>true</Code>. You
+                can use this to enforce users enter a valid <b>value</b> before
+                your program continues.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <MarkFinishedDialog Page="InputValidation.PageRef"/>
+        </Item>
+    </Adventure>
+</Section>
+
+@code {
+    public static readonly PageRef PageRef = new PageRef("Simple Validation", "/lessons/branching-logic/simple-input-validation", 1, "Branching Logic");
+}
