@@ -17,10 +17,19 @@ function RenderCode(id, content) {
 function HighlightCode(id) {
     const el = document.getElementById(id);
     const raw = document.getElementById(`${id}-raw`);
+    const code = raw.innerHTML.replace("<!--!-->", "").trim();
+    const base64 = window.btoa(code);
     // Blazor adds in a <!--!--> to the begining of the element 
     // so trim wasn't working properly. We remove it first then trim.
     el.innerHTML = raw.innerHTML.replace("<!--!-->", "").trim();
     hljs.highlightElement(el);
+}
+
+function GetVSCodeLink(id) {
+    const raw = document.getElementById(`${id}-raw`);
+    const code = raw.innerHTML.replace("<!--!-->", "").trim();
+    const base64 = window.btoa(code);
+    return `vscode://captain-coder.adventures-in-c--extension/load-simple-project?program.cs=${base64}`;
 }
 
 function get_shortest_prefix(lines) {

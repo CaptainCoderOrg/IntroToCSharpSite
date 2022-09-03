@@ -7,11 +7,17 @@
             <code id="@ID" class="language-@Language code-block"></code>
         </pre>
     </MudPaper>
-    @if (ReplIt != null)
+    @if (ReplIt != null || VSCode)
     {
-        <MudElement Class="ma-2" Style="@PlayButtonStyle">
-            <MudButton Color="Color.Tertiary" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.PlayCircle" OnClick="@(() => IsReplItOpen = !IsReplItOpen)" >Run Code</MudButton>
-        </MudElement>
+        
+        <MudGrid Class="ma-2" Spacing=4>
+            @if (VSCode) {
+                <MudButton Color="Color.Tertiary" Class="mr-4" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Code" Href="@_VSCodeLink" >Open in VS Code</MudButton>
+            }
+            @if (ReplIt != null) {
+                <MudButton Color="Color.Tertiary" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.PlayCircle" OnClick="@(() => IsReplItOpen = !IsReplItOpen)" >Run Code</MudButton>
+            }
+        </MudGrid>
         if (IsReplItOpen)
         {
             <MudPaper Style="@ReplItStyle" >
