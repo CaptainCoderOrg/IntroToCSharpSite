@@ -1,0 +1,15 @@
+<img class="mt-2 mb-0 pb-0" src="@ImageSrc" style="max-width:100%" alt="Captain Coder's Adventures in C#"/>
+
+@code
+{
+    private bool IsDarkMode = false;
+    private string ImageSrc => IsDarkMode ? "/imgs/common/adventures-in-csharp-dark.png" : "/imgs/common/adventures-in-csharp-light.png";
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        MainLayout.OnDarkModeChange += (isDarkMode) => {
+            this.IsDarkMode = isDarkMode;
+            StateHasChanged();
+        };
+    }
+}

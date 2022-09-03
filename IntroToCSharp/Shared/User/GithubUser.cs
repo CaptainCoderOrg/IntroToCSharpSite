@@ -7,21 +7,17 @@ public class GitHubUser : User
 {
     public GitHubUser(JsonDocument loginData)
     {
-        this.UID = loginData.RootElement.GetProperty("uid").GetString();
-        JsonElement providerData = loginData.RootElement.GetProperty("providerData");        
-        this.DisplayName = SafeGetDisplayName(loginData.RootElement);
-        
-        this.DoLogin();
-    }
-
-    private string? SafeGetDisplayName(JsonElement root) {
         try {
-            return root.GetProperty("providerData")[0].GetProperty("displayName").GetString();
-        }
+            this.UID = loginData.RootElement.GetProperty("uid").GetString();
+            JsonElement providerData = loginData.RootElement.GetProperty("providerData");
+            this.DisplayName = loginData.RootElement.GetProperty("providerData")[0].GetProperty("displayName").GetString();
+            this.ProviderID = providerData[0].GetProperty("providerId").ToString();
+            this.Email = providerData[0].GetProperty("email").ToString();
+            this.DoLogin();
+         }
         catch {
             NotificationService.Service.Add("An error occurred while logging into GitHub.", MudBlazor.Severity.Error).AndForget();
             UserService.Service.Logout().AndForget();
-            return null;
         }
     }
 }
