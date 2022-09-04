@@ -17,6 +17,10 @@ namespace IntroToCSharp.Shared.Components.CodeBlock
         private HttpClient HTTP { get; set; } = null!;
         private int SelectedIndex { get; set; } = 0;
         [Parameter]
+        public bool VSCode {get; set;} = false;
+        private string _VSCodeLink = string.Empty;
+
+        [Parameter]
         public string MaxHeight { get; set; } = "650px";
         [Parameter]
         public string Language { get; set; } = "csharp";
@@ -54,6 +58,9 @@ namespace IntroToCSharp.Shared.Components.CodeBlock
                 await JS.InvokeVoidAsync("RenderCode", ID, Output);
             } else {
                 await JS.InvokeVoidAsync("HighlightCode", ID);
+            }
+            if (VSCode) {
+                _VSCodeLink = await JS.InvokeAsync<string>("GetVSCodeLink", ID);
             }
         }
 

@@ -51,12 +51,12 @@
     </RecipeBox>
     <Text><b>Examples:</b></Text>
     <Text>You can <b>cast</b> an <b>int</b> to a <b>double</b>:</Text>
-    <CodeBlock ReplIt="JosephCollard/Int-to-Double">
+    <CodeBlock VSCode ReplIt="JosephCollard/Int-to-Double">
 double x = (int) 42;
 Console.WriteLine(x);
     </CodeBlock>
     <Text>You can <b>cast</b> a <b>double</b> to an <b>int</b></Text>
-    <CodeBlock ReplIt="JosephCollard/Double-to-Int">
+    <CodeBlock VSCode ReplIt="JosephCollard/Double-to-Int">
 int x = (int) 42.8;
 Console.WriteLine(x);
     </CodeBlock>
@@ -68,7 +68,7 @@ Console.WriteLine(x);
     <Text>
         You can <b>cast</b> a <b>double variable</b> to an <b>int</b>.
     </Text>
-    <CodeBlock ReplIt="JosephCollard/Double-Variable-to-Int">
+    <CodeBlock VSCode ReplIt="JosephCollard/Double-Variable-to-Int">
 double y = 75.9;
 int x = (int) y;
 Console.WriteLine(y + " => " + x);
@@ -88,17 +88,17 @@ Console.WriteLine(y + " => " + x);
     </Text>
     <Text><b>Examples:</b></Text>
     <Text>Parsing an <b>int</b> from a <b>string</b>:</Text>
-    <CodeBlock ReplIt="JosephCollard/Parsing-an-Int">
+    <CodeBlock VSCode ReplIt="JosephCollard/Parsing-an-Int">
 int x = int.Parse("42");
 Console.WriteLine(x);
     </CodeBlock>
     <Text>Parsing a <b>double</b> from a <b>string</b>:</Text>
-    <CodeBlock ReplIt="JosephCollard/Parsing-a-Double">
+    <CodeBlock VSCode ReplIt="JosephCollard/Parsing-a-Double">
 double x = double.Parse("42.8");
 Console.WriteLine(x);
     </CodeBlock>
     <Text>Parsing a <b>bool</b> from a <b>string</b>:</Text>
-    <CodeBlock ReplIt="JosephCollard/Parsing-a-Bool">
+    <CodeBlock VSCode ReplIt="JosephCollard/Parsing-a-Bool">
 bool x = bool.Parse("true");
 Console.WriteLine(x);
     </CodeBlock>
@@ -116,7 +116,7 @@ Console.WriteLine(x);
     </Text>
     <Text><b>Examples:</b></Text>
     <Text>Calling <Code>ToString</Code> on <b>literal values</b>:</Text>
-    <CodeBlock ReplIt="JosephCollard/Int-to-String">
+    <CodeBlock VSCode ReplIt="JosephCollard/Int-to-String">
 string x = 5.ToString();
 Console.WriteLine(x);
 string y = 42.7.ToString();
@@ -153,7 +153,7 @@ Console.WriteLine(zs);
         this calls the <Code>ToString</Code> method on the <b>variables</b>
         and substitutes them into the <b>string</b>.
     </Text>
-    <CodeBlock ReplIt="JosephCollard/Interpolation-Example-1">
+    <CodeBlock VSCode ReplIt="JosephCollard/Interpolation-Example-1">
 int x = 5;
 double y = 0.4;
 bool z = true;
@@ -165,7 +165,7 @@ Console.WriteLine($"int: {x}, double: {y}, bool: {z}");
         that allows you to include curly brackets: <Code>{{</Code> and
         <Code>}}</Code>.
     </Text>
-    <CodeBlock ReplIt="JosephCollard/Interpolation-Example-2">
+    <CodeBlock VSCode ReplIt="JosephCollard/Interpolation-Example-2">
 int x = 5;
 int y = 7;
 Console.WriteLine($"Position: {{ {x}, {y} }}");
