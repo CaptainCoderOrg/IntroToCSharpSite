@@ -1,0 +1,44 @@
+@inject IDialogService DialogService
+
+<MudDialog>
+    <DialogContent>
+        <MudStack Justify="Justify.Center">
+            <MudText Style="text-align:center">You have received
+                @if (@Gold > 0)
+                {
+                    <MudImage Class="pt-2 pl-2 mr-2" Style="max-width: 25px;" Src=/imgs/top-menu/coin.png /> @Gold
+                    <MudElement> and </MudElement>
+                }
+                <MudElement> @Utils.GetAOrAn(ChestReward!.Name) <b>@ChestReward?.Name</b>!</MudElement>
+            </MudText>
+            <MudPaper Class="border-style: solid border-2 mud-border-dark pa-4" Style="text-align:center;">
+                <h3>@ChestReward?.Name</h3>
+                <MudImage Src=@ChestReward?.Image />
+                <MudText>@ChestReward?.Description</MudText>
+            </MudPaper>
+            <MudButton Class="mb-2" Color="Color.Success" OnClick="@Exit" Variant="Variant.Filled">Ok</MudButton>
+        </MudStack>
+    </DialogContent>
+</MudDialog>
+
+@code {
+
+    [CascadingParameter] MudDialogInstance? MudDialog { get; set; }
+
+    [Parameter]
+    public StoreItem? ChestReward { get; set; } = null;
+
+    [Parameter]
+    public int Gold { get; set; } = 0;
+    private void Exit() => MudDialog?.Close(DialogResult.Ok(true));
+
+    public static void Show(IDialogService DialogService, ActivityStep step)
+    {
+        var options = new DialogOptions { CloseOnEscapeKey = true };
+        var parameters = new DialogParameters();
+        parameters.Add("ChestReward", step.ChestReward);
+        parameters.Add("Gold", step.Gold);
+        DialogService.Show<ClaimChestDialog>("Reward Claimed", parameters, options);
+    }
+
+}

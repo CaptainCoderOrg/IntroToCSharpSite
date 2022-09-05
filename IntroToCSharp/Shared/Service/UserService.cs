@@ -281,6 +281,19 @@ public class UserService
         return true;
     }
 
+    /// <summary>
+    /// Gives user an item.
+    /// </summary>
+    /// <param name="toBuy"></param>
+    /// <returns></returns>
+    public bool GiveItem(StoreItem toGive)
+    {
+        if (!_userData.IsLoggedIn) return false;
+        _userInventory = _userInventory.AddItem(toGive);
+        _userData.UserInventoryRef?.Set(_userInventory);
+        return true;
+    }
+
     public bool AddPage(PageRef toAdd)
     {
         if (!_userData.IsLoggedIn) return false;

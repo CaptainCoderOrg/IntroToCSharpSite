@@ -1,4 +1,4 @@
-<Challenge Title="How Fast is the Flash?" Gold="250" XP="50">
+<Challenge Title="How Fast is the Flash?" Gold="250" XP="50" ChestReward="@ChestReward">
     <Text>
         In this challenge you will update your Circle Analyzer program to calculate how fast the
         flash can run around the Earth. To do this you will need to determine the circumference
@@ -18,5 +18,12 @@
         <MudListItem Icon="@Icons.Filled.Help">The Flash can run at 2,532 miles per hour!</MudListItem>
     </Box>
     <Question Spoiler="Approximately 10 hours" Text="How long would it take the Flash to circumnavigate the Earth?"/>
+    <Question Text="Generate a share link of your Program.cs file and put it here"/>
 
 </Challenge>
+
+@code
+{
+    StoreItem ChestReward = new StoreItem("Globe", "Item", "Trinket", 1000, "A small model of the Earth. A trinket for completing the How Fast is the Flash challenge.",
+        "/imgs/rewards/trinkets/globe.png");
+}
