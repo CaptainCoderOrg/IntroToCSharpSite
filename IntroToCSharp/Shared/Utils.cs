@@ -86,6 +86,13 @@ public static class Utils
 
     public static int RoundToNearest(this int amount, int roundAmount) => roundAmount * (amount / roundAmount);
 
+    public static string GetAOrAn(string word) {
+        if (word == string.Empty) return "a";
+        char first = word.ToLower()[0];
+        if ("aeiou".Contains(first)) return "an";
+        return "a";
+    }
+
     /// <summary>
     /// Sanitize a database path by replacing illegal characters with underscores.
     /// </summary>

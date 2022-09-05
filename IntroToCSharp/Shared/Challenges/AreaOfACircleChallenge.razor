@@ -1,4 +1,4 @@
-<Challenge Title="Challenge Area of a Circle" Gold="125" XP="20">
+<Challenge Title="Area of a Circle" Gold="125" XP="20" ChestReward="@Reward">
     <Text>
         In this challenge, you will write a program to calculate the area of a circle.
     </Text>
@@ -15,3 +15,8 @@
         <TaskItem Name="Display Area">Finally, display a message informing the user the area of the circle.</TaskItem>
     </TaskList>
 </Challenge>
+
+@code {
+    private StoreItem Reward = new StoreItem("π-nguin Plushy", "Item", "Trinket", 1000, "A cute plush of a π-nguin! A trinket earned for completing the Area of a Circle Challenge",
+        "/imgs/rewards/trinkets/piguin.png");
+}
