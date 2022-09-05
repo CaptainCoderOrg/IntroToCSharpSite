@@ -101,6 +101,25 @@ export function refDatabase(path, handler) {
 }
 
 /**
+ * Given a data path queries the database once and
+ * uses the callback to report the value.
+ * @param {string} path
+ * @param {function} callback
+ */
+export function getDatabase(path, handler) {
+    const ref = firebase_database.ref;
+    const dbRef = ref(database);
+    const child = firebase_database.child;
+    const get = firebase_database.get;
+    const observer = ref(database, path)
+    get(child(dbRef, path)).then((snapshot) => {
+        let val = snapshot.val();
+        val = val == null ? null : JSON.stringify(val);
+        handler.invokeMethodAsync("OnChange", val);
+    });
+}
+
+/**
  * Given a path and data to write, attempts to write the data at the
  * specified path.
  * @param {string} path
@@ -135,5 +154,6 @@ window.firebaseEmailLogin = firebaseEmailLogin;
 window.firebaseLogout = firebaseLogout;
 window.onAuthStateChanged = onAuthStateChanged;
 window.refDatabase = refDatabase;
+window.getDatabase = getDatabase;
 window.setDatabase = setDatabase;
 window.removeDatabase = removeDatabase;
