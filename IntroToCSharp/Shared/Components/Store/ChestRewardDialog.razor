@@ -7,13 +7,14 @@
                 @if (@Gold > 0)
                 {
                     <MudImage Class="pt-2 pl-2 mr-2" Style="max-width: 25px;" Src=/imgs/top-menu/coin.png /> @Gold
-                    <MudElement> and @Utils.GetAOrAn(ChestReward?.Name) <b>@ChestReward?.Name</b>!</MudElement>
+                    <MudElement> and </MudElement>
                 }
+                <MudElement> @Utils.GetAOrAn(ChestReward!.Name) <b>@ChestReward?.Name</b>!</MudElement>
             </MudText>
             <MudPaper Class="border-style: solid border-2 mud-border-dark pa-4" Style="text-align:center;">
                 <h3>@ChestReward?.Name</h3>
-                @ChestReward?.Description
                 <MudImage Src=@ChestReward?.Image />
+                <MudText>@ChestReward?.Description</MudText>
             </MudPaper>
             <MudButton Class="mb-2" Color="Color.Success" OnClick="@Exit" Variant="Variant.Filled">Ok</MudButton>
         </MudStack>
