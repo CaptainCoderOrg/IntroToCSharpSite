@@ -64,11 +64,7 @@
         if(ChestReward != null)
         {
             UserService.Service.GiveItem(ChestReward);
-            var options = new DialogOptions { CloseOnEscapeKey = true };
-            var parameters = new DialogParameters();
-            parameters.Add("ChestReward", ChestReward);
-            parameters.Add("Gold", Gold);
-            DialogService.Show<ChestRewardDialog>("Rewards Claimed", parameters, options);
+            ClaimChestDialog.Show(DialogService, this);
         }
     }
 
