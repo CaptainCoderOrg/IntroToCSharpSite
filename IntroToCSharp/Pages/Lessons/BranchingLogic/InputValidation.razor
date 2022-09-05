@@ -73,7 +73,7 @@
         <b>evaluates</b> to a <b>bool</b> that is <Code>true</Code> if
         <b>parsing</b> was successful:
     </Text>
-    <CodeBlock ReplIt="JosephCollard/TryParse-Example">
+    <CodeBlock ReplIt="JosephCollard/TryParse-Example" VSCode>
 int result = 0;
 bool wasParseSuccessful = int.TryParse("1", out result);
 Console.WriteLine($"Was Successful: {wasParseSuccessful}");
@@ -95,7 +95,7 @@ Console.WriteLine($"Result: {result}");
         When the first <b>argument</b> of <Code>TryParse</Code> cannot
         be <b>parsed</b>, it <b>evaluates</b> to <Code>false</Code>:
     </Text>
-    <CodeBlock ReplIt="JosephCollard/TryParse-Fail-Example">
+    <CodeBlock ReplIt="JosephCollard/TryParse-Fail-Example" VSCode>
 int result = 0;
 bool wasParseSuccessful = int.TryParse("one", out result);
 Console.WriteLine($"Was Successful: {wasParseSuccessful}");
@@ -113,7 +113,7 @@ Console.WriteLine($"Result: {result}");
         Because the <Code>TryParse</Code> <b>method</b> is an <b>expression</b> that <b>evaluates</b> to
         a <b>bool</b>, it can be used directly as the <b>conditional</b> of an <b>if statement</b>:
     </Text>
-    <CodeBlock ReplIt="JosephCollard/TryParse-as-a-conditional">
+    <CodeBlock ReplIt="JosephCollard/TryParse-as-a-conditional" VSCode>
 int result = 0;
 Console.Write("Enter an integer: ");
 string userInput = Console.ReadLine()!;
@@ -136,7 +136,7 @@ Console.WriteLine($"Result is {result}");
         first <b>branch</b> in the above example. One option would be to
         write the following code:
     </Text>
-    <CodeBlock ReplIt="JosephCollard/TryParse-ignore-first-branch">
+    <CodeBlock ReplIt="JosephCollard/TryParse-ignore-first-branch" VSCode>
 int result = 0;
 Console.Write("Enter an integer: ");
 string userInput = Console.ReadLine()!;
@@ -156,7 +156,7 @@ Console.WriteLine($"Result is {result}");
         that you should be checking that the <b>condition</b> is <Code>false</Code>.
         For example:
     </Text>
-    <CodeBlock ReplIt="JosephCollard/TryParse-check-is-false">
+    <CodeBlock ReplIt="JosephCollard/TryParse-check-is-false" VSCode>
 int result = 0;
 Console.Write("Enter an integer: ");
 string userInput = Console.ReadLine()!;
