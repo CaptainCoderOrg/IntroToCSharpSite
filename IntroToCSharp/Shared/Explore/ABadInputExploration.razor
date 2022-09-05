@@ -1,0 +1,19 @@
+<Explore Title="A Bad Input">
+    <Text>
+        When asking the user to enter a number, it is very easy
+        for them to crash your program by entering a value that
+        cannot be parsed by the <Code>Parse</Code> <b>method</b>.
+    </Text>
+    <ConsoleProjectTask Name="Create Project">Create a Console Project called "A Bad Input"</ConsoleProjectTask>
+    <TaskItem Name="Prompt User">Prompt your user to enter an <b>int value</b></TaskItem>
+    <TaskItem Name="Parse Input">Use the <Code>int.Parse</Code> <b>method</b> to parse the value</TaskItem>
+    <TaskItem Name="Store Value">Store the <b>parsed value</b> in an <b>int variable</b></TaskItem>
+    <Text>Your code should be similar to this:</Text>
+    <CodeBlock>
+Console.Write("Enter a whole number: ");
+int userInput = int.Parse(Console.ReadLine()!);
+    </CodeBlock>
+    <TaskItem Name="Run Program">Run your program</TaskItem>
+    <TaskItem Name="Enter string">When prompted, enter "one"</TaskItem>
+    <Question Text="What is the error message that occurs?"/>
+</Explore>

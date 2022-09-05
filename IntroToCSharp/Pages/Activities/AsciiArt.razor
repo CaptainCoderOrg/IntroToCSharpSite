@@ -56,11 +56,11 @@ _ _`.    \  |  |  |  /    .'_ _
 
     <Text>
         Let's start by making a simple <b>ASCII</b> Dog:
-        <CodeBlock>
+        <Output>
  ..^____/
 `-. ___ )
   ||  || mh
-        </CodeBlock>
+        </Output>
         <Note>
             Art by Maija Haavisto
         </Note>
@@ -144,7 +144,7 @@ _ _`.    \  |  |  |  /    .'_ _
         To change the color of the text, you can set the
         <Code>Console.ForegroundColor</Code> property:
     </Text>
-    <CodeBlock ReplIt="JosephCollard/ForegroundColor">
+    <CodeBlock VSCode ReplIt="JosephCollard/ForegroundColor">
 Console.ForegroundColor = ConsoleColor.Red;
 Console.WriteLine("The text is red!");
 Console.ForegroundColor = ConsoleColor.Yellow;
@@ -155,7 +155,7 @@ Console.WriteLine("The text is yellow!");
         the <b>terminal</b> for a single charcter, you can set the
         <Code>Console.BackgroundColor</Code> property:
     </Text>
-    <CodeBlock ReplIt="JosephCollard/BackgroundColor">
+    <CodeBlock VSCode ReplIt="JosephCollard/BackgroundColor">
 Console.BackgroundColor = ConsoleColor.Red;
 Console.WriteLine("The background is red!");
 Console.BackgroundColor = ConsoleColor.Yellow;
@@ -186,7 +186,7 @@ Console.WriteLine("The background is yellow!");
         The code below displays <Code>Hello</Code> on a single line in the
         <b>terminal</b>.
     </Text>
-    <CodeBlock ReplIt="JosephCollard/Write-Example">
+    <CodeBlock VSCode ReplIt="JosephCollard/Write-Example">
 Console.Write("H");
 Console.Write("e");
 Console.Write("l");
@@ -200,7 +200,7 @@ Console.WriteLine("o");
     <Text>
         The code below changes the color of each letter in the word "Hello"
     </Text>
-        <CodeBlock ReplIt="JosephCollard/Rainbow-Write-Example">
+        <CodeBlock VSCode ReplIt="JosephCollard/Rainbow-Write-Example">
 Console.ForegroundColor = ConsoleColor.Red;
 Console.Write("H");
 Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -216,7 +216,7 @@ Console.WriteLine("o");
         Changing the background color and using spaces allows you to color
         an entire "cell" in the <b>terminal</b> without having any text.
     </Text>
-    <CodeBlock ReplIt="JosephCollard/MushroomPart1">
+    <CodeBlock VSCode ReplIt="JosephCollard/MushroomPart1">
 Console.BackgroundColor = ConsoleColor.White;
 Console.Write("    ");
 Console.BackgroundColor = ConsoleColor.Black;

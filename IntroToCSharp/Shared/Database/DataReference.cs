@@ -14,6 +14,43 @@ public static class DataReference
     public static DataReference<T> Json<T>(string path, T? defaultValue = default, string? niceName = null) => new JsonDataReference<T>(path, defaultValue, niceName);
 }
 
+public class DataReferenceView<T> : DataReference<T>
+{
+    public override event Action<T?>? DataChangedEvent
+    {
+        add => this.reference.DataChangedEvent += value;
+        remove => this.reference.DataChangedEvent -= value;
+    }
+
+    internal override T? Val  {get => this.reference.Val; set {}}
+
+    private DataReference<T> reference;
+
+    public DataReferenceView(DataReference<T> reference) : base(reference.Path, reference.DefaultValue, reference.NiceName)
+    {
+        this.reference = reference;
+    }
+
+    public override async Task<T?> GetValue()
+    {
+        T? result = await reference.GetValue();
+        return result;
+    }
+
+    public override void Remove(bool notifyOnSuccess = true) { }
+    [JSInvokable]
+    public override void OnSuccess() => this.reference.OnSuccess();
+    [JSInvokable]
+    public override void OnException(string exception) => this.reference.OnException(exception);
+
+    public override void Set(T data, bool notifyOnSuccess = true) { }
+
+    [JSInvokable]
+    public override void OnChange(string? data) => this.reference.OnChange(data);
+
+    internal override void HandleChange(string data) => this.reference.HandleChange(data);
+}
+
 /// <summary>
 /// A DataReference is a helper class for reading and writing data within the database.
 /// </summary>
@@ -28,6 +65,8 @@ public abstract class DataReference<T> : IResultHandler, IChangeHandler
     private event Action<T?>? DataChanged;
     private readonly string _path;
 
+    public DataReference<T> View => new DataReferenceView<T>(this);
+
     /// <summary>
     /// The nice name for this data reference, if one exists.
     /// </summary>
@@ -38,10 +77,12 @@ public abstract class DataReference<T> : IResultHandler, IChangeHandler
     /// </summary>
     public string Path => _path;
 
+    public T? DefaultValue => _defaultValue;
+
     /// <summary>
     /// This event is triggered when the data at the specified path changes.
     /// </summary>
-    public event Action<T?>? DataChangedEvent
+    public virtual event Action<T?>? DataChangedEvent
     {
         add
         {
@@ -57,7 +98,14 @@ public abstract class DataReference<T> : IResultHandler, IChangeHandler
         remove => DataChanged -= value;
     }
 
-    protected T? Val
+    public virtual async Task<T?> GetValue()
+    {
+        if (_hasRef) return _val;
+        await DatabaseService.Service.Ref(_path, this);
+        return _val;
+    }
+
+    internal virtual T? Val
     {
         get => _val;
         set
@@ -85,7 +133,7 @@ public abstract class DataReference<T> : IResultHandler, IChangeHandler
     /// Attempts to remove the data from the database
     /// </summary>
     /// <returns></returns>
-    public async void Remove(bool notifyOnSuccess = true)
+    public virtual async void Remove(bool notifyOnSuccess = true)
     {
         IResultHandler handler = notifyOnSuccess ? this : IResultHandler.Default;
         await DatabaseService.Service.Remove(_path, handler);
@@ -93,11 +141,11 @@ public abstract class DataReference<T> : IResultHandler, IChangeHandler
 
     /// <inheritdoc/>
     [JSInvokable]
-    public virtual async void OnSuccess()
+    public virtual void OnSuccess()
     {
         string message = "Data Synced";
         message += _niceName == null ? "" : $": {_niceName}";
-        await NotificationService.Service.Add(message, Severity.Success);
+        NotificationService.Service.Add(message, Severity.Success).AndForget();
     }
 
     /// <inheritdoc/>
@@ -114,7 +162,7 @@ public abstract class DataReference<T> : IResultHandler, IChangeHandler
 
     /// <inheritdoc/>
     [JSInvokable]
-    public void OnChange(string? data)
+    public virtual void OnChange(string? data)
     {
         if (data == null)
         {
@@ -124,7 +172,7 @@ public abstract class DataReference<T> : IResultHandler, IChangeHandler
         HandleChange(data);
     }
 
-    protected abstract void HandleChange(string data);
+    internal abstract void HandleChange(string data);
 }
 
 internal class JsonDataReference<T> : DataReference<T>
@@ -139,7 +187,7 @@ internal class JsonDataReference<T> : DataReference<T>
         await DatabaseService.Service.Set<string>(Path, jsonData, handler);
     }
     /// <inheritdoc/>
-    protected override void HandleChange(string data)
+    internal override void HandleChange(string data)
     {
         try
         {
@@ -173,7 +221,7 @@ internal class BoolDataReference : DataReference<bool>
     private BoolDataReference(string path, bool defaultValue = false, string? niceName = null) : base(path, defaultValue, niceName) { }
 
     /// <inheritdoc/>
-    protected override void HandleChange(string data)
+    internal override void HandleChange(string data)
     {
         try
         {
@@ -209,7 +257,7 @@ internal class StringDataReference : DataReference<string>
     }
     private StringDataReference(string path, string defaultValue = "", string? niceName = null) : base(path, defaultValue, niceName) { }
     /// <inheritdoc/>
-    protected override void HandleChange(string data)
+    internal override void HandleChange(string data)
     {
         try
         {

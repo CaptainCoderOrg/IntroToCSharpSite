@@ -1,7 +1,7 @@
 /**
  * Given an id to an element and source code to highlight
  * sets the contents of the element associated with the id
- * and uses highlight.js to highlight the element.  
+ * and uses highlight.js to highlight the element.
  */
 function RenderCode(id, content) {
     // console.log(id, content);
@@ -17,10 +17,18 @@ function RenderCode(id, content) {
 function HighlightCode(id) {
     const el = document.getElementById(id);
     const raw = document.getElementById(`${id}-raw`);
-    // Blazor adds in a <!--!--> to the begining of the element 
+    const code = raw.innerHTML.replace("<!--!-->", "").trim();
+    // Blazor adds in a <!--!--> to the begining of the element
     // so trim wasn't working properly. We remove it first then trim.
     el.innerHTML = raw.innerHTML.replace("<!--!-->", "").trim();
     hljs.highlightElement(el);
+}
+
+function GetVSCodeLink(id) {
+    const raw = document.getElementById(`${id}-raw`);
+    const code = raw.innerHTML.replace("<!--!-->", "").trim();
+    const base64 = Base64.encode(code);
+    return `vscode://captain-coder.adventures-in-c--extension/load-simple-project?program.cs=${base64}`;
 }
 
 function get_shortest_prefix(lines) {
@@ -50,7 +58,7 @@ function format_code_block(lines) {
 function RenderOutput(id) {
     const el = document.getElementById(id);
     const raw = document.getElementById(`${id}-raw`);
-    // Blazor adds in a <!--!--> to the begining of the element 
+    // Blazor adds in a <!--!--> to the begining of the element
     // so trim wasn't working properly. We remove it first then trim.
     const text = raw.innerHTML.replace("<!--!-->", "");
     if (!text) return;
