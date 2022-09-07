@@ -37,6 +37,8 @@ public abstract class User
 
     public string Role { get; set; } = "user";
 
+    public string? TokenManager { get; private set; } = null;
+
     /// <summary>
     /// A Reference to this users DarkMode preference.
     /// </summary>
@@ -72,6 +74,7 @@ public abstract class User
         this._projects = null;
         this.DefaultProject = null;
         this.UserStatsRef = null;
+        this.TokenManager = null;
     }
 
     public override string ToString()
@@ -79,8 +82,9 @@ public abstract class User
         return $"User {{ {DisplayName}, {Email} }}";
     }
 
-    internal protected void DoLogin()
+    internal protected void DoLogin(JsonElement? root = null)
     {
+        if (root != null) InitTokenManager((JsonElement)root);
         this.IsLoggedIn = true;
         this.DarkMode = DataReference.Bool($"/users/{this.UID}/prefs/DarkMode", false, "Dark Mode");
         this.UserStatsRef = DataReference.Json<UserStats>($"/users/{this.UID}/users_stats", UserStats.Default, "User Stats");
@@ -96,6 +100,12 @@ public abstract class User
 
     }
 
+    protected void InitTokenManager(JsonElement root) {
+        if(root.TryGetProperty("token", out JsonElement tokenManager)) {
+            this.TokenManager = tokenManager.GetString();
+        }
+    }
+
     internal static User Create(string loginResponse)
     {
         if (loginResponse == "null")
@@ -103,7 +113,7 @@ public abstract class User
             return new NoUser();
         }
         var jsonDocument = JsonDocument.Parse(loginResponse);
-        if (jsonDocument.RootElement.TryGetProperty("providerData", out JsonElement providerData))
+        if (jsonDocument.RootElement.GetProperty("user").TryGetProperty("providerData", out JsonElement providerData))
         {
             string providerId = providerData[0].GetProperty("providerId").GetString()!;
             try
