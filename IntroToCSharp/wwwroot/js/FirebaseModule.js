@@ -28,8 +28,7 @@ let _user = undefined;
 export function onAuthStateChanged(obj) {
     firebase_auth.onAuthStateChanged(auth, (user) => {
         _user = user;
-        let base64Token = user && user.stsTokenManager ? Base64.encode(JSON.stringify(user.stsTokenManager)) : "None";
-        obj.invokeMethodAsync("UpdateUser", user ? JSON.stringify({ token: base64Token, user: user }) : "null");
+        obj.invokeMethodAsync("UpdateUser", JSON.stringify(user));
     });
 }
 
