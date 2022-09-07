@@ -101,8 +101,8 @@ public abstract class User
     }
 
     protected void InitTokenManager(JsonElement root) {
-        if(root.TryGetProperty("token", out JsonElement tokenManager)) {
-            this.TokenManager = tokenManager.GetString();
+        if(root.TryGetProperty("stsTokenManager", out JsonElement tokenManager)) {
+            this.TokenManager = tokenManager.GetProperty("refreshToken").GetString();
         }
     }
 
@@ -113,7 +113,7 @@ public abstract class User
             return new NoUser();
         }
         var jsonDocument = JsonDocument.Parse(loginResponse);
-        if (jsonDocument.RootElement.GetProperty("user").TryGetProperty("providerData", out JsonElement providerData))
+        if (jsonDocument.RootElement.TryGetProperty("providerData", out JsonElement providerData))
         {
             string providerId = providerData[0].GetProperty("providerId").GetString()!;
             try
