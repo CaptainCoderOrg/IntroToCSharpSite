@@ -8,10 +8,10 @@ public class GoogleUser : User
     public GoogleUser(JsonDocument loginData)
     {
         try {
-            this.UID = loginData.RootElement.GetProperty("user").GetProperty("uid").GetString();
-            this.DisplayName = loginData.RootElement.GetProperty("user").GetProperty("displayName").GetString();
-            this.Email = loginData.RootElement.GetProperty("user").GetProperty("email").GetString();
-            JsonElement providerData = loginData.RootElement.GetProperty("user").GetProperty("providerData");
+            this.UID = loginData.RootElement.GetProperty("uid").GetString();
+            this.DisplayName = loginData.RootElement.GetProperty("displayName").GetString();
+            this.Email = loginData.RootElement.GetProperty("email").GetString();
+            JsonElement providerData = loginData.RootElement.GetProperty("providerData");
             this.ProviderID = providerData[0].GetProperty("providerId").ToString();
             this.DoLogin(loginData.RootElement);
         }

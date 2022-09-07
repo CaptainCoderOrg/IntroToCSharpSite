@@ -8,9 +8,9 @@ public class GitHubUser : User
     public GitHubUser(JsonDocument loginData)
     {
         try {
-            this.UID = loginData.RootElement.GetProperty("user").GetProperty("uid").GetString();
-            JsonElement providerData = loginData.RootElement.GetProperty("user").GetProperty("providerData");
-            this.DisplayName = loginData.RootElement.GetProperty("user").GetProperty("providerData")[0].GetProperty("displayName").GetString();
+            this.UID = loginData.RootElement.GetProperty("uid").GetString();
+            JsonElement providerData = loginData.RootElement.GetProperty("providerData");
+            this.DisplayName = loginData.RootElement.GetProperty("providerData")[0].GetProperty("displayName").GetString();
             this.ProviderID = providerData[0].GetProperty("providerId").ToString();
             this.Email = providerData[0].GetProperty("email").ToString();
             this.DoLogin(loginData.RootElement);
