@@ -6,8 +6,8 @@ public class PasswordUser : User
 
     public PasswordUser(JsonDocument loginData)
     {
-        this.UID = loginData.RootElement.GetProperty("uid").GetString();
-        this.DisplayName = loginData.RootElement.GetProperty("email").GetString();
+        this.UID = loginData.RootElement.GetProperty("user").GetProperty("uid").GetString();
+        this.DisplayName = loginData.RootElement.GetProperty("user").GetProperty("email").GetString();
         this.DoLogin();
     }
 

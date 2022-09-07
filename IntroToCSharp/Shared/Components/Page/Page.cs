@@ -43,8 +43,10 @@ public class Page : ComponentBase
 
     protected virtual void OnUserChange(User? newUser)
     {
+        if (User == newUser) return;
         User = newUser ?? User.NoUser;
         if (User.UserPagesRef != null) User.UserPagesRef.DataChangedEvent += OnUserPagesRefChange;
+        StateHasChanged();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
