@@ -1,0 +1,18 @@
+@page "/auth"
+@inherits CaptainCoder.Page
+
+<Title>Authenticate VS Code Extension</Title>
+
+<Section Title="Authentication">
+@if (this.User.IsLoggedIn) {
+    <MudText Style = "margin: 1.0rem 0rem">First, make sure you have the Adventures in C# Extension installed.</MudText>
+    <MudText Style = "margin: 1.0rem 0rem">Clicking the button below will redirect you to VS Code. You may need to approve this action.</MudText>
+    <MudButton Href="@AuthHref" Variant="Variant.Filled" Color="Color.Primary">Authenticate VS Code</MudButton>
+} else {
+    <MudText Style = "margin: 1.0rem 0rem">You must be logged in to Authenticate VS Code</MudText>
+}
+</Section>
+
+@code {
+    private string AuthHref => this.User == null ? "javascript:void(0)" : ($"vscode://captain-coder.adventures-in-c--extension/auth?token={this.User.TokenManager}" ?? "");
+}
