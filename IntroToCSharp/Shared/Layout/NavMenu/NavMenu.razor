@@ -1,6 +1,7 @@
 ﻿@inject IDialogService DialogService
 <MudDrawer @bind-Open="@Main.IsNavMenuOpen" Elevation="25" Variant="@DrawerVariant.Persistent" Style="position:fixed">
     <MudElement Style="@Style">
+        <MudAutocomplete T="string" Label="Search for Page" @bind-Value="SearchValue" SearchFunc="@PageSearch" ResetValueOnEmptyText="true"/>
         <MudDrawerHeader Class="pr-4" Style="@(UserData.Role == "admin" ? "margin-bottom:-40px;" : "")">
             <MudElement Class="d-flex flex-row justify-space-between" Style="width:100%">
                 <MudText Typo="Typo.h6">
@@ -21,7 +22,7 @@
         <MudNavMenu Bordered="true">
             @foreach (MenuItem item in MenuItems) {
                 if (!Filter.Contains(item)) continue;
-                <NavMenuItem Item="@item" Filter="@Filter" UserPages="_userPages"/>
+                <NavMenuItem Item="@item" Filter="@Filter" UserPages="_userPages" SearchValue="@SearchValue"/>
             }
         </MudNavMenu>
     </MudElement>
@@ -159,5 +160,24 @@
 
     private void UnPseudo() {
         UserService.Service.LogoutFromPsuedoUser();
+    }
+
+
+    private string? _searchValue = string.Empty;
+    private string? SearchValue { get => _searchValue; set {
+        _searchValue = value;
+        StateHasChanged();
+    } }
+    private string[] PageArray => Filter.Where(mi => mi.Href != null).Select(mi => mi.Name).ToArray();
+
+    private async Task<IEnumerable<string>> PageSearch(string value)
+    {
+        // In real life use an asynchronous function for fetching data from an api.
+        await Task.Delay(5);
+
+        // if text is null or empty, show complete list
+        if (string.IsNullOrEmpty(value))
+            return PageArray;
+        return PageArray.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
     }
 }

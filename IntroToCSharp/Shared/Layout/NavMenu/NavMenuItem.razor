@@ -1,16 +1,38 @@
-@if (Item.Href == null) {
+@if (Item.Href == null && IsVisible(Item)) {
     <MudNavGroup Icon="@GroupIcon" IconColor="@IconColor" Title="@Item.Name" @bind-Expanded="@IsExpanded">
         @foreach(MenuItem item in Item.Children) {
             if (!Filter.Contains(item)) continue;
-            <NavMenuItem Item="@item" Filter="@Filter" UserPages="UserPages"/>
+            <NavMenuItem Item="@item" Filter="@Filter" UserPages="UserPages" SearchValue= "@SearchValue"/>
         }
     </MudNavGroup>
 }
 else {
-    <MudNavLink Href="@Item.Href" Icon="@Icon" IconColor="@IconColor">@Item.Name</MudNavLink>
+    @if (IsVisible(Item)) {
+        <MudNavLink Href="@Item.Href" Icon="@Icon" IconColor="@IconColor">@Item.Name</MudNavLink>
+    }
 }
 
 @code {
+
+    [Parameter, EditorRequired]
+    public string? SearchValue {get; set;}
+
+    private bool IsVisible(MenuItem toCheck)
+    {
+        if(SearchValue == null || SearchValue == string.Empty)
+        {
+            return true;    
+        }
+        if (toCheck.Children.Count == 0)
+        {
+            return toCheck.Name.Contains(SearchValue, StringComparison.InvariantCultureIgnoreCase);
+        }
+        foreach(MenuItem child in toCheck.Children)
+        {
+            if (IsVisible(child)) return true;
+        }
+        return false;
+    }
     [Parameter, EditorRequired]
     public MenuItem Item { get; set; } = null!;
     [Parameter, EditorRequired]
@@ -18,7 +40,9 @@ else {
     [Parameter, EditorRequired]
     public UserPages UserPages { get; set; } = null!;
     private PageStatus Status => UserPages.GetStatus(Item);
-    private bool IsExpanded { get; set; }
+
+    private bool _isExpanded = false;
+    private bool IsExpanded { get => SearchValue != null && SearchValue != string.Empty ? true : _isExpanded; set => _isExpanded = value; }
     private string? Icon => GetIcon();
     private MudBlazor.Color IconColor => GetIconColor();
     private string? GroupIcon => IsExpanded ? null : Icon;
@@ -41,4 +65,6 @@ else {
         };
     }
 
+
 }
+
