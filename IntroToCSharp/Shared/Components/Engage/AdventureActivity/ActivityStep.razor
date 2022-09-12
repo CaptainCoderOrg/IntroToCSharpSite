@@ -21,6 +21,7 @@
         } else {
             <MudButton Disabled="@(!IsComplete)" Variant="Variant.Filled" Color="Color.Success" StartIcon="@Icons.Filled.Hiking" OnClick="@Claim">@ClaimText</MudButton>
         }
+        <MudButton @onclick="SubmitFeedback" Variant="Variant.Filled" Color="Color.Primary">Submit Feedback</MudButton>
     </MudStack>
 </MudPaper>
 
@@ -99,4 +100,11 @@
         _isClaimed = isClaimed;
         StateHasChanged();
     }
+
+    private void SubmitFeedback()
+    {
+       var options = new DialogOptions { CloseOnEscapeKey = true };
+        DialogService.Show<SubmitFeedbackDialog>("Feedback", options);
+    }
+    
 }
