@@ -16,12 +16,12 @@
                 @ChildContent
             </CascadingValue>
         </MudElement>
+        <MudCheckBox @bind-Checked="@SubmitFeedbackCheckbox" Label="Optional: Submit Feedback"><MudButton @onclick="SubmitFeedback" Variant="Variant.Filled" Color="Color.Primary">Submit Feedback</MudButton></MudCheckBox>
         @if (IsClaimed) {
             <MudButton Disabled="true" Variant="Variant.Filled" Color="Color.Success" StartIcon="@Icons.Filled.Hiking">Reward Claimed</MudButton>
         } else {
             <MudButton Disabled="@(!IsComplete)" Variant="Variant.Filled" Color="Color.Success" StartIcon="@Icons.Filled.Hiking" OnClick="@Claim">@ClaimText</MudButton>
         }
-        <MudButton @onclick="SubmitFeedback" Variant="Variant.Filled" Color="Color.Primary">Submit Feedback</MudButton>
     </MudStack>
 </MudPaper>
 
@@ -49,6 +49,7 @@
     public bool IsComplete => AdventureTasks.Where(task => !task.IsComplete).Count() == 0;
     private bool IsClaimed => DBRef == null ? false : _isClaimed;
     private bool _isClaimed = false;
+    private bool SubmitFeedbackCheckbox {get; set;} = false;
     [Parameter]
     public string ClaimName {get; set;} = "Step";
     private string ClaimText => IsComplete ? "Claim Reward" : "Complete this Step to Claim Reward";
