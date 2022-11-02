@@ -1,0 +1,46 @@
+<Challenge Title="The Guessing Game" Gold="500" XP="100">
+    <Adventure Portrait="Portraits.Lucy">
+        <Item>
+        <AdventureDialog>
+        Hi, again! I'm trying to write a guessing game for my next show.
+        I've managed
+        to get the program to display if the users guess is too high or too low
+        but I can't figure out how to use <b>while loops</b> to allow them
+        to make multiple guesses. Can you help me fix my code?
+        </AdventureDialog>
+        </Item>
+    </Adventure>
+<Text>Below is the code Lucy has written so far:</Text>
+    <CodeBlock AllowCopy>
+// Generate a random number between 1 and 100
+Random gen = new Random();
+int randomNumber = gen.Next(1, 101);
+
+// Display a welcome message
+Console.Clear();
+Console.WriteLine("Welcome to Lucy's Guessing Game!");
+Console.WriteLine("I'm thinking of a number between 1 and 100, can you guess it?");
+
+// Get the user's guess
+Console.Write("Enter your guess: ");
+int guess = int.Parse(Console.ReadLine()!);
+
+if (guess &lt; randomNumber)
+{
+  Console.WriteLine("Your guess is too low.");
+}
+else if (guess &gt; randomNumber)
+{
+  Console.WriteLine("Your guess is too high.");
+}
+else
+{
+  Console.WriteLine("Correct! You guessed my number!");
+}
+    </CodeBlock>
+    <Text>Update Lucy's code to:</Text>
+    <TaskItem Name="Validate Input">Use <b>TryParse</b> to validate the user's input</TaskItem>
+    <TaskItem Name="Loop">Loop if the user did not guess correctly</TaskItem>
+    <TaskItem Name="Bonus Warning">Bonus: Display a warning message if the user's guess is less than 1 or grater than 100</TaskItem>
+    <Question Text="Generate a share link of your Program.cs file and put it here"/>
+</Challenge>
