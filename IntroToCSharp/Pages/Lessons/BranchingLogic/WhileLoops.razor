@@ -1,0 +1,110 @@
+@inherits CaptainCoder.Page
+@page "/lessons/branching-logic/while-loops"
+
+<Title>While Loops</Title>
+
+<Section Title="Introduction">
+    <Adventure Portrait="Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog Page="IfStatements.PageRef">
+                In the <b>@IfStatements.PageRef.Name</b> lesson, you learn
+                to use <b>if</b>, <b>if else</b>, and <b>else</b> statements
+                to create decision trees that allow your programs to take
+                different paths depending on <b>boolean conditions</b>.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Page="ShapeAnalyzer.PageRef">
+                In this lesson, you will learn about <b>while</b> loops which
+                allow you to write code that repeats itself depending on
+                <b>boolean conditions</b>.                
+            </AdventureDialog>
+        </Item>
+    </Adventure>
+</Section>
+
+<Section Title="While Loop">
+    <Text>
+        A <b>while</b> loop repeats a body of code for as long as a
+        given condition evaluates to <b>true</b>. Its code structure is almost
+        identical to an <b>if statement</b>.
+    </Text>
+    <RecipeBox>
+        <WhileLoopRecipe/>
+    </RecipeBox>
+</Section>
+
+<Section Title="Simple Example">
+    <Text>
+        The loop below displays the numbers 0 through 4 each on their own line:
+    </Text>
+    <CodeBlock VSCode ReplIt="JosephCollard/Simple-While-Loop">
+int x = 1;
+while (x &lt; 5)
+{
+    Console.WriteLine(x);
+    x = x + 1;
+}
+    </CodeBlock>
+</Section>
+
+<Section Title="Countdown Challenge">
+    <CountdownChallenge/>
+</Section>
+
+<Section Title="Enforcing User Input">
+    <Text>
+        In the <b>@InputValidation.PageRef.Name</b> lesson, you learn to use the
+        <b>TryParse methods</b> to ensure your program does not crash when a user
+        enters a value that cannot be parsed. For example, the <b>string</b> "banana"
+        cannot be parsed into an <b>int</b>.
+    </Text>
+    <Text>
+        Using the <b>TryParse methods</b> together with a <b>while loop</b>, you 
+        can enforce that a user enters a value that can be parsed. For example:
+    </Text>
+    <CodeBlock VSCode ReplIt="JosephCollard/Enforce-Input">
+bool isValidInput = false;
+int input = 0;
+while (isValidInput == false)
+{
+  Console.Write("Enter an integer: ");
+  isValidInput = int.TryParse(Console.ReadLine()!, out input);
+  if (isValidInput == false)
+  {
+    Console.WriteLine("That was not an integer.");
+  }
+}
+Console.WriteLine($"You entered: {input}");
+    </CodeBlock>
+    <Note>
+        The variable <b>input</b> is declared before the <b>while loop</b>. This allows
+        it to be accessed both inside and <b>outside</b> of the loop.
+    </Note>
+</Section>
+
+<Section Title="Guessing Game">
+    <GuessingGameChallenge/>
+</Section>
+
+<Section Title="What's Next?">
+    <Adventure Portrait="Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+                Great work making it this far! With the ability to use <b>while loops</b>
+                to repeat sections of your code, you can write some very interesting and
+                complex programs. With this increased complexity, it can be easy to write
+                bugs and code that is difficult to read and decipher.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <MarkFinishedDialog Page="WhileLoops.PageRef"/>
+        </Item>
+    </Adventure>
+</Section>
+
+
+
+@code {
+    public static readonly PageRef PageRef = new PageRef("While Loops", "/lessons/branching-logic/while-loops", 0, "Branching Logic");
+}

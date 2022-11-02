@@ -1,0 +1,28 @@
+<MudStack>
+    <MudItem>
+    <b>The Recipe for a while loop:</b>
+    </MudItem>
+    <MudItem>
+    <Output>
+        while (<MudText Class="d-inline" Color="Color.Secondary">{Bool-Expression}</MudText>)
+        {
+            <MudText Class="d-inline" Color="Color.Primary">{Body}</MudText>
+        }
+    </Output>
+    </MudItem>
+</MudStack>
+<MudList Clickable>
+    <MudListItem Icon="@Icons.Material.Filled.Help" IconColor="Color.Secondary">
+        <MudStack Row=true AlignItems="AlignItems.Center">
+            <MudText Class="flex-none" Color="Color.Secondary">{Bool-Expression}</MudText>
+            <MudText>An <b>expression</b> that <b>evaluates</b> to <Code>true</Code> or <Code>false</Code>.</MudText>
+        </MudStack>
+    </MudListItem>
+
+    <MudListItem Icon="@Icons.Material.Filled.DataObject" IconColor="Color.Primary">
+        <MudStack Row=true AlignItems="AlignItems.Center">
+            <MudText Class="flex-none" Color="Color.Primary">{Body}</MudText>
+            <MudText>The code to execute while the <b>bool-expression</b> <b>evaluates</b> to <Code>true</Code>.</MudText>
+        </MudStack>
+    </MudListItem>
+</MudList>
