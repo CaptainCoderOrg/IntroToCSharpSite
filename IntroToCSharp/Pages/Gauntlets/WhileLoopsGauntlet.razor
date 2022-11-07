@@ -1,0 +1,182 @@
+@inherits CaptainCoder.Page
+@page "/gauntlets/while-loops"
+
+<Title>@((MarkupString)Title)</Title>
+
+<Section Title="Introduction">
+    <Adventure Portrait="Portraits.Nefaria">
+        <Item>
+            <AdventureDialog Portrait="Portraits.CaptainCoder" OnLoad="ReverseTitle">
+                    Greetings coder! Congratulations on reaching
+                    <b>Nefaria's</b> second <b>Gauntlet</b>: <b>While Loops</b>.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog OnLoad="UpdateTitle">
+                It's <b>YOU</b> again. I am growing tired of hearing about
+                all of your accomplishments. If you're really so great, you
+                won't have any trouble with my <b>While Loops ... of 
+                <span style="color: red">DOOM</span>!</b>
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Portrait="Portraits.CaptainCoder" OnLoad="ReverseTitle">
+                Don't worry, <b>Nefaria</b> is just being dramatic! While loops can be
+                a really challenging topic to master. But, the only way to do it is 
+                to practice, practice, practice! Completing these challenges is a
+                great way to test your abilities and continue growing.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog OnLoad="UpdateTitle">
+                Practice! Schmactice! You can <b>try</b> to complete my <b>While
+                Loops ... of <span style="color: red">DOOM</span></b>!
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Portrait="Portraits.CaptainCoder" Page="@WhileLoops.PageRef">
+                Don't worry if one of the challenges is too tough for you right now, you
+                can always train more and come back when you're ready. Or, you can move
+                past a challenge and try another one. If you need a refresher on
+                <b>while loops</b>, you can always review that lesson.
+            </AdventureDialog>
+        </Item>
+    </Adventure>
+</Section>
+
+<Section Title="First Challenge: Multiplication Table Generator">
+    <Text>
+        In this challenge you will write a program that asks the user
+        for a number and displays all multiples of that number that
+        are less than or equal to 100. For example, the output of your program
+        might look like this:
+    </Text>
+    <Output>
+Welcome to Multiplication Table Generator!
+Enter a number between 0 and 100: <i><b>10</b></i>
+10 * 1 = 10
+10 * 2 = 20
+10 * 3 = 30
+10 * 4 = 40
+10 * 5 = 50
+10 * 6 = 60
+10 * 7 = 70
+10 * 8 = 80
+10 * 9 = 90
+10 * 10 = 100
+Have a wonderful day!
+</Output>
+<Text>
+    Here is another example:
+</Text>
+<Output>
+Welcome to Multiplication Table Generator!
+Enter a number between 0 and 100: <i><b>10</b></i>
+22 * 1 = 22
+22 * 2 = 44
+22 * 3 = 66
+22 * 4 = 88
+Have a wonderful day!
+    </Output>
+    <MultipliactionTableChallenge />
+</Section>
+
+<Section Title="Second Challenge: Password Checker">
+    <Text>
+        In this challenge, you will write a program that prompts the user to enter a password.
+        If they are successful,
+        the program displays, "Access Granted!". If they are are not successful, the program
+        displays, "Incorrect. You have {N} tries remaining". If they run out tries, the program
+        displays, "Access denied!" and exits.
+    </Text>
+    <Text>Example Output 1:</Text>
+    <Output>
+Enter the password: <i><b>banana</b></i>
+Incorrect. You have 2 attempts remaining.
+Enter the password: <i><b>orange</b></i>
+Incorrect. You have 1 attempt remaining.
+Enter the password: <i><b>dog</b></i>
+Access denied!
+    </Output>
+    <Text>Example Output 2:</Text>
+    <Output>
+Enter the password: <i><b>banana</b></i>
+Incorrect. You have 2 attempts remaining.
+Enter the password: <i><b>password</b></i>
+Access Granted!
+    </Output>
+
+    <PasswordChallenge />
+</Section>
+<Section Title="Third Challenge: Hailstone Sequence">
+    <Text>
+        A Hailstone Sequence is an unsolved problem in mathematics that states: for all positive numbers
+        you will eventually reach the number 1 if you follow these 3 rules:
+    </Text>
+    <MudList>
+        <MudListItem>1. If the number is 1, stop</MudListItem>
+        <MudListItem>2. If the number is even, divide by 2 and continue</MudListItem>
+        <MudListItem>3. If the number is odd, multiply by 3, add 1, and continue</MudListItem>
+    </MudList>
+    <Example>
+        <Text>
+            If you start with the number 5, you get the following sequence:
+            5 -> 16 -> 8 -> 4 -> 2 -> 1
+        </Text>
+        <Text>
+            Because 5 is odd, you multiply by 3 and add 1 (5 * 3 + 1 = 16).
+            Next, 16 is even so you divide by 2 and get 8.
+            Next, 8 is even so you divide by 2 and get 4.
+            Next, 4 is even so you divide by 2 and get 2.
+            Next, 2 is even so you divide by 2 and get 1.
+        </Text>
+    </Example>
+    <Example>
+        <Text>
+            If you start with the number 3, you get the following sequence:
+            3 -> 10 -> 5 -> 16 -> 8 -> 4 -> 2 -> 1
+        </Text>
+        <Text>
+            Because 3 is odd, you multiply by 3 and add 1 (3 * 3 + 1 = 10).
+            Next, 10 is even so you divide by 2 and get 5.
+            Etc...
+        </Text>
+    </Example>
+    <Text>
+        In this challenge, you will write a program to print a Hailstone Sequence for a
+        starting number.
+    </Text>
+    <HailstoneChallenge />
+</Section>
+
+<Section Title="What's Next?">
+    <Adventure Portrait="Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+                While loops can be both confusing and challenging. Using
+                the challenges above is a great way to practice and prove to yourself
+                that you are on your way to becoming a coding master!
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <MarkFinishedDialog Page="WhileLoopsGauntlet.PageRef"/>
+        </Item>
+    </Adventure>
+</Section>
+
+
+@code {
+    private string Title {get; set;} = "Gauntlet: While Loops";
+
+    private void UpdateTitle() {
+        Title = "Gauntlet: While Loops <span class=\"fade-in\">... of <span style=\"color: red \">DOOM</span>!</span>";
+        StateHasChanged();
+    }
+
+    private void ReverseTitle() {
+        Title = "Gauntlet: While Loops";
+        StateHasChanged();
+    }
+
+    public static readonly PageRef PageRef = new PageRef("While Loops Gauntlet", "/gauntlets/while-loops", 3, "Gauntlets");
+}
