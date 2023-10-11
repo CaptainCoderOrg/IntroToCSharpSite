@@ -5,8 +5,8 @@
 
 <Section Title="Overview">
     <Text>
-        <b>ASCII Art</b> is a graphic design technique in which the artist uses text
-        to create a picture. For example:
+        @((MarkupString)Piper.ContentProducer(@TextOne))
+        @((MarkupString)Piper.ContentProducer(@TextTwo))
     </Text>
     <Output>
            .--._.--.
@@ -24,9 +24,8 @@ _ _`.    \  |  |  |  /    .'_ _
     </Output>
     <Text>
         In this activity, you will learn how to create colorful text based
-        art in your <b>terminal</b> using <b>C#</b>.
+        art in your <b>terminal</b> using <b>C#</b>.\
     </Text>
-
 </Section>
 <Section Title="Learning Objectives">
     <MudList Clickable="true">
@@ -95,7 +94,6 @@ _ _`.    \  |  |  |  /    .'_ _
         In the above example, you created 3 <b>string</b> literals and passed
         them as <Keyword Word="arguments"/> to the <Code>Console.WriteLine</Code> method.
     </Text>
-
     <DisplayingADoubleQuoteExploration/>
 
         <Text>
@@ -283,4 +281,7 @@ Console.WriteLine();
 
 @code {
     public static readonly PageRef PageRef = new PageRef("ASCII Art", "/activities/ascii-art", 0, "Activities");
+    public MarkdownPiper Piper = new MarkdownPiper();
+    string TextOne = "<b>ASCII Art</b> is a graphic design technique in which the artist uses text to create a picture. For example:";
+    string TextTwo = "~~Here is a test.~~";
 }
