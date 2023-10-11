@@ -1,34 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
-
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.3" PrivateAssets="all" />
-    <PackageReference Include="MudBlazor" Version="6.0.9" />
-    <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+    <PackageReference Include="Blazored.LocalStorage" Version="4.2.0"/>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.3"/>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.3" PrivateAssets="all"/>
+    <PackageReference Include="MudBlazor" Version="6.0.9"/>
+    <PackageReference Include="System.Net.Http.Json" Version="5.0.0"/>
+    <PackageReference Include="Markdig" Version="0.33.0"/>
   </ItemGroup>
-
-  <!-- Ignore ReplIt directory as it contains C# projects within -->
   <ItemGroup>
-
-    <Compile Remove="ReplIt\**" />
-    <Compile Remove="wwwroot\examples\**" />
+    <Compile Remove="ReplIt\**"/>
+    <Compile Remove="wwwroot\examples\**"/>
   </ItemGroup>
-
-
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <!-- <Exec Command="python3 prebuild.py" WorkingDirectory="ReplIt" /> -->
-    <!-- Uncomment to run npm every time you build. This is pretty slow
-    <Exec Command="npm install" WorkingDirectory="NPM" />
-    <Exec Command="npm run build" WorkingDirectory="NPM" />
-    -->
-  </Target>
-
-
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent"/>
 </Project>
