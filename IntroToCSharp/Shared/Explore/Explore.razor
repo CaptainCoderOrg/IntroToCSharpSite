@@ -12,12 +12,14 @@
     [Parameter, EditorRequired]
     public RenderFragment ChildContent {get; set;} = null!;
     private string? _dbName = null;
+    #pragma warning disable BL0007
     [Parameter]
     public string DBName
     {
         get => _dbName ?? Utils.SanitizeDBName(Title);
         set => _dbName = value;
     }
+    #pragma warning restore BL0007
     [Parameter, EditorRequired]
     public string Title {get; set;} = String.Empty;
     [Parameter]

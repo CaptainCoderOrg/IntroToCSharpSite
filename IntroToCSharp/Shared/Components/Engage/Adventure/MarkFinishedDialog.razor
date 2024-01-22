@@ -5,14 +5,14 @@
         yet done with it, you can mark it as incomplete. This will
         add an adventure icon to it in the navigation menu.
     </FadeIn>
-    <MudButton StartIcon="@Icons.Filled.Hiking" Color="Color.Primary" Variant="Variant.Filled" OnClick="@MarkAdventuring">Mark "@Page.Name" as Adventuring</MudButton>
+    <MudButton StartIcon="@Icons.Material.Filled.Hiking" Color="Color.Primary" Variant="Variant.Filled" OnClick="@MarkAdventuring">Mark "@Page.Name" as Adventuring</MudButton>
 } else {
     <FadeIn>
         Would you like to mark this page as complete? This will
         add a completed check mark next to the lesson in the navigation
         menu.
     </FadeIn>
-    <MudButton StartIcon="@Icons.Outlined.CheckCircle" IconColor="Color.Success" Color="Color.Primary" Variant="Variant.Filled" OnClick="@MarkComplete">Mark "@Page.Name" as Completed</MudButton>
+    <MudButton StartIcon="@Icons.Material.Outlined.CheckCircle" IconColor="Color.Success" Color="Color.Primary" Variant="Variant.Filled" OnClick="@MarkComplete">Mark "@Page.Name" as Completed</MudButton>
 }
 </MudStack>
 

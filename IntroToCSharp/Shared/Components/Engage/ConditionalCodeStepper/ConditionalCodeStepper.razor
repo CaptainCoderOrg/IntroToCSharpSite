@@ -49,8 +49,10 @@
         return string.Join("\n", copy);
     }
 
+    #pragma warning disable BL0007
     [Parameter, EditorRequired]
     public string SourceCode { set => _sourceCode = value.Split("\n"); }
+    #pragma warning restore BL0007
 
     [Parameter]
     public string InitialOutput { get; set; } = string.Empty;
@@ -66,8 +68,10 @@
     private RenderFragment CurrentExplanation => CurrentState.Explanation;
     private bool IsLoading => _loadIx < _states.Count;
     private List<RenderFragment> _fragments = new ();
+    #pragma warning disable BL0007
     [Parameter, EditorRequired]
     public RenderFragment ChildContent { set => _fragments.Add(value); }
+    #pragma warning restore BL0007
     private bool HasNext => CurrentState.HasNext;
     private bool HasBack => History.Count > 1;
     protected override void OnInitialized()

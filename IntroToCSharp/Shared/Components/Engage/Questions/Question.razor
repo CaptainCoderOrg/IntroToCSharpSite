@@ -1,12 +1,12 @@
 @inject NavigationManager NavigationManager
 @implements IAdventureTask;
 
-<MudListItem Icon="@Icons.Filled.QuestionAnswer" OnClick="@NotifyLoggedIn">
+<MudListItem Icon="@Icons.Material.Filled.QuestionAnswer" OnClick="@NotifyLoggedIn">
     <MudStack Row="true" AlignItems="AlignItems.Center">
         @if (ShowSpoiler)
         {
         <MudTooltip Text="@SpoilerText" Placement="Placement.Right">
-            <MudIcon Icon="@Icons.Filled.Info" Color="Color.Tertiary"/>
+            <MudIcon Icon="@Icons.Material.Filled.Info" Color="Color.Tertiary"/>
         </MudTooltip>
         }
         <MudTextField Label="@Text" @bind-Value="Answer" @bind-Disabled="@IsDisabled" />
@@ -45,8 +45,10 @@
     }
 
     private string? _dbName = null;
+    #pragma warning disable BL0007
     [Parameter]
     public string DBName { get => _dbName ?? Utils.SanitizeDBName(Text); set => _dbName = value;}
+    #pragma warning restore BL0007
 
     private string Path {
         get {

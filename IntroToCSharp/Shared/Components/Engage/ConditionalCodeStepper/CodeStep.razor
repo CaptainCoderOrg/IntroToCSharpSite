@@ -8,8 +8,11 @@
     public string Output { get; set; } = string.Empty;
     [Parameter, EditorRequired]
     public int Line {get; set;}
+    #pragma warning disable BL0007
     [Parameter]
     public string OutputLine { set => Output = $"{value}\n"; }
+    
+    #pragma warning restore BL0007
 
     [Parameter]
     public string? SubVarName {get; set;} = null;

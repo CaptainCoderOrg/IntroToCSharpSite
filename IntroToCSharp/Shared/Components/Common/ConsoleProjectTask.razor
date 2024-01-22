@@ -1,7 +1,7 @@
 <MudStack Row=true>
     <TaskItem Name="@Name">@ChildContent </TaskItem>
     @if (!_showSteps) {
-        <MudButton StartIcon="@Icons.Filled.Help" Color="Color.Primary" Variant="Variant.Filled" OnClick="ShowSteps">Show Steps for VS Code</MudButton>
+        <MudButton StartIcon="@Icons.Material.Filled.Help" Color="Color.Primary" Variant="Variant.Filled" OnClick="ShowSteps">Show Steps for VS Code</MudButton>
     }
 </MudStack>
 @if (_showSteps) {

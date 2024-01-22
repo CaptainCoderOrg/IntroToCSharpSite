@@ -2,9 +2,9 @@ using MudBlazor;
 
 namespace CaptainCoder;
 
-public class DarkPalette : Palette
+public class DarkPalette : PaletteDark
 {
-    private static readonly Palette Default = new MudTheme().PaletteDark;
+    private static readonly PaletteDark Default = new PaletteDark();
     public DarkPalette() : base() {
         LinesInputs = Default.LinesInputs;
         TableLines = Default.TableLines;

@@ -32,13 +32,13 @@
 
             @if (_isAdventureMode) {
                 <MudButton Style="margin-top:auto" Class="object-bottom" Variant="Variant.Filled"
-                    StartIcon="@Icons.Filled.LibraryBooks" Color="Color.Primary" OnClick="@(() => JournalDialog.Show(DialogService))">
+                    StartIcon="@Icons.Material.Filled.LibraryBooks" Color="Color.Primary" OnClick="@(() => JournalDialog.Show(DialogService))">
                     Journal
                 </MudButton>
                 <MudButton Style="margin-top:auto" Class="object-bottom" Variant="Variant.Filled"
-                StartIcon="@Icons.Filled.Inventory" Color="Color.Primary" Href="/inventory">Inventory</MudButton>
+                StartIcon="@Icons.Material.Filled.Inventory" Color="Color.Primary" Href="/inventory">Inventory</MudButton>
             }
-            <MudButton StartIcon="@Icons.Filled.Hiking" Color="Color.Primary" Variant="Variant.Filled" Class="pl-4 pr-0 pt-0 pb-0" OnClick="@(() => ToggleAdventureMode(!_isAdventureMode))">
+            <MudButton StartIcon="@Icons.Material.Filled.Hiking" Color="Color.Primary" Variant="Variant.Filled" Class="pl-4 pr-0 pt-0 pb-0" OnClick="@(() => ToggleAdventureMode(!_isAdventureMode))">
                 <MudStack Row=true Class="pa-0 align-center rounded" Style="gap: 0">
                     <MudText Typo="Typo.button" Style="font-size:0.8rem">Adventure Mode</MudText>
                     <MudSwitch Disabled="@(!_isLoggedIn)" @bind-Checked="@IsAdventureMode" Class="ma-0 pa-0" Color="Color.Tertiary"/>

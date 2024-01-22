@@ -17,9 +17,9 @@
             </CascadingValue>
         </MudElement>
         @if (IsClaimed) {
-            <MudButton Disabled="true" Variant="Variant.Filled" Color="Color.Success" StartIcon="@Icons.Filled.Hiking">Reward Claimed</MudButton>
+            <MudButton Disabled="true" Variant="Variant.Filled" Color="Color.Success" StartIcon="@Icons.Material.Filled.Hiking">Reward Claimed</MudButton>
         } else {
-            <MudButton Disabled="@(!IsComplete)" Variant="Variant.Filled" Color="Color.Success" StartIcon="@Icons.Filled.Hiking" OnClick="@Claim">@ClaimText</MudButton>
+            <MudButton Disabled="@(!IsComplete)" Variant="Variant.Filled" Color="Color.Success" StartIcon="@Icons.Material.Filled.Hiking" OnClick="@Claim">@ClaimText</MudButton>
         }
     </MudStack>
 </MudPaper>
@@ -30,12 +30,15 @@
     private string? _dbName = null;
     [Parameter, EditorRequired]
     public virtual string ActivityType {get; set;} = "activity-step";
+    #pragma warning disable BL0007
     [Parameter]
     public string DBName
     {
         get => _dbName ?? Utils.SanitizeDBName(Title);
         set => _dbName = value;
     }
+    
+    #pragma warning restore BL0007
     [Parameter, EditorRequired]
     public string Title {get; set;} = String.Empty;
     [Parameter]

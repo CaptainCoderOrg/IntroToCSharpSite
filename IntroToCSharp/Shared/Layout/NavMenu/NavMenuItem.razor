@@ -34,9 +34,9 @@ else {
 
     private string? GetIcon() {
         return Status switch {
-            PageStatus.New => Icons.Filled.Hiking,
-            PageStatus.Started => Icons.Filled.Hiking,
-            PageStatus.Complete => Icons.Outlined.CheckCircle,
+            PageStatus.New => Icons.Material.Filled.Hiking,
+            PageStatus.Started => Icons.Material.Filled.Hiking,
+            PageStatus.Complete => Icons.Material.Outlined.CheckCircle,
             _ => null
         };
     }

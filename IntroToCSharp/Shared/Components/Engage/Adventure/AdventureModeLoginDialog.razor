@@ -6,13 +6,13 @@
             <MudButton
               Variant="Variant.Filled"
               Color="Color.Tertiary"
-              StartIcon="@Icons.Filled.Login"
+              StartIcon="@Icons.Material.Filled.Login"
               OnClick="@Login">Login to Enable Adventure Mode</MudButton>
             @if (Page != null)
             {
                 <HorizontalDivider/>
                 <MudText Style="max-width:350px">You may continue to the page without adding it to your book.</MudText>
-                <MudButton Class="mb-4" StartIcon="@Icons.Filled.Hiking" Variant="Variant.Filled" Color="Color.Primary" Href="@Page?.Href">Go to "@Page?.Name"</MudButton>
+                <MudButton Class="mb-4" StartIcon="@Icons.Material.Filled.Hiking" Variant="Variant.Filled" Color="Color.Primary" Href="@Page?.Href">Go to "@Page?.Name"</MudButton>
             }
         </MudStack>
     </DialogContent>

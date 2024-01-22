@@ -8,8 +8,8 @@
                 <MudItem sm=6><Label Name="XP Earned"><MudText>@_userStats.XP</MudText></Label></MudItem>
                 <MudItem sm=6><Label Name="Next Level"><MudText>@_userStats.XPTowardLevel / @_userStats.XPNeeded</MudText></Label></MudItem>
                 <MudItem sm=12><Label Name="Gold"><UserGold UserData="@_userStats"/></Label></MudItem>
-                <MudItem sm=6><Label Icon="@Icons.Filled.Hiking" Name="Pages Discovered">@PagesDiscovered / @TotalPages</Label></MudItem>
-                <MudItem sm=6><Label Icon="@Icons.Filled.CheckCircle" IconColor="Color.Success" Name="Pages Completed">@PagesComplete / @TotalPages</Label></MudItem>
+                <MudItem sm=6><Label Icon="@Icons.Material.Filled.Hiking" Name="Pages Discovered">@PagesDiscovered / @TotalPages</Label></MudItem>
+                <MudItem sm=6><Label Icon="@Icons.Material.Filled.CheckCircle" IconColor="Color.Success" Name="Pages Completed">@PagesComplete / @TotalPages</Label></MudItem>
             </MudGrid>
             <MudButton Color="Color.Tertiary" Variant="Variant.Filled" OnClick="@ResetBookData">Reset Book Data</MudButton>
             <MudButton Color="Color.Secondary" Variant="Variant.Filled" OnClick="@Logout">Logout</MudButton>

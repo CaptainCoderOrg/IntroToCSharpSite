@@ -11,8 +11,10 @@
 </MudPaper>
 @code {
 
+    #pragma warning disable BL0007
     [Parameter, EditorRequired]
     public RenderFragment Block { set => _codeBlocks.Add(value); }
+    #pragma warning restore BL0007
     private bool IsFirst => _ix == 0;
     private bool IsLast => _ix == this._codeBlocks.Count-1;
 

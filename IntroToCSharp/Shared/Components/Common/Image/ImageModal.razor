@@ -1,6 +1,6 @@
-<MudDialog>
+<MudDialog Style="padding:0; margin:0; background: none;" ContentStyle="background: none; padding: 0; margin:0; max-width:calc(100vw - 100px); max-height:calc(100vh - 100px);">
     <DialogContent>
-            <MudImage Class="rounded" Style="max-width:calc(100vw - 100px); max-height:calc(100vh - 100px);" Src="@Src" onclick="@Exit" />
+            <MudImage Class="rounded" Style="width:100%; height:100%;" Src="@Src" onclick="@(() => Exit())" />
     </DialogContent>
 </MudDialog>
 

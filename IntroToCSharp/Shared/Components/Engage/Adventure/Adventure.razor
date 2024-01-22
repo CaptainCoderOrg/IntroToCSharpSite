@@ -22,11 +22,11 @@
             </MudPaper>
             @if (Page != null) {
                 @if (!IsAdded) {
-                    <MudButton Class="fade-in" StartIcon="@Icons.Filled.Hiking" Variant="Variant.Filled" Color="Color.Secondary" OnClick="AddPage">
+                    <MudButton Class="fade-in" StartIcon="@Icons.Material.Filled.Hiking" Variant="Variant.Filled" Color="Color.Secondary" OnClick="AddPage">
                         Add "@Page?.Name" to Book
                     </MudButton>
                 } else {
-                    <MudButton Class="fade-in" StartIcon="@Icons.Filled.Hiking" Variant="Variant.Filled" Color="Color.Primary" Href="@Page?.Href">
+                    <MudButton Class="fade-in" StartIcon="@Icons.Material.Filled.Hiking" Variant="Variant.Filled" Color="Color.Primary" Href="@Page?.Href">
                         Go to "@Page?.Name"
                     </MudButton>
                 }
@@ -50,8 +50,10 @@
     public Portrait Portrait { get; set; }
     [Parameter]
     public bool RightPortrait { get; set; } = false;
+    #pragma warning disable BL0007
     [Parameter, EditorRequired]
     public RenderFragment Item { set => _fragments.Add(value); }
+    #pragma warning restore BL0007
 
     private OrderedSet<AdventureDialog> _dialogs = new ();
     private OrderedSet<RenderFragment> _fragments = new ();

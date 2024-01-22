@@ -27,7 +27,9 @@
     public string? DBName {get; set;}
     [Parameter, EditorRequired]
     public RenderFragment Block { get; set; } = null!;
+    #pragma warning disable BL0007
     [Parameter, EditorRequired]
     public RenderFragment Answer { set => this._answers.Add(value); }
+    #pragma warning restore BL0007
     private HashSet<RenderFragment> _answers = new ();
 }

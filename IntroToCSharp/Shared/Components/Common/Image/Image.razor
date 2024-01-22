@@ -1,7 +1,7 @@
 @inject NavigationManager NavigationManager
 @inject IDialogService DialogService
 
-<MudImage Src="@Path" Alt="@Alt" Class="clickable-image rounded-lg" onclick="@OpenModal"/>
+<MudImage Src="@Path" Alt="@Alt" Class="clickable-image rounded-lg" onclick="@(() => OpenModal())"/>
 
 @code {
     [Parameter, EditorRequired]
