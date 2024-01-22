@@ -11,9 +11,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v1.9.0
+      uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 6.0.201
+        dotnet-version: 8.0.100
     - name: Publish Project
       run: dotnet publish IntroToCSharp/IntroToCSharp.csproj -warnaserror -c Release -o release --nologo
     - name: Add .nojekyll file
