@@ -35,7 +35,7 @@
         <b>Rider</b> (Mac) to develop <b>C#</b> code. The short answer is that
         I have and I do use <b>Visual Studio</b> when I am developing large
         projects. It is a very powerful tool designed specifically for working
-        with the <b>.NET Framework</b> and is excellent for productivity. However,
+        with <b>.NET</b> and is excellent for productivity. However,
         because it is so well designed, these tools hide many of the nitty
         gritty details that I feel are important to learn and understand
         when you're starting out as a developer.
@@ -48,15 +48,19 @@
 </Section>
 <Section Title="Installing and Configuring VS Code">
     <Text>
-        This section assumes you already have .NET 6 installed. If you
-        have not done so already, install .NET 6 and then continue.
+        This section assumes you already have the .NET SDK installed. If you
+        have not done so already, install .NET SDK and then continue.
     </Text>
+    <Note>
+        This document was last updated on Jan. 22nd 2024. As of its writing, .NET 8 was
+        the latest version of the .NET SDK.
+    </Note>
     <MudGrid>
         <MudItem>
-            <TaskItem Name="VerifyNET6">If you have not done so already, Install .NET 6</TaskItem>
+            <TaskItem Name="VerifyNETInstall">If you have not done so already, install the latest version of .NET</TaskItem>
         </MudItem>
         <MudItem>
-            <MudButton Color="Color.Tertiary" Variant="Variant.Filled" Href="https://dotnet.microsoft.com/en-us/download/dotnet/6.0" Target="_blank">Download .NET 6</MudButton>
+            <MudButton Color="Color.Tertiary" Variant="Variant.Filled" Href="https://dotnet.microsoft.com/en-us/download" Target="_blank">Download .NET SDK</MudButton>
         </MudItem>
     </MudGrid>
     <MudGrid>
@@ -76,23 +80,31 @@
     <Image Src="open-vs-code.png" />
     <HorizontalDivider/>
     <Text>
-        Next, you will install the <b>C#</b> extension for <b>VS Code</b>. This provides
+        Next, you will install the <b>C# Dev Kit</b> extension for <b>VS Code</b>. This provides
         productivity tools for developing <b>C#</b> programs.
     </Text>
     <TaskItem Name="Open Extensions Bar">Click the Extensions tab on the Left Bar</TaskItem>
     <Image Src="extensions-button.png" />
-    <TaskItem Name="Search CSharp">In the search bar at the top, search for "C#"</TaskItem>
-    <TaskItem Name="Select CSharp">Select the "C#" option, this will likely be the first option</TaskItem>
-    <TaskItem Name="Install CSharp">Ensure it is the C# extension by Microsoft, then click Install</TaskItem>
+    <TaskItem Name="Search CSharp">In the search bar at the top, search for "C# Dev Kit"</TaskItem>
+    <TaskItem Name="Select CSharp">Select the "C# Dev Kit" option, this will likely be the first option</TaskItem>
+    <TaskItem Name="Install CSharp">Ensure it is the "C# Dev Kit" extension by Microsoft, then click Install</TaskItem>
     <Image Src="csharp-extension.png" />
     <HorizontalDivider/>
     <Text>
-        Last, you will install the .NET Interactive Notebooks extension. This extension allows you to
+        Next, install the <b>Adventures in C#</b> extension for <b>VS Code</b>. This provides
+        tools for connecting your VS Code workspace with this Workbook.
+    </Text>
+    <TaskItem Name="Search .NET Interactive">Search for the "Polyglot Notebooks" extension</TaskItem>
+    <TaskItem Name="Select .NET Interactive">Select it from the options</TaskItem>
+    <TaskItem Name="Install .NET Interactive">Verify it is the version from CaptainCoder.org</TaskItem>
+    <Image Src="adventures-extension.png"/>    
+    <HorizontalDivider/>
+    <Text>
+        Next, you will install the "Polyglot Notebooks" extension. This extension allows you to
         quickly write and test code without creating an entire <b>C#</b> project. This can be incredibly useful
         for testing out small snippets of code like the ones scattered throughout this book.
     </Text>
-    <Note>This extension is not necessary but I highly recommend it.</Note>
-    <TaskItem Name="Search .NET Interactive">Search for the ".NET Interactive Notebook" extension</TaskItem>
+    <TaskItem Name="Search .NET Interactive">Search for the "Polyglot Notebooks" extension</TaskItem>
     <TaskItem Name="Select .NET Interactive">Select it from the options</TaskItem>
     <TaskItem Name="Install .NET Interactive">Verify it is the version from Microsoft and click Install</TaskItem>
     <Image Src="interactive-extension.png"/>
