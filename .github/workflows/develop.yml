@@ -12,15 +12,15 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Push a directory to another repository
-      uses: jcollard/copy_folder_to_another_repo_action@master
+    - name: Pushes to csharp-develop.captaincoder.org
+      uses: jcollard/github-action-push-to-another-repository@main
       env:
-        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        SSH_DEPLOY_KEY: ${{ secrets.DEVELOP_SITE_SSH_DEPLOY_KEY }}
       with:
-        source_folder: '.'
-        destination_repo: 'CaptainCoderOrg/IntroToCSharpSite-dev-deploy'
-        destination_branch: main
-        user_email: 'jcollard@users.noreply.github.com'
-        user_name: 'jcollard'
+        source-directory: '.'
+        target-directory: '.'
+        destination-github-username: 'CaptainCoderOrg'
+        destination-repository-name: 'IntroToCSharpSite-dev-deploy'
+        target-branch: main
     
     
