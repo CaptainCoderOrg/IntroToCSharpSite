@@ -35,6 +35,7 @@ public class PageRegistry
         AddSection("Math", "Lessons", order++);
         AddSection("Branching Logic", "Lessons", order++);
         AddSection("Gauntlets", order++);
+        AddSection("Challenges", order++);
         // AddSection("Journal", order++);
         // AddSection("Social", order++);
     }

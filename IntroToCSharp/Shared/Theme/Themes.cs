@@ -26,7 +26,7 @@ public class Themes
         //     Primary = Colors.Blue.Lighten1
         // },
         PaletteDark = DarkPalette,
-        Palette = new DarkPalette() {
+        Palette = new PaletteLight() {
             GrayDefault = new ("#282828"),
         },
 

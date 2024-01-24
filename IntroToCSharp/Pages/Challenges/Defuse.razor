@@ -1,0 +1,43 @@
+@inherits CaptainCoder.Page
+@page "/challenges/defuse"
+
+<Section Title="Introduction">
+    <Adventure Portrait="Portraits.CaptainCoder">
+        <Item>
+            <AdventureDialog>
+
+                Greetings coder! Welcome to the <b>Defuse</b> challenge.
+                In the <b>Defuse</b> game, the player is tasked with correctly
+                guessing a code to defuse a bomb. This game is a variation
+                of the classic game 
+                <MudLink Href="https://en.wikipedia.org/wiki/Mastermind_(board_game)" Target="_blank">Mastermind</MudLink>.
+
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog>
+                
+            </AdventureDialog>
+        </Item>
+
+    </Adventure>
+</Section>
+
+<Section Title="Defuse Challenge">
+    <Text>
+        In the defuse challenge... 
+
+        Quis occaecat exercitation sit reprehenderit dolor laboris. Consectetur
+        irure enim voluptate nulla incididunt aliqua quis Lorem ad. Lorem
+        nostrud deserunt commodo veniam. Esse tempor cillum minim fugiat anim
+        proident nostrud qui sint labore officia non. Pariatur consequat ipsum
+        duis tempor pariatur excepteur ad Lorem pariatur quis nisi est
+        incididunt nostrud.
+
+    </Text>
+</Section>
+
+@code
+{
+    public static readonly PageRef PageRef = new PageRef("Defuse Challenge", "/challenges/defuse", 0, "Challenges", false);
+}
