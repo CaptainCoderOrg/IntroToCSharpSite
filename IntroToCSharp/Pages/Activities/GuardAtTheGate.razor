@@ -1,0 +1,120 @@
+@inherits CaptainCoder.Page
+@page "/activities/guard-at-the-gate"
+
+<Section Title="Guard at the Gate">
+    <Adventure Portrait="Portraits.Nefaria">
+        <Item>
+            <AdventureDialog Portrait="Portraits.CaptainCoder">
+                    Greetings coder! It looks like you've been working
+                    hard on a lot of different projects! In the previous
+                    section you even made an entire city in the
+                    <b>@BasicDataTypes.PageRef.Name</b>! That's pretty
+                    impressive! But wait what is this...?
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Portrait="Portraits.Nefaria">
+                    Oh, I see you've met my guard at the gate!
+                    Now how will you get into see your precious city
+                    with my guard at the front gate! It seems like you
+                    will be stuck out here while I take over your new
+                    program.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Portrait="Portraits.CaptainCoder">
+                    It looks like Nefaria is up-to her old tricks again.
+                    But don't worry in the <b>If-else section reference here</b>
+                    you saw how to use if-else statements to control the flow of events.
+                    What you need here is a program to help us get back into the city.
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Portrait="Portraits.CaptainCoder">
+                    you will also want to teach the guard a password to make sure that
+                    Nefaria can't take over our program again! In this activity you will use
+                    <b>booleans</b> alongside <b>if-else statements</b> to create a program 
+                    that requires a password.
+            </AdventureDialog>
+        </Item>
+    </Adventure>
+</Section>
+
+<Section Title="Learning Objectives">
+    <MudListItem Icon="@Icons.Filled.Circle">Practice using booleans</MudListItem>
+    <MudListItem Icon="@Icons.Filled.Circle">Practice using if-else statements</MudListItem>
+    <MudListItem Icon="@Icons.Filled.Circle">Practice combining booleans and if-else statements</MudListItem>
+</Section>
+
+<Section Title="Creating our Guard">
+    <Text>
+        Before you begin let's take a few minutes to figure out what you are going to need to make a guard
+        for our front gate. When you think about a guard at the front gate, you know that the guard will need
+        at least one condition that will tell them if the person <i>Is Allowed</i> into the city. We also know that we
+        need to be able to check <i>if</i> the person gave them the correct password. Then we will need to tell
+        them if they are allowed to go or not.
+    </Text>
+
+    <Note>Remember:<br> Booleans are set to either <Code>true</Code> or they are set to <Code>false</Code>.
+    </Note>
+
+    <TaskList Name="Create a Guard">
+        <TaskItem Name="Boolean">Create a <Code>boolean</Code> called IsAllowedIn that starts out as <Code>false</Code>.</TaskItem>
+        <TaskItem Name="Password">Create a super secret <Code>string</Code> password for the get called <Code>password</Code>.</TaskItem>
+        <TaskItem Name="Set Password">Set your password to your super secret password</TaskItem>
+        <TaskItem Name="Build Guard">Display your guards text! He should warn them to halt and ask for their password!</TaskItem>
+        <TaskItem Name="Store Response">Store the user's response to the password as <Code>string</Code><Code>passwordResponse</Code>.</TaskItem>
+    </TaskList>
+</Section>
+
+<Section Title="If-Else Statements">
+    <Text>
+        Before we get into the next part of the assignment, let's be sure that we understand an if-else statment. When creating an if statement
+        you are accessing "if" some conditions "is true". If the condition is true, then the code within the brackets of the if statement will be executed.
+        If the statement is not true, or <b>false</b>, then the code will be ignored.
+    </Text>
+    <Note>
+        Remember: An if statement <b>does not</b> always need an <b>else</b> statement.
+    </Note>
+    <Text>
+        When you add an <b>else</b> statement to an if statement we tell the code that it has two options. If the statement is in "if" bracket is true, then
+        execute that code, <b>else</b> execute the code in the "else" statement. 
+    </Text>
+
+    <TaskList Name="Create if-else">
+        <TaskItem Name="Create if Statement">Create an if statement that checks to see <b>if</b> the passwordResponse is the same as the password.</TaskItem>
+        <TaskItem Name="If true">If the passwordResponse is the same as the password, then the guard should tell the user that they are allowed in.</TaskItem>
+        <TaskItem Name="Change bool">Change the bool Is Allowed in to true so that the guard always remembers that we are allowed in.</TaskItem>
+        <TaskItem Name="Else statement">Create an else stament that displays a message to the user if their password is wrong, that they can't come in!</TaskItem>
+    </TaskList>
+</Section>
+
+<Section Title="What's Next">
+    <Adventure Portrait="Portraits.Nefaria">
+        <Item>
+            <AdventureDialog Portrait="Portraits.Nefaria">
+                    Curses! Why won't this guard let me in!
+                    Password? What password?
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Portrait="Portraits.CaptainCoder">
+                    It seems like you'll have a lot harder time
+                    making trouble now that there is a guard on
+                    duty Nefaria. Perhaps you can build your own
+                    city for a change?
+            </AdventureDialog>
+        </Item>
+        <Item>
+            <AdventureDialog Portrait="Portraits.CaptainCoder">
+                    Never! Next time I'll be sure to stump you and your
+                    new Coder!
+            </AdventureDialog>
+        </Item>
+    </Adventure>
+</Section>
+
+@code
+{
+    public static readonly PageRef PageRef = new PageRef("Guard at the gate", "/activities/guard-at-the-gate", 5, "Activities");
+}
