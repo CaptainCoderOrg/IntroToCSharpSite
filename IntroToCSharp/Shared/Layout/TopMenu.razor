@@ -6,6 +6,7 @@
     <MudToggleIconButton @bind-Toggled="@Main.IsDarkMode" ToggledIcon="@Icons.Material.Outlined.LightMode"
         Icon="@Icons.Material.Outlined.DarkMode" Color="Color.Inherit" />
     <MudIconButton Icon="@Icons.Material.Filled.Storefront" Color="Color.Inherit" Href="/store" />
+    <MudIconButton Icon="@Icons.Material.Filled.BugReport" Color="Color.Inherit" @onclick="BugReport"/>
 
     <MudSpacer />
     @if (UserData.IsLoggedIn)
@@ -24,8 +25,8 @@
     }
     </MudAppBar>
 
-    @code
-    {
+@code
+{
     [Parameter, EditorRequired]
     public MainLayout Main { get; set; } = null!;
     // The user's data
@@ -39,5 +40,11 @@
     protected override void OnInitialized()
     {
         UserService.Service.OnUserChange += UpdateUser;
+    }
+
+    private void BugReport()
+    {
+    var options = new DialogOptions { CloseOnEscapeKey = true };
+        DialogService.Show<BugReportDialog>("Bug Report", options);
     }
 }
